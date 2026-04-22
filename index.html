@@ -6,7 +6,7 @@
 <title>Mourya Dusi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
 
 <style>
   :root {
@@ -52,7 +52,12 @@
     transition: background 0.4s ease, color 0.4s ease;
   }
 
-  /* ── CUSTOM CURSOR ── */
+  /* ── CUSTOM CURSOR — desktop only ── */
+  @media (hover: none) {
+    #cursor-dot, #cursor-ring { display: none !important; }
+    body { cursor: auto !important; }
+    a, button, .project-item, nav a, .btn, .social-link { cursor: pointer !important; }
+  }
   #cursor-dot {
     position: fixed;
     width: var(--cursor-size);
@@ -92,46 +97,55 @@
     gap: 0;
   }
   #loader-name {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(42px, 8vw, 80px);
-    font-weight: 400;
-    letter-spacing: -0.02em;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 10vw, 96px);
+    font-weight: 300;
+    letter-spacing: 0.12em;
     color: var(--text);
     overflow: hidden;
     display: flex;
     gap: 0;
+    position: relative;
   }
   .loader-char {
     display: inline-block;
-    transform: translateY(100%);
+    transform: translateY(110%) rotateX(40deg);
     opacity: 0;
-    animation: charRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: charRise 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transform-origin: bottom center;
   }
   @keyframes charRise {
-    to { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(0) rotateX(0deg); opacity: 1; }
   }
   #loader-line {
     width: 0;
     height: 1px;
-    background: var(--text-muted);
-    margin-top: 20px;
-    animation: lineExpand 0.8s 1.2s ease forwards;
+    background: linear-gradient(90deg, transparent, var(--text-muted), transparent);
+    margin-top: 24px;
+    animation: lineExpand 1s 1.4s ease forwards;
   }
-  @keyframes lineExpand {
-    to { width: 180px; }
-  }
+  @keyframes lineExpand { to { width: 240px; } }
   #loader-sub {
-    font-size: 12px;
-    letter-spacing: 0.3em;
+    font-size: 11px;
+    letter-spacing: 0.35em;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: var(--text-subtle);
     opacity: 0;
-    margin-top: 16px;
-    animation: fadeIn 0.6s 1.6s ease forwards;
+    margin-top: 18px;
+    animation: fadeIn 0.6s 1.9s ease forwards;
   }
   @keyframes fadeIn { to { opacity: 1; } }
+  #loader-progress {
+    position: absolute;
+    bottom: 0; left: 0;
+    height: 1px;
+    background: var(--text-muted);
+    width: 0;
+    animation: progressBar 2.2s ease forwards;
+  }
+  @keyframes progressBar { to { width: 100%; } }
   #loader.fade-out {
-    animation: loaderFade 0.8s ease forwards;
+    animation: loaderFade 0.9s cubic-bezier(0.4, 0, 1, 1) forwards;
   }
   @keyframes loaderFade {
     to { opacity: 0; pointer-events: none; }
@@ -274,11 +288,11 @@
     animation: slideUp 0.7s 2.4s ease forwards;
   }
   .hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(44px, 7vw, 88px);
-    font-weight: 400;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 8vw, 100px);
+    font-weight: 300;
     line-height: 1.0;
-    letter-spacing: -0.03em;
+    letter-spacing: 0.02em;
     margin-bottom: 32px;
     opacity: 0;
     animation: slideUp 0.8s 2.5s ease forwards;
@@ -286,6 +300,33 @@
   .hero-title em {
     font-style: italic;
     color: var(--text-muted);
+  }
+
+  /* ── LETTER EXPLOSION ── */
+  .explode-text {
+    display: inline;
+  }
+  .explode-char {
+    display: inline-block;
+    position: relative;
+    cursor: default;
+    transition: none;
+  }
+  .explode-char.pop {
+    animation: charPop 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) forwards;
+  }
+  @keyframes charPop {
+    0%   { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1; }
+    20%  { transform: translate(var(--rx), var(--ry)) rotate(var(--rr)) scale(1.4); opacity: 1; }
+    60%  { transform: translate(calc(var(--rx)*2.5), calc(var(--ry)*2.5)) rotate(calc(var(--rr)*2)) scale(0.6); opacity: 0.4; }
+    100% { transform: translate(calc(var(--rx)*4), calc(var(--ry)*4)) rotate(calc(var(--rr)*3)) scale(0); opacity: 0; }
+  }
+  .explode-char.reform {
+    animation: charReform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  @keyframes charReform {
+    0%   { transform: translate(calc(var(--rx)*4), calc(var(--ry)*4)) rotate(calc(var(--rr)*3)) scale(0); opacity: 0; }
+    100% { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1; }
   }
   .hero-intro {
     font-size: clamp(16px, 2vw, 19px);
@@ -366,17 +407,19 @@
   .photo-placeholder svg { opacity: 0.3; }
   .hero-photo-tag {
     position: absolute;
-    bottom: -20px;
-    left: -20px;
+    bottom: -28px;
+    left: -28px;
     background: var(--surface);
     border: 1px solid var(--border);
-    padding: 12px 20px;
-    border-radius: 16px;
-    font-size: 12px;
+    padding: 16px 24px;
+    border-radius: 20px;
+    font-size: 13px;
     color: var(--text-muted);
     white-space: nowrap;
+    min-width: 200px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
   }
-  .hero-photo-tag strong { display: block; color: var(--text); font-size: 13px; font-weight: 400; }
+  .hero-photo-tag strong { display: block; color: var(--text); font-size: 15px; font-weight: 400; margin-bottom: 3px; }
 
   @keyframes slideUp {
     from { opacity: 0; transform: translateY(30px); }
@@ -807,13 +850,6 @@
   .country-flag { font-size: 22px; }
   .country-name { font-size: 13px; }
   .country-visits { font-size: 11px; color: var(--text-subtle); letter-spacing: 0.1em; }
-   <!-- Stats -->
-    <div class="globe-stats-row" id="globe-stats">
-      <div class="gstat"><div class="gstat-n" id="gcn">0</div><div class="gstat-l">Countries</div><div class="gstat-s">visited</div></div>
-      <div class="gstat"><div class="gstat-n" id="gcm">0<sup>k</sup></div><div class="gstat-l">Miles flown</div><div class="gstat-s">≈ 6× around Earth</div></div>
-      <div class="gstat"><div class="gstat-n" id="gct">0</div><div class="gstat-l">Trips taken</div><div class="gstat-s">from Vijayawada</div></div>
-    </div>
-
 
   /* ── CONTACT ── */
   #contact { border-top: 1px solid var(--border); }
@@ -912,15 +948,16 @@
 <!-- Loader -->
 <div id="loader">
   <div id="loader-name">
-    <span class="loader-char" style="animation-delay:0.1s">M</span>
-    <span class="loader-char" style="animation-delay:0.18s">o</span>
-    <span class="loader-char" style="animation-delay:0.26s">u</span>
-    <span class="loader-char" style="animation-delay:0.34s">r</span>
-    <span class="loader-char" style="animation-delay:0.42s">y</span>
-    <span class="loader-char" style="animation-delay:0.50s">a</span>
+    <span class="loader-char" style="animation-delay:0.05s">M</span>
+    <span class="loader-char" style="animation-delay:0.13s">o</span>
+    <span class="loader-char" style="animation-delay:0.21s">u</span>
+    <span class="loader-char" style="animation-delay:0.29s">r</span>
+    <span class="loader-char" style="animation-delay:0.37s">y</span>
+    <span class="loader-char" style="animation-delay:0.45s">a</span>
   </div>
   <div id="loader-line"></div>
   <div id="loader-sub">AI & Data Science</div>
+  <div id="loader-progress"></div>
 </div>
 
 <!-- Header -->
@@ -931,6 +968,7 @@
     <a href="#projects">Work</a>
     <a href="#experience">Experience</a>
     <a href="#personal">Personal</a>
+    <a href="#guestbook">Guestbook</a>
     <a href="#contact">Contact</a>
     <button id="theme-toggle" aria-label="Toggle theme"></button>
   </nav>
@@ -946,6 +984,7 @@
   <a href="#projects" class="mn-link">Work</a>
   <a href="#experience" class="mn-link">Experience</a>
   <a href="#personal" class="mn-link">Personal</a>
+  <a href="#guestbook" class="mn-link">Guestbook</a>
   <a href="#contact" class="mn-link">Contact</a>
 </div>
 
@@ -973,8 +1012,8 @@
     <h1 class="hero-title">
       Hey,<br>I'm <em>Mourya.</em>
     </h1>
-    <p class="hero-intro">
-      Here, you can check out what I'm working on. I try my best to create things with <span class="heart">❤</span> — or maybe something very much better but very simple. AI & Data Science, built with intention.
+    <p class="hero-intro" id="hero-intro">
+      <span class="explode-text">Here, you can check out what I'm working on. I try my best to create things with <span class="heart">❤</span> — or maybe something very much better but very simple. AI & Data Science, built with intention.</span>
     </p>
     <div class="hero-cta">
       <a href="#projects" class="btn btn-primary">See my work</a>
@@ -984,7 +1023,9 @@
   <div class="hero-photo-wrap">
     <div class="hero-photo-frame">
       <!-- Replace the src below with your actual photo URL -->
-<img src="photo.jpg" alt="Mourya Dusi" id="hero-img">    <div class="hero-photo-tag">
+      <img src="photo.jpg" alt="Mourya Dusi" id="hero-img"'">
+    </div>
+    <div class="hero-photo-tag">
       <strong>Mourya Dusi</strong>
       Dubai, UAE · Open to work
     </div>
@@ -1287,69 +1328,411 @@
     </div>
   </div>
 
-  <div class="countries-section reveal">
-    <h3>Places I've been</h3>
-    <p>9 countries and counting. Every trip leaves a mark.</p>
-    <div class="countries-grid">
-      <div class="country-pill">
-        <span class="country-flag">🇮🇳</span>
-        <div>
-          <div class="country-name">India</div>
-          <div class="country-visits">Home</div>
-        </div>
+  <!-- D3 Globe -->
+  <div class="reveal" style="margin-top:80px;" id="globe-section">
+    <div style="text-align:center;margin-bottom:32px;">
+      <p style="font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:12px;">Places visited</p>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,44px);font-weight:300;letter-spacing:.02em;">Places I've <em style="font-style:italic;color:var(--text-muted)">called home for a while</em></h3>
+    </div>
+
+    <!-- Stats -->
+    <div style="display:flex;justify-content:center;gap:56px;flex-wrap:wrap;margin-bottom:40px;">
+      <div style="text-align:center;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;line-height:1;color:var(--text);" id="g-cn">0</div>
+        <div style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);margin-top:6px;">Countries</div>
       </div>
-      <div class="country-pill">
-        <span class="country-flag">🇦🇪</span>
-        <div>
-          <div class="country-name">UAE</div>
-          <div class="country-visits">Currently based</div>
-        </div>
+      <div style="text-align:center;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;line-height:1;color:var(--text);" id="g-mi">0<span style="font-size:22px;color:var(--text-subtle)">k</span></div>
+        <div style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);margin-top:6px;">Miles flown</div>
+        <div style="font-size:11px;color:var(--text-subtle);margin-top:2px;font-style:italic;">≈ 6× around Earth</div>
       </div>
-      <div class="country-pill">
-        <span class="country-flag">🇲🇾</span>
-        <div>
-          <div class="country-name">Malaysia</div>
-          <div class="country-visits">Visited</div>
-        </div>
+      <div style="text-align:center;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;line-height:1;color:var(--text);" id="g-tr">0</div>
+        <div style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);margin-top:6px;">Trips taken</div>
+        <div style="font-size:11px;color:var(--text-subtle);margin-top:2px;font-style:italic;">from Vijayawada</div>
       </div>
-      <div class="country-pill">
-        <span class="country-flag">🇸🇬</span>
-        <div>
-          <div class="country-name">Singapore</div>
-          <div class="country-visits">Visited</div>
-        </div>
-      </div>
-      <div class="country-pill">
-        <span class="country-flag">🇹🇭</span>
-        <div>
-          <div class="country-name">Thailand</div>
-          <div class="country-visits">Visited</div>
-        </div>
-      </div>
-      <div class="country-pill">
-        <span class="country-flag">🇻🇳</span>
-        <div>
-          <div class="country-name">Vietnam</div>
-          <div class="country-visits">Visited</div>
-        </div>
-      </div>
-      <div class="country-pill">
-        <span class="country-flag">🇺🇸</span>
-        <div>
-          <div class="country-name">USA</div>
-          <div class="country-visits">Visited</div>
-        </div>
-      </div>
-      <div class="country-pill">
-        <span class="country-flag">🇳🇵</span>
-        <div>
-          <div class="country-name">Nepal</div>
-          <div class="country-visits">Visited</div>
-        </div>
+    </div>
+
+    <p style="text-align:center;font-size:12px;color:var(--text-subtle);margin-bottom:24px;letter-spacing:.1em;">Drag to rotate · Click a glowing country for the story</p>
+
+    <div style="display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap;">
+      <canvas id="globe-canvas" width="520" height="520" style="cursor:grab;border-radius:50%;flex-shrink:0;max-width:100%;touch-action:none;"></canvas>
+
+      <!-- Story panel -->
+      <div id="globe-panel" style="width:280px;background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:24px 22px;opacity:0;transform:translateX(16px);transition:opacity .35s ease,transform .35s ease;pointer-events:none;max-height:460px;overflow-y:auto;scrollbar-width:thin;">
+        <button id="globe-panel-close" style="float:right;background:none;border:none;color:var(--text-subtle);font-size:22px;cursor:pointer;line-height:1;margin:-4px -4px 0 0;">×</button>
+        <div id="gp-flag" style="font-size:36px;display:block;margin-bottom:10px;clear:both;"></div>
+        <div id="gp-name" style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;margin-bottom:4px;color:var(--text);"></div>
+        <div id="gp-tag" style="font-size:12px;color:var(--text-muted);font-style:italic;margin-bottom:18px;"></div>
+        <div style="height:1px;background:var(--border);margin-bottom:14px;"></div>
+        <div id="gp-trips"></div>
       </div>
     </div>
   </div>
+
+  <!-- Countries pill grid -->
+  <div class="countries-section reveal">
+    <h3>9 countries · countless memories</h3>
+    <p>Every stamp in the passport, a story worth telling.</p>
+    <div class="countries-grid">
+      <div class="country-pill"><span class="country-flag">🇮🇳</span><div><div class="country-name">India</div><div class="country-visits">Home</div></div></div>
+      <div class="country-pill"><span class="country-flag">🇦🇪</span><div><div class="country-name">UAE</div><div class="country-visits">Currently based</div></div></div>
+      <div class="country-pill"><span class="country-flag">🇲🇾</span><div><div class="country-name">Malaysia</div><div class="country-visits">Visited</div></div></div>
+      <div class="country-pill"><span class="country-flag">🇸🇬</span><div><div class="country-name">Singapore</div><div class="country-visits">Visited</div></div></div>
+      <div class="country-pill"><span class="country-flag">🇹🇭</span><div><div class="country-name">Thailand</div><div class="country-visits">Visited</div></div></div>
+      <div class="country-pill"><span class="country-flag">🇻🇳</span><div><div class="country-name">Vietnam</div><div class="country-visits">Visited</div></div></div>
+      <div class="country-pill"><span class="country-flag">🇺🇸</span><div><div class="country-name">USA</div><div class="country-visits">Visited</div></div></div>
+      <div class="country-pill"><span class="country-flag">🇳🇵</span><div><div class="country-name">Nepal</div><div class="country-visits">Visited</div></div></div>
+    </div>
+  </div>
 </section>
+
+<style>
+#globe-panel.show{opacity:1!important;transform:translateX(0)!important;pointer-events:all!important;}
+#gp-trips .gt{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:12px;margin-bottom:8px;animation:gtIn .4s ease both;}
+@keyframes gtIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.gt-n{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:4px;}
+.gt-t{font-size:13px;color:#ddd;line-height:1.5;}
+.gt-d{font-size:12px;color:var(--text-muted);margin-top:4px;line-height:1.6;}
+.g-bar-row{display:flex;justify-content:space-between;font-size:11px;color:var(--text-subtle);margin:8px 0 4px;}
+.g-bar-track{height:4px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;}
+.g-bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,#16a34a,#4ade80);width:0;transition:width 1s .1s ease;}
+@media(max-width:700px){
+  #globe-panel{width:100%!important;max-width:340px;transform:translateY(8px)!important;}
+  #globe-panel.show{transform:translateY(0)!important;}
+  #globe-canvas{width:300px!important;height:300px!important;}
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script>
+(function(){
+// ── TRAVEL STORIES ──
+const STORIES = {
+  IN:{flag:'🇮🇳',name:'India',tag:'Home. Where every journey begins and ends.',trips:[
+    {n:'Home Base',t:'Vijayawada, Andhra Pradesh',d:'The city that grounds me no matter how far I wander.'},
+    {n:'States Visited',t:'13 of 28 states',bar:{v:13,tot:28}},
+    {n:'Union Territories',t:'2 of 8 UTs',bar:{v:2,tot:8}},
+    {n:'Coverage',t:'39% of India explored so far',d:"India never runs out — still so much left."},
+  ]},
+  MY:{flag:'🇲🇾',name:'Malaysia',tag:'Where the travel bug first bit.',trips:[
+    {n:'Trip 01 · With Dad',t:'My very first international trip. The Petronas Towers at night lit something in me that never went out.'},
+  ]},
+  AE:{flag:'🇦🇪',name:'UAE',tag:'A place I keep coming back to.',trips:[
+    {n:'TFrom city lights to desert nights—this place has my heart.'},
+]},    
+  SG:{flag:'🇸🇬',name:'Singapore',tag:'The city that always surprises.',trips:[
+    {n:'Trip 01 · Solo',t:'Gardens by the Bay at night. Hawker food that changes your benchmarks. A city that just works.'},
+    {n:'Trip 02 · With Buddies',t:'Same city, completely different energy with the squad. Clarke Quay, Sentosa, late nights.'},
+  ]},
+  TH(2023,2025):{flag:'🇹🇭',name:'Thailand',tag:'The trip that became a legend.',trips:[
+    {n:'From beaches to chaotic laughs to amazing food and nature—definitely worth coming back again.'},
+    
+  ]},
+  US:{flag:'🇺🇸',name:'USA',tag:'The great American road trip.',trips:[
+    {n:'My favorite road trip—highways, deserts, mountains, and a new way of seeing distance.'},
+  ]},
+  NP:{flag:'🇳🇵',name:'Nepal',tag:'Humbling in every way.',trips:[
+    {n:'Trip 01 · With Parents',t:'Kathmandu with mom and dad. The Himalayas make your ambitions feel simultaneously tiny and impossibly big.'},
+  ]},
+  VN:{flag:'🇻🇳',name:'Vietnam',tag:'Underrated, unforgettable.',trips:[
+    {n:'Trip 01 · With Buddies',t:'The food is extraordinary. Pure chaos in the best way.'},
+  ]},
+};
+
+// Visited ISO alpha-2 codes
+const VISITED = new Set(['IN','MY','AE','SG','TH','US','NP','VN']);
+
+// Topojson numeric → ISO alpha-2
+const N2A={356:'IN',458:'MY',784:'AE',702:'SG',764:'TH',840:'US',524:'NP',704:'VN',4:'AF',8:'AL',12:'DZ',24:'AO',32:'AR',36:'AU',40:'AT',50:'BD',56:'BE',76:'BR',100:'BG',116:'KH',120:'CM',124:'CA',144:'LK',152:'CL',156:'CN',170:'CO',180:'CD',188:'CR',191:'HR',192:'CU',203:'CZ',208:'DK',218:'EC',818:'EG',231:'ET',246:'FI',250:'FR',276:'DE',288:'GH',300:'GR',348:'HU',360:'ID',364:'IR',368:'IQ',372:'IE',376:'IL',380:'IT',392:'JP',404:'KE',410:'KR',418:'LA',434:'LY',484:'MX',496:'MN',104:'MM',508:'MZ',528:'NL',566:'NG',578:'NO',586:'PK',604:'PE',608:'PH',616:'PL',620:'PT',642:'RO',643:'RU',682:'SA',710:'ZA',724:'ES',752:'SE',756:'CH',760:'SY',788:'TN',792:'TR',804:'UA',826:'GB',858:'UY',887:'YE',716:'ZW'};
+
+const canvas = document.getElementById('globe-canvas');
+const ctx = canvas.getContext('2d');
+const W = canvas.width, H = canvas.height;
+const cx = W/2, cy = H/2;
+
+// D3 orthographic projection
+const proj = d3.geoOrthographic()
+  .scale(W/2 - 4)
+  .translate([cx, cy])
+  .clipAngle(90);
+
+const path = d3.geoPath(proj, ctx);
+
+let rotation = [0, -20]; // [lambda, phi] — start showing Asia/India
+let isDragging = false, lastPos = null, velRot = [0,0];
+let worldData = null;
+
+function isDark(){return document.documentElement.getAttribute('data-theme')!=='light';}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+
+  // Ocean sphere
+  ctx.beginPath();
+  path({type:'Sphere'});
+  const grad = ctx.createRadialGradient(cx-60,cy-60,20,cx,cy,W/2);
+  if(isDark()){
+    grad.addColorStop(0,'#152540');
+    grad.addColorStop(1,'#060e1a');
+  } else {
+    grad.addColorStop(0,'#c8dff5');
+    grad.addColorStop(1,'#8ab8e0');
+  }
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  if(!worldData) return;
+
+  // Graticule (grid lines)
+  ctx.beginPath();
+  path(d3.geoGraticule()());
+  ctx.strokeStyle = isDark() ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.06)';
+  ctx.lineWidth = 0.5;
+  ctx.stroke();
+
+  // Countries
+  worldData.features.forEach(f => {
+    const iso = N2A[parseInt(f.id)];
+    const visited = VISITED.has(iso);
+    ctx.beginPath();
+    path(f);
+    if(visited){
+      ctx.fillStyle = isDark() ? '#1d7a4a' : '#22a05a';
+      ctx.strokeStyle = '#4ade80';
+      ctx.lineWidth = 1.0;
+    } else {
+      ctx.fillStyle = isDark() ? '#1a2c40' : '#c0d4e8';
+      ctx.strokeStyle = isDark() ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.1)';
+      ctx.lineWidth = 0.4;
+    }
+    ctx.fill();
+    ctx.stroke();
+  });
+
+  // Glow pass for visited countries
+  worldData.features.forEach(f => {
+    const iso = N2A[parseInt(f.id)];
+    if(!VISITED.has(iso)) return;
+    ctx.beginPath();
+    path(f);
+    ctx.fillStyle = 'rgba(74,222,128,0.12)';
+    ctx.fill();
+  });
+
+  // Dots on visited country centers (using D3 centroid — accurate)
+  VISITED.forEach(iso => {
+    const f = worldData.features.find(ft => N2A[parseInt(ft.id)] === iso);
+    if(!f) return;
+    const c = d3.geoCentroid(f);
+    // Use manual center for large/awkward countries
+    const centers = {
+      IN:[78.0,22.0], US:[-98.5,39.5], MY:[109.0,3.8],
+      AE:[54.0,24.0], RU:[90.0,60.0]
+    };
+    const coords = centers[iso] || c;
+    const px = proj(coords);
+    if(!px) return; // behind globe
+
+    // Check if point is on front hemisphere
+    const angle = d3.geoDistance(coords, [-rotation[0], -rotation[1]]);
+    if(angle > Math.PI/2) return; // behind globe
+
+    const [x,y] = px;
+    // Outer pulse ring
+    const t = Date.now()/1000;
+    const pulse = 0.5 + 0.5*Math.sin(t*2 + iso.charCodeAt(0));
+    ctx.beginPath();
+    ctx.arc(x, y, 6 + pulse*4, 0, Math.PI*2);
+    ctx.strokeStyle = `rgba(74,222,128,${0.15 + pulse*0.2})`;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Inner dot
+    ctx.beginPath();
+    ctx.arc(x, y, 5, 0, Math.PI*2);
+    ctx.fillStyle = '#4ade80';
+    ctx.fill();
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  });
+
+  // Atmosphere rim
+  ctx.beginPath();
+  path({type:'Sphere'});
+  const rim = ctx.createRadialGradient(cx,cy,W/2-8,cx,cy,W/2+2);
+  rim.addColorStop(0,'rgba(100,180,255,0.0)');
+  rim.addColorStop(1,'rgba(100,180,255,0.12)');
+  ctx.strokeStyle = rim;
+  ctx.lineWidth = 8;
+  ctx.stroke();
+}
+
+// Animation loop
+function animate(){
+  requestAnimationFrame(animate);
+  if(!isDragging){
+    velRot[0] *= 0.92;
+    velRot[1] *= 0.92;
+    rotation[0] += 0.12 + velRot[0];  // auto rotate
+    rotation[1] += velRot[1];
+    rotation[1] = Math.max(-60, Math.min(60, rotation[1]));
+  }
+  proj.rotate(rotation);
+  draw();
+}
+
+// Load world data then start
+fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+  .then(r=>r.json())
+  .then(world=>{
+    // Convert topojson to geojson features
+    worldData = topojsonFeature(world, world.objects.countries);
+    animate();
+    startCounters();
+  })
+  .catch(()=>{ animate(); startCounters(); });
+
+// Minimal topojson → geojson (no external dep)
+function topojsonFeature(topo, obj){
+  const arcs=topo.arcs, sc=topo.transform.scale, tr=topo.transform.translate;
+  function arc2pts(i){
+    const rev=i<0, raw=arcs[rev?~i:i];
+    let x=0,y=0;
+    const pts=raw.map(([dx,dy])=>{x+=dx;y+=dy;return[x*sc[0]+tr[0],y*sc[1]+tr[1]]});
+    return rev?pts.reverse():pts;
+  }
+  function buildGeom(g){
+    if(g.type==='Polygon') return {type:'Polygon',coordinates:g.arcs.map(r=>r.flatMap(arc2pts))};
+    if(g.type==='MultiPolygon') return {type:'MultiPolygon',coordinates:g.arcs.map(p=>p.map(r=>r.flatMap(arc2pts)))};
+    return g;
+  }
+  return {type:'FeatureCollection',features:obj.geometries.map(g=>({type:'Feature',id:g.id,geometry:buildGeom(g)}))};
+}
+
+// ── DRAG ──
+let clickOk = true;
+canvas.addEventListener('mousedown', e=>{
+  isDragging=true; clickOk=true;
+  lastPos=[e.clientX,e.clientY]; velRot=[0,0];
+  canvas.style.cursor='grabbing';
+});
+canvas.addEventListener('touchstart', e=>{
+  isDragging=true; clickOk=true;
+  lastPos=[e.touches[0].clientX,e.touches[0].clientY]; velRot=[0,0];
+},{passive:true});
+window.addEventListener('mousemove', e=>{
+  if(!isDragging||!lastPos) return;
+  const dx=e.clientX-lastPos[0], dy=e.clientY-lastPos[1];
+  if(Math.abs(dx)>3||Math.abs(dy)>3) clickOk=false;
+  const sens = 0.3;
+  velRot[0] = dx*sens;
+  velRot[1] = -dy*sens;
+  rotation[0] += velRot[0];
+  rotation[1] += velRot[1];
+  rotation[1] = Math.max(-60,Math.min(60,rotation[1]));
+  lastPos=[e.clientX,e.clientY];
+});
+window.addEventListener('touchmove', e=>{
+  if(!isDragging||!lastPos) return;
+  const dx=e.touches[0].clientX-lastPos[0], dy=e.touches[0].clientY-lastPos[1];
+  clickOk=false;
+  velRot[0]=dx*0.3; velRot[1]=-dy*0.3;
+  rotation[0]+=velRot[0]; rotation[1]+=velRot[1];
+  rotation[1]=Math.max(-60,Math.min(60,rotation[1]));
+  lastPos=[e.touches[0].clientX,e.touches[0].clientY];
+},{passive:true});
+window.addEventListener('mouseup',()=>{ isDragging=false; canvas.style.cursor='grab'; });
+window.addEventListener('touchend',()=>{ isDragging=false; });
+
+// ── CLICK — use D3 invert (the RIGHT way) ──
+canvas.addEventListener('click', e=>{
+  if(!clickOk || !worldData) return;
+  const rect = canvas.getBoundingClientRect();
+  // Scale click coords to canvas resolution
+  const scaleX = W / rect.width;
+  const scaleY = H / rect.height;
+  const cx2 = (e.clientX - rect.left) * scaleX;
+  const cy2 = (e.clientY - rect.top) * scaleY;
+
+  // D3 invert: pixel → [lon, lat]  — 100% correct, handles all rotations
+  const coords = proj.invert([cx2, cy2]);
+  if(!coords) return;
+
+  // Find which visited country contains this point (or is nearest)
+  let hitISO = null;
+  let minDist = Infinity;
+
+  worldData.features.forEach(f=>{
+    const iso = N2A[parseInt(f.id)];
+    if(!VISITED.has(iso)) return;
+    // Check if point is inside country polygon
+    if(d3.geoContains(f, coords)){
+      hitISO = iso;
+    }
+  });
+
+  // If no exact hit, find nearest visited country center
+  if(!hitISO){
+    const centers = {IN:[78,22],MY:[109,3.8],AE:[54,24],SG:[103.8,1.35],TH:[100.5,15],US:[-98.5,39.5],NP:[84,28.4],VN:[107.8,16]};
+    Object.entries(centers).forEach(([iso,c])=>{
+      const d = d3.geoDistance(coords, c);
+      if(d < minDist){ minDist=d; hitISO=iso; }
+    });
+    // Only accept if within ~18 degrees (~2000km)
+    if(minDist > 0.32) hitISO = null;
+  }
+
+  if(hitISO) showPanel(hitISO);
+  else closePanel();
+});
+
+// ── PANEL ──
+function showPanel(iso){
+  const s = STORIES[iso]; if(!s) return;
+  document.getElementById('gp-flag').textContent = s.flag;
+  document.getElementById('gp-name').textContent = s.name;
+  document.getElementById('gp-tag').textContent = s.tag;
+  const tc = document.getElementById('gp-trips'); tc.innerHTML='';
+  s.trips.forEach((trip,i)=>{
+    const div=document.createElement('div'); div.className='gt';
+    div.style.animationDelay=(i*.07)+'s';
+    let h=`<div class="gt-n">${trip.n}</div><div class="gt-t">${trip.t}</div>`;
+    if(trip.d) h+=`<div class="gt-d">${trip.d}</div>`;
+    if(trip.bar){
+      const pct=Math.round(trip.bar.v/trip.bar.tot*100);
+      h+=`<div class="g-bar-row"><span>${trip.bar.v}/${trip.bar.tot}</span><span>${pct}%</span></div>
+          <div class="g-bar-track"><div class="g-bar-fill" id="gbar${i}"></div></div>`;
+    }
+    div.innerHTML=h; tc.appendChild(div);
+    if(trip.bar){ setTimeout(()=>{ const b=document.getElementById('gbar'+i); if(b)b.style.width=Math.round(trip.bar.v/trip.bar.tot*100)+'%'; },100+i*60); }
+  });
+  const panel = document.getElementById('globe-panel');
+  panel.classList.add('show');
+}
+function closePanel(){ document.getElementById('globe-panel').classList.remove('show'); }
+document.getElementById('globe-panel-close').addEventListener('click', closePanel);
+
+// ── COUNTERS ──
+function startCounters(){
+  function run(el, target, dur, fmt){
+    let s=null;
+    const f=ts=>{ if(!s)s=ts; const p=Math.min((ts-s)/dur,1),e=1-Math.pow(1-p,3); el.innerHTML=fmt(Math.round(e*target)); if(p<1)requestAnimationFrame(f); };
+    requestAnimationFrame(f);
+  }
+  const obs=new IntersectionObserver(entries=>{
+    if(!entries[0].isIntersecting) return;
+    run(document.getElementById('g-cn'),9,1400,v=>`${v}`);
+    run(document.getElementById('g-mi'),151,2000,v=>`${v}<span style="font-size:22px;color:var(--text-subtle)">k</span>`);
+    run(document.getElementById('g-tr'),16,1400,v=>`${v}`);
+    obs.disconnect();
+  },{threshold:.3});
+  const sec=document.getElementById('globe-section'); if(sec) obs.observe(sec);
+}
+
+})();
+</script>
 
 <!-- Contact -->
 <section id="contact">
@@ -1381,6 +1764,45 @@
       <p>Currently based in Dubai, UAE. Open to full-time roles in AI & Data Science, remote positions, and relocation opportunities.</p>
       <p>If you're building something interesting in AI, machine learning, or data infrastructure — I'd love to hear about it.</p>
       <p style="color: var(--text-subtle); font-size: 13px;">UAE Resident · Open to Remote Work & Relocation</p>
+    </div>
+  </div>
+</section>
+
+<!-- Guestbook -->
+<section id="guestbook" style="border-top:1px solid var(--border);">
+  <div style="max-width:1200px;margin:0 auto;padding:120px clamp(24px,5vw,60px);">
+    <div class="section-label">07 — Guestbook</div>
+    <div style="display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:start;">
+      <div>
+        <h2 class="section-title reveal">Leave a<br><em>message</em></h2>
+        <p style="font-size:15px;color:var(--text-muted);font-weight:300;margin-top:16px;line-height:1.7;max-width:480px;">
+          Say hello, share a thought, or just let me know you were here. All messages appear live.
+        </p>
+        <!-- Messages feed -->
+        <div id="gb-feed" style="margin-top:48px;display:flex;flex-direction:column;gap:12px;"></div>
+        <div id="gb-empty" style="margin-top:48px;font-size:13px;color:var(--text-subtle);display:none;">No messages yet. Be the first!</div>
+      </div>
+      <!-- Form -->
+      <div class="reveal">
+        <div id="gb-form-wrap" style="background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:32px;">
+          <div style="margin-bottom:20px;">
+            <label style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);display:block;margin-bottom:8px;">Your name</label>
+            <input id="gb-name" type="text" maxlength="40" placeholder="Jane Smith"
+              style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:14px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;">
+          </div>
+          <div style="margin-bottom:20px;">
+            <label style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);display:block;margin-bottom:8px;">Message</label>
+            <textarea id="gb-msg" maxlength="280" placeholder="Say something nice..." rows="4"
+              style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:14px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;resize:none;transition:border-color .2s;line-height:1.6;"></textarea>
+            <div style="text-align:right;font-size:11px;color:var(--text-subtle);margin-top:4px;"><span id="gb-count">0</span>/280</div>
+          </div>
+          <button id="gb-submit"
+            style="width:100%;padding:14px;background:var(--text);color:var(--bg);border:none;border-radius:10px;font-size:14px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:opacity .2s,transform .2s;font-weight:400;">
+            Post message →
+          </button>
+          <div id="gb-status" style="text-align:center;font-size:12px;color:var(--text-subtle);margin-top:12px;min-height:18px;"></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1417,6 +1839,13 @@ window.addEventListener('load', () => {
 // Cursor
 const dot = document.getElementById('cursor-dot');
 const ring = document.getElementById('cursor-ring');
+
+// Hide cursor on touch devices
+if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+  document.body.style.cursor = 'auto';
+  if(dot) dot.style.display = 'none';
+  if(ring) ring.style.display = 'none';
+}
 let mouseX = 0, mouseY = 0;
 let ringX = 0, ringY = 0;
 
@@ -1491,6 +1920,228 @@ const observer = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 reveals.forEach(el => observer.observe(el));
+</script>
+<script>
+// ── LETTER EXPLOSION ──
+(function(){
+  function initExplosion(){
+    const heroIntro = document.getElementById('hero-intro');
+    if(!heroIntro) return;
+
+    // Walk text nodes inside .explode-text, wrap each char in a span
+    function wrapNode(node, container){
+      if(node.nodeType === 3){ // text
+        node.textContent.split('').forEach(ch => {
+          const s = document.createElement('span');
+          s.className = 'explode-char';
+          s.textContent = ch === ' ' ? '\u00a0' : ch;
+          s.style.setProperty('--rx','0px');
+          s.style.setProperty('--ry','0px');
+          s.style.setProperty('--rr','0deg');
+          container.appendChild(s);
+        });
+      } else {
+        container.appendChild(node.cloneNode(true));
+      }
+    }
+
+    const explodeSpan = heroIntro.querySelector('.explode-text');
+    if(!explodeSpan) return;
+    const children = Array.from(explodeSpan.childNodes);
+    explodeSpan.innerHTML = '';
+    children.forEach(n => wrapNode(n, explodeSpan));
+
+    let exploded = false;
+    let reformTimer = null;
+
+    function setVectors(){
+      explodeSpan.querySelectorAll('.explode-char').forEach(c => {
+        c.style.setProperty('--rx', ((Math.random()-.5)*220)+'px');
+        c.style.setProperty('--ry', ((Math.random()-.5)*180)+'px');
+        c.style.setProperty('--rr', ((Math.random()-.5)*900)+'deg');
+      });
+    }
+
+    function explode(){
+      if(exploded) return;
+      exploded = true;
+      setVectors();
+      explodeSpan.querySelectorAll('.explode-char').forEach(c => {
+        c.classList.remove('reform');
+        void c.offsetWidth; // force reflow
+        c.classList.add('pop');
+      });
+      clearTimeout(reformTimer);
+      reformTimer = setTimeout(reform, 1500);
+    }
+
+    function reform(){
+      exploded = false;
+      explodeSpan.querySelectorAll('.explode-char').forEach((c,i) => {
+        c.classList.remove('pop');
+        void c.offsetWidth;
+        c.classList.add('reform');
+        c.style.transitionDelay = '';
+      });
+      setTimeout(()=>{
+        explodeSpan.querySelectorAll('.explode-char').forEach(c => c.classList.remove('reform'));
+      }, 700);
+    }
+
+    // Desktop: hover on paragraph
+    heroIntro.addEventListener('mouseenter', explode);
+    heroIntro.style.cursor = 'default';
+    // Mobile / fallback: click
+    heroIntro.addEventListener('click', ()=>{ exploded ? reform() : explode(); });
+  }
+
+  // Run after loader exits (loader takes ~2.4s + 0.8s fade = 3.2s)
+  setTimeout(initExplosion, 3400);
+})();
+
+// ── GUESTBOOK (localStorage-backed, real-time) ──
+(function(){
+  const STORAGE_KEY = 'mourya_guestbook_v1';
+  const ADMIN_SECRET = 'mourya2026'; // change this
+
+  function loadMessages() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    catch(e) { return []; }
+  }
+  function saveMessages(msgs) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(msgs));
+  }
+
+  function timeAgo(ts) {
+    const diff = Date.now() - ts;
+    const mins = Math.floor(diff / 60000);
+    const hrs = Math.floor(mins / 60);
+    const days = Math.floor(hrs / 24);
+    if (mins < 1) return 'just now';
+    if (mins < 60) return `${mins}m ago`;
+    if (hrs < 24) return `${hrs}h ago`;
+    if (days < 7) return `${days}d ago`;
+    return new Date(ts).toLocaleDateString('en-US', {month:'short', day:'numeric'});
+  }
+
+  function renderMessages() {
+    const feed = document.getElementById('gb-feed');
+    const empty = document.getElementById('gb-empty');
+    if (!feed) return;
+    const msgs = loadMessages();
+    feed.innerHTML = '';
+    if (msgs.length === 0) {
+      if (empty) { empty.style.display = 'block'; }
+      return;
+    }
+    if (empty) empty.style.display = 'none';
+    msgs.slice().reverse().forEach((msg, ri) => {
+      const i = msgs.length - 1 - ri;
+      const card = document.createElement('div');
+      card.className = 'gb-card';
+      card.style.cssText = `
+        background:var(--bg2);border:1px solid var(--border);border-radius:14px;
+        padding:18px 20px;animation:gbIn .4s ease both;animation-delay:${ri*0.05}s;
+        opacity:0;position:relative;
+      `;
+      const initials = (msg.name || '?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+      const colors = ['#4ade80','#60a5fa','#f472b6','#fb923c','#a78bfa'];
+      const col = colors[msg.name.charCodeAt(0) % colors.length];
+      card.innerHTML = `
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+          <div style="width:34px;height:34px;border-radius:50%;background:${col}22;border:1px solid ${col}44;
+            display:flex;align-items:center;justify-content:center;font-size:11px;color:${col};font-weight:500;flex-shrink:0;">${initials}</div>
+          <div>
+            <div style="font-size:13px;color:var(--text);font-weight:400;">${escHtml(msg.name)}</div>
+            <div style="font-size:11px;color:var(--text-subtle);">${timeAgo(msg.ts)}</div>
+          </div>
+          <button onclick="gbDelete(${i})" title="Delete message"
+            style="margin-left:auto;background:none;border:none;color:var(--text-subtle);font-size:16px;cursor:pointer;
+            opacity:0;transition:opacity .2s;padding:4px 8px;border-radius:6px;line-height:1;"
+            class="gb-del">×</button>
+        </div>
+        <p style="font-size:14px;color:var(--text-muted);line-height:1.65;margin:0;">${escHtml(msg.message)}</p>
+      `;
+      card.addEventListener('mouseenter', () => { const d = card.querySelector('.gb-del'); if(d) d.style.opacity='0.6'; });
+      card.addEventListener('mouseleave', () => { const d = card.querySelector('.gb-del'); if(d) d.style.opacity='0'; });
+      feed.appendChild(card);
+    });
+  }
+
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  window.gbDelete = function(i) {
+    const pw = prompt('Enter admin password to delete:');
+    if (pw !== ADMIN_SECRET) { alert('Incorrect password.'); return; }
+    const msgs = loadMessages();
+    msgs.splice(i, 1);
+    saveMessages(msgs);
+    renderMessages();
+  };
+
+  // Submit
+  const nameEl = document.getElementById('gb-name');
+  const msgEl  = document.getElementById('gb-msg');
+  const countEl= document.getElementById('gb-count');
+  const submitEl= document.getElementById('gb-submit');
+  const statusEl= document.getElementById('gb-status');
+
+  if (msgEl) {
+    msgEl.addEventListener('input', () => {
+      if (countEl) countEl.textContent = msgEl.value.length;
+    });
+  }
+
+  // Input focus glow
+  [nameEl, msgEl].forEach(el => {
+    if (!el) return;
+    el.addEventListener('focus', () => el.style.borderColor = 'var(--border-hover)');
+    el.addEventListener('blur',  () => el.style.borderColor = 'var(--border)');
+  });
+
+  if (submitEl) {
+    submitEl.addEventListener('click', () => {
+      const name = nameEl ? nameEl.value.trim() : '';
+      const message = msgEl ? msgEl.value.trim() : '';
+      if (!name) { flash(statusEl, 'Please enter your name.'); nameEl && nameEl.focus(); return; }
+      if (!message) { flash(statusEl, 'Please write a message.'); msgEl && msgEl.focus(); return; }
+      const msgs = loadMessages();
+      msgs.push({ name, message, ts: Date.now() });
+      saveMessages(msgs);
+      nameEl.value = '';
+      msgEl.value = '';
+      if (countEl) countEl.textContent = '0';
+      flash(statusEl, '✓ Message posted!');
+      renderMessages();
+    });
+    submitEl.addEventListener('mouseenter', () => { submitEl.style.opacity='.85'; submitEl.style.transform='translateY(-1px)'; });
+    submitEl.addEventListener('mouseleave', () => { submitEl.style.opacity='1'; submitEl.style.transform=''; });
+  }
+
+  function flash(el, msg) {
+    if (!el) return;
+    el.textContent = msg;
+    setTimeout(() => { el.textContent = ''; }, 3000);
+  }
+
+  // Inject animation keyframe
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes gbIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+    #gb-feed .gb-card { opacity:1!important; }
+    #guestbook input::placeholder,#guestbook textarea::placeholder{color:var(--text-subtle)}
+    @media(max-width:760px){
+      #guestbook [style*="grid-template-columns:1fr 420px"]{grid-template-columns:1fr!important;gap:40px!important}
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Initial render + live updates via storage event
+  renderMessages();
+  window.addEventListener('storage', e => { if (e.key === STORAGE_KEY) renderMessages(); });
+})();
 </script>
 </body>
 </html>
