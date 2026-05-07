@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visitor Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:#0a0a0a;color:#f0f0f0;min-height:100vh}
+
+/* ── LOGIN ── */
+#login{position:fixed;inset:0;background:#0a0a0a;z-index:100;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px}
+#login h1{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;letter-spacing:.08em;margin-bottom:8px}
+#login p{font-size:12px;color:#444;letter-spacing:.1em}
+#pwd{background:#111;border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:13px 20px;font-size:15px;color:#f0f0f0;font-family:'DM Sans',sans-serif;outline:none;width:260px;text-align:center;letter-spacing:.25em;transition:border-color .2s}
+#pwd:focus{border-color:rgba(255,255,255,.25)}
+#login-btn{background:#f0f0f0;color:#0a0a0a;border:none;border-radius:10px;padding:13px 36px;font-size:14px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:opacity .2s}
+#login-btn:hover{opacity:.85}
+#login-err{font-size:12px;color:#e06060;min-height:16px}
+
+/* ── DASHBOARD ── */
+#dash{display:none;padding:48px clamp(16px,4vw,60px) 80px;max-width:1200px;margin:0 auto}
+.dash-top{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;flex-wrap:wrap;gap:16px}
+.dash-title{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;letter-spacing:-.01em}
+.dash-sub{font-size:13px;color:#555;margin-top:4px}
+.logout{background:none;border:1px solid rgba(255,255,255,.1);color:#666;padding:8px 20px;border-radius:100px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.logout:hover{border-color:rgba(255,255,255,.25);color:#f0f0f0}
+
+/* ── STAT CARDS ── */
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;margin-bottom:48px}
+.stat-card{background:#111;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:24px 20px}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;line-height:1;color:#f0f0f0}
+.stat-l{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#444;margin-top:8px}
+
+/* ── FILTERS ── */
+.filters{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap;align-items:center}
+.filter-btn{background:none;border:1px solid rgba(255,255,255,.1);color:#666;padding:7px 16px;border-radius:100px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.filter-btn:hover,.filter-btn.active{border-color:rgba(255,255,255,.25);color:#f0f0f0}
+#search{background:#111;border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:7px 18px;font-size:12px;color:#f0f0f0;font-family:'DM Sans',sans-serif;outline:none;width:200px;transition:border-color .2s}
+#search:focus{border-color:rgba(255,255,255,.2)}
+#search::placeholder{color:#444}
+.clear-btn{background:none;border:1px solid rgba(229,62,62,.3);color:#e06060;padding:7px 16px;border-radius:100px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;margin-left:auto}
+.clear-btn:hover{background:rgba(229,62,62,.1)}
+
+/* ── TABLE ── */
+.table-wrap{background:#111;border:1px solid rgba(255,255,255,.07);border-radius:16px;overflow:hidden}
+.table-header{display:grid;grid-template-columns:32px 160px 140px 110px 100px 100px 80px 1fr;gap:0;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.06);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#444}
+.visitor-row{display:grid;grid-template-columns:32px 160px 140px 110px 100px 100px 80px 1fr;gap:0;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px;color:#888;transition:background .15s;align-items:center}
+.visitor-row:last-child{border-bottom:none}
+.visitor-row:hover{background:rgba(255,255,255,.02)}
+.visitor-row .num{color:#444;font-size:11px;font-variant-numeric:tabular-nums}
+.visitor-row .location{color:#f0f0f0}
+.visitor-row .flag{font-size:16px;margin-right:6px}
+.visitor-row .time{font-size:11px;color:#555}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:100px;font-size:11px}
+.badge-mobile{background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.2);color:#60a5fa}
+.badge-desktop{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.2);color:#4ade80}
+.no-visits{text-align:center;padding:60px 20px;color:#333;font-size:14px}
+.result-info{font-size:12px;color:#444;margin-bottom:12px}
+
+/* ── COUNTRIES BREAKDOWN ── */
+.breakdown{margin-top:40px}
+.breakdown h3{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:#444;margin-bottom:20px}
+.country-rows{display:flex;flex-direction:column;gap:10px}
+.country-row{display:flex;align-items:center;gap:12px}
+.country-bar-wrap{flex:1;height:4px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
+.country-bar{height:100%;border-radius:2px;background:linear-gradient(90deg,#16a34a,#4ade80);transition:width .8s ease}
+.country-label{font-size:13px;color:#888;min-width:140px}
+.country-count{font-size:12px;color:#444;min-width:30px;text-align:right}
+
+@media(max-width:900px){
+  .table-header,.visitor-row{grid-template-columns:32px 1fr 100px 80px}
+  .visitor-row .col-region,.visitor-row .col-org,.visitor-row .col-browser,.visitor-row .col-os,.table-header .h-region,.table-header .h-org,.table-header .h-browser,.table-header .h-os{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Login screen -->
+<div id="login">
+  <h1>Mourya</h1>
+  <p>Visitor Dashboard · Private</p>
+  <input type="password" id="pwd" placeholder="••••••••" autocomplete="off">
+  <button id="login-btn">Enter →</button>
+  <div id="login-err"></div>
+</div>
+
+<!-- Dashboard -->
+<div id="dash">
+  <div class="dash-top">
+    <div>
+      <div class="dash-title">Visitor Dashboard</div>
+      <div class="dash-sub">Private · Only visible to you</div>
+    </div>
+    <div style="display:flex;gap:12px;align-items:center;">
+      <button class="filter-btn" id="export-btn">Export CSV</button>
+      <button class="logout" id="logout-btn">Log out</button>
+    </div>
+  </div>
+
+  <!-- Stat cards -->
+  <div class="stats">
+    <div class="stat-card"><div class="stat-n" id="s-total">0</div><div class="stat-l">Total Visitors</div></div>
+    <div class="stat-card"><div class="stat-n" id="s-today">0</div><div class="stat-l">Today</div></div>
+    <div class="stat-card"><div class="stat-n" id="s-week">0</div><div class="stat-l">This Week</div></div>
+    <div class="stat-card"><div class="stat-n" id="s-countries">0</div><div class="stat-l">Countries</div></div>
+    <div class="stat-card"><div class="stat-n" id="s-mobile">0%</div><div class="stat-l">Mobile</div></div>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">All time</button>
+    <button class="filter-btn" data-filter="today">Today</button>
+    <button class="filter-btn" data-filter="week">This week</button>
+    <button class="filter-btn" data-filter="month">This month</button>
+    <input type="text" id="search" placeholder="Search country, city, IP...">
+    <button class="clear-btn" id="clear-btn">Clear all data</button>
+  </div>
+
+  <div class="result-info" id="result-info"></div>
+
+  <!-- Table -->
+  <div class="table-wrap">
+    <div class="table-header">
+      <span>#</span>
+      <span>Location</span>
+      <span class="h-region">Region / ISP</span>
+      <span>Device</span>
+      <span class="h-browser">Browser</span>
+      <span class="h-os">OS</span>
+      <span class="h-org">Screen</span>
+      <span>Time</span>
+    </div>
+    <div id="visitor-table"></div>
+  </div>
+
+  <!-- Country breakdown -->
+  <div class="breakdown">
+    <h3>Visitors by country</h3>
+    <div class="country-rows" id="country-breakdown"></div>
+  </div>
+</div>
+
+<script>
+const VKEY = 'mourya_visitors_v2';
+const GKEY = 'mourya_dash_auth';
+const PWD  = 'mourya2026'; // ← change this to match your portfolio
+
+function loadVisitors(){ try{ return JSON.parse(localStorage.getItem(VKEY))||[]; }catch{ return []; } }
+
+// ── LOGIN ──
+const loginEl = document.getElementById('login');
+const dashEl  = document.getElementById('dash');
+const pwdEl   = document.getElementById('pwd');
+const errEl   = document.getElementById('login-err');
+
+function checkAuth(){ if(sessionStorage.getItem(GKEY)==='1'){ showDash(); } }
+
+document.getElementById('login-btn').addEventListener('click', tryLogin);
+pwdEl.addEventListener('keydown', e=>{ if(e.key==='Enter') tryLogin(); });
+
+function tryLogin(){
+  if(pwdEl.value === PWD){
+    sessionStorage.setItem(GKEY,'1');
+    errEl.textContent='';
+    showDash();
+  } else {
+    errEl.textContent='Incorrect password.';
+    pwdEl.value='';
+    pwdEl.focus();
+  }
+}
+
+document.getElementById('logout-btn').addEventListener('click',()=>{
+  sessionStorage.removeItem(GKEY);
+  dashEl.style.display='none';
+  loginEl.style.display='flex';
+  pwdEl.value='';
+});
+
+function showDash(){
+  loginEl.style.display='none';
+  dashEl.style.display='block';
+  renderDash('all','');
+}
+
+// ── RENDER ──
+let currentFilter = 'all';
+let currentSearch = '';
+
+document.querySelectorAll('.filter-btn[data-filter]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn[data-filter]').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    renderDash(currentFilter, currentSearch);
+  });
+});
+
+document.getElementById('search').addEventListener('input', e=>{
+  currentSearch = e.target.value.toLowerCase();
+  renderDash(currentFilter, currentSearch);
+});
+
+document.getElementById('clear-btn').addEventListener('click',()=>{
+  if(!confirm('Delete ALL visitor data permanently?')) return;
+  localStorage.removeItem(VKEY);
+  renderDash('all','');
+});
+
+document.getElementById('export-btn').addEventListener('click',()=>{
+  const visitors = loadVisitors();
+  if(!visitors.length){ alert('No data to export.'); return; }
+  const cols = ['timestamp','ip','city','region','country','country_code','org','timezone','device','browser','os','screen','lang','ref'];
+  const rows = visitors.map(v=>[
+    new Date(v.ts).toISOString(), v.ip, v.city, v.region, v.country,
+    v.country_code, v.org, v.timezone, v.device, v.browser,
+    v.os, v.screen, v.lang, v.ref
+  ].map(x=>'"'+(x||'').replace(/"/g,'""')+'"').join(','));
+  const csv = [cols.join(','), ...rows].join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download = 'mourya-visitors-'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();
+});
+
+function timeAgo(ts){
+  const d=Date.now()-ts,m=Math.floor(d/60000),h=Math.floor(m/60),dy=Math.floor(h/24);
+  if(m<1)return'just now';if(m<60)return m+'m ago';if(h<24)return h+'h ago';
+  if(dy<7)return dy+'d ago';
+  return new Date(ts).toLocaleDateString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+}
+
+function filterByTime(visitors, filter){
+  const now = Date.now();
+  if(filter==='today') return visitors.filter(v=>now-v.ts < 24*60*60*1000);
+  if(filter==='week')  return visitors.filter(v=>now-v.ts < 7*24*60*60*1000);
+  if(filter==='month') return visitors.filter(v=>now-v.ts < 30*24*60*60*1000);
+  return visitors;
+}
+
+function renderDash(filter, search){
+  const all = loadVisitors();
+  const timeFiltered = filterByTime(all, filter);
+  const today = filterByTime(all,'today').length;
+  const week  = filterByTime(all,'week').length;
+  const mobileCount = all.filter(v=>v.device==='Mobile').length;
+  const countries = new Set(all.map(v=>v.country).filter(Boolean));
+
+  document.getElementById('s-total').textContent = all.length;
+  document.getElementById('s-today').textContent = today;
+  document.getElementById('s-week').textContent  = week;
+  document.getElementById('s-countries').textContent = countries.size;
+  document.getElementById('s-mobile').textContent = all.length ? Math.round(mobileCount/all.length*100)+'%' : '0%';
+
+  // Apply search
+  const searched = search
+    ? timeFiltered.filter(v=>[v.country,v.city,v.ip,v.org,v.browser,v.ref].join(' ').toLowerCase().includes(search))
+    : timeFiltered;
+
+  document.getElementById('result-info').textContent =
+    `Showing ${searched.length} of ${all.length} visitors`;
+
+  // Table
+  const table = document.getElementById('visitor-table');
+  if(!searched.length){
+    table.innerHTML = '<div class="no-visits">No visitors found</div>';
+  } else {
+    // Show newest first
+    const rows = searched.slice().reverse().map((v,i)=>{
+      const flag = v.country_code
+        ? String.fromCodePoint(...[...v.country_code.toUpperCase()].map(c=>c.charCodeAt(0)+0x1F1A5))
+        : '🌐';
+      const deviceBadge = v.device==='Mobile'
+        ? '<span class="badge badge-mobile">📱 Mobile</span>'
+        : '<span class="badge badge-desktop">🖥 Desktop</span>';
+      return `<div class="visitor-row">
+        <span class="num">${searched.length-i}</span>
+        <span class="location"><span class="flag">${flag}</span>${escH(v.city||'—')}, ${escH(v.country||'Unknown')}</span>
+        <span class="col-region" style="font-size:11px;color:#555;">${escH((v.region||'')+(v.org?' · '+v.org.slice(0,20):''))}</span>
+        <span>${deviceBadge}</span>
+        <span class="col-browser" style="font-size:12px;">${escH(v.browser||'—')}</span>
+        <span class="col-os" style="font-size:12px;">${escH(v.os||'—')}</span>
+        <span class="col-org" style="font-size:11px;color:#555;">${escH(v.screen||'—')}</span>
+        <span class="time">${timeAgo(v.ts)}<br><span style="font-size:10px;color:#333;">${escH(v.ip||'')}</span></span>
+      </div>`;
+    }).join('');
+    table.innerHTML = rows;
+  }
+
+  // Country breakdown (from all data, not filtered)
+  const countryMap = {};
+  all.forEach(v=>{ if(v.country){ countryMap[v.country]=(countryMap[v.country]||0)+1; } });
+  const sorted = Object.entries(countryMap).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  const max = sorted[0]?.[1]||1;
+  document.getElementById('country-breakdown').innerHTML = sorted.map(([country,count])=>`
+    <div class="country-row">
+      <span class="country-label">${escH(country)}</span>
+      <div class="country-bar-wrap"><div class="country-bar" style="width:${count/max*100}%"></div></div>
+      <span class="country-count">${count}</span>
+    </div>
+  `).join('') || '<span style="color:#333;font-size:13px;">No data yet</span>';
+}
+
+function escH(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ── INIT ──
+checkAuth();
+// Auto-refresh every 60 seconds
+setInterval(()=>{ if(sessionStorage.getItem(GKEY)==='1') renderDash(currentFilter,currentSearch); }, 60000);
+</script>
+</body>
+</html>
