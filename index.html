@@ -785,7 +785,6 @@
 <!-- Footer -->
 <footer>
   <span>© 2026 Mourya Dusi</span>
-  <span id="visitor-count" style="cursor:default;" title="Portfolio visitors">— visitors</span>
   <span>Built with ❤</span>
 </footer>
 
@@ -1131,36 +1130,6 @@ document.querySelectorAll('.reveal').forEach(el=>revObserver.observe(el));
   document.head.appendChild(style);
   render();
   window.addEventListener('storage',e=>{if(e.key===KEY)render();});
-})();
-</script>
-<!-- Visitor Tracking -->
-<script>
-(function(){
-  const VKEY='mourya_visitors_v2';
-  function loadV(){try{return JSON.parse(localStorage.getItem(VKEY))||[];}catch{return [];}}
-  function saveV(v){try{localStorage.setItem(VKEY,JSON.stringify(v));}catch{}}
-  function getBrowser(){const ua=navigator.userAgent;if(ua.includes('Edg'))return'Edge';if(ua.includes('OPR'))return'Opera';if(ua.includes('Chrome')&&!ua.includes('Chromium'))return'Chrome';if(ua.includes('Firefox'))return'Firefox';if(ua.includes('Safari')&&!ua.includes('Chrome'))return'Safari';return'Browser';}
-  function getOS(){const ua=navigator.userAgent;if(ua.includes('Windows'))return'Windows';if(ua.includes('Mac OS'))return'macOS';if(ua.includes('iPhone')||ua.includes('iPad'))return'iOS';if(ua.includes('Android'))return'Android';if(ua.includes('Linux'))return'Linux';return'Unknown';}
-  function getDevice(){return /Mobi|Android/i.test(navigator.userAgent)?'Mobile':'Desktop';}
-  function updateCounter(n){const el=document.getElementById('visitor-count');if(el)el.textContent=n+' visitor'+(n!==1?'s':'');}
-  async function track(){
-    const existing=loadV();
-    updateCounter(existing.length);
-    try{
-      const r=await fetch('https://ipapi.co/json/');
-      const geo=await r.json();
-      if(geo.error)return;
-      const recent=existing.filter(v=>v.ip===geo.ip&&(Date.now()-v.ts)<2*60*60*1000);
-      if(!recent.length){
-        const visit={ts:Date.now(),ip:geo.ip||'',city:geo.city||'',region:geo.region||'',country:geo.country_name||'',country_code:geo.country_code||'',org:geo.org||'',timezone:geo.timezone||'',device:getDevice(),browser:getBrowser(),os:getOS(),screen:screen.width+'×'+screen.height,lang:navigator.language,ref:document.referrer||'Direct'};
-        existing.push(visit);
-        if(existing.length>1000)existing.splice(0,existing.length-1000);
-        saveV(existing);
-        updateCounter(existing.length);
-      }
-    }catch(e){}
-  }
-  window.addEventListener('load',track);
 })();
 </script>
   <script defer src="/_vercel/insights/script.js"></script>
