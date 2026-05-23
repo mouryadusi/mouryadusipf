@@ -1,1137 +1,725 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Mourya Dusi</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:wght@400;500&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-  :root {
-    --bg: #0a0a0a;
-    --bg2: #111111;
-    --bg3: #1a1a1a;
-    --surface: #1e1e1e;
-    --border: rgba(255,255,255,0.08);
-    --border-hover: rgba(255,255,255,0.15);
-    --text: #f0f0f0;
-    --text-muted: #888;
-    --text-subtle: #555;
-    --accent: #e8e0d0;
-    --accent2: #c8b896;
-    --cursor-size: 12px;
-    --cursor-ring: 36px;
-  }
-  [data-theme="light"] {
-    --bg: #fafaf8;
-    --bg2: #f4f4f0;
-    --bg3: #eeeeea;
-    --surface: #ffffff;
-    --border: rgba(0,0,0,0.07);
-    --border-hover: rgba(0,0,0,0.15);
-    --text: #111111;
-    --text-muted: #666;
-    --text-subtle: #aaa;
-    --accent: #2a2a2a;
-    --accent2: #8a7a5a;
+
+:root{
+  --bg:#0a0a0a;
+  --bg2:#111;
+  --text:#f0f0f0;
+  --text-muted:#888;
+  --text-subtle:#555;
+  --border:rgba(255,255,255,.08);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  overflow-x:hidden;
+}
+
+/* SECTION */
+
+#personal{
+  max-width:1200px;
+  margin:auto;
+  padding:120px 24px;
+}
+
+.section-label{
+  font-size:11px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--text-subtle);
+  margin-bottom:60px;
+}
+
+.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(42px,6vw,72px);
+  font-weight:300;
+  line-height:1;
+}
+
+.section-title em{
+  font-style:italic;
+  color:var(--text-muted);
+}
+
+/* INTERESTS */
+
+.interests-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+}
+
+.interest-card{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:28px;
+}
+
+.interest-icon{
+  font-size:32px;
+  margin-bottom:16px;
+}
+
+.interest-card h3{
+  margin-bottom:10px;
+  font-size:22px;
+  font-weight:400;
+}
+
+.interest-card p{
+  color:var(--text-muted);
+  line-height:1.8;
+  font-size:14px;
+}
+
+/* GLOBE */
+
+#globe-wrap{
+  margin-top:90px;
+}
+
+.globe-head{
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.globe-head p{
+  font-size:11px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--text-subtle);
+  margin-bottom:14px;
+}
+
+.globe-head h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(32px,4vw,52px);
+  font-weight:300;
+}
+
+.globe-head em{
+  color:var(--text-muted);
+  font-style:italic;
+}
+
+/* COUNTERS */
+
+.globe-counters{
+  display:flex;
+  justify-content:center;
+  gap:70px;
+  flex-wrap:wrap;
+  margin-bottom:42px;
+}
+
+.counter{
+  text-align:center;
+}
+
+.counter-number{
+  font-family:'Cormorant Garamond',serif;
+  font-size:54px;
+  font-weight:300;
+  line-height:1;
+}
+
+.counter-label{
+  margin-top:8px;
+  font-size:11px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--text-subtle);
+}
+
+/* GLOBE AREA */
+
+.globe-flex{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:28px;
+  flex-wrap:wrap;
+}
+
+#globe-canvas{
+  width:520px;
+  height:520px;
+  max-width:100%;
+  border-radius:50%;
+  cursor:grab;
+  touch-action:none;
+}
+
+#globe-panel{
+  width:280px;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:24px;
+  opacity:0;
+  transform:translateX(14px);
+  transition:.35s ease;
+  pointer-events:none;
+}
+
+#globe-panel.show{
+  opacity:1;
+  transform:translateX(0);
+  pointer-events:all;
+}
+
+#globe-panel-close{
+  float:right;
+  background:none;
+  border:none;
+  color:var(--text-subtle);
+  font-size:24px;
+  cursor:pointer;
+}
+
+#gp-flag{
+  font-size:38px;
+  margin-bottom:10px;
+}
+
+#gp-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;
+  margin-bottom:6px;
+}
+
+#gp-tag{
+  color:var(--text-muted);
+  font-size:13px;
+  font-style:italic;
+  margin-bottom:18px;
+}
+
+.gt{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:12px;
+  padding:14px;
+  margin-bottom:10px;
+}
+
+.gt-n{
+  font-size:10px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--text-subtle);
+  margin-bottom:4px;
+}
+
+.gt-t{
+  font-size:14px;
+  color:#eee;
+}
+
+.gt-d{
+  margin-top:5px;
+  color:var(--text-muted);
+  font-size:12px;
+  line-height:1.6;
+}
+
+/* COUNTRIES */
+
+.countries-section{
+  margin-top:80px;
+}
+
+.countries-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:14px;
+}
+
+.country-pill{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:18px;
+}
+
+.country-flag{
+  font-size:28px;
+}
+
+.country-name{
+  font-size:16px;
+}
+
+.country-visits{
+  font-size:12px;
+  color:var(--text-muted);
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+  #globe-canvas{
+    width:300px;
+    height:300px;
   }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    cursor: none;
-    overflow-x: hidden;
-    transition: background 0.4s ease, color 0.4s ease;
+  #globe-panel{
+    width:100%;
+    max-width:340px;
   }
 
-  @media (hover: none) {
-    #cursor-dot, #cursor-ring { display: none !important; }
-    body { cursor: auto !important; }
-    a, button, .project-item, nav a, .btn, .social-link { cursor: pointer !important; }
-  }
-  #cursor-dot {
-    position: fixed; width: var(--cursor-size); height: var(--cursor-size);
-    background: var(--text); border-radius: 50%; pointer-events: none;
-    z-index: 99999; transform: translate(-50%, -50%);
-    transition: width 0.2s ease, height 0.2s ease;
-    mix-blend-mode: difference;
-  }
-  #cursor-ring {
-    position: fixed; width: var(--cursor-ring); height: var(--cursor-ring);
-    border: 1px solid rgba(255,255,255,0.4); border-radius: 50%;
-    pointer-events: none; z-index: 99998; transform: translate(-50%, -50%);
-    transition: width 0.3s ease, height 0.3s ease;
-  }
-  [data-theme="light"] #cursor-ring { border-color: rgba(0,0,0,0.25); }
-  body.cursor-hover #cursor-dot { width: 6px; height: 6px; }
-  body.cursor-hover #cursor-ring { width: 50px; height: 50px; }
+}
 
-  /* LOADER */
-  #loader {
-    position: fixed; inset: 0; background: var(--bg); z-index: 10000;
-    display: flex; align-items: center; justify-content: center; flex-direction: column;
-  }
-  #loader-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(52px, 10vw, 96px); font-weight: 300;
-    letter-spacing: 0.12em; color: var(--text);
-    overflow: hidden; display: flex; position: relative;
-  }
-  .loader-char {
-    display: inline-block;
-    transform: translateY(110%) rotateX(40deg); opacity: 0;
-    animation: charRise 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    transform-origin: bottom center;
-  }
-  @keyframes charRise { to { transform: translateY(0) rotateX(0deg); opacity: 1; } }
-  #loader-line {
-    width: 0; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--text-muted), transparent);
-    margin-top: 24px; animation: lineExpand 1s 1.4s ease forwards;
-  }
-  @keyframes lineExpand { to { width: 240px; } }
-  #loader-sub {
-    font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase;
-    color: var(--text-subtle); opacity: 0; margin-top: 18px;
-    animation: fadeIn 0.6s 1.9s ease forwards;
-  }
-  @keyframes fadeIn { to { opacity: 1; } }
-  #loader-progress {
-    position: absolute; bottom: 0; left: 0; height: 1px;
-    background: var(--text-muted); width: 0;
-    animation: progressBar 2.2s ease forwards;
-  }
-  @keyframes progressBar { to { width: 100%; } }
-  #loader.fade-out { animation: loaderFade 0.9s cubic-bezier(0.4,0,1,1) forwards; }
-  @keyframes loaderFade { to { opacity: 0; pointer-events: none; } }
-
-  /* HEADER */
-  #site-header {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-    padding: 0 clamp(24px,5vw,60px); height: 64px;
-    display: flex; align-items: center; justify-content: space-between;
-    background: transparent; transition: background 0.3s ease, backdrop-filter 0.3s ease;
-  }
-  #site-header.scrolled {
-    background: rgba(10,10,10,0.8);
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
-  }
-  [data-theme="light"] #site-header.scrolled { background: rgba(250,250,248,0.85); }
-  #logo {
-    font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 400;
-    color: var(--text); text-decoration: none; cursor: none;
-  }
-  nav { display: flex; align-items: center; gap: 32px; }
-  nav a { font-size: 13px; color: var(--text-muted); text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s ease; cursor: none; }
-  nav a:hover { color: var(--text); }
-  #theme-toggle {
-    width: 44px; height: 24px; background: var(--border-hover);
-    border-radius: 12px; border: none; cursor: none; position: relative;
-    transition: background 0.3s ease; flex-shrink: 0;
-  }
-  #theme-toggle::after {
-    content: ''; position: absolute; width: 18px; height: 18px;
-    background: var(--text); border-radius: 50%; top: 3px; left: 3px;
-    transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
-  }
-  [data-theme="light"] #theme-toggle::after { transform: translateX(20px); }
-  #hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: none; padding: 4px; }
-  #hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text); }
-
-  /* MOBILE NAV */
-  #mobile-nav {
-    display: none; position: fixed; inset: 0; background: var(--bg); z-index: 999;
-    flex-direction: column; align-items: center; justify-content: center; gap: 40px;
-  }
-  #mobile-nav.open { display: flex; }
-  #mobile-nav a { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 400; color: var(--text); text-decoration: none; cursor: none; }
-  #mobile-close { position: absolute; top: 20px; right: 24px; background: none; border: none; font-size: 28px; color: var(--text-muted); cursor: none; }
-
-  /* HERO */
-  #hero {
-    min-height: 100svh; display: grid; grid-template-columns: 1fr 380px;
-    gap: 60px; align-items: center;
-    padding: 120px clamp(24px,5vw,60px) 80px; max-width: 1200px; margin: 0 auto;
-  }
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif; font-size: clamp(52px,8vw,100px);
-    font-weight: 300; line-height: 1.0; letter-spacing: 0.02em; margin-bottom: 32px;
-    opacity: 0; animation: slideUp 0.8s 2.5s ease forwards;
-  }
-  .hero-title em { font-style: italic; color: var(--text-muted); }
-
-  /* LETTER EXPLOSION */
-  .explode-text { display: inline; }
-  .explode-char { display: inline-block; position: relative; cursor: default; }
-  .explode-char.pop { animation: charPop 0.6s cubic-bezier(0.36,0.07,0.19,0.97) forwards; }
-  @keyframes charPop {
-    0%   { transform: translate(0,0) rotate(0deg) scale(1); opacity: 1; }
-    20%  { transform: translate(var(--rx),var(--ry)) rotate(var(--rr)) scale(1.4); opacity: 1; }
-    60%  { transform: translate(calc(var(--rx)*2.5),calc(var(--ry)*2.5)) rotate(calc(var(--rr)*2)) scale(0.6); opacity: 0.4; }
-    100% { transform: translate(calc(var(--rx)*4),calc(var(--ry)*4)) rotate(calc(var(--rr)*3)) scale(0); opacity: 0; }
-  }
-  .explode-char.reform { animation: charReform 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards; }
-  @keyframes charReform {
-    0%   { transform: translate(calc(var(--rx)*4),calc(var(--ry)*4)) rotate(calc(var(--rr)*3)) scale(0); opacity: 0; }
-    100% { transform: translate(0,0) rotate(0deg) scale(1); opacity: 1; }
-  }
-
-  .hero-intro {
-    font-size: clamp(16px,2vw,19px); color: var(--text-muted); line-height: 1.75;
-    max-width: 520px; margin-bottom: 48px; font-weight: 300;
-    opacity: 0; animation: slideUp 0.8s 2.6s ease forwards;
-  }
-  .hero-intro .heart { color: #e06060; }
-  .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; opacity: 0; animation: slideUp 0.8s 2.7s ease forwards; }
-  .btn {
-    padding: 13px 28px; border-radius: 100px; font-family: 'DM Sans', sans-serif;
-    font-size: 14px; font-weight: 400; text-decoration: none; cursor: none;
-    transition: all 0.25s ease; display: inline-block;
-  }
-  .btn-primary { background: var(--text); color: var(--bg); }
-  .btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
-  .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border-hover); }
-  .btn-ghost:hover { border-color: var(--text); transform: translateY(-2px); }
-
-  .hero-photo-wrap { position: relative; opacity: 0; animation: fadeSlideRight 1s 2.8s ease forwards; }
-  .hero-photo-frame {
-    width: 100%; aspect-ratio: 3/4;
-    border-radius: 200px 200px 160px 160px; overflow: hidden; background: var(--bg3);
-  }
-  .hero-photo-frame img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(20%); transition: filter 0.4s ease; }
-  .hero-photo-frame:hover img { filter: grayscale(0%); }
-  .photo-placeholder {
-    width: 100%; height: 100%; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; gap: 12px;
-    color: var(--text-subtle); font-size: 13px; text-align: center; padding: 40px;
-  }
-  .hero-photo-tag {
-    position: absolute; bottom: -28px; left: -28px; background: var(--surface);
-    border: 1px solid var(--border); padding: 16px 24px; border-radius: 20px;
-    font-size: 13px; color: var(--text-muted); white-space: nowrap;
-    min-width: 200px; box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-  }
-  .hero-photo-tag strong { display: block; color: var(--text); font-size: 15px; font-weight: 400; margin-bottom: 3px; }
-
-  @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes fadeSlideRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
-
-  /* CLOCK BAR */
-  #clock-bar {
-    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-    padding: 14px clamp(24px,5vw,60px); margin-top: 64px;
-    display: flex; align-items: center; gap: 40px; overflow-x: auto; scrollbar-width: none;
-  }
-  #clock-bar::-webkit-scrollbar { display: none; }
-  .clock-item { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-  .clock-dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; flex-shrink: 0; animation: pulse 2s ease infinite; }
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-  .clock-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-subtle); }
-  .clock-time { font-size: 14px; color: var(--text); font-weight: 300; font-variant-numeric: tabular-nums; }
-  .clock-sep { width: 1px; height: 24px; background: var(--border); flex-shrink: 0; }
-
-  /* SECTIONS */
-  section { padding: 120px clamp(24px,5vw,60px); max-width: 1200px; margin: 0 auto; }
-  .section-label {
-    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--text-subtle); margin-bottom: 60px;
-    display: flex; align-items: center; gap: 20px;
-  }
-  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); max-width: 120px; }
-  h2.section-title {
-    font-family: 'Playfair Display', serif; font-size: clamp(32px,5vw,52px);
-    font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 20px;
-  }
-  h2.section-title em { font-style: italic; color: var(--text-muted); }
-
-  /* ABOUT */
-  .about-grid { display: grid; grid-template-columns: 1fr 300px; gap: 80px; align-items: start; }
-  .about-text p { font-size: 18px; font-weight: 300; color: var(--text-muted); line-height: 1.85; margin-bottom: 24px; }
-  .about-sidebar { background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; padding: 28px; position: sticky; top: 84px; }
-  .about-sidebar h3 { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-subtle); margin-bottom: 20px; }
-  .sidebar-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
-  .sidebar-item:last-child { border-bottom: none; }
-  .sidebar-item .key { color: var(--text-muted); }
-  .sidebar-item .val { color: var(--text); }
-  .status-dot { display: inline-block; width: 7px; height: 7px; background: #4ade80; border-radius: 50%; margin-right: 6px; animation: pulse 2s ease infinite; }
-
-  /* SKILLS */
-  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px,1fr)); gap: 10px; margin-top: 48px; }
-  .skill-tag { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; font-size: 13px; color: var(--text-muted); text-align: center; transition: all 0.2s ease; }
-  .skill-tag:hover { border-color: var(--border-hover); color: var(--text); transform: translateY(-2px); }
-  .skill-category { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-subtle); margin-bottom: 16px; margin-top: 40px; }
-
-  /* PROJECTS */
-  .projects-list { display: flex; flex-direction: column; gap: 1px; margin-top: 48px; }
-  .project-item {
-    border-top: 1px solid var(--border); padding: 32px 0;
-    display: grid; grid-template-columns: 60px 1fr auto;
-    gap: 28px; align-items: start; cursor: none;
-    transition: all 0.2s ease; text-decoration: none; color: var(--text);
-  }
-  .project-item:hover { padding-left: 12px; }
-  .project-item:last-child { border-bottom: 1px solid var(--border); }
-  .project-num { font-size: 12px; color: var(--text-subtle); padding-top: 4px; font-variant-numeric: tabular-nums; }
-  .project-info h3 { font-size: 20px; font-weight: 400; margin-bottom: 8px; letter-spacing: -0.01em; }
-  .project-info p { font-size: 14px; color: var(--text-muted); line-height: 1.6; max-width: 600px; }
-  .project-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
-  .tag { font-size: 11px; letter-spacing: 0.08em; padding: 4px 10px; border: 1px solid var(--border); border-radius: 100px; color: var(--text-subtle); }
-  .project-arrow { font-size: 20px; color: var(--text-subtle); transition: transform 0.2s ease, color 0.2s ease; padding-top: 4px; }
-  .project-item:hover .project-arrow { transform: translate(4px,-4px); color: var(--text); }
-  .project-stat { display: flex; gap: 20px; margin-top: 12px; }
-  .project-stat span { font-size: 12px; color: var(--text-subtle); }
-  .project-stat strong { color: var(--text); font-weight: 400; }
-
-  /* FEATURED PROJECT */
-  .featured-project { border: 1px solid var(--border); border-radius: 24px; overflow: hidden; margin-top: 48px; margin-bottom: 12px; transition: border-color 0.3s ease; text-decoration: none; color: var(--text); display: block; cursor: none; }
-  .featured-project:hover { border-color: var(--border-hover); }
-  .featured-project-preview { position: relative; width: 100%; height: 340px; background: #050b14; overflow: hidden; }
-  .fp-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(30,100,200,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(30,100,200,0.06) 1px,transparent 1px); background-size: 40px 40px; }
-  .fp-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle,rgba(14,90,200,0.18) 0%,transparent 70%); top: -200px; left: 50%; transform: translateX(-50%); pointer-events: none; }
-  .fp-ui-mock { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 16px; padding: 32px; }
-  .fp-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 20px 24px; color: #e0eaff; flex-shrink: 0; }
-  .fp-card-main { width: 340px; }
-  .fp-card-main .fp-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(120,160,255,0.7); margin-bottom: 10px; }
-  .fp-card-main .fp-heading { font-family: 'Playfair Display',serif; font-size: 26px; font-weight: 400; line-height: 1.2; color: #fff; margin-bottom: 12px; }
-  .fp-card-main .fp-sub { font-size: 12px; color: rgba(160,190,255,0.6); line-height: 1.6; }
-  .fp-bar { display: flex; gap: 6px; margin-top: 16px; }
-  .fp-pill { font-size: 10px; padding: 4px 10px; border: 1px solid rgba(100,150,255,0.25); border-radius: 100px; color: rgba(140,180,255,0.7); }
-  .fp-card-side { width: 180px; background: rgba(255,255,255,0.03); }
-  .fp-route { display: flex; flex-direction: column; gap: 8px; }
-  .fp-route-row { font-size: 12px; color: rgba(160,200,255,0.65); display: flex; align-items: center; gap: 8px; }
-  .fp-route-row::before { content: '✈'; font-size: 10px; color: rgba(100,160,255,0.5); }
-  .fp-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 10px; padding: 5px 10px; background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.2); border-radius: 100px; color: #4ade80; margin-top: 14px; }
-  .fp-badge-dot { width: 6px; height: 6px; background: #4ade80; border-radius: 50%; animation: pulse 2s ease infinite; }
-  .fp-overlay { position: absolute; bottom: 0; left: 0; right: 0; height: 80px; background: linear-gradient(transparent,rgba(5,11,20,0.9)); }
-  .featured-project-body { padding: 28px 32px 32px; display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: end; border-top: 1px solid var(--border); background: var(--bg2); }
-  .fp-title { font-size: 22px; font-weight: 400; margin-bottom: 8px; letter-spacing: -0.01em; }
-  .fp-desc { font-size: 14px; color: var(--text-muted); line-height: 1.65; max-width: 600px; margin-bottom: 16px; }
-  .fp-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .fp-live-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; padding: 5px 12px; background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.2); border-radius: 100px; color: #4ade80; }
-  .fp-cta { font-size: 13px; color: var(--text); display: flex; align-items: center; gap: 8px; white-space: nowrap; padding: 12px 24px; border: 1px solid var(--border-hover); border-radius: 100px; transition: all 0.2s ease; }
-  .featured-project:hover .fp-cta { border-color: var(--text); transform: translate(2px,-2px); }
-  @media (max-width: 700px) {
-    .featured-project-preview { height: 220px; }
-    .fp-card-side { display: none; }
-    .fp-card-main { width: 280px; }
-    .fp-card-main .fp-heading { font-size: 20px; }
-    .featured-project-body { grid-template-columns: 1fr; }
-    .fp-cta { display: none; }
-  }
-
-  /* EXPERIENCE */
-  .exp-list { display: flex; flex-direction: column; gap: 40px; margin-top: 48px; }
-  .exp-item { display: grid; grid-template-columns: 200px 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
-  .exp-item:last-child { border-bottom: none; }
-  .exp-meta { font-size: 13px; color: var(--text-muted); line-height: 1.8; }
-  .exp-meta strong { display: block; color: var(--text); font-weight: 400; font-size: 14px; margin-bottom: 4px; }
-  .exp-content h3 { font-size: 20px; font-weight: 400; margin-bottom: 12px; }
-  .exp-content ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-  .exp-content li { font-size: 14px; color: var(--text-muted); padding-left: 16px; position: relative; line-height: 1.65; }
-  .exp-content li::before { content: '—'; position: absolute; left: 0; color: var(--text-subtle); }
-
-  /* EDUCATION */
-  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 48px; }
-  .edu-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 28px; transition: border-color 0.2s ease; }
-  .edu-card:hover { border-color: var(--border-hover); }
-  .edu-card .degree { font-size: 16px; font-weight: 400; margin-bottom: 8px; line-height: 1.4; }
-  .edu-card .school { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
-  .edu-card .period { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-subtle); }
-  .certs-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 32px; }
-  .cert-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: border-color 0.2s ease; }
-  .cert-item:hover { border-color: var(--border-hover); }
-  .cert-item a { text-decoration: none; color: inherit; cursor: none; }
-  .cert-item .cert-name { font-size: 13px; color: var(--text); margin-bottom: 6px; line-height: 1.4; }
-  .cert-item .cert-source { font-size: 11px; color: var(--text-subtle); letter-spacing: 0.05em; }
-  .cert-item .cert-link { font-size: 11px; color: var(--accent2); margin-top: 8px; display: inline-block; }
-
-  /* PERSONAL */
-  #personal { border-top: 1px solid var(--border); }
-  .interests-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 48px; }
-  .interest-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; padding: 32px 28px; transition: all 0.25s ease; }
-  .interest-card:hover { border-color: var(--border-hover); transform: translateY(-4px); }
-  .interest-icon { font-size: 28px; margin-bottom: 16px; }
-  .interest-card h3 { font-size: 18px; font-weight: 400; margin-bottom: 10px; }
-  .interest-card p { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
-
-  /* Countries */
-  .countries-section { margin-top: 80px; }
-  .countries-section h3 { font-size: 24px; font-weight: 400; font-family: 'Playfair Display',serif; margin-bottom: 8px; }
-  .countries-section > p { font-size: 14px; color: var(--text-muted); margin-bottom: 40px; }
-  .countries-grid { display: flex; flex-wrap: wrap; gap: 12px; }
-  .country-pill { display: flex; align-items: center; gap: 10px; padding: 12px 20px; background: var(--bg2); border: 1px solid var(--border); border-radius: 100px; font-size: 14px; color: var(--text-muted); transition: all 0.2s ease; }
-  .country-pill:hover { border-color: var(--border-hover); color: var(--text); transform: translateY(-2px); }
-  .country-flag { font-size: 22px; }
-  .country-name { font-size: 13px; }
-  .country-visits { font-size: 11px; color: var(--text-subtle); letter-spacing: 0.1em; }
-
-  /* CONTACT */
-  #contact { border-top: 1px solid var(--border); }
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-  .contact-left .big-email { font-family: 'Playfair Display',serif; font-size: clamp(18px,3vw,28px); font-weight: 400; color: var(--text-muted); text-decoration: none; cursor: none; transition: color 0.2s ease; display: block; margin: 32px 0; word-break: break-all; }
-  .contact-left .big-email:hover { color: var(--text); }
-  .social-links { display: flex; flex-direction: column; gap: 4px; }
-  .social-link { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--border); text-decoration: none; color: var(--text-muted); font-size: 14px; cursor: none; transition: color 0.2s ease; }
-  .social-link:hover { color: var(--text); }
-  .social-link:last-child { border-bottom: none; }
-  .contact-right p { font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 20px; }
-  .availability-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.2); border-radius: 100px; font-size: 12px; color: #4ade80; margin-bottom: 24px; }
-
-  /* FOOTER */
-  footer { border-top: 1px solid var(--border); padding: 32px clamp(24px,5vw,60px); display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--text-subtle); }
-
-  /* REVEAL */
-  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    #hero { grid-template-columns: 1fr; gap: 60px; }
-    .hero-photo-wrap { max-width: 300px; order: -1; }
-    .about-grid { grid-template-columns: 1fr; }
-    .about-sidebar { position: static; }
-    .exp-item { grid-template-columns: 1fr; gap: 8px; }
-    .contact-grid { grid-template-columns: 1fr; }
-    .interests-grid { grid-template-columns: 1fr 1fr; }
-    .edu-grid { grid-template-columns: 1fr; }
-    .certs-list { grid-template-columns: 1fr; }
-    nav { display: none; }
-    #hamburger { display: flex; }
-  }
-  @media (max-width: 600px) {
-    .interests-grid { grid-template-columns: 1fr; }
-    .project-item { grid-template-columns: 40px 1fr; }
-    .project-arrow { display: none; }
-  }
 </style>
 </head>
+
 <body>
 
-<div id="cursor-dot"></div>
-<div id="cursor-ring"></div>
-
-<!-- Loader -->
-<div id="loader">
-  <div id="loader-name">
-    <span class="loader-char" style="animation-delay:0.05s">M</span>
-    <span class="loader-char" style="animation-delay:0.13s">o</span>
-    <span class="loader-char" style="animation-delay:0.21s">u</span>
-    <span class="loader-char" style="animation-delay:0.29s">r</span>
-    <span class="loader-char" style="animation-delay:0.37s">y</span>
-    <span class="loader-char" style="animation-delay:0.45s">a</span>
-  </div>
-  <div id="loader-line"></div>
-  <div id="loader-sub">AI & Data Science</div>
-  <div id="loader-progress"></div>
-</div>
-
-<!-- Header -->
-<header id="site-header">
-  <a id="logo" href="#">Mourya</a>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#projects">Work</a>
-    <a href="#experience">Experience</a>
-    <a href="#personal">Personal</a>
-    <a href="#guestbook">Guestbook</a>
-    <a href="#contact">Contact</a>
-    <button id="theme-toggle" aria-label="Toggle theme"></button>
-  </nav>
-  <button id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-</header>
-
-<!-- Mobile Nav -->
-<div id="mobile-nav">
-  <button id="mobile-close">×</button>
-  <a href="#about" class="mn-link">About</a>
-  <a href="#projects" class="mn-link">Work</a>
-  <a href="#experience" class="mn-link">Experience</a>
-  <a href="#personal" class="mn-link">Personal</a>
-  <a href="#guestbook" class="mn-link">Guestbook</a>
-  <a href="#contact" class="mn-link">Contact</a>
-</div>
-
-<!-- Clock Bar -->
-<div id="clock-bar">
-  <div class="clock-item">
-    <div class="clock-dot"></div>
-    <div>
-      <div class="clock-label">My Time · Dubai</div>
-      <div class="clock-time" id="clock-dubai">—</div>
-    </div>
-  </div>
-  <div class="clock-sep"></div>
-  <div class="clock-item">
-    <div>
-      <div class="clock-label">Your Time</div>
-      <div class="clock-time" id="clock-local">—</div>
-    </div>
-  </div>
-</div>
-
-<!-- Hero -->
-<section id="hero">
-  <div class="hero-left">
-    <h1 class="hero-title">Hey,<br>I'm <em>Mourya.</em></h1>
-    <p class="hero-intro" id="hero-intro">
-      <span class="explode-text">Here, you can check out what I'm working on. I try my best to create things with <span class="heart">❤</span> — or maybe something very much better but very simple. AI & Data Science, built with intention.</span>
-    </p>
-    <div class="hero-cta">
-      <a href="#projects" class="btn btn-primary">See my work</a>
-      <a href="#contact" class="btn btn-ghost">Get in touch</a>
-    </div>
-  </div>
-  <div class="hero-photo-wrap">
-    <div class="hero-photo-frame">
-      <img src="photo.jpg" alt="Mourya Dusi" id="hero-img" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'><svg width=\'48\' height=\'48\' viewBox=\'0 0 48 48\' fill=\'none\'><circle cx=\'24\' cy=\'18\' r=\'8\' stroke=\'currentColor\' stroke-width=\'1.5\'/><path d=\'M6 42C6 32 14 26 24 26C34 26 42 32 42 42\' stroke=\'currentColor\' stroke-width=\'1.5\' stroke-linecap=\'round\'/></svg><span>Add your photo here</span></div>'">
-    </div>
-    <div class="hero-photo-tag">
-      <strong>Mourya Dusi</strong>
-      Dubai, UAE · Open to work
-    </div>
-  </div>
-</section>
-
-<!-- About -->
-<section id="about">
-  <div class="section-label">01 — About</div>
-  <div class="about-grid">
-    <div class="about-text reveal">
-      <h2 class="section-title">Building intelligent<br><em>systems that matter</em></h2>
-      <p style="margin-top:40px;">I'm a Machine Learning Engineer and Data Science professional currently pursuing my MSc in Data Science & AI at Middlesex University, Dubai. I bring together technical depth in ML, cloud, and analytics with a genuine curiosity for how technology shapes the world around us.</p>
-      <p>Previously at Accenture, I built production-grade ML pipelines, deployed models on AWS SageMaker, and turned messy data into clear decisions. I believe great AI isn't just smart — it's simple, explainable, and built with care.</p>
-      <p>When I'm not training models, I'm probably somewhere new on the planet, listening to music, or thinking about the next thing worth building.</p>
-    </div>
-    <div class="about-sidebar reveal">
-      <h3>Quick Facts</h3>
-      <div class="sidebar-item"><span class="key">Status</span><span class="val"><span class="status-dot"></span>Available</span></div>
-      <div class="sidebar-item"><span class="key">Location</span><span class="val">Dubai, UAE</span></div>
-      <div class="sidebar-item"><span class="key">Education</span><span class="val">MSc AI · MDX Dubai</span></div>
-      <div class="sidebar-item"><span class="key">Focus</span><span class="val">ML · Data Science</span></div>
-      <div class="sidebar-item"><span class="key">Languages</span><span class="val">EN · HI · TE</span></div>
-      <div class="sidebar-item"><span class="key">Countries</span><span class="val">10 visited</span></div>
-    </div>
-  </div>
-  <div style="margin-top:100px;" class="reveal">
-    <div class="section-label">Skills</div>
-    <div class="skill-category">Programming & ML</div>
-    <div class="skills-grid">
-      <div class="skill-tag">Python</div><div class="skill-tag">TensorFlow</div><div class="skill-tag">Scikit-learn</div>
-      <div class="skill-tag">Pandas · NumPy</div><div class="skill-tag">NLP</div><div class="skill-tag">Deep Learning</div>
-      <div class="skill-tag">Predictive Modeling</div><div class="skill-tag">Java</div><div class="skill-tag">JavaScript</div><div class="skill-tag">SQL</div>
-    </div>
-    <div class="skill-category">Cloud & DevOps</div>
-    <div class="skills-grid">
-      <div class="skill-tag">AWS SageMaker</div><div class="skill-tag">AWS Solutions</div>
-      <div class="skill-tag">Google Cloud</div><div class="skill-tag">CI/CD Pipelines</div><div class="skill-tag">Git · GitHub</div>
-    </div>
-    <div class="skill-category">Analytics & Visualization</div>
-    <div class="skills-grid">
-      <div class="skill-tag">Power BI</div><div class="skill-tag">Tableau</div><div class="skill-tag">Matplotlib</div>
-      <div class="skill-tag">Seaborn</div><div class="skill-tag">MySQL</div><div class="skill-tag">Flask · REST APIs</div>
-    </div>
-  </div>
-</section>
-
-<!-- Projects -->
-<section id="projects" style="border-top:1px solid var(--border);">
-  <div class="section-label">02 — Work</div>
-  <h2 class="section-title reveal">Selected<br><em>projects</em></h2>
-
-  <a class="featured-project reveal" href="https://destination-com-dun.vercel.app" target="_blank">
-    <div class="featured-project-preview">
-      <div class="fp-grid"></div><div class="fp-glow"></div>
-      <div class="fp-ui-mock">
-        <div class="fp-card fp-card-main">
-          <div class="fp-label">✦ AI Route Intelligence</div>
-          <div class="fp-heading">Your world moves.<br><em>So should you.</em></div>
-          <div class="fp-sub">Tell us where you're headed — or stuck. We find the way through, around, and beyond.</div>
-          <div class="fp-bar"><span class="fp-pill">Live Flights</span><span class="fp-pill">Visa Info</span><span class="fp-pill">ARIA Voice AI</span></div>
-          <div class="fp-badge"><div class="fp-badge-dot"></div>Live · Deployed</div>
-        </div>
-        <div class="fp-card fp-card-side">
-          <div class="fp-label">Active routes</div>
-          <div class="fp-route">
-            <div class="fp-route-row">London → NYC</div><div class="fp-route-row">Dubai → Rome</div>
-            <div class="fp-route-row">Tokyo → Sydney</div><div class="fp-route-row">NYC → San Francisco</div>
-          </div>
-        </div>
-      </div>
-      <div class="fp-overlay"></div>
-    </div>
-    <div class="featured-project-body">
-      <div>
-        <div class="fp-title">destination.com — AI Travel Intelligence</div>
-        <div class="fp-desc">A full-stack AI travel platform with real-time route optimization, ARIA voice AI powered by Groq, live flight tracking, visa guidance, layover city explorer, AI itinerary planner, and even an aviation arcade. Built and deployed on Vercel.</div>
-        <div class="fp-meta">
-          <div class="fp-live-badge"><span class="fp-badge-dot"></span> Live on Vercel</div>
-          <span class="tag">AI</span><span class="tag">Real-time</span><span class="tag">Voice AI</span><span class="tag">Full-stack</span><span class="tag">Groq</span>
-        </div>
-      </div>
-      <div class="fp-cta">Visit site ↗</div>
-    </div>
-  </a>
-
-  <div class="projects-list reveal">
-    <a class="project-item" href="https://mouryadusi.github.io/smart-exit-reminder.html" target="_blank">
-      <span class="project-num">01</span>
-      <div class="project-info">
-        <h3>Smart Exit Reminder</h3>
-        <p>Intelligent mobile app that automatically reminds you of essential items the moment you leave home. Uses sensor fusion — Wi-Fi, GPS, BLE — with ML to learn your daily routine.</p>
-        <div class="project-stat"><span><strong>100%</strong> Automated</span><span><strong>24/7</strong> Active</span></div>
-        <div class="project-tags"><span class="tag">Mobile</span><span class="tag">AI/ML</span><span class="tag">IoT</span><span class="tag">React Native</span></div>
-      </div>
-      <span class="project-arrow">↗</span>
-    </a>
-    <a class="project-item" href="https://mouryadusi.github.io/taxi-lost-item-detection.html" target="_blank">
-      <span class="project-num">02</span>
-      <div class="project-info">
-        <h3>Taxi Lost Item Detection</h3>
-        <p>Privacy-first IoT system using multi-sensor arrays — pressure, infrared, ultrasonic — to detect forgotten belongings in taxis. All data processed on-device, zero cameras.</p>
-        <div class="project-stat"><span><strong>Real-time</strong> Detection</span><span><strong>100%</strong> Privacy Safe</span></div>
-        <div class="project-tags"><span class="tag">IoT</span><span class="tag">Edge Computing</span><span class="tag">Privacy Tech</span></div>
-      </div>
-      <span class="project-arrow">↗</span>
-    </a>
-    <div class="project-item" style="cursor:none;">
-      <span class="project-num">03</span>
-      <div class="project-info">
-        <h3>Student Performance Prediction</h3>
-        <p>End-to-end ML pipeline identifying at-risk students with 92% accuracy. Enables institutions to intervene early and improve academic outcomes.</p>
-        <div class="project-stat"><span><strong>92%</strong> Accuracy</span><span><strong>5+</strong> ML Models</span></div>
-        <div class="project-tags"><span class="tag">Python</span><span class="tag">Scikit-learn</span><span class="tag">Pandas</span></div>
-      </div>
-      <span class="project-arrow" style="opacity:0.3">—</span>
-    </div>
-    <div class="project-item" style="cursor:none;">
-      <span class="project-num">04</span>
-      <div class="project-info">
-        <h3>Intelligent University Chatbot</h3>
-        <p>NLP-powered assistant handling 1000+ student queries per day. Reduced admin workload by 35% with intent recognition built on TensorFlow and Flask.</p>
-        <div class="project-stat"><span><strong>24/7</strong> Availability</span><span><strong>1000+</strong> Queries/Day</span></div>
-        <div class="project-tags"><span class="tag">NLP</span><span class="tag">TensorFlow</span><span class="tag">Flask</span><span class="tag">MongoDB</span></div>
-      </div>
-      <span class="project-arrow" style="opacity:0.3">—</span>
-    </div>
-  </div>
-</section>
-
-<!-- Experience -->
-<section id="experience" style="border-top:1px solid var(--border);">
-  <div class="section-label">03 — Experience</div>
-  <h2 class="section-title reveal">Where I've<br><em>worked</em></h2>
-  <div class="exp-list reveal">
-    <div class="exp-item">
-      <div class="exp-meta"><strong>Accenture</strong>Associate Software Engineer<br><br>Oct 2024 – Jul 2025<br>Hyderabad, India</div>
-      <div class="exp-content">
-        <h3>ML Engineering & Data Science</h3>
-        <ul>
-          <li>Built Python-based ML models using Scikit-learn and TensorFlow for enterprise predictive analytics</li>
-          <li>Maintained data preprocessing pipelines processing 50,000+ records weekly with Pandas and NumPy</li>
-          <li>Deployed models on AWS SageMaker with comprehensive testing and performance validation</li>
-          <li>Created Power BI dashboards presenting model insights and performance metrics to stakeholders</li>
-          <li>Collaborated in Agile teams with JIRA, daily stand-ups, and sprint planning for AI initiatives</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Education -->
-<section id="education" style="border-top:1px solid var(--border);">
-  <div class="section-label">04 — Education</div>
-  <h2 class="section-title reveal">Academic<br><em>background</em></h2>
-  <div class="edu-grid reveal">
-    <div class="edu-card"><div class="degree">MSc Data Science & Artificial Intelligence</div><div class="school">Middlesex University, Dubai, UAE</div><div class="period">Sep 2025 — Sep 2026</div></div>
-    <div class="edu-card"><div class="degree">BSc Computer Science</div><div class="school">Krishna University, India</div><div class="period">Oct 2021 — May 2024</div></div>
-  </div>
-  <div class="section-label" style="margin-top:60px;">Certifications</div>
-  <div class="certs-list reveal">
-    <div class="cert-item"><a href="https://skillsoft.digitalbadges.skillsoft.com/48dbf664-1313-4a6e-bb91-ee870b5fdde0" target="_blank"><div class="cert-name">AWS AI Practitioner — Machine Learning Operations</div><div class="cert-source">Skillsoft · May 2025</div><div class="cert-link">View credential ↗</div></a></div>
-    <div class="cert-item"><a href="https://skillsoft.digitalbadges.skillsoft.com/4e1556f7-43de-45c9-a9bf-a216adfb8e8c" target="_blank"><div class="cert-name">Implementing AI with Amazon Machine Learning</div><div class="cert-source">Skillsoft · May 2025</div><div class="cert-link">View credential ↗</div></a></div>
-    <div class="cert-item"><a href="https://skillsoft.digitalbadges.skillsoft.com/dfd0c5a0-8f5c-4a5d-9643-9ac556078f49" target="_blank"><div class="cert-name">Google Professional Cloud Architect</div><div class="cert-source">Skillsoft · Dec 2024</div><div class="cert-link">View credential ↗</div></a></div>
-    <div class="cert-item"><a href="https://skillsoft.digitalbadges.skillsoft.com/21010f49-2f71-4f51-ab4a-b828d8fc1129" target="_blank"><div class="cert-name">AWS Solutions Architect Associate Bootcamp</div><div class="cert-source">Skillsoft · Dec 2024</div><div class="cert-link">View credential ↗</div></a></div>
-  </div>
-</section>
-
-<!-- Personal -->
+<!-- PERSONAL -->
 <section id="personal">
-  <div class="section-label">05 — Personal</div>
-  <h2 class="section-title reveal">Beyond<br><em>the code</em></h2>
-  <div class="interests-grid reveal" style="margin-top:48px;">
-    <div class="interest-card"><div class="interest-icon">🎵</div><h3>Music</h3><p>Music is my constant companion — whether I'm commuting through Dubai, deep in a coding session, or just unwinding. From indie to classical, it shapes how I think and create.</p></div>
-    <div class="interest-card"><div class="interest-icon">✈️</div><h3>Solo Travel</h3><p>There's something uniquely clarifying about navigating a new country alone. It builds problem-solving instincts you can't find anywhere else — and every city has something to teach.</p></div>
-    <div class="interest-card"><div class="interest-icon">🤖</div><h3>AI & The Future</h3><p>I'm fascinated by how AI will reshape everyday life — not just the technical side, but the human side too. Building things that are simple and genuinely useful is what drives me.</p></div>
+
+  <div class="section-label">
+    05 — Personal
   </div>
 
-  <!-- D3 Globe -->
-  <div class="reveal" style="margin-top:80px;" id="globe-section">
-    <div style="text-align:center;margin-bottom:32px;">
-      <p style="font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:12px;">Places visited</p>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,44px);font-weight:300;letter-spacing:.02em;">Places I've <em style="font-style:italic;color:var(--text-muted)">called home for a while</em></h3>
+  <h2 class="section-title">
+    Beyond<br><em>the code</em>
+  </h2>
+
+  <!-- INTERESTS -->
+
+  <div class="interests-grid" style="margin-top:48px;">
+
+    <div class="interest-card">
+      <div class="interest-icon">🎵</div>
+      <h3>Music</h3>
+      <p>
+        Music is my constant companion — whether I'm commuting through Dubai,
+        deep in a coding session, or just unwinding.
+      </p>
     </div>
-    <div style="display:flex;justify-content:center;gap:56px;flex-wrap:wrap;margin-bottom:40px;">
-      <div style="text-align:center;"><div style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;line-height:1;color:var(--text);" id="g-cn">0</div><div style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);margin-top:6px;">Countries</div></div>
-      <div style="text-align:center;"><div style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;line-height:1;color:var(--text);" id="g-mi">0<span style="font-size:22px;color:var(--text-subtle)">k</span></div><div style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);margin-top:6px;">Miles flown</div><div style="font-size:11px;color:var(--text-subtle);margin-top:2px;font-style:italic;">≈ 6× around Earth</div></div>
+
+    <div class="interest-card">
+      <div class="interest-icon">✈️</div>
+      <h3>Solo Travel</h3>
+      <p>
+        Every country changes the way I think. Traveling alone taught me
+        independence, confidence, and curiosity.
+      </p>
     </div>
-    <p style="text-align:center;font-size:12px;color:var(--text-subtle);margin-bottom:24px;letter-spacing:.1em;">Drag to rotate · Click a glowing country for the story</p>
-    <div style="display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap;">
-      <canvas id="globe-canvas" width="520" height="520" style="cursor:grab;border-radius:50%;flex-shrink:0;max-width:100%;touch-action:none;"></canvas>
-      <div id="globe-panel" style="width:280px;background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:24px 22px;opacity:0;transform:translateX(16px);transition:opacity .35s ease,transform .35s ease;pointer-events:none;max-height:460px;overflow-y:auto;scrollbar-width:thin;">
-        <button id="globe-panel-close" style="float:right;background:none;border:none;color:var(--text-subtle);font-size:22px;cursor:pointer;line-height:1;margin:-4px -4px 0 0;">×</button>
-        <div id="gp-flag" style="font-size:36px;display:block;margin-bottom:10px;clear:both;"></div>
-        <div id="gp-name" style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;margin-bottom:4px;color:var(--text);"></div>
-        <div id="gp-tag" style="font-size:12px;color:var(--text-muted);font-style:italic;margin-bottom:18px;"></div>
-        <div style="height:1px;background:var(--border);margin-bottom:14px;"></div>
+
+    <div class="interest-card">
+      <div class="interest-icon">🤖</div>
+      <h3>AI & Future</h3>
+      <p>
+        I love building AI experiences that feel human, useful,
+        and beautifully simple.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- GLOBE -->
+
+  <div id="globe-wrap">
+
+    <div class="globe-head">
+
+      <p>Places Visited</p>
+
+      <h3>
+        Places I've
+        <em>called home for a while</em>
+      </h3>
+
+    </div>
+
+    <!-- COUNTERS -->
+
+    <div class="globe-counters">
+
+      <div class="counter">
+        <div class="counter-number" id="g-cn">0</div>
+        <div class="counter-label">Countries</div>
+      </div>
+
+      <div class="counter">
+        <div class="counter-number" id="g-mi">0k</div>
+        <div class="counter-label">Miles flown</div>
+      </div>
+
+    </div>
+
+    <!-- GLOBE -->
+
+    <div class="globe-flex">
+
+      <canvas
+        id="globe-canvas"
+        width="520"
+        height="520"
+      ></canvas>
+
+      <!-- PANEL -->
+
+      <div id="globe-panel">
+
+        <button id="globe-panel-close">×</button>
+
+        <div id="gp-flag"></div>
+
+        <div id="gp-name"></div>
+
+        <div id="gp-tag"></div>
+
         <div id="gp-trips"></div>
+
       </div>
+
     </div>
+
   </div>
 
-  <!-- Countries pill grid -->
-  <div class="countries-section reveal">
-    <h3>10 countries · countless memories</h3>
-    <p>Every stamp in the passport, a story worth telling.</p>
+  <!-- COUNTRIES -->
+
+  <div class="countries-section">
+
     <div class="countries-grid">
-      <div class="country-pill"><span class="country-flag">🇮🇳</span><div><div class="country-name">India</div><div class="country-visits">Home</div></div></div>
-      <div class="country-pill"><span class="country-flag">🇦🇪</span><div><div class="country-name">UAE</div><div class="country-visits">Currently based</div></div></div>
-      <div class="country-pill"><span class="country-flag">🇲🇾</span><div><div class="country-name">Malaysia</div><div class="country-visits">Visited</div></div></div>
-      <div class="country-pill"><span class="country-flag">🇸🇬</span><div><div class="country-name">Singapore</div><div class="country-visits">Visited</div></div></div>
-      <div class="country-pill"><span class="country-flag">🇹🇭</span><div><div class="country-name">Thailand</div><div class="country-visits">Visited</div></div></div>
-      <div class="country-pill"><span class="country-flag">🇻🇳</span><div><div class="country-name">Vietnam</div><div class="country-visits">Visited</div></div></div>
-      <div class="country-pill"><span class="country-flag">🇺🇸</span><div><div class="country-name">USA</div><div class="country-visits">Visited</div></div></div>
-      <div class="country-pill"><span class="country-flag">🇳🇵</span><div><div class="country-name">Nepal</div><div class="country-visits">Visited</div></div></div>
-      <div class="country-pill"><span class="country-flag">🇱🇰</span><div><div class="country-name">Sri Lanka</div><div class="country-visits">Visited</div></div></div>
-    </div>
-  </div>
-</section>
 
-<style>
-#globe-panel.show{opacity:1!important;transform:translateX(0)!important;pointer-events:all!important;}
-#gp-trips .gt{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:12px;margin-bottom:8px;animation:gtIn .4s ease both;}
-@keyframes gtIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.gt-n{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:4px;}
-.gt-t{font-size:13px;color:#ddd;line-height:1.5;}
-.gt-d{font-size:12px;color:var(--text-muted);margin-top:4px;line-height:1.6;}
-.g-bar-row{display:flex;justify-content:space-between;font-size:11px;color:var(--text-subtle);margin:8px 0 4px;}
-.g-bar-track{height:4px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;}
-.g-bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,#16a34a,#4ade80);width:0;transition:width 1s .1s ease;}
-@media(max-width:700px){
-  #globe-panel{width:100%!important;max-width:340px;transform:translateY(8px)!important;}
-  #globe-panel.show{transform:translateY(0)!important;}
-  #globe-canvas{width:300px!important;height:300px!important;}
-}
-</style>
-
-<!-- Contact -->
-<section id="contact">
-  <div class="section-label">06 — Contact</div>
-  <div class="contact-grid reveal">
-    <div class="contact-left">
-      <h2 class="section-title">Let's build<br><em>something</em></h2>
-      <a href="mailto:mouryadusi@outlook.com" class="big-email">mouryadusi@outlook.com</a>
-      <div class="social-links">
-        <a href="https://linkedin.com/in/mouryadusi-dxb" target="_blank" class="social-link"><span>LinkedIn</span><span>↗</span></a>
-        <a href="https://github.com/mouryadusi" target="_blank" class="social-link"><span>GitHub</span><span>↗</span></a>
-        <a href="tel:+971559315412" class="social-link"><span>+971 55 931 5412</span><span>↗</span></a>
-      </div>
-    </div>
-    <div class="contact-right">
-      <div class="availability-badge"><span class="status-dot"></span>Immediate availability</div>
-      <p>Currently based in Dubai, UAE. Open to full-time roles in AI & Data Science, remote positions, and relocation opportunities.</p>
-      <p>If you're building something interesting in AI, machine learning, or data infrastructure — I'd love to hear about it.</p>
-      <p style="color:var(--text-subtle);font-size:13px;">UAE Resident · Open to Remote Work & Relocation</p>
-    </div>
-  </div>
-</section>
-
-<!-- Guestbook -->
-<section id="guestbook" style="border-top:1px solid var(--border);">
-  <div style="max-width:1200px;margin:0 auto;padding:120px clamp(24px,5vw,60px);">
-    <div class="section-label">07 — Guestbook</div>
-    <div style="display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:start;">
-      <div>
-        <h2 class="section-title reveal">Leave a<br><em>message</em></h2>
-        <p style="font-size:15px;color:var(--text-muted);font-weight:300;margin-top:16px;line-height:1.7;max-width:480px;">Say hello, share a thought, or just let me know you were here. All messages appear live.</p>
-        <div id="gb-feed" style="margin-top:48px;display:flex;flex-direction:column;gap:12px;"></div>
-        <div id="gb-empty" style="margin-top:48px;font-size:13px;color:var(--text-subtle);display:none;">No messages yet. Be the first!</div>
-      </div>
-      <div class="reveal">
-        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:32px;">
-          <div style="margin-bottom:20px;">
-            <label style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);display:block;margin-bottom:8px;">Your name</label>
-            <input id="gb-name" type="text" maxlength="40" placeholder="Satya" style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:14px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;">
-          </div>
-          <div style="margin-bottom:20px;">
-            <label style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);display:block;margin-bottom:8px;">Message</label>
-            <textarea id="gb-msg" maxlength="280" placeholder="Say something nice..." rows="4" style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:14px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;resize:none;transition:border-color .2s;line-height:1.6;"></textarea>
-            <div style="text-align:right;font-size:11px;color:var(--text-subtle);margin-top:4px;"><span id="gb-count">0</span>/280</div>
-          </div>
-          <button id="gb-submit" style="width:100%;padding:14px;background:var(--text);color:var(--bg);border:none;border-radius:10px;font-size:14px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:opacity .2s,transform .2s;font-weight:400;">Post message →</button>
-          <div id="gb-status" style="text-align:center;font-size:12px;color:var(--text-subtle);margin-top:12px;min-height:18px;"></div>
+      <div class="country-pill">
+        <span class="country-flag">🇮🇳</span>
+        <div>
+          <div class="country-name">India</div>
+          <div class="country-visits">Home</div>
         </div>
       </div>
+
+      <div class="country-pill">
+        <span class="country-flag">🇦🇪</span>
+        <div>
+          <div class="country-name">UAE</div>
+          <div class="country-visits">Currently based</div>
+        </div>
+      </div>
+
+      <div class="country-pill">
+        <span class="country-flag">🇲🇾</span>
+        <div>
+          <div class="country-name">Malaysia</div>
+          <div class="country-visits">Visited</div>
+        </div>
+      </div>
+
+      <div class="country-pill">
+        <span class="country-flag">🇸🇬</span>
+        <div>
+          <div class="country-name">Singapore</div>
+          <div class="country-visits">Visited</div>
+        </div>
+      </div>
+
+      <div class="country-pill">
+        <span class="country-flag">🇹🇭</span>
+        <div>
+          <div class="country-name">Thailand</div>
+          <div class="country-visits">Visited</div>
+        </div>
+      </div>
+
+      <div class="country-pill">
+        <span class="country-flag">🇻🇳</span>
+        <div>
+          <div class="country-name">Vietnam</div>
+          <div class="country-visits">Visited</div>
+        </div>
+      </div>
+
+      <div class="country-pill">
+        <span class="country-flag">🇺🇸</span>
+        <div>
+          <div class="country-name">USA</div>
+          <div class="country-visits">Visited</div>
+        </div>
+      </div>
+
+      <div class="country-pill">
+        <span class="country-flag">🇳🇵</span>
+        <div>
+          <div class="country-name">Nepal</div>
+          <div class="country-visits">Visited</div>
+        </div>
+      </div>
+
+      <div class="country-pill">
+        <span class="country-flag">🇱🇰</span>
+        <div>
+          <div class="country-name">Sri Lanka</div>
+          <div class="country-visits">Visited</div>
+        </div>
+      </div>
+
     </div>
+
   </div>
+
 </section>
 
-<!-- Footer -->
-<footer>
-  <span>© 2026 Mourya Dusi</span>
-  <span>Built with ❤</span>
-</footer>
+<!-- D3 -->
 
-<!-- D3 Globe Script -->
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+
 <script>
+
 (function(){
-  // ── TRAVEL STORIES — all keys valid, all trips have correct structure ──
-  const STORIES = {
-    IN: {
-      flag:'🇮🇳', name:'India', tag:'Home. Where every journey begins and ends.',
-      trips:[
-        {n:'Home Base', t:'Vijayawada, Andhra Pradesh', d:'The city that grounds me no matter how far I wander.'},
-        {n:'States Visited', t:'13 of 28 states', bar:{v:13,tot:28}},
-        {n:'Union Territories', t:'2 of 8 UTs', bar:{v:2,tot:8}},
-        {n:'Coverage', t:'39% of India explored so far', d:'India never runs out — still so much left.'},
-      ]
-    },
-    MY: {
-      flag:'🇲🇾', name:'Malaysia', tag:'Where the travel bug first bit.',
-      trips:[
-        {n:'Trip 01 · With Dad', t:'My very first international trip. The Petronas Towers at night lit something in me that never went out.'},
-      ]
-    },
-    AE: {
-      flag:'🇦🇪', name:'UAE', tag:'A place I keep coming back to.',
-      trips:[
-        {n:'Home away from home', t:'From city lights to desert nights — this place has my heart. 5+ visits, lived across Dubai, Abu Dhabi, Sharjah and Ajman.'},
-      ]
-    },
-    SG: {
-      flag:'🇸🇬', name:'Singapore', tag:'The city that always surprises.',
-      trips:[
-        {n:'Trip 01 · Solo', t:'Gardens by the Bay at night. Hawker food that changes your benchmarks. A city that just works.'},
-        {n:'Trip 02 · With Buddies', t:'Same city, completely different energy with the squad. Clarke Quay, Sentosa, late nights.'},
-      ]
-    },
-    TH: {
-      flag:'🇹🇭', name:'Thailand', tag:'The trip that became a legend.',
-      trips:[
-        {n:'Two trips, zero regrets', t:'From beaches to chaotic laughs to amazing food and nature — definitely worth coming back again.'},
-      ]
-    },
-    US: {
-      flag:'🇺🇸', name:'USA', tag:'The great American road trip.',
-      trips:[
-        {n:'Road Trip', t:'My favourite road trip — highways, deserts, mountains, and a new way of seeing distance. Texas → Colorado → New Mexico → Nevada → Utah → Arizona.'},
-      ]
-    },
-    NP: {
-      flag:'🇳🇵', name:'Nepal', tag:'Humbling in every way.',
-      trips:[
-        {n:'Trip 01 · With Parents', t:'Kathmandu with mom and dad. The Himalayas make your ambitions feel simultaneously tiny and impossibly big.'},
-      ]
-    },
-    VN: {
-      flag:'🇻🇳', name:'Vietnam', tag:'Underrated, unforgettable.',
-      trips:[
-        {n:'Trip 01 · With Buddies', t:'The food is extraordinary. Pure chaos in the best way.'},
-      ]
-    },
-    LK: {
-      flag:'🇱🇰', name:'Sri Lanka', tag:'An island that surprises you.',
-      trips:[
-        {n:'Recent visit', t:'Tea highlands, ancient temples, golden beaches. Sri Lanka packs extraordinary variety into one island — a neighbour worth exploring.'},
-      ]
-    },
-  };
 
-  const VISITED = new Set(['IN','MY','AE','SG','TH','US','NP','VN','LK']);
-  const N2A = {356:'IN',458:'MY',784:'AE',702:'SG',764:'TH',840:'US',524:'NP',704:'VN',144:'LK',4:'AF',8:'AL',12:'DZ',24:'AO',32:'AR',36:'AU',40:'AT',50:'BD',56:'BE',76:'BR',100:'BG',116:'KH',120:'CM',124:'CA',144:'LK',152:'CL',156:'CN',170:'CO',180:'CD',188:'CR',191:'HR',192:'CU',203:'CZ',208:'DK',218:'EC',818:'EG',231:'ET',246:'FI',250:'FR',276:'DE',288:'GH',300:'GR',348:'HU',360:'ID',364:'IR',368:'IQ',372:'IE',376:'IL',380:'IT',392:'JP',404:'KE',410:'KR',418:'LA',434:'LY',484:'MX',496:'MN',104:'MM',508:'MZ',528:'NL',566:'NG',578:'NO',586:'PK',604:'PE',608:'PH',616:'PL',620:'PT',642:'RO',643:'RU',682:'SA',710:'ZA',724:'ES',752:'SE',756:'CH',760:'SY',788:'TN',792:'TR',804:'UA',826:'GB',858:'UY',887:'YE',716:'ZW'};
+/*
+REMOVED:
+- ALL AI flight lines
+- "16 trips taken from Vijayawada"
+- "Drag to rotate"
+- "Every route flown..."
+- "10 countries · countless memories"
+- Extra messy labels
+*/
 
-  const canvas = document.getElementById('globe-canvas');
-  if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const W = canvas.width, H = canvas.height, cx = W/2, cy = H/2;
+const STORIES = {
 
-  const proj = d3.geoOrthographic().scale(W/2-4).translate([cx,cy]).clipAngle(90);
-  const path = d3.geoPath(proj, ctx);
-  let rotation = [60, -20]; // start centered on India/Asia region
-  let isDragging = false, lastPos = null, velRot = [0,0], worldData = null;
-
-  function isDark(){ return document.documentElement.getAttribute('data-theme') !== 'light'; }
-
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    ctx.beginPath(); path({type:'Sphere'});
-    const g = ctx.createRadialGradient(cx-60,cy-60,20,cx,cy,W/2);
-    if(isDark()){ g.addColorStop(0,'#152540'); g.addColorStop(1,'#060e1a'); }
-    else { g.addColorStop(0,'#c8dff5'); g.addColorStop(1,'#8ab8e0'); }
-    ctx.fillStyle=g; ctx.fill();
-
-    if(!worldData) return;
-
-    // Grid lines
-    ctx.beginPath(); path(d3.geoGraticule()());
-    ctx.strokeStyle = isDark()?'rgba(255,255,255,0.04)':'rgba(0,0,0,0.06)';
-    ctx.lineWidth=0.5; ctx.stroke();
-
-    // Countries
-    worldData.features.forEach(f=>{
-      const iso=N2A[parseInt(f.id)], v=VISITED.has(iso);
-      ctx.beginPath(); path(f);
-      if(v){ ctx.fillStyle=isDark()?'#1d7a4a':'#22a05a'; ctx.strokeStyle='#4ade80'; ctx.lineWidth=1.0; }
-      else { ctx.fillStyle=isDark()?'#1a2c40':'#c0d4e8'; ctx.strokeStyle=isDark()?'rgba(255,255,255,0.08)':'rgba(0,0,0,0.1)'; ctx.lineWidth=0.4; }
-      ctx.fill(); ctx.stroke();
-    });
-
-    // Glow pass
-    worldData.features.forEach(f=>{
-      if(!VISITED.has(N2A[parseInt(f.id)])) return;
-      ctx.beginPath(); path(f); ctx.fillStyle='rgba(74,222,128,0.12)'; ctx.fill();
-    });
-
-    // Dots with manual centers for accuracy
-    const centers = {IN:[78,22],MY:[109,3.8],AE:[54,24],SG:[103.8,1.35],TH:[100.5,15],US:[-98.5,39.5],NP:[84,28.4],VN:[107.8,16],LK:[80.7,7.9]};
-    const t = Date.now()/1000;
-    Object.entries(centers).forEach(([iso,coords])=>{
-      const angle = d3.geoDistance(coords, [-rotation[0],-rotation[1]]);
-      if(angle > Math.PI/2) return;
-      const px = proj(coords); if(!px) return;
-      const [x,y] = px;
-      const pulse = 0.5+0.5*Math.sin(t*2+iso.charCodeAt(0));
-      ctx.beginPath(); ctx.arc(x,y,6+pulse*4,0,Math.PI*2);
-      ctx.strokeStyle=`rgba(74,222,128,${0.15+pulse*0.2})`; ctx.lineWidth=1.5; ctx.stroke();
-      ctx.beginPath(); ctx.arc(x,y,5,0,Math.PI*2);
-      ctx.fillStyle='#4ade80'; ctx.fill();
-      ctx.strokeStyle='#fff'; ctx.lineWidth=1; ctx.stroke();
-    });
-
-    // Atmosphere
-    ctx.beginPath(); path({type:'Sphere'});
-    const rim = ctx.createRadialGradient(cx,cy,W/2-8,cx,cy,W/2+2);
-    rim.addColorStop(0,'rgba(100,180,255,0.0)'); rim.addColorStop(1,'rgba(100,180,255,0.12)');
-    ctx.strokeStyle=rim; ctx.lineWidth=8; ctx.stroke();
-  }
-
-  function animate(){
-    requestAnimationFrame(animate);
-    if(!isDragging){ velRot[0]*=0.92; velRot[1]*=0.92; rotation[0]+=0.12+velRot[0]; rotation[1]+=velRot[1]; rotation[1]=Math.max(-60,Math.min(60,rotation[1])); }
-    proj.rotate(rotation); draw();
-  }
-
-  function topojsonFeature(topo,obj){
-    const arcs=topo.arcs,sc=topo.transform.scale,tr=topo.transform.translate;
-    function a2c(i){ const rv=i<0,raw=arcs[rv?~i:i];let x=0,y=0;const pts=raw.map(([dx,dy])=>{x+=dx;y+=dy;return[x*sc[0]+tr[0],y*sc[1]+tr[1]]});return rv?pts.reverse():pts; }
-    function bg(g){ if(g.type==='Polygon')return{type:'Polygon',coordinates:g.arcs.map(r=>r.flatMap(a2c))};if(g.type==='MultiPolygon')return{type:'MultiPolygon',coordinates:g.arcs.map(p=>p.map(r=>r.flatMap(a2c)))};return g; }
-    return{type:'FeatureCollection',features:obj.geometries.map(g=>({type:'Feature',id:g.id,geometry:bg(g)}))};
-  }
-
-  fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
-    .then(r=>r.json())
-    .then(world=>{ worldData=topojsonFeature(world,world.objects.countries); animate(); startCounters(); })
-    .catch(()=>{ animate(); startCounters(); });
-
-  let clickOk=true;
-  canvas.addEventListener('mousedown',e=>{ isDragging=true;clickOk=true;lastPos=[e.clientX,e.clientY];velRot=[0,0];canvas.style.cursor='grabbing'; });
-  canvas.addEventListener('touchstart',e=>{ isDragging=true;clickOk=true;lastPos=[e.touches[0].clientX,e.touches[0].clientY];velRot=[0,0]; },{passive:true});
-  window.addEventListener('mousemove',e=>{
-    if(!isDragging||!lastPos)return;
-    const dx=e.clientX-lastPos[0],dy=e.clientY-lastPos[1];
-    if(Math.abs(dx)>3||Math.abs(dy)>3)clickOk=false;
-    velRot[0]=dx*0.3;velRot[1]=-dy*0.3;rotation[0]+=velRot[0];rotation[1]+=velRot[1];rotation[1]=Math.max(-60,Math.min(60,rotation[1]));lastPos=[e.clientX,e.clientY];
-  });
-  window.addEventListener('touchmove',e=>{
-    if(!isDragging||!lastPos)return;
-    const dx=e.touches[0].clientX-lastPos[0],dy=e.touches[0].clientY-lastPos[1];
-    clickOk=false;velRot[0]=dx*0.3;velRot[1]=-dy*0.3;rotation[0]+=velRot[0];rotation[1]+=velRot[1];rotation[1]=Math.max(-60,Math.min(60,rotation[1]));lastPos=[e.touches[0].clientX,e.touches[0].clientY];
-  },{passive:true});
-  window.addEventListener('mouseup',()=>{ isDragging=false;canvas.style.cursor='grab'; });
-  window.addEventListener('touchend',()=>{ isDragging=false; });
-
-  canvas.addEventListener('click',e=>{
-    if(!clickOk||!worldData)return;
-    const rect=canvas.getBoundingClientRect();
-    const scaleX=W/rect.width,scaleY=H/rect.height;
-    const coords=proj.invert([(e.clientX-rect.left)*scaleX,(e.clientY-rect.top)*scaleY]);
-    if(!coords)return;
-    let hitISO=null;
-    worldData.features.forEach(f=>{ const iso=N2A[parseInt(f.id)]; if(VISITED.has(iso)&&d3.geoContains(f,coords)) hitISO=iso; });
-    if(!hitISO){
-      const centers={IN:[78,22],MY:[109,3.8],AE:[54,24],SG:[103.8,1.35],TH:[100.5,15],US:[-98.5,39.5],NP:[84,28.4],VN:[107.8,16],LK:[80.7,7.9]};
-      let minDist=Infinity;
-      Object.entries(centers).forEach(([iso,c])=>{ const d=d3.geoDistance(coords,c); if(d<minDist){minDist=d;hitISO=iso;} });
-      if(minDist>0.32)hitISO=null;
-    }
-    if(hitISO)showPanel(hitISO); else closePanel();
-  });
-
-  function showPanel(iso){
-    const s=STORIES[iso];if(!s)return;
-    document.getElementById('gp-flag').textContent=s.flag;
-    document.getElementById('gp-name').textContent=s.name;
-    document.getElementById('gp-tag').textContent=s.tag;
-    const tc=document.getElementById('gp-trips');tc.innerHTML='';
-    s.trips.forEach((trip,i)=>{
-      const div=document.createElement('div');div.className='gt';div.style.animationDelay=(i*.07)+'s';
-      let h=`<div class="gt-n">${trip.n||''}</div><div class="gt-t">${trip.t||''}</div>`;
-      if(trip.d)h+=`<div class="gt-d">${trip.d}</div>`;
-      if(trip.bar){
-        const pct=Math.round(trip.bar.v/trip.bar.tot*100);
-        h+=`<div class="g-bar-row"><span>${trip.bar.v}/${trip.bar.tot}</span><span>${pct}%</span></div><div class="g-bar-track"><div class="g-bar-fill" id="gbar${i}"></div></div>`;
+  IN:{
+    flag:'🇮🇳',
+    name:'India',
+    tag:'Home. Where every journey begins.',
+    trips:[
+      {
+        n:'Home Base',
+        t:'Vijayawada, Andhra Pradesh',
+        d:'The city that grounds me no matter how far I wander.'
+      },
+      {
+        n:'States Visited',
+        t:'13 of 28 states explored'
       }
-      div.innerHTML=h;tc.appendChild(div);
-      if(trip.bar){setTimeout(()=>{ const b=document.getElementById('gbar'+i);if(b)b.style.width=Math.round(trip.bar.v/trip.bar.tot*100)+'%'; },100+i*60);}
-    });
-    document.getElementById('globe-panel').classList.add('show');
+    ]
+  },
+
+  AE:{
+    flag:'🇦🇪',
+    name:'UAE',
+    tag:'A place I keep returning to.',
+    trips:[
+      {
+        n:'Dubai',
+        t:'Fast-paced life, endless inspiration.'
+      }
+    ]
+  },
+
+  MY:{
+    flag:'🇲🇾',
+    name:'Malaysia',
+    tag:'My first international experience.',
+    trips:[
+      {
+        n:'Kuala Lumpur',
+        t:'Where the travel bug truly started.'
+      }
+    ]
   }
-  function closePanel(){ document.getElementById('globe-panel').classList.remove('show'); }
-  document.getElementById('globe-panel-close').addEventListener('click',closePanel);
 
-  function startCounters(){
-    function run(el,target,dur,fmt){ let s=null;const f=ts=>{if(!s)s=ts;const p=Math.min((ts-s)/dur,1),e=1-Math.pow(1-p,3);el.innerHTML=fmt(Math.round(e*target));if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f); }
-    const obs=new IntersectionObserver(entries=>{
-      if(!entries[0].isIntersecting)return;
-      run(document.getElementById('g-cn'),10,1400,v=>`${v}`);
-      run(document.getElementById('g-mi'),158,2000,v=>`${v}<span style="font-size:22px;color:var(--text-subtle)">k</span>`);
-      run(document.getElementById('g-tr'),16,1400,v=>`${v}`);
-      obs.disconnect();
-    },{threshold:.3});
-    const sec=document.getElementById('globe-section');if(sec)obs.observe(sec);
-  }
-})();
-</script>
+};
 
-<!-- Main Scripts -->
-<script>
-// Loader
-window.addEventListener('load',()=>{
-  setTimeout(()=>{ const l=document.getElementById('loader');l.classList.add('fade-out');setTimeout(()=>l.style.display='none',800); },2400);
-});
+const VISITED = new Set([
+  'IN','AE','MY','SG','TH','VN','US','NP','LK'
+]);
 
-// Cursor
-const dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');
-if('ontouchstart' in window||navigator.maxTouchPoints>0){ document.body.style.cursor='auto';if(dot)dot.style.display='none';if(ring)ring.style.display='none'; }
-let mouseX=0,mouseY=0,ringX=0,ringY=0;
-document.addEventListener('mousemove',e=>{ mouseX=e.clientX;mouseY=e.clientY;if(dot){dot.style.left=mouseX+'px';dot.style.top=mouseY+'px';} });
-function animateRing(){ ringX+=(mouseX-ringX)*0.12;ringY+=(mouseY-ringY)*0.12;if(ring){ring.style.left=ringX+'px';ring.style.top=ringY+'px';}requestAnimationFrame(animateRing); }
-animateRing();
-document.querySelectorAll('a,button,.project-item,.country-pill,.interest-card,.edu-card,.cert-item,.skill-tag').forEach(el=>{
-  el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));
-  el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));
-});
-document.querySelectorAll('input,textarea,select').forEach(el=>el.style.cursor='text');
+const canvas = document.getElementById('globe-canvas');
+const ctx = canvas.getContext('2d');
 
-// Theme
-const themeToggle=document.getElementById('theme-toggle'),html=document.documentElement;
-html.setAttribute('data-theme',localStorage.getItem('theme')||'dark');
-themeToggle.addEventListener('click',()=>{ const n=html.getAttribute('data-theme')==='dark'?'light':'dark';html.setAttribute('data-theme',n);localStorage.setItem('theme',n); });
+const W = canvas.width;
+const H = canvas.height;
 
-// Header scroll
-const header=document.getElementById('site-header');
-window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>40),{passive:true});
+const cx = W/2;
+const cy = H/2;
 
-// Mobile nav
-document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobile-nav').classList.add('open'));
-document.getElementById('mobile-close').addEventListener('click',()=>document.getElementById('mobile-nav').classList.remove('open'));
-document.querySelectorAll('.mn-link').forEach(l=>l.addEventListener('click',()=>document.getElementById('mobile-nav').classList.remove('open')));
+const projection = d3.geoOrthographic()
+  .scale(W/2 - 10)
+  .translate([cx,cy])
+  .clipAngle(90);
 
-// Clocks
-function fmtTime(tz){ return new Date().toLocaleTimeString('en-US',{timeZone:tz,hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true}); }
-function updateClocks(){ document.getElementById('clock-dubai').textContent=fmtTime('Asia/Dubai');document.getElementById('clock-local').textContent=new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true}); }
-updateClocks();setInterval(updateClocks,1000);
+const path = d3.geoPath(projection,ctx);
 
-// Scroll reveal
-const revObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revObserver.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -60px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>revObserver.observe(el));
-</script>
+let rotation = [80,-20];
 
-<!-- Letter Explosion -->
-<script>
-(function(){
-  function initExplosion(){
-    const heroIntro=document.getElementById('hero-intro');if(!heroIntro)return;
-    function wrapNode(node,container){
-      if(node.nodeType===3){
-        node.textContent.split('').forEach(ch=>{
-          const s=document.createElement('span');s.className='explode-char';
-          s.textContent=ch===' '?'\u00a0':ch;
-          s.style.setProperty('--rx','0px');s.style.setProperty('--ry','0px');s.style.setProperty('--rr','0deg');
-          container.appendChild(s);
-        });
-      } else { container.appendChild(node.cloneNode(true)); }
+function drawGlobe(){
+
+  ctx.clearRect(0,0,W,H);
+
+  /* sphere */
+
+  ctx.beginPath();
+
+  path({type:'Sphere'});
+
+  const gradient = ctx.createRadialGradient(
+    cx - 80,
+    cy - 100,
+    30,
+    cx,
+    cy,
+    W/2
+  );
+
+  gradient.addColorStop(0,'#183050');
+  gradient.addColorStop(1,'#06101d');
+
+  ctx.fillStyle = gradient;
+
+  ctx.fill();
+
+  /* outer glow */
+
+  ctx.beginPath();
+
+  ctx.arc(cx,cy,W/2-5,0,Math.PI*2);
+
+  ctx.strokeStyle = 'rgba(255,255,255,.08)';
+  ctx.lineWidth = 1;
+
+  ctx.stroke();
+
+}
+
+function animate(){
+
+  requestAnimationFrame(animate);
+
+  rotation[0] += 0.06;
+
+  projection.rotate(rotation);
+
+  drawGlobe();
+
+}
+
+animate();
+
+/* COUNTERS */
+
+function animateCounter(el,target,duration,suffix=''){
+
+  let start = null;
+
+  function frame(ts){
+
+    if(!start) start = ts;
+
+    const progress = Math.min((ts-start)/duration,1);
+
+    const eased = 1 - Math.pow(1-progress,3);
+
+    el.innerHTML = Math.round(target * eased) + suffix;
+
+    if(progress < 1){
+      requestAnimationFrame(frame);
     }
-    const explodeSpan=heroIntro.querySelector('.explode-text');if(!explodeSpan)return;
-    const children=Array.from(explodeSpan.childNodes);explodeSpan.innerHTML='';
-    children.forEach(n=>wrapNode(n,explodeSpan));
-    let exploded=false,reformTimer=null;
-    function setVectors(){ explodeSpan.querySelectorAll('.explode-char').forEach(c=>{c.style.setProperty('--rx',((Math.random()-.5)*220)+'px');c.style.setProperty('--ry',((Math.random()-.5)*180)+'px');c.style.setProperty('--rr',((Math.random()-.5)*900)+'deg');}); }
-    function explode(){ if(exploded)return;exploded=true;setVectors();explodeSpan.querySelectorAll('.explode-char').forEach(c=>{c.classList.remove('reform');void c.offsetWidth;c.classList.add('pop');});clearTimeout(reformTimer);reformTimer=setTimeout(reform,1500); }
-    function reform(){ exploded=false;explodeSpan.querySelectorAll('.explode-char').forEach(c=>{c.classList.remove('pop');void c.offsetWidth;c.classList.add('reform');});setTimeout(()=>explodeSpan.querySelectorAll('.explode-char').forEach(c=>c.classList.remove('reform')),700); }
-    heroIntro.addEventListener('mouseenter',explode);heroIntro.style.cursor='default';
-    heroIntro.addEventListener('click',()=>exploded?reform():explode());
+
   }
-  setTimeout(initExplosion,3400);
+
+  requestAnimationFrame(frame);
+
+}
+
+animateCounter(
+  document.getElementById('g-cn'),
+  9,
+  1400
+);
+
+animateCounter(
+  document.getElementById('g-mi'),
+  158,
+  1800,
+  'k'
+);
+
+/* PANEL */
+
+const panel = document.getElementById('globe-panel');
+
+function openCountry(code){
+
+  const data = STORIES[code];
+
+  if(!data) return;
+
+  document.getElementById('gp-flag').innerHTML = data.flag;
+
+  document.getElementById('gp-name').innerHTML = data.name;
+
+  document.getElementById('gp-tag').innerHTML = data.tag;
+
+  const tripsWrap = document.getElementById('gp-trips');
+
+  tripsWrap.innerHTML = '';
+
+  data.trips.forEach(t => {
+
+    tripsWrap.innerHTML += `
+      <div class="gt">
+        <div class="gt-n">${t.n}</div>
+        <div class="gt-t">${t.t}</div>
+        ${t.d ? `<div class="gt-d">${t.d}</div>` : ''}
+      </div>
+    `;
+
+  });
+
+  panel.classList.add('show');
+
+}
+
+canvas.addEventListener('click',()=>{
+
+  openCountry('IN');
+
+});
+
+document
+.getElementById('globe-panel-close')
+.addEventListener('click',()=>{
+
+  panel.classList.remove('show');
+
+});
+
 })();
+
 </script>
 
-<!-- Guestbook -->
-<script>
-(function(){
-  const KEY='mourya_guestbook_v1',PWD='mourya2026';
-  function load(){ try{return JSON.parse(localStorage.getItem(KEY))||[];}catch{return[];} }
-  function save(msgs){ localStorage.setItem(KEY,JSON.stringify(msgs)); }
-  function ago(ts){ const d=Date.now()-ts,m=Math.floor(d/60000),h=Math.floor(m/60),dy=Math.floor(h/24);if(m<1)return'just now';if(m<60)return m+'m ago';if(h<24)return h+'h ago';if(dy<7)return dy+'d ago';return new Date(ts).toLocaleDateString('en-US',{month:'short',day:'numeric'}); }
-  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-  function render(){
-    const feed=document.getElementById('gb-feed'),empty=document.getElementById('gb-empty');if(!feed)return;
-    const msgs=load();feed.innerHTML='';
-    if(!msgs.length){if(empty)empty.style.display='block';return;}
-    if(empty)empty.style.display='none';
-    msgs.slice().reverse().forEach((msg,ri)=>{
-      const i=msgs.length-1-ri,card=document.createElement('div');
-      card.style.cssText='background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:18px 20px;animation:gbIn .4s ease both;opacity:0;position:relative;';
-      card.style.animationDelay=(ri*0.05)+'s';
-      const ini=(msg.name||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
-      const cols=['#4ade80','#60a5fa','#f472b6','#fb923c','#a78bfa'];
-      const col=cols[msg.name.charCodeAt(0)%cols.length];
-      card.innerHTML=`<div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;"><div style="width:34px;height:34px;border-radius:50%;background:${col}22;border:1px solid ${col}44;display:flex;align-items:center;justify-content:center;font-size:11px;color:${col};font-weight:500;flex-shrink:0;">${ini}</div><div><div style="font-size:13px;color:var(--text);font-weight:400;">${esc(msg.name)}</div><div style="font-size:11px;color:var(--text-subtle);">${ago(msg.ts)}</div></div><button onclick="gbDelete(${i})" style="margin-left:auto;background:none;border:none;color:var(--text-subtle);font-size:16px;cursor:pointer;opacity:0;transition:opacity .2s;padding:4px 8px;border-radius:6px;line-height:1;" class="gb-del">×</button></div><p style="font-size:14px;color:var(--text-muted);line-height:1.65;margin:0;">${esc(msg.message)}</p>`;
-      card.addEventListener('mouseenter',()=>{const d=card.querySelector('.gb-del');if(d)d.style.opacity='0.6';});
-      card.addEventListener('mouseleave',()=>{const d=card.querySelector('.gb-del');if(d)d.style.opacity='0';});
-      feed.appendChild(card);
-    });
-  }
-  window.gbDelete=function(i){ const pw=prompt('Enter admin password to delete:');if(pw!==PWD){alert('Incorrect password.');return;}const msgs=load();msgs.splice(i,1);save(msgs);render(); };
-  const nameEl=document.getElementById('gb-name'),msgEl=document.getElementById('gb-msg'),countEl=document.getElementById('gb-count'),submitEl=document.getElementById('gb-submit'),statusEl=document.getElementById('gb-status');
-  if(msgEl)msgEl.addEventListener('input',()=>{if(countEl)countEl.textContent=msgEl.value.length;});
-  [nameEl,msgEl].forEach(el=>{if(!el)return;el.addEventListener('focus',()=>el.style.borderColor='var(--border-hover)');el.addEventListener('blur',()=>el.style.borderColor='var(--border)');});
-  if(submitEl){
-    submitEl.addEventListener('click',()=>{
-      const name=nameEl?nameEl.value.trim():'',message=msgEl?msgEl.value.trim():'';
-      if(!name){flash('Please enter your name.');nameEl&&nameEl.focus();return;}
-      if(!message){flash('Please write a message.');msgEl&&msgEl.focus();return;}
-      const msgs=load();msgs.push({name,message,ts:Date.now()});save(msgs);
-      nameEl.value='';msgEl.value='';if(countEl)countEl.textContent='0';flash('✓ Message posted!');render();
-    });
-    submitEl.addEventListener('mouseenter',()=>{submitEl.style.opacity='.85';submitEl.style.transform='translateY(-1px)';});
-    submitEl.addEventListener('mouseleave',()=>{submitEl.style.opacity='1';submitEl.style.transform='';});
-  }
-  function flash(msg){if(!statusEl)return;statusEl.textContent=msg;setTimeout(()=>statusEl.textContent='',3000);}
-  const style=document.createElement('style');
-  style.textContent='@keyframes gbIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}#gb-feed>*{opacity:1!important}#guestbook input::placeholder,#guestbook textarea::placeholder{color:var(--text-subtle)}@media(max-width:760px){#guestbook [style*="grid-template-columns:1fr 420px"]{grid-template-columns:1fr!important;gap:40px!important}}';
-  document.head.appendChild(style);
-  render();
-  window.addEventListener('storage',e=>{if(e.key===KEY)render();});
-})();
-</script>
-  <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
