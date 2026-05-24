@@ -1212,7 +1212,7 @@ document.querySelectorAll('.reveal').forEach(el=>revObserver.observe(el));
 </style>
 
 <!-- ═══════════════════════════════════════════════════════════
-     FEATURE 3: HIRE ME IN 60 SECONDS
+     FEATURE 3: HIRE ME IN 30 SECONDS
      ═══════════════════════════════════════════════════════════ -->
 <style>
 #pitch-btn{
@@ -1408,7 +1408,7 @@ document.addEventListener('DOMContentLoaded', function(){
   if(contactTitle){
     const btn = document.createElement('button');
     btn.id='pitch-btn';
-    btn.innerHTML='▶ Hire me in 60 seconds';
+    btn.innerHTML='▶ Hire me in 30 seconds';
     btn.onclick = startPitch;
     contactTitle.parentElement.insertBefore(btn, contactTitle.nextSibling);
   }
@@ -1431,7 +1431,7 @@ document.addEventListener('DOMContentLoaded', function(){
         <circle cx="40" cy="40" r="35" stroke-width="3"/>
         <circle id="pitch-progress-ring" cx="40" cy="40" r="35" stroke-width="3"/>
       </svg>
-      <div id="pitch-seconds">60</div>
+      <div id="pitch-seconds">30</div>
     </div>
     ${pitchSlides.map((s,i)=>`
       <div class="pitch-slide${i===0?' active':''}" id="ps${i}">
