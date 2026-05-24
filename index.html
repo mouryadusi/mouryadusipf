@@ -1212,7 +1212,7 @@ document.querySelectorAll('.reveal').forEach(el=>revObserver.observe(el));
 </style>
 
 <!-- ═══════════════════════════════════════════════════════════
-     FEATURE 3: HIRE ME IN 3- SECONDS
+     FEATURE 3: HIRE ME IN 60 SECONDS
      ═══════════════════════════════════════════════════════════ -->
 <style>
 #pitch-btn{
@@ -1408,7 +1408,7 @@ document.addEventListener('DOMContentLoaded', function(){
   if(contactTitle){
     const btn = document.createElement('button');
     btn.id='pitch-btn';
-    btn.innerHTML='▶ Hire me in 30 seconds';
+    btn.innerHTML='▶ Hire me in 60 seconds';
     btn.onclick = startPitch;
     contactTitle.parentElement.insertBefore(btn, contactTitle.nextSibling);
   }
@@ -1416,8 +1416,9 @@ document.addEventListener('DOMContentLoaded', function(){
   // ── INJECT PITCH OVERLAY ──
   const pitchSlides = [
     {label:'The problem',    title:'You need someone who ships ML — not just studies it.',  body:'Most candidates at my level have notebooks. I have production deployments on AWS SageMaker, real pipelines, and a live AI product used by real people.'},
-    {label:'Who I am',       big:'Mourya Dusi',   body:'ML Engineer · Data Scientist · MSc AI, Dubai · AWS Certified  · Based in UAE'},
+    {label:'Who I am',       big:'Mourya Dusi',   body:'ML Engineer · Data Scientist · MSc AI, Dubai · AWS Certified · 9 months Accenture · Based in UAE'},
     {label:'What I built',   title:'destination.com — a full AI travel platform.',          body:'Voice AI (ARIA), live flights, visa guidance, route optimisation. Built alone. Deployed on Vercel. Working right now.'},
+    {label:'The number',     big:'50,000+',        body:'records processed per week in my Accenture ML pipeline. Not a toy dataset. Production data. Real stakeholders.'},
     {label:'What I want',    title:'A role where I can build things that matter.',           body:'ML Engineer · Junior Data Scientist · AI Engineer. Dubai or remote. Available from September 2026. Open to relocation.'},
     {label:'Next step',      title:'mouryadusi@outlook.com',                                 body:'That\'s it. One email. I\'ll respond within the hour.'},
   ];
@@ -1430,7 +1431,7 @@ document.addEventListener('DOMContentLoaded', function(){
         <circle cx="40" cy="40" r="35" stroke-width="3"/>
         <circle id="pitch-progress-ring" cx="40" cy="40" r="35" stroke-width="3"/>
       </svg>
-      <div id="pitch-seconds">30</div>
+      <div id="pitch-seconds">60</div>
     </div>
     ${pitchSlides.map((s,i)=>`
       <div class="pitch-slide${i===0?' active':''}" id="ps${i}">
@@ -1561,20 +1562,20 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 // ── PITCH FUNCTIONS ──
-let pitchInterval, pitchCurrent=0, pitchTime=30;
+let pitchInterval, pitchCurrent=0, pitchTime=60;
 const PITCH_TOTAL=6;
 function startPitch(){
   document.getElementById('pitch-overlay').classList.add('open');
   document.body.style.overflow='hidden';
-  pitchCurrent=0; pitchTime=30;
+  pitchCurrent=0; pitchTime=60;
   showSlide(0);
   pitchInterval = setInterval(()=>{
     pitchTime--;
     document.getElementById('pitch-seconds').textContent=pitchTime;
     const ring=document.getElementById('pitch-progress-ring');
-    ring.style.strokeDashoffset=220*(1-pitchTime/30);
+    ring.style.strokeDashoffset=220*(1-pitchTime/60);
     if(pitchTime<=0){closePitch();return;}
-    const slide=Math.floor((30-pitchTime)/10);
+    const slide=Math.floor((60-pitchTime)/10);
     if(slide!==pitchCurrent&&slide<PITCH_TOTAL){pitchCurrent=slide;showSlide(slide);}
   },1000);
 }
@@ -1667,23 +1668,50 @@ function initFlightMap(){
 // ── KNOWLEDGE GRAPH ──
 
 // ── AI CHAT ──
-const MOURYA_CONTEXT=`You are an AI assistant representing Mourya Dusi's portfolio. Answer questions about him concisely and warmly.
+// ── AI CHAT — smart rule-based engine (no API needed, works everywhere) ──
+const AI_KB = [
+  { k:['build','can he','what does','create','make','develop','ship'],
+    a:"Mourya builds production ML systems — pipelines that processed 50,000+ records a week at Accenture, models deployed on AWS SageMaker, and full-stack AI products. His live project destination.com has voice AI, real-time flights, and visa guidance, all built solo." },
+  { k:['available','hire','open','looking','job','role','work','opportunity','join','recruit'],
+    a:"Yes — Mourya is actively looking for ML Engineer, Data Scientist, or AI Engineer roles. He's completing his MSc in Dubai in September 2026 and is open to Dubai-based, remote, or relocation opportunities. Email him at mouryadusi@outlook.com." },
+  { k:['project','built','destination','travel','smart exit','taxi','chatbot','student','portfolio'],
+    a:"His standout project is destination.com — a full AI travel platform with voice AI (ARIA), live flight tracking, and visa guidance, deployed on Vercel. He's also built a taxi lost-item detector, a student performance predictor at 92% accuracy, and an NLP university chatbot." },
+  { k:['stack','skill','tech','language','tool','python','tensorflow','aws','cloud','framework'],
+    a:"Mourya's core stack is Python, TensorFlow, Scikit-learn, and AWS (SageMaker, EC2, S3). He also works with SQL, Power BI, Flask, NLP, and D3.js. He holds AWS AI Practitioner, Google Cloud Architect, and AWS Solutions Architect certifications." },
+  { k:['experience','accenture','work history','background','career','company'],
+    a:"He spent 9 months at Accenture in Hyderabad as an ML Engineer — building production pipelines processing 50,000+ records weekly, deploying models on AWS SageMaker, and creating Power BI dashboards for stakeholders." },
+  { k:['education','degree','msc','master','university','middlesex','mdx','study','thesis'],
+    a:"Mourya is completing his MSc in Data Science & AI at Middlesex University Dubai, graduating September 2026. He also holds a BSc in Computer Science from Krishna University, India." },
+  { k:['certif','aws','google cloud','badge','credential'],
+    a:"He's certified in AWS AI Practitioner (MLOps), Implementing AI with Amazon ML, Google Professional Cloud Architect, and AWS Solutions Architect Associate — all earned in 2024–2025." },
+  { k:['travel','country','visit','trip','malaysia','singapore','uae','dubai','thailand','usa','nepal','vietnam','sri lanka'],
+    a:"Mourya has visited 10 countries — India (home), UAE (based there now), Malaysia, Singapore, Thailand, Vietnam, USA, Nepal, Sri Lanka, and counting. He travels mostly solo and finds it sharpens his problem-solving instincts." },
+  { k:['contact','email','reach','linkedin','github','social','message','touch'],
+    a:"Best way to reach Mourya: mouryadusi@outlook.com — he responds quickly. You can also find him on LinkedIn at linkedin.com/in/mouryadusi-dxb or on GitHub at github.com/mouryadusi." },
+  { k:['who','mourya','about','introduce','tell me','yourself','person','he'],
+    a:"Mourya Dusi is an ML Engineer and Data Scientist based in Dubai, UAE, currently completing his MSc in AI at Middlesex University. He's worked at Accenture, built live AI products, holds multiple cloud certifications, and travels to 10+ countries in his spare time." },
+  { k:['salary','pay','rate','compensation','expect','cost'],
+    a:"Mourya is targeting ML Engineer or Data Scientist roles — for current market rates and his expectations, just reach out directly at mouryadusi@outlook.com. He's open to a conversation." },
+  { k:['location','based','where','dubai','india','remote','relocat'],
+    a:"He's currently based in Dubai, UAE (studying at MDX Dubai) and is also spending time in India while working remotely on his thesis. He's open to Dubai, remote, or relocation roles globally." },
+  { k:['music','hobby','interest','outside','personal','fun','free time'],
+    a:"Outside of work, Mourya is into music — it's always on whether he's coding or commuting. He travels solo most of the time and is genuinely fascinated by where AI is headed and what it means for people, not just systems." },
+  { k:['fit','good','suitable','match','right','perfect','team','culture'],
+    a:"He's a strong fit for teams that value shipping over theorising — he's gone from notebook to production deployment, built solo products used by real people, and works well in Agile environments. He's collaborative, certified, and immediately available." },
+];
 
-KEY FACTS:
-- ML Engineer & Data Scientist, based in Dubai, UAE
-- MSc Data Science & AI at Middlesex University Dubai (completing Sep 2026)
-- 9 months at Accenture India (ML Engineer) — built production ML pipelines, AWS SageMaker deployments, Power BI dashboards, 50,000+ records/week preprocessing
-- Built destination.com — full AI travel platform with voice AI (ARIA), live flights, visa guidance. Live on Vercel.
-- Other projects: Smart Exit Reminder, Taxi Lost Item Detection, Student Performance Prediction (92% accuracy), University Chatbot
-- Skills: Python, TensorFlow, Scikit-learn, NLP, AWS (SageMaker, EC2, S3), Power BI, SQL, Flask, D3.js
-- Certifications: AWS AI Practitioner, Google Cloud Architect, AWS Solutions Architect
-- Visited 10 countries: India, UAE, Malaysia, Singapore, Thailand, Vietnam, USA, Nepal, Sri Lanka
-- Email: mouryadusi@outlook.com | LinkedIn: mouryadusi-dxb | GitHub: mouryadusi
-- Available for: ML Engineer, Data Scientist, AI Engineer roles. Open to Dubai, remote, relocation.
-- Immediate availability after Sep 2026 (can start then or negotiate earlier for part-time remote)
-- Personality: thoughtful, builds things with care, traveler, music lover
-
-Keep answers under 3 sentences. Be warm and first-person when appropriate ("Mourya built..." or "He's available..."). Never make up facts not listed above.`;
+function getAIReply(q){
+  const ql = q.toLowerCase();
+  for(const entry of AI_KB){
+    if(entry.k.some(kw => ql.includes(kw))) return entry.a;
+  }
+  // Fuzzy fallback — check any word overlap
+  const words = ql.split(/\s+/).filter(w=>w.length>3);
+  for(const entry of AI_KB){
+    if(words.some(w => entry.k.some(kw=>kw.includes(w)||w.includes(kw)))) return entry.a;
+  }
+  return "Great question — I don't have a specific answer for that, but Mourya would love to chat. Drop him an email at mouryadusi@outlook.com and he'll respond quickly.";
+}
 
 function toggleAI(){
   document.getElementById('ai-panel').classList.toggle('open');
@@ -1696,32 +1724,19 @@ function aiAsk(q){
 }
 window.aiAsk=aiAsk;
 
-async function sendAI(){
+function sendAI(){
   const input=document.getElementById('ai-input');
   const q=input.value.trim();
   if(!q)return;
   input.value='';
   addMsg(q,'user');
-  const typingEl=addMsg('...','bot typing');
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:200,
-        system:MOURYA_CONTEXT,
-        messages:[{role:'user',content:q}]
-      })
-    });
-    const data=await res.json();
-    const reply=data.content?.[0]?.text||"I'm not sure about that — drop Mourya an email at mouryadusi@outlook.com!";
-    typingEl.textContent=reply;
+  // Simulate brief typing delay for realism
+  const typingEl=addMsg('typing…','bot typing');
+  setTimeout(()=>{
+    typingEl.textContent=getAIReply(q);
     typingEl.classList.remove('typing');
-  }catch(e){
-    typingEl.textContent="Hmm, something went wrong. Email Mourya directly at mouryadusi@outlook.com!";
-    typingEl.classList.remove('typing');
-  }
+    document.getElementById('ai-messages').scrollTop=9999;
+  }, 600 + Math.random()*400);
 }
 window.sendAI=sendAI;
 
