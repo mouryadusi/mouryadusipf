@@ -1562,20 +1562,20 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 // ── PITCH FUNCTIONS ──
-let pitchInterval, pitchCurrent=0, pitchTime=60;
+let pitchInterval, pitchCurrent=0, pitchTime=30;
 const PITCH_TOTAL=6;
 function startPitch(){
   document.getElementById('pitch-overlay').classList.add('open');
   document.body.style.overflow='hidden';
-  pitchCurrent=0; pitchTime=60;
+  pitchCurrent=0; pitchTime=30;
   showSlide(0);
   pitchInterval = setInterval(()=>{
     pitchTime--;
     document.getElementById('pitch-seconds').textContent=pitchTime;
     const ring=document.getElementById('pitch-progress-ring');
-    ring.style.strokeDashoffset=220*(1-pitchTime/60);
+    ring.style.strokeDashoffset=220*(1-pitchTime/30);
     if(pitchTime<=0){closePitch();return;}
-    const slide=Math.floor((60-pitchTime)/10);
+    const slide=Math.floor((30-pitchTime)/10);
     if(slide!==pitchCurrent&&slide<PITCH_TOTAL){pitchCurrent=slide;showSlide(slide);}
   },1000);
 }
