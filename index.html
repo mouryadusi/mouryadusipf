@@ -344,13 +344,92 @@
   .edu-card .degree { font-size: 16px; font-weight: 400; margin-bottom: 8px; line-height: 1.4; }
   .edu-card .school { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
   .edu-card .period { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-subtle); }
-  .certs-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 32px; }
-  .cert-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: border-color 0.2s ease; }
-  .cert-item:hover { border-color: var(--border-hover); }
-  .cert-item a { text-decoration: none; color: inherit; cursor: none; }
-  .cert-item .cert-name { font-size: 13px; color: var(--text); margin-bottom: 6px; line-height: 1.4; }
-  .cert-item .cert-source { font-size: 11px; color: var(--text-subtle); letter-spacing: 0.05em; }
-  .cert-item .cert-link { font-size: 11px; color: var(--accent2); margin-top: 8px; display: inline-block; }
+  /* ── CERTIFICATIONS VAULT ── */
+  .cert-vault-wrap { margin-top: 40px; }
+  .cert-vault-header {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px; margin-bottom: 32px;
+  }
+  .cert-stats {
+    display: flex; gap: 28px;
+  }
+  .cert-stat { text-align: center; }
+  .cert-stat-n {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px; font-weight: 300; color: var(--text); line-height: 1;
+  }
+  .cert-stat-l { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--text-subtle); margin-top: 4px; }
+
+  /* Filter tabs */
+  .cert-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+  .cert-filter {
+    padding: 6px 16px; border-radius: 100px; font-size: 12px;
+    border: 1px solid var(--border); color: var(--text-muted);
+    background: none; cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: all .2s;
+  }
+  .cert-filter:hover, .cert-filter.active {
+    border-color: var(--text); color: var(--text); background: var(--text); color: var(--bg);
+  }
+
+  /* Cards grid */
+  .cert-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .cert-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden; cursor: pointer;
+    transition: all .25s ease; position: relative;
+    animation: certFadeIn .4s ease both;
+  }
+  @keyframes certFadeIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+  .cert-card:hover { border-color: var(--border-hover); transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,.3); }
+  .cert-card.hidden { display: none; }
+  .cert-card-inner { padding: 20px; }
+  .cert-issuer-bar {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+  }
+  .cert-issuer-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; flex-shrink: 0; font-weight: 600;
+  }
+  .cert-issuer-name { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-subtle); }
+  .cert-card-title { font-size: 13px; color: var(--text); line-height: 1.5; margin-bottom: 12px; font-weight: 400; }
+  .cert-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; }
+  .cert-date { font-size: 11px; color: var(--text-subtle); }
+  .cert-badge {
+    font-size: 10px; padding: 3px 10px; border-radius: 100px;
+    border: 1px solid; letter-spacing: .08em; text-transform: uppercase;
+  }
+  /* Category accent colours */
+  .cert-card[data-cat="ai"] .cert-issuer-icon { background: rgba(74,222,128,.15); color: #4ade80; }
+  .cert-card[data-cat="ai"] .cert-badge { border-color: rgba(74,222,128,.3); color: #4ade80; }
+  .cert-card[data-cat="cloud"] .cert-issuer-icon { background: rgba(96,165,250,.15); color: #60a5fa; }
+  .cert-card[data-cat="cloud"] .cert-badge { border-color: rgba(96,165,250,.3); color: #60a5fa; }
+  .cert-card[data-cat="devops"] .cert-issuer-icon { background: rgba(251,146,60,.15); color: #fb923c; }
+  .cert-card[data-cat="devops"] .cert-badge { border-color: rgba(251,146,60,.3); color: #fb923c; }
+  .cert-card[data-cat="agile"] .cert-issuer-icon { background: rgba(167,139,250,.15); color: #a78bfa; }
+  .cert-card[data-cat="agile"] .cert-badge { border-color: rgba(167,139,250,.3); color: #a78bfa; }
+  .cert-card[data-cat="python"] .cert-issuer-icon { background: rgba(251,191,36,.15); color: #fbbf24; }
+  .cert-card[data-cat="python"] .cert-badge { border-color: rgba(251,191,36,.3); color: #fbbf24; }
+  .cert-card[data-cat="security"] .cert-issuer-icon { background: rgba(244,114,182,.15); color: #f472b6; }
+  .cert-card[data-cat="security"] .cert-badge { border-color: rgba(244,114,182,.3); color: #f472b6; }
+  .cert-card[data-cat="other"] .cert-issuer-icon { background: rgba(52,211,153,.15); color: #34d399; }
+  .cert-card[data-cat="other"] .cert-badge { border-color: rgba(52,211,153,.3); color: #34d399; }
+
+  /* Expand toggle */
+  .cert-show-more {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    margin-top: 24px; width: 100%; padding: 14px;
+    border: 1px dashed var(--border); border-radius: 12px;
+    background: none; color: var(--text-muted); font-family: 'DM Sans', sans-serif;
+    font-size: 13px; cursor: pointer; transition: all .2s;
+  }
+  .cert-show-more:hover { border-color: var(--border-hover); color: var(--text); }
+
+  @media(max-width:600px){.cert-grid{grid-template-columns:1fr}.cert-stats{gap:20px}.cert-stat-n{font-size:28px}}
 
   /* PERSONAL */
   #personal { border-top: 1px solid var(--border); }
@@ -653,12 +732,341 @@
     <div class="edu-card"><div class="degree">BSc Computer Science</div><div class="school">Krishna University, India</div><div class="period">Oct 2021 — May 2024</div></div>
   </div>
   <div class="section-label" style="margin-top:60px;">Certifications</div>
-  <div class="certs-list reveal">
-    <div class="cert-item"><a href="https://skillsoft.digitalbadges.skillsoft.com/48dbf664-1313-4a6e-bb91-ee870b5fdde0" target="_blank"><div class="cert-name">AWS AI Practitioner — Machine Learning Operations</div><div class="cert-source">Skillsoft · May 2025</div><div class="cert-link">View credential ↗</div></a></div>
-    <div class="cert-item"><a href="https://skillsoft.digitalbadges.skillsoft.com/4e1556f7-43de-45c9-a9bf-a216adfb8e8c" target="_blank"><div class="cert-name">Implementing AI with Amazon Machine Learning</div><div class="cert-source">Skillsoft · May 2025</div><div class="cert-link">View credential ↗</div></a></div>
-    <div class="cert-item"><a href="https://skillsoft.digitalbadges.skillsoft.com/dfd0c5a0-8f5c-4a5d-9643-9ac556078f49" target="_blank"><div class="cert-name">Google Professional Cloud Architect</div><div class="cert-source">Skillsoft · Dec 2024</div><div class="cert-link">View credential ↗</div></a></div>
-    <div class="cert-item"><a href="https://skillsoft.digitalbadges.skillsoft.com/21010f49-2f71-4f51-ab4a-b828d8fc1129" target="_blank"><div class="cert-name">AWS Solutions Architect Associate Bootcamp</div><div class="cert-source">Skillsoft · Dec 2024</div><div class="cert-link">View credential ↗</div></a></div>
-  </div>
+
+  <div class="cert-vault-wrap reveal">
+    <!-- Stats row -->
+    <div class="cert-vault-header">
+      <div class="cert-stats">
+        <div class="cert-stat"><div class="cert-stat-n">20</div><div class="cert-stat-l">Credentials</div></div>
+        <div class="cert-stat"><div class="cert-stat-n">4</div><div class="cert-stat-l">Issuers</div></div>
+        <div class="cert-stat"><div class="cert-stat-n">6</div><div class="cert-stat-l">Domains</div></div>
+      </div>
+    </div>
+
+    <!-- Filter tabs -->
+    <div class="cert-filters">
+      <button class="cert-filter active" data-filter="all">All</button>
+      <button class="cert-filter" data-filter="ai">AI & ML</button>
+      <button class="cert-filter" data-filter="cloud">Cloud</button>
+      <button class="cert-filter" data-filter="devops">DevOps</button>
+      <button class="cert-filter" data-filter="agile">Agile</button>
+      <button class="cert-filter" data-filter="python">Python</button>
+      <button class="cert-filter" data-filter="security">Security</button>
+      <button class="cert-filter" data-filter="other">Other</button>
+    </div>
+
+    <!-- Cards -->
+    <div class="cert-grid" id="cert-grid">
+
+      <div class="cert-card" data-cat="ai">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">AWS AI Practitioner — Machine Learning Operations (MLOps)</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">May 2025</span>
+            <span class="cert-badge">AI & ML</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/48dbf664-1313-4a6e-bb91-ee870b5fdde0" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="ai">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">Implementing AI with Amazon Machine Learning</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">May 2025</span>
+            <span class="cert-badge">AI & ML</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/4e1556f7-43de-45c9-a9bf-a216adfb8e8c" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="security">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">CBROPS: The CIA Triad & Security Approaches</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">May 2025</span>
+            <span class="cert-badge">Security</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/73d48c78-ccca-4d1d-b5dd-d670850c73e5" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="cloud">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">AWS Certified Solutions Architect Associate Bootcamp</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Dec 2024</span>
+            <span class="cert-badge">Cloud</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/21010f49-2f71-4f51-ab4a-b828d8fc1129" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="cloud">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">Google Professional Cloud Architect: Cloud Architecture & System Design</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Dec 2024</span>
+            <span class="cert-badge">Cloud</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/d0db326d-4914-463c-903e-622fe2a27bb7" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="cloud">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">Google Professional Cloud Architect: Google Cloud Fundamentals</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Dec 2024</span>
+            <span class="cert-badge">Cloud</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/dfd0c5a0-8f5c-4a5d-9643-9ac556078f49" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="cloud">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">MS-102: Implementing a Microsoft 365 Tenant</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Dec 2024</span>
+            <span class="cert-badge">Cloud</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/82ea4d99-275c-41d2-b07f-134d5d6a11bb" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="devops">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">IT Infrastructure Automation: Getting Started</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Nov 2024</span>
+            <span class="cert-badge">DevOps</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/a4ca4636-247a-4d6f-9b7c-d618819b3779" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="devops">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">The Language of DevOps: DevOps Tools & Processes</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Nov 2024</span>
+            <span class="cert-badge">DevOps</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/09975ccb-a064-4cf7-aaaf-3e2963e9261c" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="devops">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">Exploring Business Process Automation</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Nov 2024</span>
+            <span class="cert-badge">DevOps</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/8e12f1ce-1b65-44bd-a2c2-4b20f94ad469" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="devops">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">Using Robots and RPA in the Workplace</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Nov 2024</span>
+            <span class="cert-badge">DevOps</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/98bb76ea-5486-4fba-a240-42a737e68aca" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="agile">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">Agile Best Practices for Tech Leaders: Core Concepts</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Nov 2024</span>
+            <span class="cert-badge">Agile</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/1a009b26-9bdf-4656-9f4f-95ae5a8360cb" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="agile">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">Agile Best Practices for Tech Leaders: The Scrum Framework</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Nov 2024</span>
+            <span class="cert-badge">Agile</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/126d98cb-64d3-40c7-9653-40430e832974" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="agile">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">Agile Best Practices for Tech Leaders: The Scrum Phases</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Nov 2024</span>
+            <span class="cert-badge">Agile</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/54ad40c8-bfd5-4897-bc1e-ca4c06802956" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="other">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">Software Design & Development: Methodologies</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Nov 2024</span>
+            <span class="cert-badge">Engineering</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/9d237755-1b3c-44a4-aed6-029d675467ab" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="other">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">Software Design & Development: Software Engineering & SDLC Phases</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Nov 2024</span>
+            <span class="cert-badge">Engineering</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/8679a933-dd38-4c18-ba44-100cbcfacce1" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="other">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">Being an Effective Team Member</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Feb 2025</span>
+            <span class="cert-badge">Leadership</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/4cb93caa-c828-4460-a981-2525aa59e349" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="cloud">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">P</div>
+            <div class="cert-issuer-name">Pluralsight</div>
+          </div>
+          <div class="cert-card-title">5G & Edge Computing</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Nov 2024</span>
+            <span class="cert-badge">Cloud</span>
+          </div>
+        </div>
+        <a href="https://app.pluralsight.com/achievements/share/b5fd9399-a4d2-4f0b-92bb-807608597726" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="python">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">U</div>
+            <div class="cert-issuer-name">Udemy</div>
+          </div>
+          <div class="cert-card-title">100 Days of Code: The Complete Python Pro Bootcamp</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">May 2024</span>
+            <span class="cert-badge">Python</span>
+          </div>
+        </div>
+        <a href="https://ude.my/UC-5eee6069-97e5-455d-bf39-561f00a28b65" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="other">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">AWS Certified AI Practitioner</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Jun 2025</span>
+            <span class="cert-badge">AI & ML</span>
+          </div>
+        </div>
+        <a href="#" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--text-subtle);text-decoration:none;letter-spacing:.05em;">Credential pending</a>
+      </div>
+
+    </div><!-- end cert-grid -->
+
+    <!-- Show more / less toggle (shows all 20 at once, collapses to 6) -->
+    <button class="cert-show-more" id="cert-toggle">
+      <span id="cert-toggle-text">Show all 20 credentials</span>
+      <span id="cert-toggle-icon">↓</span>
+    </button>
+
+  </div><!-- end cert-vault-wrap -->
 </section>
 
 <!-- Personal -->
@@ -1212,7 +1620,7 @@ document.querySelectorAll('.reveal').forEach(el=>revObserver.observe(el));
 </style>
 
 <!-- ═══════════════════════════════════════════════════════════
-     FEATURE 3: HIRE ME IN 30 SECONDS
+     FEATURE 3: HIRE ME IN 60 SECONDS
      ═══════════════════════════════════════════════════════════ -->
 <style>
 #pitch-btn{
@@ -1408,7 +1816,7 @@ document.addEventListener('DOMContentLoaded', function(){
   if(contactTitle){
     const btn = document.createElement('button');
     btn.id='pitch-btn';
-    btn.innerHTML='▶ Hire me in 30 seconds';
+    btn.innerHTML='▶ Hire me in 60 seconds';
     btn.onclick = startPitch;
     contactTitle.parentElement.insertBefore(btn, contactTitle.nextSibling);
   }
@@ -1416,7 +1824,7 @@ document.addEventListener('DOMContentLoaded', function(){
   // ── INJECT PITCH OVERLAY ──
   const pitchSlides = [
     {label:'The problem',    title:'You need someone who ships ML — not just studies it.',  body:'Most candidates at my level have notebooks. I have production deployments on AWS SageMaker, real pipelines, and a live AI product used by real people.'},
-    {label:'Who I am',       big:'Mourya Dusi',   body:'ML Engineer · Data Scientist · MSc AI, Dubai · AWS Certified · Based in UAE'},
+    {label:'Who I am',       big:'Mourya Dusi',   body:'ML Engineer · Data Scientist · MSc AI, Dubai · AWS Certified · 9 months Accenture · Based in UAE'},
     {label:'What I built',   title:'destination.com — a full AI travel platform.',          body:'Voice AI (ARIA), live flights, visa guidance, route optimisation. Built alone. Deployed on Vercel. Working right now.'},
     {label:'The number',     big:'50,000+',        body:'records processed per week in my Accenture ML pipeline. Not a toy dataset. Production data. Real stakeholders.'},
     {label:'What I want',    title:'A role where I can build things that matter.',           body:'ML Engineer · Junior Data Scientist · AI Engineer. Dubai or remote. Available from September 2026. Open to relocation.'},
@@ -1431,7 +1839,7 @@ document.addEventListener('DOMContentLoaded', function(){
         <circle cx="40" cy="40" r="35" stroke-width="3"/>
         <circle id="pitch-progress-ring" cx="40" cy="40" r="35" stroke-width="3"/>
       </svg>
-      <div id="pitch-seconds">30</div>
+      <div id="pitch-seconds">60</div>
     </div>
     ${pitchSlides.map((s,i)=>`
       <div class="pitch-slide${i===0?' active':''}" id="ps${i}">
@@ -1562,20 +1970,20 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 // ── PITCH FUNCTIONS ──
-let pitchInterval, pitchCurrent=0, pitchTime=30;
+let pitchInterval, pitchCurrent=0, pitchTime=60;
 const PITCH_TOTAL=6;
 function startPitch(){
   document.getElementById('pitch-overlay').classList.add('open');
   document.body.style.overflow='hidden';
-  pitchCurrent=0; pitchTime=30;
+  pitchCurrent=0; pitchTime=60;
   showSlide(0);
   pitchInterval = setInterval(()=>{
     pitchTime--;
     document.getElementById('pitch-seconds').textContent=pitchTime;
     const ring=document.getElementById('pitch-progress-ring');
-    ring.style.strokeDashoffset=220*(1-pitchTime/30);
+    ring.style.strokeDashoffset=220*(1-pitchTime/60);
     if(pitchTime<=0){closePitch();return;}
-    const slide=Math.floor((30-pitchTime)/10);
+    const slide=Math.floor((60-pitchTime)/10);
     if(slide!==pitchCurrent&&slide<PITCH_TOTAL){pitchCurrent=slide;showSlide(slide);}
   },1000);
 }
@@ -1689,7 +2097,7 @@ const AI_KB = [
   { k:['contact','email','reach','linkedin','github','social','message','touch'],
     a:"Best way to reach Mourya: mouryadusi@outlook.com — he responds quickly. You can also find him on LinkedIn at linkedin.com/in/mouryadusi-dxb or on GitHub at github.com/mouryadusi." },
   { k:['who','mourya','about','introduce','tell me','yourself','person','he'],
-    a:"Mourya Dusi is an ML Engineer and Data Scientist based in Dubai, UAE, currently completing his MSc in AI at Middlesex University. He's worked at Accenture, built live AI products, holds multiple cloud certifications." },
+    a:"Mourya Dusi is an ML Engineer and Data Scientist based in Dubai, UAE, currently completing his MSc in AI at Middlesex University. He's worked at Accenture, built live AI products, holds multiple cloud certifications, and travels to 10+ countries in his spare time." },
   { k:['salary','pay','rate','compensation','expect','cost'],
     a:"Mourya is targeting ML Engineer or Data Scientist roles — for current market rates and his expectations, just reach out directly at mouryadusi@outlook.com. He's open to a conversation." },
   { k:['location','based','where','dubai','india','remote','relocat'],
