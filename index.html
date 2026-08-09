@@ -491,7 +491,9 @@
   }
 </style>
 <style>
-
+/* ============================================================
+   editorial project storytelling, accessibility and motion
+   ============================================================ */
 
 /* Welcome experience */
 #welcome-experience{
@@ -684,19 +686,6 @@
 .availability-badge,.hero-photo-tag{transition:border-color .4s ease,box-shadow .4s ease;}
 .availability-badge{box-shadow:0 0 30px rgba(var(--mood-rgb),.05);}
 
-#references{padding-top:72px;padding-bottom:88px;border-top:1px solid var(--border);}
-.reference-grid{
-  display:grid;grid-template-columns:repeat(5,1fr);gap:1px;
-  border:1px solid var(--border);background:var(--border);margin-top:36px;
-}
-.reference-card{background:var(--bg);padding:22px 18px;min-height:150px;display:flex;flex-direction:column;justify-content:space-between;}
-.reference-card small{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-subtle);}
-.reference-card strong{font-family:'Playfair Display',serif;font-size:18px;font-weight:400;margin-top:18px;}
-.reference-card a{font-size:11px;color:var(--text-muted);text-decoration:none;margin-top:18px;word-break:break-word;}
-.reference-card a:hover{color:var(--text);}
-@media(max-width:900px){.reference-grid{grid-template-columns:1fr 1fr;}}
-@media(max-width:520px){.reference-grid{grid-template-columns:1fr;}}
-
 /* Accessibility / reduced motion */
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
@@ -745,7 +734,7 @@
       </div>
       <div class="welcome-controls">
         <div class="welcome-progress" aria-hidden="true"><div class="welcome-progress-bar" id="welcome-progress"></div></div>
-        <button class="welcome-skip" id="welcome-skip" type="button">Enter portfolio →</button>
+        <span class="welcome-skip" aria-hidden="true">Please enjoy the welcome</span>
       </div>
     </div>
   </div>
@@ -1439,9 +1428,6 @@
   </div>
 </section>
 
-
-
-
 <!-- Footer -->
 <footer>
   <span>© 2026 Mourya Dusi</span>
@@ -1671,7 +1657,6 @@
 </script>
 
 
-<!-- Reference-driven interactions -->
 <script>
 (function(){
   const greetings = [
@@ -1690,7 +1675,7 @@
   const skip = document.getElementById('welcome-skip');
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let index=0, timer=null, paused=false, entered=false;
-  const interval = 1550;
+  const interval = 2000;
 
   function paint(i, animate=true){
     index=i;
@@ -1740,19 +1725,20 @@
     clearTimeout(window.__welcomeResume);
     window.__welcomeResume=setTimeout(()=>{paused=false;schedule();},2200);
   }));
-  ['mouseenter','focusin'].forEach(ev=>welcome.addEventListener(ev,()=>{paused=true;clearInterval(timer);}));
-  ['mouseleave','focusout'].forEach(ev=>welcome.addEventListener(ev,()=>{if(!entered){paused=false;schedule();}}));
-  skip.addEventListener('click',enter);
+  // Keep the automatic sequence uninterrupted so every language is visible.
+  // Explicit language selection pauses briefly, then resumes from that language.
+
   document.addEventListener('keydown',e=>{
     if(entered)return;
-    if(e.key==='Escape' || e.key==='Enter') enter();
+    if(e.key==='Escape') enter();
     if(e.key==='ArrowRight'){paused=true;paint(Math.min(index+1,greetings.length-1));}
     if(e.key==='ArrowLeft'){paused=true;paint(Math.max(index-1,0));}
   });
   document.body.style.overflow='hidden';
   paint(0,false);
   // The original loader remains visible first; begin the greeting cycle only after it clears.
-  setTimeout(schedule, 2550);
+  // Wait until the original loader has completely finished before cycling greetings.
+  setTimeout(schedule, 3400);
   window.__mouryaGreetings=greetings;
 })();
 
@@ -2228,12 +2214,12 @@ document.addEventListener('DOMContentLoaded', function(){
 
   // ── INJECT PITCH OVERLAY ──
   const pitchSlides = [
-    {label:'The problem',    title:'You need someone who ships ML — not just studies it.',  body:'Most candidates at my level have notebooks. I have production deployments on AWS SageMaker, real pipelines, and a live AI product used by real people.'},
+    {label:'The problem',    title:'You need someone who ships ML — not just studies it.',  body:'My portfolio includes production ML work, AWS SageMaker deployment, data pipelines, and a live AI travel platform deployed on Vercel.'},
     {label:'Who I am',       big:'Mourya Dusi',   body:'ML Engineer · Data Scientist · MSc AI, Dubai · AWS Certified · 9 months Accenture · Based in UAE'},
     {label:'What I built',   title:'destination.com — a full AI travel platform.',          body:'Voice AI (ARIA), live flights, visa guidance, route optimisation. Built alone. Deployed on Vercel. Working right now.'},
     {label:'The number',     big:'50,000+',        body:'records processed per week in my Accenture ML pipeline. Not a toy dataset. Production data. Real stakeholders.'},
     {label:'What I want',    title:'A role where I can build things that matter.',           body:'ML Engineer · Junior Data Scientist · AI Engineer. Dubai or remote. Available from September 2026. Open to relocation.'},
-    {label:'Next step',      title:'mouryadusi@outlook.com',                                 body:'That\'s it. One email. I\'ll respond within the hour.'},
+    {label:'Next step',      title:'mouryadusi@outlook.com',                                 body:'Email Mourya at mouryadusi@outlook.com to discuss an opportunity.'},
   ];
   const overlay = document.createElement('div');
   overlay.id='pitch-overlay';
@@ -2280,21 +2266,21 @@ document.addEventListener('DOMContentLoaded', function(){
           <div class="np-kicker">AI Travel · Live Product</div>
           <div class="np-headline">Local Engineer Builds AI Travel Platform Alone; Platform Actually Works</div>
           <div class="np-byline">By Mourya Dusi · Vercel, Dubai</div>
-          <p class="np-body">In a move that surprised exactly no one who knows him, Mourya Dusi shipped destination.com — a full-stack AI travel platform featuring voice AI (ARIA), live flight tracking, visa guidance, and a layover city explorer — without a team, without a budget, and without breaking a sweat.</p>
+          <p class="np-body">Mourya Dusi built destination.com — a full-stack AI travel platform featuring voice AI (ARIA), live flight tracking, visa guidance, a layover city explorer, an AI itinerary planner, and an aviation arcade. It is deployed on Vercel.</p>
           <div class="np-stat-box">ARIA<span>Voice AI, powered by Groq</span></div>
-          <p class="np-body">The platform, now live on Vercel, handles real-time route optimisation, visa requirements by country pair, and even features an aviation arcade. Sources confirmed it loads in under two seconds.</p>
+          <p class="np-body">The platform, now live on Vercel, handles real-time route optimisation, visa requirements by country pair, and even features an aviation arcade. The portfolio describes the platform as deployed on Vercel with these integrated travel features.</p>
         </div>
         <div class="np-col">
           <div class="np-kicker">Machine Learning · Education</div>
           <div class="np-headline">At-Risk Students Now Identified With 92% Accuracy</div>
           <div class="np-byline">Predictive Analytics Desk</div>
           <div class="np-stat-box">92%<span>Model accuracy</span></div>
-          <p class="np-body">An end-to-end ML pipeline trained on educational data can now predict student failure before it happens. Institutions are reportedly thrilled. Students less so.</p>
+          <p class="np-body">An end-to-end ML pipeline trained on educational data can now predict student failure before it happens. The project description states that the pipeline enables institutions to identify at-risk students earlier.</p>
           <hr class="np-footer-rule">
           <div class="np-kicker" style="margin-top:20px;">NLP · University Tech</div>
           <div class="np-headline">Chatbot Handles 1,000 Student Queries Per Day; Human Staff Take Long Lunch</div>
           <div class="np-byline">Campus Technology Reporter</div>
-          <p class="np-body">TensorFlow. Flask. MongoDB. Three words that apparently add up to a 35% reduction in administrative workload. The chatbot is available 24/7 and has never once asked for annual leave.</p>
+          <p class="np-body">TensorFlow. Flask. MongoDB. Three words that apparently add up to a 35% reduction in administrative workload. The chatbot is available 24/7 and and is described as available 24/7.</p>
         </div>
         <div class="np-col">
           <div class="np-kicker">IoT · Privacy Technology</div>
@@ -2500,7 +2486,7 @@ const AI_KB = [
   { k:['travel','country','visit','trip','malaysia','singapore','uae','dubai','thailand','usa','nepal','vietnam','sri lanka'],
     a:"Mourya has visited 10 countries — India (home), UAE (based there now), Malaysia, Singapore, Thailand, Vietnam, USA, Nepal, Sri Lanka, and counting. He travels mostly solo and finds it sharpens his problem-solving instincts." },
   { k:['contact','email','reach','linkedin','github','social','message','touch'],
-    a:"Best way to reach Mourya: mouryadusi@outlook.com — he responds quickly. You can also find him on LinkedIn at linkedin.com/in/mouryadusi-dxb or on GitHub at github.com/mouryadusi." },
+    a:"The portfolio lists mouryadusi@outlook.com as the contact email. You can also find him on LinkedIn at linkedin.com/in/mouryadusi-dxb or on GitHub at github.com/mouryadusi." },
   { k:['who','mourya','about','introduce','tell me','yourself','person','he'],
     a:"Mourya Dusi is an ML Engineer and Data Scientist based in Dubai, UAE, currently completing his MSc in AI at Middlesex University. He's worked at Accenture, built live AI products, holds multiple cloud certifications, and travels to 10+ countries in his spare time." },
   { k:['salary','pay','rate','compensation','expect','cost'],
@@ -2510,7 +2496,7 @@ const AI_KB = [
   { k:['music','hobby','interest','outside','personal','fun','free time'],
     a:"Outside of work, Mourya is into music — it's always on whether he's coding or commuting. He travels solo most of the time and is genuinely fascinated by where AI is headed and what it means for people, not just systems." },
   { k:['fit','good','suitable','match','right','perfect','team','culture'],
-    a:"He's a strong fit for teams that value shipping over theorising — he's gone from notebook to production deployment, built solo products used by real people, and works well in Agile environments. He's collaborative, certified, and immediately available." },
+    a:"His portfolio shows ML engineering, data science, cloud deployment, Agile collaboration, and AI project work. He is open to AI & Data Science roles, remote positions, and relocation opportunities." },
 ];
 
 function getAIReply(q){
@@ -2579,6 +2565,21 @@ function addMsg(text,type){
       if(pitch && pitch.classList.contains('open')) closePitch();
     }
   });
+})();
+</script>
+<script>
+/* Welcome sequence synchronization */
+(function(){
+  const loader=document.getElementById('loader');
+  const welcome=document.getElementById('welcome-experience');
+  if(!loader||!welcome)return;
+  document.body.style.overflow='hidden';
+  function unlockWelcome(){
+    loader.style.display='none';
+    welcome.style.visibility='visible';
+    welcome.style.opacity='1';
+  }
+  window.setTimeout(unlockWelcome,3400);
 })();
 </script>
 </body>
