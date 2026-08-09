@@ -79,7 +79,7 @@
   }
   #loader-name {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(52px, 10vw, 96px); font-weight: 300;
+    font-size: clamp(34px, 6vw, 58px); font-weight: 300;
     letter-spacing: 0.12em; color: var(--text);
     overflow: hidden; display: flex; position: relative;
   }
@@ -102,6 +102,14 @@
     animation: fadeIn 0.6s 1.9s ease forwards;
   }
   @keyframes fadeIn { to { opacity: 1; } }
+  #loader-greeting {
+    min-height: 18px; margin-top: 14px;
+    font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 300;
+    letter-spacing: 0.18em; color: var(--text-muted);
+    opacity: 0.9; text-align: center; transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+  #loader-greeting.show { opacity: 1; transform: translateY(0); }
+
   #loader-progress {
     position: absolute; bottom: 0; left: 0; height: 1px;
     background: var(--text-muted); width: 0;
@@ -496,141 +504,12 @@
    ============================================================ */
 
 /* Welcome experience */
-#welcome-experience{
-  position:fixed;inset:0;z-index:11000;background:var(--bg);
-  display:flex;align-items:center;justify-content:center;
-  padding:clamp(24px,5vw,72px);overflow:hidden;
-  opacity:1;visibility:visible;
-  transition:opacity .8s cubic-bezier(.22,1,.36,1),visibility .8s;
-}
-#welcome-experience.dismissed{opacity:0;visibility:hidden;pointer-events:none;}
-#welcome-experience::before{
-  content:'';position:absolute;inset:0;
-  background:
-    radial-gradient(circle at 18% 20%,rgba(255,255,255,.035),transparent 34%),
-    radial-gradient(circle at 82% 78%,rgba(255,255,255,.025),transparent 32%);
-  pointer-events:none;
-}
-.welcome-inner{width:min(1120px,100%);position:relative;z-index:1;}
-.welcome-kicker{
-  font-size:11px;letter-spacing:.28em;text-transform:uppercase;
-  color:var(--text-subtle);margin-bottom:28px;
-}
-.welcome-name{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(64px,12vw,150px);font-weight:300;line-height:.8;
-  letter-spacing:-.045em;margin-left:-.06em;
-}
-.welcome-role{
-  margin-top:22px;font-size:clamp(14px,2vw,18px);
-  letter-spacing:.18em;text-transform:uppercase;color:var(--text-muted);
-}
-.welcome-greeting-wrap{
-  min-height:clamp(105px,14vw,165px);display:flex;align-items:center;
-  margin-top:52px;border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);position:relative;
-}
-.welcome-greeting{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(28px,5.2vw,68px);font-weight:400;line-height:1.08;
-  letter-spacing:-.025em;color:var(--text);opacity:0;
-  transform:translateY(16px);transition:opacity .55s ease,transform .55s ease;
-}
-.welcome-greeting.active{opacity:1;transform:translateY(0);}
-.welcome-greeting[dir="rtl"]{font-family:'DM Sans',sans-serif;font-weight:300;}
-.welcome-bottom{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:28px;margin-top:26px;flex-wrap:wrap;
-}
-.welcome-languages{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
-.welcome-language{
-  border:1px solid var(--border);background:transparent;color:var(--text-subtle);
-  border-radius:999px;padding:7px 11px;font:11px 'DM Sans',sans-serif;
-  letter-spacing:.08em;cursor:pointer;transition:all .25s ease;
-}
-.welcome-language:hover,.welcome-language.active{
-  color:var(--text);border-color:var(--border-hover);background:var(--bg2);
-}
-.welcome-language.active{box-shadow:inset 0 -1px 0 var(--text);}
-.welcome-controls{display:flex;align-items:center;gap:14px;}
-.welcome-progress{width:min(220px,30vw);height:1px;background:var(--border);overflow:hidden;}
-.welcome-progress-bar{height:100%;width:0;background:var(--text);transform-origin:left;}
-.welcome-progress-bar.running{animation:welcomeProgress 1.55s linear forwards;}
-@keyframes welcomeProgress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-.welcome-skip{
-  border:0;background:none;color:var(--text-muted);font:11px 'DM Sans',sans-serif;
-  letter-spacing:.12em;text-transform:uppercase;cursor:pointer;padding:8px 0;
-}
-.welcome-skip:hover{color:var(--text);}
-@media(max-width:650px){
-  #welcome-experience{align-items:flex-start;padding-top:18vh;}
-  .welcome-name{font-size:clamp(58px,18vw,100px);}
-  .welcome-greeting-wrap{margin-top:40px;min-height:120px;}
-  .welcome-bottom{display:block;}
-  .welcome-controls{margin-top:18px;}
-  .welcome-progress{width:150px;}
-}
-
-/* Kinetic signature hero */
-#hero{position:relative;perspective:1200px;}
-.hero-left{position:relative;z-index:2;}
-.hero-title{
-  font-size:clamp(68px,10.5vw,142px)!important;
-  letter-spacing:-.055em!important;line-height:.82!important;
-  margin-left:-.06em!important;
-}
-.hero-title em{
-  display:inline-block;color:var(--text)!important;
-  font-style:italic;transform:skewX(-7deg);
-  text-shadow:0 .03em 0 rgba(255,255,255,.04);
-}
-.hero-title em::after{
-  content:'';display:block;height:1px;width:72%;margin:.13em 0 0 .08em;
-  background:var(--text);transform:scaleX(.18);transform-origin:left;
-  transition:transform .8s cubic-bezier(.22,1,.36,1);
-}
-#hero:hover .hero-title em::after{transform:scaleX(1);}
-.hero-identity{
-  margin:-6px 0 34px;font-size:11px;letter-spacing:.28em;
-  text-transform:uppercase;color:var(--text-subtle);
-}
-.hero-greeting-rail{
-  display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:26px;
-}
-.hero-greeting-rail span{
-  font-size:10px;letter-spacing:.08em;color:var(--text-subtle);
-  border:1px solid var(--border);padding:6px 9px;border-radius:999px;
-}
-.hero-greeting-live{
-  min-width:210px;font-family:'Playfair Display',serif;font-size:18px;
-  color:var(--text-muted);display:inline-block;transition:opacity .35s ease;
-}
 .hero-parallax{will-change:transform;transition:transform .12s linear;}
 
-/* Tap-to-reveal portrait */
+/* Direct portrait */
 .hero-photo-wrap{isolation:isolate;}
-.hero-photo-frame{position:relative;cursor:pointer;}
-.hero-photo-frame img{transition:filter .7s ease,transform .9s cubic-bezier(.22,1,.36,1),clip-path .9s cubic-bezier(.22,1,.36,1);}
-.hero-photo-frame.photo-hidden img{
-  filter:blur(18px) grayscale(100%);transform:scale(1.08);
-  clip-path:inset(14% 14% 14% 14% round 28px);
-}
-.photo-reveal-overlay{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  z-index:3;background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.22));
-  transition:opacity .5s ease;pointer-events:none;
-}
-.photo-reveal-overlay span{
-  background:rgba(10,10,10,.72);border:1px solid rgba(255,255,255,.18);
-  color:#fff;border-radius:999px;padding:11px 17px;font-size:11px;
-  letter-spacing:.16em;text-transform:uppercase;backdrop-filter:blur(12px);
-}
-.hero-photo-frame.photo-revealed .photo-reveal-overlay{opacity:0;}
-.hero-photo-frame.photo-revealed img{filter:grayscale(0%);transform:scale(1);clip-path:none;}
-.photo-reveal-note{
-  margin-top:12px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--text-subtle);text-align:center;
-}
+.hero-photo-frame{position:relative;}
+.hero-photo-frame img{display:block;width:100%;height:auto;}
 
 /* Editorial project storytelling */
 .projects-list.editorial-projects{gap:0;margin-top:56px;}
@@ -693,14 +572,102 @@
   .welcome-progress-bar{animation:none!important;}
 }
 </style>
+
+<style id="project-experience-system">
+/* Immersive project detail + AI-driven Engineer scroll */
+#project-detail{position:fixed;inset:0;z-index:12000;background:var(--bg);color:var(--text);overflow-y:auto;overscroll-behavior:contain;display:none;opacity:0;transition:opacity .45s ease}
+#project-detail.open{display:block;opacity:1}
+.pd-shell{min-height:100vh}
+.pd-close{position:fixed;top:24px;right:clamp(20px,4vw,54px);z-index:20;width:46px;height:46px;border:1px solid var(--border-hover);border-radius:50%;background:rgba(10,10,10,.45);backdrop-filter:blur(14px);color:var(--text);font-size:24px;cursor:pointer;transition:transform .3s ease,background .3s ease}
+[data-theme="light"] .pd-close{background:rgba(250,250,248,.55)}
+.pd-close:hover{transform:rotate(8deg) scale(1.05)}
+.pd-hero{height:100svh;min-height:680px;position:relative;display:grid;place-items:center;overflow:hidden;padding:90px clamp(24px,6vw,90px)}
+.pd-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 70% 40%,rgba(255,255,255,.07),transparent 35%),linear-gradient(180deg,transparent 55%,var(--bg) 100%);pointer-events:none}
+.pd-media{position:absolute;inset:8vh 5vw 8vh 5vw;border:1px solid var(--border);border-radius:28px;overflow:hidden;background:var(--bg2);transform:scale(.92);opacity:0;animation:pdMediaIn 1.2s .15s cubic-bezier(.16,1,.3,1) forwards}
+.pd-media-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:44px 44px}
+.pd-media-glow{position:absolute;width:65vw;height:65vw;max-width:900px;max-height:900px;border-radius:50%;left:50%;top:45%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(120,160,255,.18),transparent 68%);filter:blur(8px)}
+.pd-media-card{position:absolute;left:50%;top:50%;width:min(760px,72vw);transform:translate(-50%,-50%);border:1px solid rgba(255,255,255,.12);background:rgba(10,10,10,.46);backdrop-filter:blur(18px);padding:clamp(28px,5vw,64px);border-radius:24px;box-shadow:0 40px 100px rgba(0,0,0,.32)}
+[data-theme="light"] .pd-media-card{background:rgba(255,255,255,.68)}
+.pd-media-kicker{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:20px}
+.pd-media-title{font-family:'Playfair Display',serif;font-size:clamp(34px,6vw,76px);line-height:.94;font-weight:400;letter-spacing:-.04em}
+.pd-media-copy{font-size:clamp(13px,1.4vw,16px);line-height:1.7;color:var(--text-muted);max-width:560px;margin-top:22px}
+.pd-hero-copy{position:relative;z-index:2;text-align:center;max-width:1100px;margin-top:48vh;pointer-events:none}
+.pd-index{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:18px;opacity:0;animation:pdFadeUp .8s .65s ease forwards}
+.pd-title{font-family:'Cormorant Garamond',serif;font-size:clamp(58px,13vw,180px);font-weight:300;line-height:.8;letter-spacing:-.055em;opacity:0;transform:translateY(40px);animation:pdFadeUp 1s .75s cubic-bezier(.16,1,.3,1) forwards}
+.pd-subtitle{font-size:clamp(13px,1.5vw,17px);color:var(--text-muted);margin-top:26px;opacity:0;animation:pdFadeUp .8s .95s ease forwards}
+.pd-scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--text-subtle);display:flex;align-items:center;gap:12px;z-index:3}
+.pd-scroll::after{content:'';width:56px;height:1px;background:var(--border-hover);animation:pdPulse 1.8s ease-in-out infinite}
+@keyframes pdMediaIn{to{opacity:1;transform:scale(1)}}
+@keyframes pdFadeUp{to{opacity:1;transform:translateY(0)}}
+@keyframes pdPulse{0%,100%{transform:scaleX(.4);opacity:.35}50%{transform:scaleX(1);opacity:1}}
+
+.pd-meta{padding:90px clamp(24px,8vw,120px);display:grid;grid-template-columns:1.3fr 1fr;gap:80px;border-top:1px solid var(--border)}
+.pd-lede{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,52px);line-height:1.12;font-weight:400;letter-spacing:-.025em}
+.pd-meta-copy{font-size:15px;color:var(--text-muted);line-height:1.85}
+.pd-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+.pd-fact{border-top:1px solid var(--border);padding-top:12px}.pd-fact b{display:block;font-size:12px;font-weight:400;color:var(--text)}.pd-fact span{display:block;font-size:11px;color:var(--text-subtle);margin-top:4px}
+
+/* pinned, scroll-progress-driven Engineer sequence */
+.pd-engineer{height:360vh;position:relative;background:var(--bg);border-top:1px solid var(--border)}
+.pd-engineer-pin{position:sticky;top:0;height:100svh;min-height:640px;overflow:hidden;display:grid;place-items:center}
+.eng-orbit{position:absolute;width:min(70vw,760px);aspect-ratio:1;border:1px solid var(--border);border-radius:50%;opacity:.45;transform:scale(.82);will-change:transform}
+.eng-orbit::before,.eng-orbit::after{content:'';position:absolute;border:1px solid var(--border);border-radius:50%;inset:12%;}.eng-orbit::after{inset:25%}
+.eng-core{text-align:center;position:relative;z-index:3;width:min(1000px,90vw)}
+.eng-label{font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:24px}
+.eng-word{font-family:'Cormorant Garamond',serif;font-size:clamp(72px,17vw,220px);font-weight:300;line-height:.72;letter-spacing:-.07em;display:flex;justify-content:center;overflow:visible}
+.eng-char{display:inline-block;will-change:transform,opacity,filter;transition:none}
+.eng-statement{min-height:5.5em;margin:38px auto 0;max-width:850px;font-size:clamp(20px,3vw,42px);line-height:1.15;color:var(--text-muted);letter-spacing:-.02em}
+.eng-statement span{display:inline-block;will-change:transform,opacity,filter}
+.eng-detail{position:absolute;left:clamp(24px,6vw,90px);right:clamp(24px,6vw,90px);bottom:42px;display:flex;justify-content:space-between;align-items:end;gap:30px;font-size:11px;color:var(--text-subtle);letter-spacing:.08em;text-transform:uppercase}
+.eng-progress{width:180px;height:1px;background:var(--border);overflow:hidden}.eng-progress span{display:block;height:100%;width:0;background:var(--text);transform-origin:left}
+.eng-hint{max-width:360px;line-height:1.6;text-align:right}
+
+.pd-story{padding:120px clamp(24px,8vw,120px);max-width:1250px;margin:auto}
+.pd-story-block{display:grid;grid-template-columns:180px 1fr;gap:70px;padding:90px 0;border-top:1px solid var(--border)}
+.pd-story-num{font-size:11px;letter-spacing:.2em;color:var(--text-subtle);text-transform:uppercase}
+.pd-story h3{font-family:'Playfair Display',serif;font-size:clamp(30px,4vw,58px);font-weight:400;line-height:1.05;margin-bottom:24px}
+.pd-story p{max-width:760px;color:var(--text-muted);font-size:16px;line-height:1.9}
+.pd-story-media{height:min(70vh,620px);margin-top:40px;border:1px solid var(--border);border-radius:24px;overflow:hidden;position:relative;background:var(--bg2);display:grid;place-items:center}
+.pd-story-media::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.05),transparent 55%)}
+.pd-story-media .media-mark{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,9vw,120px);font-weight:300;letter-spacing:-.05em;color:var(--text);opacity:.9}
+.pd-end{min-height:70vh;display:grid;place-items:center;text-align:center;padding:100px 24px;border-top:1px solid var(--border)}
+.pd-end h2{font-family:'Playfair Display',serif;font-size:clamp(42px,7vw,90px);font-weight:400;line-height:.95;letter-spacing:-.04em}.pd-end p{color:var(--text-muted);margin-top:24px}.pd-live{display:inline-flex;margin-top:30px;padding:13px 24px;border:1px solid var(--border-hover);border-radius:100px;color:var(--text);text-decoration:none}
+@media(max-width:760px){
+ .pd-media{inset:8vh 18px 16vh;border-radius:20px}.pd-media-card{width:calc(100% - 36px);padding:26px}.pd-hero-copy{margin-top:48vh}.pd-meta{grid-template-columns:1fr;gap:36px;padding:70px 24px}.pd-facts{grid-template-columns:1fr 1fr}.pd-engineer{height:300vh}.eng-word{font-size:clamp(64px,20vw,130px)}.eng-statement{font-size:22px}.eng-detail{bottom:24px;display:block}.eng-progress{width:100%;margin-top:12px}.eng-hint{text-align:left;margin-top:12px}.pd-story{padding:70px 24px}.pd-story-block{grid-template-columns:1fr;gap:20px;padding:60px 0}.pd-story-media{height:48vh}
+}
+@media(prefers-reduced-motion:reduce){.pd-media,.pd-title,.pd-index,.pd-subtitle{animation:none;opacity:1;transform:none}.pd-engineer{height:auto}.pd-engineer-pin{position:relative;height:auto;min-height:80vh;padding:120px 24px}.eng-char,.eng-statement span{opacity:1!important;transform:none!important;filter:none!important}.pd-scroll{display:none}}
+</style>
+
 </head>
 <body>
+
+<div id="project-detail" aria-hidden="true">
+  <button class="pd-close" id="pd-close" aria-label="Close project">×</button>
+  <div class="pd-shell">
+    <section class="pd-hero" id="pd-hero">
+      <div class="pd-media" id="pd-media"><div class="pd-media-grid"></div><div class="pd-media-glow"></div><div class="pd-media-card"><div class="pd-media-kicker" id="pd-media-kicker"></div><div class="pd-media-title" id="pd-media-title"></div><div class="pd-media-copy" id="pd-media-copy"></div></div></div>
+      <div class="pd-hero-copy"><div class="pd-index" id="pd-index"></div><h1 class="pd-title" id="pd-title"></h1><p class="pd-subtitle" id="pd-subtitle"></p></div>
+      <div class="pd-scroll">Scroll to enter</div>
+    </section>
+    <section class="pd-meta"><div class="pd-lede" id="pd-lede"></div><div><p class="pd-meta-copy" id="pd-meta-copy"></p><div class="pd-facts" id="pd-facts"></div></div></section>
+    <section class="pd-engineer" id="pd-engineer">
+      <div class="pd-engineer-pin">
+        <div class="eng-orbit" id="eng-orbit"></div>
+        <div class="eng-core"><div class="eng-label">Engineering, progressively</div><div class="eng-word" id="eng-word" aria-label="Engineer"></div><div class="eng-statement" id="eng-statement"></div></div>
+        <div class="eng-detail"><div><div id="eng-counter">01 / 06</div><div class="eng-progress"><span id="eng-progress-bar"></span></div></div><div class="eng-hint">Scroll controls the sequence. Every movement forward or backward is reversible.</div></div>
+      </div>
+    </section>
+    <section class="pd-story" id="pd-story"></section>
+    <section class="pd-end"><div><h2>Build it.<br><em>Make it useful.</em></h2><p id="pd-end-copy"></p><a class="pd-live" id="pd-live" href="#" target="_blank" rel="noopener">Open project ↗</a></div></section>
+  </div>
+</div>
+
 
 <div id="cursor-dot"></div>
 <div id="cursor-ring"></div>
 
-<!-- Loader -->
-<div id="loader">
+<!-- Original centered greeting / loader -->
+<div id="loader" aria-label="Mourya Dusi introduction">
   <div id="loader-name">
     <span class="loader-char" style="animation-delay:0.05s">M</span>
     <span class="loader-char" style="animation-delay:0.13s">o</span>
@@ -708,36 +675,16 @@
     <span class="loader-char" style="animation-delay:0.29s">r</span>
     <span class="loader-char" style="animation-delay:0.37s">y</span>
     <span class="loader-char" style="animation-delay:0.45s">a</span>
+    <span class="loader-char" style="animation-delay:0.53s"> </span>
+    <span class="loader-char" style="animation-delay:0.61s">D</span>
+    <span class="loader-char" style="animation-delay:0.69s">u</span>
+    <span class="loader-char" style="animation-delay:0.77s">s</span>
+    <span class="loader-char" style="animation-delay:0.85s">i</span>
   </div>
   <div id="loader-line"></div>
-  <div id="loader-sub">AI & Data Science</div>
+  <div id="loader-sub">AI &amp; Data Science</div>
+  <div id="loader-greeting" aria-live="polite">Thanks for visiting</div>
   <div id="loader-progress"></div>
-</div>
-
-<!-- Multilingual welcome experience -->
-<div id="welcome-experience" aria-label="Welcome">
-  <div class="welcome-inner">
-    <div class="welcome-kicker">Welcome</div>
-    <div class="welcome-name">Mourya Dusi</div>
-    <div class="welcome-role">AI &amp; Data Science</div>
-    <div class="welcome-greeting-wrap">
-      <div class="welcome-greeting active" id="welcome-greeting" aria-live="polite">Thanks for visiting</div>
-    </div>
-    <div class="welcome-bottom">
-      <div class="welcome-languages" role="tablist" aria-label="Greeting languages">
-        <button class="welcome-language active" type="button" data-index="0">English</button>
-        <button class="welcome-language" type="button" data-index="1">తెలుగు</button>
-        <button class="welcome-language" type="button" data-index="2">Español</button>
-        <button class="welcome-language" type="button" data-index="3">العربية</button>
-        <button class="welcome-language" type="button" data-index="4">हिन्दी</button>
-        <button class="welcome-language" type="button" data-index="5">日本語</button>
-      </div>
-      <div class="welcome-controls">
-        <div class="welcome-progress" aria-hidden="true"><div class="welcome-progress-bar" id="welcome-progress"></div></div>
-        <span class="welcome-skip" aria-hidden="true">Please enjoy the welcome</span>
-      </div>
-    </div>
-  </div>
 </div>
 
 <!-- Header -->
@@ -792,22 +739,16 @@
     <p class="hero-intro" id="hero-intro">
       <span class="explode-text">Here, you can check out what I'm working on. I try my best to create things with <span class="heart">❤</span> — or maybe something very much better but very simple. AI & Data Science, built with intention.</span>
     </p>
-    <div class="hero-greeting-rail" aria-label="Multilingual greeting">
-      <span class="hero-greeting-live" id="hero-greeting-live" aria-live="polite">Thanks for visiting</span>
-      <span>EN</span><span>TE</span><span>ES</span><span>AR</span><span>HI</span><span>JA</span>
-    </div>
     <div class="hero-cta">
       <a href="#projects" class="btn btn-primary">See my work</a>
       <a href="#contact" class="btn btn-ghost">Get in touch</a>
     </div>
   </div>
   <div class="hero-photo-wrap hero-parallax" id="hero-portrait-wrap">
-    <div class="hero-photo-frame photo-hidden" id="photo-reveal" role="button" tabindex="0" aria-label="Tap to reveal Mourya's photograph" aria-pressed="false">
+    <div class="hero-photo-frame">
       <img src="assets/mourya.jpg" alt="Mourya Dusi" id="hero-img"
         onerror="this.onerror=null;this.src='photo.jpg';">
-      <div class="photo-reveal-overlay"><span>Tap to reveal</span></div>
     </div>
-    <div class="photo-reveal-note" id="photo-reveal-note">Click / tap the portrait</div>
     <div class="hero-photo-tag">
       <strong>Mourya Dusi</strong>
       Dubai, UAE · Open to work
@@ -862,7 +803,7 @@
   <div class="section-label">02 — Work</div>
   <h2 class="section-title reveal">Selected<br><em>projects</em></h2>
 
-  <a class="featured-project reveal" href="https://destination-com-dun.vercel.app" target="_blank">
+  <a class="featured-project reveal" href="https://destination-com-dun.vercel.app" target="_blank" data-project="destination">
     <div class="featured-project-preview">
       <div class="fp-grid"></div><div class="fp-glow"></div>
       <div class="fp-ui-mock">
@@ -897,7 +838,7 @@
   </a>
 
   <div class="projects-list editorial-projects reveal">
-    <a class="project-item" href="https://mouryadusi.github.io/smart-exit-reminder.html" target="_blank">
+    <a class="project-item" href="https://mouryadusi.github.io/smart-exit-reminder.html" target="_blank" data-project="smart-exit">
       <span class="project-num">01</span>
       <div class="project-info">
         <h3>Smart Exit Reminder</h3>
@@ -907,7 +848,7 @@
       </div>
       <span class="project-arrow">↗</span>
     <div class="project-progress" aria-hidden="true"><span></span></div></a>
-    <a class="project-item" href="https://mouryadusi.github.io/taxi-lost-item-detection.html" target="_blank">
+    <a class="project-item" href="https://mouryadusi.github.io/taxi-lost-item-detection.html" target="_blank" data-project="taxi-lost">
       <span class="project-num">02</span>
       <div class="project-info">
         <h3>Taxi Lost Item Detection</h3>
@@ -917,7 +858,7 @@
       </div>
       <span class="project-arrow">↗</span>
     <div class="project-progress" aria-hidden="true"><span></span></div></a>
-    <div class="project-item" style="cursor:none;">
+    <div class="project-item" style="cursor:none;" data-project="student-performance" tabindex="0" role="button" aria-label="Open Student Performance Prediction project">
       <span class="project-num">03</span>
       <div class="project-info">
         <h3>Student Performance Prediction</h3>
@@ -927,7 +868,7 @@
       </div>
       <span class="project-arrow" style="opacity:0.3">—</span>
     <div class="project-progress" aria-hidden="true"><span></span></div></div>
-    <div class="project-item" style="cursor:none;">
+    <div class="project-item" style="cursor:none;" data-project="university-chatbot" tabindex="0" role="button" aria-label="Open Intelligent University Chatbot project">
       <span class="project-num">04</span>
       <div class="project-info">
         <h3>Intelligent University Chatbot</h3>
@@ -1658,106 +1599,40 @@
 
 
 <script>
+/* Original centered greeting: show every requested language before entering the portfolio. */
 (function(){
   const greetings = [
-    {text:'Thanks for visiting', lang:'English'},
-    {text:'ధన్యవాదాలు', lang:'Telugu'},
-    {text:'Gracias por visitar', lang:'Spanish'},
-    {text:'شكرًا لزيارتك', lang:'Arabic', dir:'rtl'},
-    {text:'आने के लिए धन्यवाद', lang:'Hindi'},
-    {text:'訪れてくれてありがとう', lang:'Japanese'}
+    'Thanks for visiting',
+    'धन्यवाद',
+    'Gracias por visitar',
+    'شكرًا لزيارتك',
+    'आने के लिए धन्यवाद',
+    '訪れてくれてありがとう'
   ];
-  const welcome = document.getElementById('welcome-experience');
-  const greetingEl = document.getElementById('welcome-greeting');
-  const progress = document.getElementById('welcome-progress');
-  const buttons = Array.from(document.querySelectorAll('.welcome-language'));
-  const heroGreeting = document.getElementById('hero-greeting-live');
-  const skip = document.getElementById('welcome-skip');
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let index=0, timer=null, paused=false, entered=false;
-  const interval = 2000;
-
-  function paint(i, animate=true){
-    index=i;
-    const item=greetings[i];
-    if(animate){
-      greetingEl.classList.remove('active');
+  const el=document.getElementById('loader-greeting');
+  const loader=document.getElementById('loader');
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!el||!loader)return;
+  let i=0;
+  const interval=reduced?1400:1800;
+  el.textContent=greetings[0];
+  const timer=setInterval(()=>{
+    i++;
+    if(i>=greetings.length){
+      clearInterval(timer);
       setTimeout(()=>{
-        greetingEl.textContent=item.text;
-        greetingEl.dir=item.dir||'ltr';
-        greetingEl.classList.add('active');
-      }, prefersReduced ? 0 : 80);
-    }else{
-      greetingEl.textContent=item.text;
-      greetingEl.dir=item.dir||'ltr';
-      greetingEl.classList.add('active');
-    }
-    buttons.forEach((b,j)=>b.classList.toggle('active',j===i));
-    if(heroGreeting) heroGreeting.textContent=item.text;
-    if(progress){
-      progress.classList.remove('running');
-      void progress.offsetWidth;
-      if(!prefersReduced && !paused) progress.classList.add('running');
-    }
-  }
-  function next(){
-    if(entered || paused) return;
-    if(index >= greetings.length-1){
-      enter();
+        loader.classList.add('fade-out');
+        setTimeout(()=>{ loader.style.display='none'; document.body.style.overflow=''; },900);
+      },interval);
       return;
     }
-    paint(index+1);
-  }
-  function schedule(){
-    clearInterval(timer);
-    timer=setInterval(next,interval);
-  }
-  function enter(){
-    if(entered)return;
-    entered=true; clearInterval(timer);
-    welcome.classList.add('dismissed');
-    document.body.style.overflow='';
-    setTimeout(()=>welcome.remove(),850);
-  }
-  buttons.forEach(b=>b.addEventListener('click',()=>{
-    paint(Number(b.dataset.index));
-    paused=true;
-    clearTimeout(window.__welcomeResume);
-    window.__welcomeResume=setTimeout(()=>{paused=false;schedule();},2200);
-  }));
-  // Keep the automatic sequence uninterrupted so every language is visible.
-  // Explicit language selection pauses briefly, then resumes from that language.
-
-  document.addEventListener('keydown',e=>{
-    if(entered)return;
-    if(e.key==='Escape') enter();
-    if(e.key==='ArrowRight'){paused=true;paint(Math.min(index+1,greetings.length-1));}
-    if(e.key==='ArrowLeft'){paused=true;paint(Math.max(index-1,0));}
-  });
-  document.body.style.overflow='hidden';
-  paint(0,false);
-  // The original loader remains visible first; begin the greeting cycle only after it clears.
-  // Wait until the original loader has completely finished before cycling greetings.
-  setTimeout(schedule, 3400);
-  window.__mouryaGreetings=greetings;
-})();
-
-/* Portrait reveal — original interaction using the existing portrait */
-(function(){
-  const frame=document.getElementById('photo-reveal');
-  const note=document.getElementById('photo-reveal-note');
-  if(!frame)return;
-  function toggle(){
-    const revealed=frame.classList.toggle('photo-revealed');
-    frame.classList.toggle('photo-hidden',!revealed);
-    frame.setAttribute('aria-pressed',String(revealed));
-    frame.setAttribute('aria-label',revealed?'Hide Mourya photograph':'Tap to reveal Mourya photograph');
-    if(note)note.textContent=revealed?'Portrait revealed · tap to hide':'Click / tap the portrait';
-  }
-  frame.addEventListener('click',toggle);
-  frame.addEventListener('keydown',e=>{
-    if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}
-  });
+    el.classList.remove('show');
+    setTimeout(()=>{
+      el.textContent=greetings[i];
+      el.dir=(i===3)?'rtl':'ltr';
+      el.classList.add('show');
+    },120);
+  },interval);
 })();
 
 /* Pointer + scroll kinetic movement */
@@ -1809,12 +1684,53 @@
 })();
 </script>
 
+
+<script>
+/* Immersive project detail controller + scroll-driven Engineer sequence */
+(function(){
+ const detail=document.getElementById('project-detail'); if(!detail)return;
+ const DATA={
+  destination:{num:'FEATURED',title:'destination.com',subtitle:'AI Travel Intelligence · Full-stack · Live',kicker:'AI / REAL-TIME / PRODUCT',media:'Your world moves. So should you.',copy:'A live AI travel platform combining route intelligence, voice AI, live flights, visa guidance and itinerary planning.',lede:'A travel system designed as a living interface — where intelligence, real-time information and movement meet.',meta:'Built and deployed as a full-stack product. The portfolio records voice AI (ARIA), live flight tracking, visa guidance, a layover city explorer, an AI itinerary planner and an aviation arcade.',facts:[['Stack','AI · Full-stack'],['Signal','Real-time'],['Status','Live / Vercel']],story:[['01','The idea','Travel is not a static page. It is a stream of decisions: where to go, how to get there, what changes while you move. This project turns that stream into one coherent product experience.','ROUTE INTELLIGENCE'],['02','The system','The interface brings multiple services into one flow — live flights, route optimisation, visa guidance, voice interaction and itinerary planning. Each layer is designed to answer the next question before the user has to ask it.','ARIA / LIVE DATA'],['03','The build','The emphasis is on shipping: a working product, deployed infrastructure, responsive interaction and a visual system that can carry dense information without feeling dense.','FULL-STACK / DEPLOYED']]},
+  'smart-exit':{num:'01',title:'Smart Exit Reminder',subtitle:'Mobile AI · Sensor fusion · Automation',kicker:'MOBILE / AI / IOT',media:'Remember what matters when you leave.',copy:'An intelligent reminder system using Wi-Fi, GPS and BLE signals to learn routines and surface essential items at the right moment.',lede:'The product disappears into the routine. The intelligence only appears when it is useful.',meta:'The project combines sensor fusion with machine-learning logic to detect context and trigger reminders without requiring a manual checklist.',facts:[['Signals','Wi-Fi · GPS · BLE'],['Mode','Automated'],['Focus','Routine learning']],story:[['01','Context','Leaving home is a tiny decision repeated thousands of times. The system observes contextual signals instead of asking the user to remember another task.','SENSOR FUSION'],['02','Inference','Signals become a lightweight representation of routine. The product learns patterns and uses them to decide when a reminder has genuine value.','CONTEXT → ACTION'],['03','Interaction','The best notification is the one that arrives at exactly the right moment — then gets out of the way.','QUIET AUTOMATION']]},
+  'taxi-lost':{num:'02',title:'Taxi Lost Item Detection',subtitle:'Edge AI · IoT · Privacy-first',kicker:'EDGE / IOT / PRIVACY',media:'Detect the object. Protect the passenger.',copy:'A sensor-based system for detecting forgotten belongings in taxis without cameras, with processing kept on-device.',lede:'Useful intelligence does not require surveillance. This system is designed around the opposite principle.',meta:'Pressure, infrared and ultrasonic sensing are combined to detect forgotten objects while keeping the data path local and camera-free.',facts:[['Sensors','Pressure · IR · Ultrasonic'],['Privacy','No cameras'],['Compute','On-device']],story:[['01','The problem','A lost item is obvious only after the passenger has left. The system moves detection earlier, into the moment when recovery is still possible.','DETECTION'],['02','Privacy','Instead of observing people, it observes physical signals. The architecture keeps processing on-device and avoids camera-based identification.','LOCAL PROCESSING'],['03','Reliability','Multiple sensing modalities can complement one another, turning a single ambiguous signal into a more reliable event.','MULTI-SENSOR']]},
+  'student-performance':{num:'03',title:'Student Performance Prediction',subtitle:'Machine Learning · Predictive analytics',kicker:'ML / ANALYTICS / EDUCATION',media:'Predict earlier. Intervene sooner.',copy:'An end-to-end machine-learning pipeline designed to identify students at risk and support earlier intervention.',lede:'Prediction becomes valuable when it changes what happens next.',meta:'The project uses Python, Scikit-learn and Pandas to model student outcomes and surface risk signals for earlier action.',facts:[['Result','92% accuracy'],['Models','5+'],['Tools','Python · Scikit-learn']],story:[['01','The signal','Academic outcomes leave patterns in data. The pipeline looks for those patterns before failure becomes visible.','PREDICTIVE SIGNAL'],['02','The model','Multiple approaches can be compared, evaluated and interpreted before selecting a useful predictive workflow.','MODEL COMPARISON'],['03','The outcome','The objective is not prediction for its own sake. It is earlier visibility for people who can actually intervene.','EARLY ACTION']]},
+  'university-chatbot':{num:'04',title:'Intelligent University Chatbot',subtitle:'NLP · TensorFlow · Flask',kicker:'NLP / AUTOMATION / PRODUCT',media:'Answer the question before the queue forms.',copy:'An NLP-powered university assistant built to handle recurring student questions and reduce administrative workload.',lede:'Good automation removes friction without removing the human option.',meta:'The system combines intent recognition with a Flask application and MongoDB-backed workflows to provide always-on assistance.',facts:[['Volume','1,000+ queries/day'],['Availability','24/7'],['Impact','35% workload reduction']],story:[['01','The queue','Repeated questions create repeated work. A conversational interface can absorb the predictable layer of that demand.','INTENT RECOGNITION'],['02','The system','NLP maps natural-language questions to useful responses while keeping the application simple enough to maintain.','TENSORFLOW / FLASK'],['03','The experience','Students get an immediate answer; staff can spend more time on questions that actually require a person.','HUMAN + AUTOMATION']]}}
+ };
+ let active=null,locked=false;
+ function open(slug){const d=DATA[slug];if(!d)return;active=d;locked=true;document.body.dataset.projectOpen='true';document.body.style.overflow='hidden';detail.classList.add('open');detail.setAttribute('aria-hidden','false');detail.scrollTop=0;
+  document.getElementById('pd-index').textContent=d.num;document.getElementById('pd-title').textContent=d.title;document.getElementById('pd-subtitle').textContent=d.subtitle;document.getElementById('pd-media-kicker').textContent=d.kicker;document.getElementById('pd-media-title').textContent=d.media;document.getElementById('pd-media-copy').textContent=d.copy;document.getElementById('pd-lede').textContent=d.lede;document.getElementById('pd-meta-copy').textContent=d.meta;document.getElementById('pd-end-copy').textContent='Explore the live build or return to the portfolio.';document.getElementById('pd-live').href=document.querySelector('[data-project="'+slug+'"]')?.href||'#';
+  const facts=document.getElementById('pd-facts');facts.innerHTML=d.facts.map(x=>`<div class="pd-fact"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('');
+  document.getElementById('pd-story').innerHTML=d.story.map(x=>`<article class="pd-story-block"><div class="pd-story-num">${x[0]}</div><div><h3>${x[1]}</h3><p>${x[2]}</p><div class="pd-story-media"><div class="media-mark">${x[3]}</div></div></div></article>`).join('');
+  buildEngineer();requestAnimationFrame(()=>requestAnimationFrame(()=>{locked=false;updateEngineer();}));
+ }
+ function close(){locked=true;detail.classList.remove('open');detail.setAttribute('aria-hidden','true');document.body.style.overflow='';document.body.removeAttribute('data-project-open');history.replaceState(null,'',location.pathname+location.search);setTimeout(()=>{locked=false;},450)}
+ function buildEngineer(){const word=document.getElementById('eng-word');word.innerHTML='';'ENGINEER'.split('').forEach((ch,i)=>{const s=document.createElement('span');s.className='eng-char';s.textContent=ch;s.dataset.i=i;word.appendChild(s)});}
+ const phases=[
+  ['ENGINEER','Start with a problem.','Observe the signal before writing the solution.'],
+  ['ENGINEER','Shape the data.','Turn noise into structure, context and something a model can use.'],
+  ['ENGINEER','Build the model.','Make intelligence measurable, testable and useful.'],
+  ['ENGINEER','Ship the system.','A model becomes engineering when it survives contact with the real world.'],
+  ['ENGINEER','Make it clear.','Reduce complexity until the person using it understands what matters.'],
+  ['ENGINEER','Keep it moving.','Monitor, learn, iterate — then let the next version emerge.']
+ ];
+ function ease(t){return t*t*(3-2*t)}
+ function updateEngineer(){if(!active)return;const sec=document.getElementById('pd-engineer'),r=sec.getBoundingClientRect(),total=sec.offsetHeight-window.innerHeight;let p=Math.max(0,Math.min(1,(-r.top)/Math.max(total,1)));let phase=Math.min(5,Math.floor(p*6));let local=(p*6)-phase;local=ease(local);
+  const statement=document.getElementById('eng-statement');const [a,b,c]=phases[phase];statement.innerHTML=`<span style="opacity:${Math.max(.12,1-local)};transform:translateY(${local*20}px);filter:blur(${local*4}px)">${b}</span><br><span style="font-size:.48em;letter-spacing:.02em;color:var(--text-subtle);opacity:${Math.max(.1,local)};transform:translateY(${(1-local)*20}px);filter:blur(${(1-local)*4}px)">${c}</span>`;
+  document.querySelectorAll('.eng-char').forEach((el,i)=>{const cp=i/7;const reveal=Math.max(0,Math.min(1,(p-cp)*4));const q=ease(reveal);const dir=i%2?-1:1;el.style.opacity=.18+q*.82;el.style.transform=`translate3d(${dir*(1-q)*55}px,${(1-q)*28}px,0) rotate(${dir*(1-q)*8}deg) scale(${.78+q*.22})`;el.style.filter=`blur(${(1-q)*8}px)`});
+  const orbit=document.getElementById('eng-orbit');orbit.style.transform=`scale(${.82+p*.32}) rotate(${p*80}deg)`;orbit.style.opacity=.25+p*.3;document.getElementById('eng-progress-bar').style.width=(p*100)+'%';document.getElementById('eng-counter').textContent=String(phase+1).padStart(2,'0')+' / 06';
+ }
+ detail.addEventListener('scroll',()=>{if(!locked)requestAnimationFrame(updateEngineer)},{passive:true});
+ document.getElementById('pd-close').addEventListener('click',close);
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&detail.classList.contains('open'))close()});
+ document.querySelectorAll('[data-project]').forEach(el=>{el.addEventListener('click',e=>{if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;e.preventDefault();open(el.dataset.project)});el.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&el.tagName!=='A'){e.preventDefault();open(el.dataset.project)}})});
+ window.addEventListener('popstate',()=>{if(detail.classList.contains('open'))close()});
+ window.__openProject=open;
+})();
+</script>
+
 <!-- Main Scripts -->
 <script>
-// Loader
-window.addEventListener('load',()=>{
-  setTimeout(()=>{ const l=document.getElementById('loader');l.classList.add('fade-out');setTimeout(()=>l.style.display='none',800); },2400);
-});
+// Loader is controlled by the multilingual greeting sequence below.
 
 // Cursor
 const dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');
@@ -2565,21 +2481,6 @@ function addMsg(text,type){
       if(pitch && pitch.classList.contains('open')) closePitch();
     }
   });
-})();
-</script>
-<script>
-/* Welcome sequence synchronization */
-(function(){
-  const loader=document.getElementById('loader');
-  const welcome=document.getElementById('welcome-experience');
-  if(!loader||!welcome)return;
-  document.body.style.overflow='hidden';
-  function unlockWelcome(){
-    loader.style.display='none';
-    welcome.style.visibility='visible';
-    welcome.style.opacity='1';
-  }
-  window.setTimeout(unlockWelcome,3400);
 })();
 </script>
 </body>
