@@ -1,3027 +1,2163 @@
 <!DOCTYPE html>
-
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f5f5f7">
-<meta name="description" content="Mourya Dusi — AI & Data Science portfolio.">
-<title>Mourya Dusi — AI & Data Science</title>
-
+<title>Mourya Dusi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-:root{
-  --bg:#f5f5f7;
-  --white:#fff;
-  --black:#050505;
-  --text:#1d1d1f;
-  --muted:#6e6e73;
-  --soft:#86868b;
-  --line:rgba(0,0,0,.09);
-  --dark:#0b0b0d;
-  --dark2:#111114;
-  --accent:#0071e3;
-  --green:#16a34a;
-  --radius:28px;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  font-family:'DM Sans','Inter',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  overflow-x:hidden;
-}
-
-body.no-scroll{
-  overflow:hidden;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-button{
-  font:inherit;
-}
-
-img{
-  max-width:100%;
-  display:block;
-}
-
-::selection{
-  background:#111;
-  color:#fff;
-}
-
-/* =========================================================
-   INTRO SCREEN
-========================================================= */
-
-#intro-screen{
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  background:#050505;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  transition:opacity 1s ease,visibility 1s ease;
-}
-
-#intro-screen.hide{
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-}
-
-.intro-content{
-  text-align:center;
-  padding:30px;
-}
-
-.intro-kicker{
-  font-size:11px;
-  letter-spacing:.25em;
-  text-transform:uppercase;
-  color:#777;
-  margin-bottom:28px;
-}
-
-.intro-name{
-  font-family:'Cormorant Garamond',serif;
-  font-weight:300;
-  font-size:clamp(52px,10vw,120px);
-  line-height:.9;
-  letter-spacing:-.04em;
-}
-
-.intro-name span{
-  display:inline-block;
-  animation:introLetter 1.2s cubic-bezier(.2,.8,.2,1) both;
-}
-
-.intro-name span:nth-child(1){animation-delay:.05s}
-.intro-name span:nth-child(2){animation-delay:.10s}
-.intro-name span:nth-child(3){animation-delay:.15s}
-.intro-name span:nth-child(4){animation-delay:.20s}
-.intro-name span:nth-child(5){animation-delay:.25s}
-.intro-name span:nth-child(6){animation-delay:.30s}
-
-.intro-role{
-  margin-top:26px;
-  font-size:13px;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  color:#999;
-}
-
-.intro-thanks{
-  margin-top:55px;
-  min-height:24px;
-  font-family:'Cormorant Garamond',serif;
-  font-size:24px;
-  color:#ddd;
-  transition:opacity .4s ease;
-}
-
-.intro-line{
-  width:70px;
-  height:1px;
-  background:#333;
-  margin:25px auto 0;
-}
-
-@keyframes introLetter{
-  from{
-    opacity:0;
-    transform:translateY(30px);
+  :root {
+    --bg: #0a0a0a;
+    --bg2: #111111;
+    --bg3: #1a1a1a;
+    --surface: #1e1e1e;
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(255,255,255,0.15);
+    --text: #f0f0f0;
+    --text-muted: #888;
+    --text-subtle: #555;
+    --accent: #e8e0d0;
+    --accent2: #c8b896;
+    --cursor-size: 12px;
+    --cursor-ring: 36px;
   }
-  to{
-    opacity:1;
-    transform:translateY(0);
+  [data-theme="light"] {
+    --bg: #fafaf8;
+    --bg2: #f4f4f0;
+    --bg3: #eeeeea;
+    --surface: #ffffff;
+    --border: rgba(0,0,0,0.07);
+    --border-hover: rgba(0,0,0,0.15);
+    --text: #111111;
+    --text-muted: #666;
+    --text-subtle: #aaa;
+    --accent: #2a2a2a;
+    --accent2: #8a7a5a;
   }
-}
 
-/* =========================================================
-   NAV
-========================================================= */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    cursor: none;
+    overflow-x: hidden;
+    transition: background 0.4s ease, color 0.4s ease;
+  }
 
-.nav{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  z-index:1000;
-  height:64px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 clamp(20px,5vw,70px);
-  background:rgba(245,245,247,.72);
-  backdrop-filter:blur(22px);
-  -webkit-backdrop-filter:blur(22px);
-  border-bottom:1px solid rgba(0,0,0,.04);
-}
+  @media (hover: none) {
+    #cursor-dot, #cursor-ring { display: none !important; }
+    body { cursor: auto !important; }
+    a, button, .project-item, nav a, .btn, .social-link { cursor: pointer !important; }
+  }
+  #cursor-dot {
+    position: fixed; width: var(--cursor-size); height: var(--cursor-size);
+    background: var(--text); border-radius: 50%; pointer-events: none;
+    z-index: 99999; transform: translate(-50%, -50%);
+    transition: width 0.2s ease, height 0.2s ease;
+    mix-blend-mode: difference;
+  }
+  #cursor-ring {
+    position: fixed; width: var(--cursor-ring); height: var(--cursor-ring);
+    border: 1px solid rgba(255,255,255,0.4); border-radius: 50%;
+    pointer-events: none; z-index: 99998; transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+  }
+  [data-theme="light"] #cursor-ring { border-color: rgba(0,0,0,0.25); }
+  body.cursor-hover #cursor-dot { width: 6px; height: 6px; }
+  body.cursor-hover #cursor-ring { width: 50px; height: 50px; }
 
-.nav-logo{
-  font-size:16px;
-  font-weight:500;
-  letter-spacing:-.02em;
-}
+  /* LOADER */
+  #loader {
+    position: fixed; inset: 0; background: var(--bg); z-index: 10000;
+    display: flex; align-items: center; justify-content: center; flex-direction: column;
+  }
+  #loader-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 10vw, 96px); font-weight: 300;
+    letter-spacing: 0.12em; color: var(--text);
+    overflow: hidden; display: flex; position: relative;
+  }
+  .loader-char {
+    display: inline-block;
+    transform: translateY(110%) rotateX(40deg); opacity: 0;
+    animation: charRise 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transform-origin: bottom center;
+  }
+  @keyframes charRise { to { transform: translateY(0) rotateX(0deg); opacity: 1; } }
+  #loader-line {
+    width: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--text-muted), transparent);
+    margin-top: 24px; animation: lineExpand 1s 1.4s ease forwards;
+  }
+  @keyframes lineExpand { to { width: 240px; } }
+  #loader-sub {
+    font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--text-subtle); opacity: 0; margin-top: 18px;
+    animation: fadeIn 0.6s 1.9s ease forwards;
+  }
+  @keyframes fadeIn { to { opacity: 1; } }
+  #loader-progress {
+    position: absolute; bottom: 0; left: 0; height: 1px;
+    background: var(--text-muted); width: 0;
+    animation: progressBar 2.2s ease forwards;
+  }
+  @keyframes progressBar { to { width: 100%; } }
+  #loader.fade-out { animation: loaderFade 0.9s cubic-bezier(0.4,0,1,1) forwards; }
+  @keyframes loaderFade { to { opacity: 0; pointer-events: none; } }
 
-.nav-links{
-  display:flex;
-  align-items:center;
-  gap:30px;
-}
+  /* HEADER */
+  #site-header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 0 clamp(24px,5vw,60px); height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: transparent; transition: background 0.3s ease, backdrop-filter 0.3s ease;
+  }
+  #site-header.scrolled {
+    background: rgba(10,10,10,0.8);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  [data-theme="light"] #site-header.scrolled { background: rgba(250,250,248,0.85); }
+  #logo {
+    font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 400;
+    color: var(--text); text-decoration: none; cursor: none;
+  }
+  nav { display: flex; align-items: center; gap: 32px; }
+  nav a { font-size: 13px; color: var(--text-muted); text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s ease; cursor: none; }
+  nav a:hover { color: var(--text); }
+  #theme-toggle {
+    width: 44px; height: 24px; background: var(--border-hover);
+    border-radius: 12px; border: none; cursor: none; position: relative;
+    transition: background 0.3s ease; flex-shrink: 0;
+  }
+  #theme-toggle::after {
+    content: ''; position: absolute; width: 18px; height: 18px;
+    background: var(--text); border-radius: 50%; top: 3px; left: 3px;
+    transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
+  }
+  [data-theme="light"] #theme-toggle::after { transform: translateX(20px); }
+  #hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: none; padding: 4px; }
+  #hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text); }
 
-.nav-links a{
-  font-size:12px;
-  color:#555;
-  transition:color .25s ease;
-}
+  /* MOBILE NAV */
+  #mobile-nav {
+    display: none; position: fixed; inset: 0; background: var(--bg); z-index: 999;
+    flex-direction: column; align-items: center; justify-content: center; gap: 40px;
+  }
+  #mobile-nav.open { display: flex; }
+  #mobile-nav a { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 400; color: var(--text); text-decoration: none; cursor: none; }
+  #mobile-close { position: absolute; top: 20px; right: 24px; background: none; border: none; font-size: 28px; color: var(--text-muted); cursor: none; }
 
-.nav-links a:hover{
-  color:#000;
-}
+  /* HERO */
+  #hero {
+    min-height: 100svh; display: grid; grid-template-columns: 1fr 380px;
+    gap: 60px; align-items: center;
+    padding: 120px clamp(24px,5vw,60px) 80px; max-width: 1200px; margin: 0 auto;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(52px,8vw,100px);
+    font-weight: 300; line-height: 1.0; letter-spacing: 0.02em; margin-bottom: 32px;
+    opacity: 0; animation: slideUp 0.8s 2.5s ease forwards;
+  }
+  .hero-title em { font-style: italic; color: var(--text-muted); }
 
-.nav-menu{
-  display:none;
-  border:0;
-  background:none;
-  cursor:pointer;
-  font-size:22px;
-}
+  /* LETTER EXPLOSION */
+  .explode-text { display: inline; }
+  .explode-char { display: inline-block; position: relative; cursor: default; }
+  .explode-char.pop { animation: charPop 0.6s cubic-bezier(0.36,0.07,0.19,0.97) forwards; }
+  @keyframes charPop {
+    0%   { transform: translate(0,0) rotate(0deg) scale(1); opacity: 1; }
+    20%  { transform: translate(var(--rx),var(--ry)) rotate(var(--rr)) scale(1.4); opacity: 1; }
+    60%  { transform: translate(calc(var(--rx)*2.5),calc(var(--ry)*2.5)) rotate(calc(var(--rr)*2)) scale(0.6); opacity: 0.4; }
+    100% { transform: translate(calc(var(--rx)*4),calc(var(--ry)*4)) rotate(calc(var(--rr)*3)) scale(0); opacity: 0; }
+  }
+  .explode-char.reform { animation: charReform 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+  @keyframes charReform {
+    0%   { transform: translate(calc(var(--rx)*4),calc(var(--ry)*4)) rotate(calc(var(--rr)*3)) scale(0); opacity: 0; }
+    100% { transform: translate(0,0) rotate(0deg) scale(1); opacity: 1; }
+  }
 
+  .hero-intro {
+    font-size: clamp(16px,2vw,19px); color: var(--text-muted); line-height: 1.75;
+    max-width: 520px; margin-bottom: 48px; font-weight: 300;
+    opacity: 0; animation: slideUp 0.8s 2.6s ease forwards;
+  }
+  .hero-intro .heart { color: #e06060; }
+  .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; opacity: 0; animation: slideUp 0.8s 2.7s ease forwards; }
+  .btn {
+    padding: 13px 28px; border-radius: 100px; font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 400; text-decoration: none; cursor: none;
+    transition: all 0.25s ease; display: inline-block;
+  }
+  .btn-primary { background: var(--text); color: var(--bg); }
+  .btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+  .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border-hover); }
+  .btn-ghost:hover { border-color: var(--text); transform: translateY(-2px); }
+
+  .hero-photo-wrap { position: relative; opacity: 0; animation: fadeSlideRight 1s 2.8s ease forwards; }
+  .hero-photo-frame {
+    width: 100%; aspect-ratio: 3/4;
+    border-radius: 200px 200px 160px 160px; overflow: hidden; background: var(--bg3);
+  }
+  .hero-photo-frame img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(20%); transition: filter 0.4s ease; }
+  .hero-photo-frame:hover img { filter: grayscale(0%); }
+  .photo-placeholder {
+    width: 100%; height: 100%; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 12px;
+    color: var(--text-subtle); font-size: 13px; text-align: center; padding: 40px;
+  }
+  .hero-photo-tag {
+    position: absolute; bottom: -28px; left: -28px; background: var(--surface);
+    border: 1px solid var(--border); padding: 16px 24px; border-radius: 20px;
+    font-size: 13px; color: var(--text-muted); white-space: nowrap;
+    min-width: 200px; box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  .hero-photo-tag strong { display: block; color: var(--text); font-size: 15px; font-weight: 400; margin-bottom: 3px; }
+
+  @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeSlideRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+
+  /* CLOCK BAR */
+  #clock-bar {
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    padding: 14px clamp(24px,5vw,60px); margin-top: 64px;
+    display: flex; align-items: center; gap: 40px; overflow-x: auto; scrollbar-width: none;
+  }
+  #clock-bar::-webkit-scrollbar { display: none; }
+  .clock-item { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+  .clock-dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; flex-shrink: 0; animation: pulse 2s ease infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .clock-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-subtle); }
+  .clock-time { font-size: 14px; color: var(--text); font-weight: 300; font-variant-numeric: tabular-nums; }
+  .clock-sep { width: 1px; height: 24px; background: var(--border); flex-shrink: 0; }
+
+  /* SECTIONS */
+  section { padding: 120px clamp(24px,5vw,60px); max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--text-subtle); margin-bottom: 60px;
+    display: flex; align-items: center; gap: 20px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); max-width: 120px; }
+  h2.section-title {
+    font-family: 'Playfair Display', serif; font-size: clamp(32px,5vw,52px);
+    font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 20px;
+  }
+  h2.section-title em { font-style: italic; color: var(--text-muted); }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 300px; gap: 80px; align-items: start; }
+  .about-text p { font-size: 18px; font-weight: 300; color: var(--text-muted); line-height: 1.85; margin-bottom: 24px; }
+  .about-sidebar { background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; padding: 28px; position: sticky; top: 84px; }
+  .about-sidebar h3 { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-subtle); margin-bottom: 20px; }
+  .sidebar-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .sidebar-item:last-child { border-bottom: none; }
+  .sidebar-item .key { color: var(--text-muted); }
+  .sidebar-item .val { color: var(--text); }
+  .status-dot { display: inline-block; width: 7px; height: 7px; background: #4ade80; border-radius: 50%; margin-right: 6px; animation: pulse 2s ease infinite; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px,1fr)); gap: 10px; margin-top: 48px; }
+  .skill-tag { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; font-size: 13px; color: var(--text-muted); text-align: center; transition: all 0.2s ease; }
+  .skill-tag:hover { border-color: var(--border-hover); color: var(--text); transform: translateY(-2px); }
+  .skill-category { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-subtle); margin-bottom: 16px; margin-top: 40px; }
+
+  /* PROJECTS */
+  .projects-list { display: flex; flex-direction: column; gap: 1px; margin-top: 48px; }
+  .project-item {
+    border-top: 1px solid var(--border); padding: 32px 0;
+    display: grid; grid-template-columns: 60px 1fr auto;
+    gap: 28px; align-items: start; cursor: none;
+    transition: all 0.2s ease; text-decoration: none; color: var(--text);
+  }
+  .project-item:hover { padding-left: 12px; }
+  .project-item:last-child { border-bottom: 1px solid var(--border); }
+  .project-num { font-size: 12px; color: var(--text-subtle); padding-top: 4px; font-variant-numeric: tabular-nums; }
+  .project-info h3 { font-size: 20px; font-weight: 400; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .project-info p { font-size: 14px; color: var(--text-muted); line-height: 1.6; max-width: 600px; }
+  .project-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
+  .tag { font-size: 11px; letter-spacing: 0.08em; padding: 4px 10px; border: 1px solid var(--border); border-radius: 100px; color: var(--text-subtle); }
+  .project-arrow { font-size: 20px; color: var(--text-subtle); transition: transform 0.2s ease, color 0.2s ease; padding-top: 4px; }
+  .project-item:hover .project-arrow { transform: translate(4px,-4px); color: var(--text); }
+  .project-stat { display: flex; gap: 20px; margin-top: 12px; }
+  .project-stat span { font-size: 12px; color: var(--text-subtle); }
+  .project-stat strong { color: var(--text); font-weight: 400; }
+
+  /* FEATURED PROJECT */
+  .featured-project { border: 1px solid var(--border); border-radius: 24px; overflow: hidden; margin-top: 48px; margin-bottom: 12px; transition: border-color 0.3s ease; text-decoration: none; color: var(--text); display: block; cursor: none; }
+  .featured-project:hover { border-color: var(--border-hover); }
+  .featured-project-preview { position: relative; width: 100%; height: 340px; background: #050b14; overflow: hidden; }
+  .fp-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(30,100,200,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(30,100,200,0.06) 1px,transparent 1px); background-size: 40px 40px; }
+  .fp-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle,rgba(14,90,200,0.18) 0%,transparent 70%); top: -200px; left: 50%; transform: translateX(-50%); pointer-events: none; }
+  .fp-ui-mock { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 16px; padding: 32px; }
+  .fp-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 20px 24px; color: #e0eaff; flex-shrink: 0; }
+  .fp-card-main { width: 340px; }
+  .fp-card-main .fp-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(120,160,255,0.7); margin-bottom: 10px; }
+  .fp-card-main .fp-heading { font-family: 'Playfair Display',serif; font-size: 26px; font-weight: 400; line-height: 1.2; color: #fff; margin-bottom: 12px; }
+  .fp-card-main .fp-sub { font-size: 12px; color: rgba(160,190,255,0.6); line-height: 1.6; }
+  .fp-bar { display: flex; gap: 6px; margin-top: 16px; }
+  .fp-pill { font-size: 10px; padding: 4px 10px; border: 1px solid rgba(100,150,255,0.25); border-radius: 100px; color: rgba(140,180,255,0.7); }
+  .fp-card-side { width: 180px; background: rgba(255,255,255,0.03); }
+  .fp-route { display: flex; flex-direction: column; gap: 8px; }
+  .fp-route-row { font-size: 12px; color: rgba(160,200,255,0.65); display: flex; align-items: center; gap: 8px; }
+  .fp-route-row::before { content: '✈'; font-size: 10px; color: rgba(100,160,255,0.5); }
+  .fp-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 10px; padding: 5px 10px; background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.2); border-radius: 100px; color: #4ade80; margin-top: 14px; }
+  .fp-badge-dot { width: 6px; height: 6px; background: #4ade80; border-radius: 50%; animation: pulse 2s ease infinite; }
+  .fp-overlay { position: absolute; bottom: 0; left: 0; right: 0; height: 80px; background: linear-gradient(transparent,rgba(5,11,20,0.9)); }
+  .featured-project-body { padding: 28px 32px 32px; display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: end; border-top: 1px solid var(--border); background: var(--bg2); }
+  .fp-title { font-size: 22px; font-weight: 400; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .fp-desc { font-size: 14px; color: var(--text-muted); line-height: 1.65; max-width: 600px; margin-bottom: 16px; }
+  .fp-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .fp-live-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; padding: 5px 12px; background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.2); border-radius: 100px; color: #4ade80; }
+  .fp-cta { font-size: 13px; color: var(--text); display: flex; align-items: center; gap: 8px; white-space: nowrap; padding: 12px 24px; border: 1px solid var(--border-hover); border-radius: 100px; transition: all 0.2s ease; }
+  .featured-project:hover .fp-cta { border-color: var(--text); transform: translate(2px,-2px); }
+  @media (max-width: 700px) {
+    .featured-project-preview { height: 220px; }
+    .fp-card-side { display: none; }
+    .fp-card-main { width: 280px; }
+    .fp-card-main .fp-heading { font-size: 20px; }
+    .featured-project-body { grid-template-columns: 1fr; }
+    .fp-cta { display: none; }
+  }
+
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; gap: 40px; margin-top: 48px; }
+  .exp-item { display: grid; grid-template-columns: 200px 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-meta { font-size: 13px; color: var(--text-muted); line-height: 1.8; }
+  .exp-meta strong { display: block; color: var(--text); font-weight: 400; font-size: 14px; margin-bottom: 4px; }
+  .exp-content h3 { font-size: 20px; font-weight: 400; margin-bottom: 12px; }
+  .exp-content ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .exp-content li { font-size: 14px; color: var(--text-muted); padding-left: 16px; position: relative; line-height: 1.65; }
+  .exp-content li::before { content: '—'; position: absolute; left: 0; color: var(--text-subtle); }
+
+  /* EDUCATION */
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 48px; }
+  .edu-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 28px; transition: border-color 0.2s ease; }
+  .edu-card:hover { border-color: var(--border-hover); }
+  .edu-card .degree { font-size: 16px; font-weight: 400; margin-bottom: 8px; line-height: 1.4; }
+  .edu-card .school { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
+  .edu-card .period { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-subtle); }
+  /* ── CERTIFICATIONS VAULT ── */
+  .cert-vault-wrap { margin-top: 40px; }
+  .cert-vault-header {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px; margin-bottom: 32px;
+  }
+  .cert-stats {
+    display: flex; gap: 28px;
+  }
+  .cert-stat { text-align: center; }
+  .cert-stat-n {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px; font-weight: 300; color: var(--text); line-height: 1;
+  }
+  .cert-stat-l { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--text-subtle); margin-top: 4px; }
+
+  /* Filter tabs */
+  .cert-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+  .cert-filter {
+    padding: 6px 16px; border-radius: 100px; font-size: 12px;
+    border: 1px solid var(--border); color: var(--text-muted);
+    background: none; cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: all .2s;
+  }
+  .cert-filter:hover, .cert-filter.active {
+    border-color: var(--text); color: var(--text); background: var(--text); color: var(--bg);
+  }
+
+  /* Cards grid */
+  .cert-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .cert-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden; cursor: pointer;
+    transition: all .25s ease; position: relative;
+    animation: certFadeIn .4s ease both;
+  }
+  @keyframes certFadeIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+  .cert-card:hover { border-color: var(--border-hover); transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,.3); }
+  .cert-card.hidden { display: none; }
+  .cert-card-inner { padding: 20px; }
+  .cert-issuer-bar {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+  }
+  .cert-issuer-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; flex-shrink: 0; font-weight: 600;
+  }
+  .cert-issuer-name { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-subtle); }
+  .cert-card-title { font-size: 13px; color: var(--text); line-height: 1.5; margin-bottom: 12px; font-weight: 400; }
+  .cert-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; }
+  .cert-date { font-size: 11px; color: var(--text-subtle); }
+  .cert-badge {
+    font-size: 10px; padding: 3px 10px; border-radius: 100px;
+    border: 1px solid; letter-spacing: .08em; text-transform: uppercase;
+  }
+  /* Category accent colours */
+  .cert-card[data-cat="ai"] .cert-issuer-icon { background: rgba(74,222,128,.15); color: #4ade80; }
+  .cert-card[data-cat="ai"] .cert-badge { border-color: rgba(74,222,128,.3); color: #4ade80; }
+  .cert-card[data-cat="cloud"] .cert-issuer-icon { background: rgba(96,165,250,.15); color: #60a5fa; }
+  .cert-card[data-cat="cloud"] .cert-badge { border-color: rgba(96,165,250,.3); color: #60a5fa; }
+  .cert-card[data-cat="devops"] .cert-issuer-icon { background: rgba(251,146,60,.15); color: #fb923c; }
+  .cert-card[data-cat="devops"] .cert-badge { border-color: rgba(251,146,60,.3); color: #fb923c; }
+  .cert-card[data-cat="agile"] .cert-issuer-icon { background: rgba(167,139,250,.15); color: #a78bfa; }
+  .cert-card[data-cat="agile"] .cert-badge { border-color: rgba(167,139,250,.3); color: #a78bfa; }
+  .cert-card[data-cat="python"] .cert-issuer-icon { background: rgba(251,191,36,.15); color: #fbbf24; }
+  .cert-card[data-cat="python"] .cert-badge { border-color: rgba(251,191,36,.3); color: #fbbf24; }
+  .cert-card[data-cat="security"] .cert-issuer-icon { background: rgba(244,114,182,.15); color: #f472b6; }
+  .cert-card[data-cat="security"] .cert-badge { border-color: rgba(244,114,182,.3); color: #f472b6; }
+  .cert-card[data-cat="other"] .cert-issuer-icon { background: rgba(52,211,153,.15); color: #34d399; }
+  .cert-card[data-cat="other"] .cert-badge { border-color: rgba(52,211,153,.3); color: #34d399; }
+
+  /* Expand toggle */
+  .cert-show-more {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    margin-top: 24px; width: 100%; padding: 14px;
+    border: 1px dashed var(--border); border-radius: 12px;
+    background: none; color: var(--text-muted); font-family: 'DM Sans', sans-serif;
+    font-size: 13px; cursor: pointer; transition: all .2s;
+  }
+  .cert-show-more:hover { border-color: var(--border-hover); color: var(--text); }
+
+  @media(max-width:600px){.cert-grid{grid-template-columns:1fr}.cert-stats{gap:20px}.cert-stat-n{font-size:28px}}
+
+  /* PERSONAL */
+  #personal { border-top: 1px solid var(--border); }
+  .interests-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 48px; }
+  .interest-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; padding: 32px 28px; transition: all 0.25s ease; }
+  .interest-card:hover { border-color: var(--border-hover); transform: translateY(-4px); }
+  .interest-icon { font-size: 28px; margin-bottom: 16px; }
+  .interest-card h3 { font-size: 18px; font-weight: 400; margin-bottom: 10px; }
+  .interest-card p { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+
+  /* Countries */
+  .countries-section { margin-top: 80px; }
+  .countries-section h3 { font-size: 24px; font-weight: 400; font-family: 'Playfair Display',serif; margin-bottom: 8px; }
+  .countries-section > p { font-size: 14px; color: var(--text-muted); margin-bottom: 40px; }
+  .countries-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+  .country-pill { display: flex; align-items: center; gap: 10px; padding: 12px 20px; background: var(--bg2); border: 1px solid var(--border); border-radius: 100px; font-size: 14px; color: var(--text-muted); transition: all 0.2s ease; }
+  .country-pill:hover { border-color: var(--border-hover); color: var(--text); transform: translateY(-2px); }
+  .country-flag { font-size: 22px; }
+  .country-name { font-size: 13px; }
+  .country-visits { font-size: 11px; color: var(--text-subtle); letter-spacing: 0.1em; }
+
+  /* CONTACT */
+  #contact { border-top: 1px solid var(--border); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .contact-left .big-email { font-family: 'Playfair Display',serif; font-size: clamp(18px,3vw,28px); font-weight: 400; color: var(--text-muted); text-decoration: none; cursor: none; transition: color 0.2s ease; display: block; margin: 32px 0; word-break: break-all; }
+  .contact-left .big-email:hover { color: var(--text); }
+  .social-links { display: flex; flex-direction: column; gap: 4px; }
+  .social-link { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--border); text-decoration: none; color: var(--text-muted); font-size: 14px; cursor: none; transition: color 0.2s ease; }
+  .social-link:hover { color: var(--text); }
+  .social-link:last-child { border-bottom: none; }
+  .contact-right p { font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 20px; }
+  .availability-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.2); border-radius: 100px; font-size: 12px; color: #4ade80; margin-bottom: 24px; }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--border); padding: 32px clamp(24px,5vw,60px); display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--text-subtle); }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    #hero { grid-template-columns: 1fr; gap: 60px; }
+    .hero-photo-wrap { max-width: 300px; order: -1; }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-sidebar { position: static; }
+    .exp-item { grid-template-columns: 1fr; gap: 8px; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .interests-grid { grid-template-columns: 1fr 1fr; }
+    .edu-grid { grid-template-columns: 1fr; }
+    .certs-list { grid-template-columns: 1fr; }
+    nav { display: none; }
+    #hamburger { display: flex; }
+  }
+  @media (max-width: 600px) {
+    .interests-grid { grid-template-columns: 1fr; }
+    .project-item { grid-template-columns: 40px 1fr; }
+    .project-arrow { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- Loader -->
+<div id="loader">
+  <div id="loader-name">
+    <span class="loader-char" style="animation-delay:0.05s">M</span>
+    <span class="loader-char" style="animation-delay:0.13s">o</span>
+    <span class="loader-char" style="animation-delay:0.21s">u</span>
+    <span class="loader-char" style="animation-delay:0.29s">r</span>
+    <span class="loader-char" style="animation-delay:0.37s">y</span>
+    <span class="loader-char" style="animation-delay:0.45s">a</span>
+  </div>
+  <div id="loader-line"></div>
+  <div id="loader-sub">AI & Data Science</div>
+  <div id="loader-progress"></div>
+</div>
+
+<!-- Header -->
+<header id="site-header">
+  <a id="logo" href="#">Mourya</a>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#projects">Work</a>
+    <a href="#experience">Experience</a>
+    <a href="#personal">Personal</a>
+    <a href="#guestbook">Guestbook</a>
+    <a href="#contact">Contact</a>
+    <button id="theme-toggle" aria-label="Toggle theme"></button>
+  </nav>
+  <button id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</header>
+
+<!-- Mobile Nav -->
+<div id="mobile-nav">
+  <button id="mobile-close">×</button>
+  <a href="#about" class="mn-link">About</a>
+  <a href="#projects" class="mn-link">Work</a>
+  <a href="#experience" class="mn-link">Experience</a>
+  <a href="#personal" class="mn-link">Personal</a>
+  <a href="#guestbook" class="mn-link">Guestbook</a>
+  <a href="#contact" class="mn-link">Contact</a>
+</div>
+
+<!-- Clock Bar -->
+<div id="clock-bar">
+  <div class="clock-item">
+    <div class="clock-dot"></div>
+    <div>
+      <div class="clock-label">My Time · Dubai</div>
+      <div class="clock-time" id="clock-dubai">—</div>
+    </div>
+  </div>
+  <div class="clock-sep"></div>
+  <div class="clock-item">
+    <div>
+      <div class="clock-label">Your Time</div>
+      <div class="clock-time" id="clock-local">—</div>
+    </div>
+  </div>
+</div>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="hero-left">
+    <h1 class="hero-title">Hey,<br>I'm <em>Mourya.</em></h1>
+    <p class="hero-intro" id="hero-intro">
+      <span class="explode-text">Here, you can check out what I'm working on. I try my best to create things with <span class="heart">❤</span> — or maybe something very much better but very simple. AI & Data Science, built with intention.</span>
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">See my work</a>
+      <a href="#contact" class="btn btn-ghost">Get in touch</a>
+    </div>
+  </div>
+  <div class="hero-photo-wrap">
+    <div class="hero-photo-frame">
+      <img src="photo.jpg" alt="Mourya Dusi" id="hero-img" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'><svg width=\'48\' height=\'48\' viewBox=\'0 0 48 48\' fill=\'none\'><circle cx=\'24\' cy=\'18\' r=\'8\' stroke=\'currentColor\' stroke-width=\'1.5\'/><path d=\'M6 42C6 32 14 26 24 26C34 26 42 32 42 42\' stroke=\'currentColor\' stroke-width=\'1.5\' stroke-linecap=\'round\'/></svg><span>Add your photo here</span></div>'">
+    </div>
+    <div class="hero-photo-tag">
+      <strong>Mourya Dusi</strong>
+      Dubai, UAE · Open to work
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="section-label">01 — About</div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <h2 class="section-title">Building intelligent<br><em>systems that matter</em></h2>
+      <p style="margin-top:40px;">I'm a Machine Learning Engineer and Data Science professional currently pursuing my MSc in Data Science & AI at Middlesex University, Dubai. I bring together technical depth in ML, cloud, and analytics with a genuine curiosity for how technology shapes the world around us.</p>
+      <p>Previously at Accenture, I built production-grade ML pipelines, deployed models on AWS SageMaker, and turned messy data into clear decisions. I believe great AI isn't just smart — it's simple, explainable, and built with care.</p>
+      <p>When I'm not training models, I'm probably somewhere new on the planet, listening to music, or thinking about the next thing worth building.</p>
+    </div>
+    <div class="about-sidebar reveal">
+      <h3>Quick Facts</h3>
+      <div class="sidebar-item"><span class="key">Status</span><span class="val"><span class="status-dot"></span>Available</span></div>
+      <div class="sidebar-item"><span class="key">Location</span><span class="val">Dubai, UAE</span></div>
+      <div class="sidebar-item"><span class="key">Education</span><span class="val">MSc AI · MDX Dubai</span></div>
+      <div class="sidebar-item"><span class="key">Focus</span><span class="val">ML · Data Science</span></div>
+      <div class="sidebar-item"><span class="key">Languages</span><span class="val">EN · HI · TE</span></div>
+      <div class="sidebar-item"><span class="key">Countries</span><span class="val">10 visited</span></div>
+    </div>
+  </div>
+  <div style="margin-top:100px;" class="reveal">
+    <div class="section-label">Skills</div>
+    <div class="skill-category">Programming & ML</div>
+    <div class="skills-grid">
+      <div class="skill-tag">Python</div><div class="skill-tag">TensorFlow</div><div class="skill-tag">Scikit-learn</div>
+      <div class="skill-tag">Pandas · NumPy</div><div class="skill-tag">NLP</div><div class="skill-tag">Deep Learning</div>
+      <div class="skill-tag">Predictive Modeling</div><div class="skill-tag">Java</div><div class="skill-tag">JavaScript</div><div class="skill-tag">SQL</div>
+    </div>
+    <div class="skill-category">Cloud & DevOps</div>
+    <div class="skills-grid">
+      <div class="skill-tag">AWS SageMaker</div><div class="skill-tag">AWS Solutions</div>
+      <div class="skill-tag">Google Cloud</div><div class="skill-tag">CI/CD Pipelines</div><div class="skill-tag">Git · GitHub</div>
+    </div>
+    <div class="skill-category">Analytics & Visualization</div>
+    <div class="skills-grid">
+      <div class="skill-tag">Power BI</div><div class="skill-tag">Tableau</div><div class="skill-tag">Matplotlib</div>
+      <div class="skill-tag">Seaborn</div><div class="skill-tag">MySQL</div><div class="skill-tag">Flask · REST APIs</div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects" style="border-top:1px solid var(--border);">
+  <div class="section-label">02 — Work</div>
+  <h2 class="section-title reveal">Selected<br><em>projects</em></h2>
+
+  <a class="featured-project reveal" href="https://destination-com-dun.vercel.app" target="_blank">
+    <div class="featured-project-preview">
+      <div class="fp-grid"></div><div class="fp-glow"></div>
+      <div class="fp-ui-mock">
+        <div class="fp-card fp-card-main">
+          <div class="fp-label">✦ AI Route Intelligence</div>
+          <div class="fp-heading">Your world moves.<br><em>So should you.</em></div>
+          <div class="fp-sub">Tell us where you're headed — or stuck. We find the way through, around, and beyond.</div>
+          <div class="fp-bar"><span class="fp-pill">Live Flights</span><span class="fp-pill">Visa Info</span><span class="fp-pill">ARIA Voice AI</span></div>
+          <div class="fp-badge"><div class="fp-badge-dot"></div>Live · Deployed</div>
+        </div>
+        <div class="fp-card fp-card-side">
+          <div class="fp-label">Active routes</div>
+          <div class="fp-route">
+            <div class="fp-route-row">London → NYC</div><div class="fp-route-row">Dubai → Rome</div>
+            <div class="fp-route-row">Tokyo → Sydney</div><div class="fp-route-row">NYC → San Francisco</div>
+          </div>
+        </div>
+      </div>
+      <div class="fp-overlay"></div>
+    </div>
+    <div class="featured-project-body">
+      <div>
+        <div class="fp-title">destination.com — AI Travel Intelligence</div>
+        <div class="fp-desc">A full-stack AI travel platform with real-time route optimization, ARIA voice AI powered by Groq, live flight tracking, visa guidance, layover city explorer, AI itinerary planner, and even an aviation arcade. Built and deployed on Vercel.</div>
+        <div class="fp-meta">
+          <div class="fp-live-badge"><span class="fp-badge-dot"></span> Live on Vercel</div>
+          <span class="tag">AI</span><span class="tag">Real-time</span><span class="tag">Voice AI</span><span class="tag">Full-stack</span><span class="tag">Groq</span>
+        </div>
+      </div>
+      <div class="fp-cta">Visit site ↗</div>
+    </div>
+  </a>
+
+  <div class="projects-list reveal">
+    <a class="project-item" href="https://mouryadusi.github.io/smart-exit-reminder.html" target="_blank">
+      <span class="project-num">01</span>
+      <div class="project-info">
+        <h3>Smart Exit Reminder</h3>
+        <p>Intelligent mobile app that automatically reminds you of essential items the moment you leave home. Uses sensor fusion — Wi-Fi, GPS, BLE — with ML to learn your daily routine.</p>
+        <div class="project-stat"><span><strong>100%</strong> Automated</span><span><strong>24/7</strong> Active</span></div>
+        <div class="project-tags"><span class="tag">Mobile</span><span class="tag">AI/ML</span><span class="tag">IoT</span><span class="tag">React Native</span></div>
+      </div>
+      <span class="project-arrow">↗</span>
+    </a>
+    <a class="project-item" href="https://mouryadusi.github.io/taxi-lost-item-detection.html" target="_blank">
+      <span class="project-num">02</span>
+      <div class="project-info">
+        <h3>Taxi Lost Item Detection</h3>
+        <p>Privacy-first IoT system using multi-sensor arrays — pressure, infrared, ultrasonic — to detect forgotten belongings in taxis. All data processed on-device, zero cameras.</p>
+        <div class="project-stat"><span><strong>Real-time</strong> Detection</span><span><strong>100%</strong> Privacy Safe</span></div>
+        <div class="project-tags"><span class="tag">IoT</span><span class="tag">Edge Computing</span><span class="tag">Privacy Tech</span></div>
+      </div>
+      <span class="project-arrow">↗</span>
+    </a>
+    <div class="project-item" style="cursor:none;">
+      <span class="project-num">03</span>
+      <div class="project-info">
+        <h3>Student Performance Prediction</h3>
+        <p>End-to-end ML pipeline identifying at-risk students with 92% accuracy. Enables institutions to intervene early and improve academic outcomes.</p>
+        <div class="project-stat"><span><strong>92%</strong> Accuracy</span><span><strong>5+</strong> ML Models</span></div>
+        <div class="project-tags"><span class="tag">Python</span><span class="tag">Scikit-learn</span><span class="tag">Pandas</span></div>
+      </div>
+      <span class="project-arrow" style="opacity:0.3">—</span>
+    </div>
+    <div class="project-item" style="cursor:none;">
+      <span class="project-num">04</span>
+      <div class="project-info">
+        <h3>Intelligent University Chatbot</h3>
+        <p>NLP-powered assistant handling 1000+ student queries per day. Reduced admin workload by 35% with intent recognition built on TensorFlow and Flask.</p>
+        <div class="project-stat"><span><strong>24/7</strong> Availability</span><span><strong>1000+</strong> Queries/Day</span></div>
+        <div class="project-tags"><span class="tag">NLP</span><span class="tag">TensorFlow</span><span class="tag">Flask</span><span class="tag">MongoDB</span></div>
+      </div>
+      <span class="project-arrow" style="opacity:0.3">—</span>
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section id="experience" style="border-top:1px solid var(--border);">
+  <div class="section-label">03 — Experience</div>
+  <h2 class="section-title reveal">Where I've<br><em>worked</em></h2>
+  <div class="exp-list reveal">
+    <div class="exp-item">
+      <div class="exp-meta"><strong>Accenture</strong>Associate Software Engineer<br><br>Oct 2024 – Jul 2025<br>Hyderabad, India</div>
+      <div class="exp-content">
+        <h3>ML Engineering & Data Science</h3>
+        <ul>
+          <li>Built Python-based ML models using Scikit-learn and TensorFlow for enterprise predictive analytics</li>
+          <li>Maintained data preprocessing pipelines processing 50,000+ records weekly with Pandas and NumPy</li>
+          <li>Deployed models on AWS SageMaker with comprehensive testing and performance validation</li>
+          <li>Created Power BI dashboards presenting model insights and performance metrics to stakeholders</li>
+          <li>Collaborated in Agile teams with JIRA, daily stand-ups, and sprint planning for AI initiatives</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Education -->
+<section id="education" style="border-top:1px solid var(--border);">
+  <div class="section-label">04 — Education</div>
+  <h2 class="section-title reveal">Academic<br><em>background</em></h2>
+  <div class="edu-grid reveal">
+    <div class="edu-card"><div class="degree">MSc Data Science & Artificial Intelligence</div><div class="school">Middlesex University, Dubai, UAE</div><div class="period">Sep 2025 — Sep 2026</div></div>
+    <div class="edu-card"><div class="degree">BSc Computer Science</div><div class="school">Krishna University, India</div><div class="period">Oct 2021 — May 2024</div></div>
+  </div>
+  <div class="section-label" style="margin-top:60px;">Certifications</div>
+
+  <div class="cert-vault-wrap reveal">
+    <!-- Stats row -->
+    <div class="cert-vault-header">
+      <div class="cert-stats">
+        <div class="cert-stat"><div class="cert-stat-n">20</div><div class="cert-stat-l">Credentials</div></div>
+        <div class="cert-stat"><div class="cert-stat-n">4</div><div class="cert-stat-l">Issuers</div></div>
+        <div class="cert-stat"><div class="cert-stat-n">6</div><div class="cert-stat-l">Domains</div></div>
+      </div>
+    </div>
+
+    <!-- Filter tabs -->
+    <div class="cert-filters">
+      <button class="cert-filter active" data-filter="all">All</button>
+      <button class="cert-filter" data-filter="ai">AI & ML</button>
+      <button class="cert-filter" data-filter="cloud">Cloud</button>
+      <button class="cert-filter" data-filter="devops">DevOps</button>
+      <button class="cert-filter" data-filter="agile">Agile</button>
+      <button class="cert-filter" data-filter="python">Python</button>
+      <button class="cert-filter" data-filter="security">Security</button>
+      <button class="cert-filter" data-filter="other">Other</button>
+    </div>
+
+    <!-- Cards -->
+    <div class="cert-grid" id="cert-grid">
+
+      <div class="cert-card" data-cat="ai">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">AWS AI Practitioner — Machine Learning Operations (MLOps)</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">May 2025</span>
+            <span class="cert-badge">AI & ML</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/48dbf664-1313-4a6e-bb91-ee870b5fdde0" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="ai">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">Implementing AI with Amazon Machine Learning</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">May 2025</span>
+            <span class="cert-badge">AI & ML</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/4e1556f7-43de-45c9-a9bf-a216adfb8e8c" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="security">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">CBROPS: The CIA Triad & Security Approaches</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">May 2025</span>
+            <span class="cert-badge">Security</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/73d48c78-ccca-4d1d-b5dd-d670850c73e5" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="cloud">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">AWS Certified Solutions Architect Associate Bootcamp</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Dec 2024</span>
+            <span class="cert-badge">Cloud</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/21010f49-2f71-4f51-ab4a-b828d8fc1129" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="cloud">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">Google Professional Cloud Architect: Cloud Architecture & System Design</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Dec 2024</span>
+            <span class="cert-badge">Cloud</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/d0db326d-4914-463c-903e-622fe2a27bb7" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="cloud">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">Google Professional Cloud Architect: Google Cloud Fundamentals</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Dec 2024</span>
+            <span class="cert-badge">Cloud</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/dfd0c5a0-8f5c-4a5d-9643-9ac556078f49" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="cloud">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">MS-102: Implementing a Microsoft 365 Tenant</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Dec 2024</span>
+            <span class="cert-badge">Cloud</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/82ea4d99-275c-41d2-b07f-134d5d6a11bb" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="devops">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">IT Infrastructure Automation: Getting Started</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Nov 2024</span>
+            <span class="cert-badge">DevOps</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/a4ca4636-247a-4d6f-9b7c-d618819b3779" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="devops">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">The Language of DevOps: DevOps Tools & Processes</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Nov 2024</span>
+            <span class="cert-badge">DevOps</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/09975ccb-a064-4cf7-aaaf-3e2963e9261c" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="devops">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">Exploring Business Process Automation</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Nov 2024</span>
+            <span class="cert-badge">DevOps</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/8e12f1ce-1b65-44bd-a2c2-4b20f94ad469" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="devops">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">Using Robots and RPA in the Workplace</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Nov 2024</span>
+            <span class="cert-badge">DevOps</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/98bb76ea-5486-4fba-a240-42a737e68aca" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="agile">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">Agile Best Practices for Tech Leaders: Core Concepts</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Nov 2024</span>
+            <span class="cert-badge">Agile</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/1a009b26-9bdf-4656-9f4f-95ae5a8360cb" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="agile">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">Agile Best Practices for Tech Leaders: The Scrum Framework</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Nov 2024</span>
+            <span class="cert-badge">Agile</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/126d98cb-64d3-40c7-9653-40430e832974" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="agile">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">Agile Best Practices for Tech Leaders: The Scrum Phases</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Nov 2024</span>
+            <span class="cert-badge">Agile</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/54ad40c8-bfd5-4897-bc1e-ca4c06802956" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="other">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">Software Design & Development: Methodologies</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Nov 2024</span>
+            <span class="cert-badge">Engineering</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/9d237755-1b3c-44a4-aed6-029d675467ab" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="other">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">Software Design & Development: Software Engineering & SDLC Phases</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Nov 2024</span>
+            <span class="cert-badge">Engineering</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/8679a933-dd38-4c18-ba44-100cbcfacce1" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="other">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">Being an Effective Team Member</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Feb 2025</span>
+            <span class="cert-badge">Leadership</span>
+          </div>
+        </div>
+        <a href="https://skillsoft.digitalbadges.skillsoft.com/4cb93caa-c828-4460-a981-2525aa59e349" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="cloud">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">P</div>
+            <div class="cert-issuer-name">Pluralsight</div>
+          </div>
+          <div class="cert-card-title">5G & Edge Computing</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Nov 2024</span>
+            <span class="cert-badge">Cloud</span>
+          </div>
+        </div>
+        <a href="https://app.pluralsight.com/achievements/share/b5fd9399-a4d2-4f0b-92bb-807608597726" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="python">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">U</div>
+            <div class="cert-issuer-name">Udemy</div>
+          </div>
+          <div class="cert-card-title">100 Days of Code: The Complete Python Pro Bootcamp</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">May 2024</span>
+            <span class="cert-badge">Python</span>
+          </div>
+        </div>
+        <a href="https://ude.my/UC-5eee6069-97e5-455d-bf39-561f00a28b65" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
+      </div>
+
+      <div class="cert-card" data-cat="other">
+        <div class="cert-card-inner">
+          <div class="cert-issuer-bar">
+            <div class="cert-issuer-icon">S</div>
+            <div class="cert-issuer-name">Skillsoft</div>
+          </div>
+          <div class="cert-card-title">AWS Certified AI Practitioner</div>
+          <div class="cert-card-footer">
+            <span class="cert-date">Jun 2025</span>
+            <span class="cert-badge">AI & ML</span>
+          </div>
+        </div>
+        <a href="#" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--text-subtle);text-decoration:none;letter-spacing:.05em;">Credential pending</a>
+      </div>
+
+    </div><!-- end cert-grid -->
+
+    <!-- Show more / less toggle (shows all 20 at once, collapses to 6) -->
+    <button class="cert-show-more" id="cert-toggle">
+      <span id="cert-toggle-text">Show all 20 credentials</span>
+      <span id="cert-toggle-icon">↓</span>
+    </button>
+
+  </div><!-- end cert-vault-wrap -->
+</section>
+
+<!-- Personal -->
+<section id="personal">
+  <div class="section-label">05 — Personal</div>
+  <h2 class="section-title reveal">Beyond<br><em>the code</em></h2>
+  <div class="interests-grid reveal" style="margin-top:48px;">
+    <div class="interest-card"><div class="interest-icon">🎵</div><h3>Music</h3><p>Music is my constant companion — whether I'm commuting through Dubai, deep in a coding session, or just unwinding. From indie to classical, it shapes how I think and create.</p></div>
+    <div class="interest-card"><div class="interest-icon">✈️</div><h3>Travel</h3><p>I travel most of the time solo — there's something uniquely clarifying about navigating a new country on your own terms. Every city teaches you something a group trip never could.</p></div>
+    <div class="interest-card"><div class="interest-icon">🤖</div><h3>AI & The Future</h3><p>I'm fascinated by how AI will reshape everyday life — not just the technical side, but the human side too. Building things that are simple and genuinely useful is what drives me.</p></div>
+  </div>
+
+  <!-- D3 Globe -->
+  <div class="reveal" style="margin-top:80px;" id="globe-section">
+    <div style="text-align:center;margin-bottom:32px;">
+      <p style="font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:12px;">Places visited</p>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,44px);font-weight:300;letter-spacing:.02em;">Places I've <em style="font-style:italic;color:var(--text-muted)">called home for a while</em></h3>
+    </div>
+    <div style="display:flex;justify-content:center;gap:56px;flex-wrap:wrap;margin-bottom:40px;">
+      <div style="text-align:center;"><div style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;line-height:1;color:var(--text);" id="g-cn">0</div><div style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);margin-top:6px;">Countries</div></div>
+      <div style="text-align:center;"><div style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;line-height:1;color:var(--text);" id="g-mi">0<span style="font-size:22px;color:var(--text-subtle)">k</span></div><div style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);margin-top:6px;">Miles flown</div><div style="font-size:11px;color:var(--text-subtle);margin-top:2px;font-style:italic;">≈ 6× around Earth</div></div>
+
+    </div>
+    <p style="text-align:center;font-size:12px;color:var(--text-subtle);margin-bottom:24px;letter-spacing:.1em;">Drag to rotate · Click a glowing country for the story</p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap;">
+      <canvas id="globe-canvas" width="520" height="520" style="cursor:grab;border-radius:50%;flex-shrink:0;max-width:100%;touch-action:none;"></canvas>
+      <div id="globe-panel" style="width:280px;background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:24px 22px;opacity:0;transform:translateX(16px);transition:opacity .35s ease,transform .35s ease;pointer-events:none;max-height:460px;overflow-y:auto;scrollbar-width:thin;">
+        <button id="globe-panel-close" style="float:right;background:none;border:none;color:var(--text-subtle);font-size:22px;cursor:pointer;line-height:1;margin:-4px -4px 0 0;">×</button>
+        <div id="gp-flag" style="font-size:36px;display:block;margin-bottom:10px;clear:both;"></div>
+        <div id="gp-name" style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;margin-bottom:4px;color:var(--text);"></div>
+        <div id="gp-tag" style="font-size:12px;color:var(--text-muted);font-style:italic;margin-bottom:18px;"></div>
+        <div style="height:1px;background:var(--border);margin-bottom:14px;"></div>
+        <div id="gp-trips"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Countries pill grid -->
+  <div class="countries-section reveal">
+    <div class="countries-grid">
+      <div class="country-pill"><span class="country-flag">🇮🇳</span><div><div class="country-name">India</div><div class="country-visits">Home</div></div></div>
+      <div class="country-pill"><span class="country-flag">🇦🇪</span><div><div class="country-name">UAE</div><div class="country-visits">Currently based</div></div></div>
+      <div class="country-pill"><span class="country-flag">🇲🇾</span><div><div class="country-name">Malaysia</div><div class="country-visits">Visited</div></div></div>
+      <div class="country-pill"><span class="country-flag">🇸🇬</span><div><div class="country-name">Singapore</div><div class="country-visits">Visited</div></div></div>
+      <div class="country-pill"><span class="country-flag">🇹🇭</span><div><div class="country-name">Thailand</div><div class="country-visits">Visited</div></div></div>
+      <div class="country-pill"><span class="country-flag">🇻🇳</span><div><div class="country-name">Vietnam</div><div class="country-visits">Visited</div></div></div>
+      <div class="country-pill"><span class="country-flag">🇺🇸</span><div><div class="country-name">USA</div><div class="country-visits">Visited</div></div></div>
+      <div class="country-pill"><span class="country-flag">🇳🇵</span><div><div class="country-name">Nepal</div><div class="country-visits">Visited</div></div></div>
+      <div class="country-pill"><span class="country-flag">🇱🇰</span><div><div class="country-name">Sri Lanka</div><div class="country-visits">Visited</div></div></div>
+    </div>
+  </div>
+</section>
+
+<style>
+#globe-panel.show{opacity:1!important;transform:translateX(0)!important;pointer-events:all!important;}
+#gp-trips .gt{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:12px;margin-bottom:8px;animation:gtIn .4s ease both;}
+@keyframes gtIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.gt-n{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:4px;}
+.gt-t{font-size:13px;color:#ddd;line-height:1.5;}
+.gt-d{font-size:12px;color:var(--text-muted);margin-top:4px;line-height:1.6;}
+.g-bar-row{display:flex;justify-content:space-between;font-size:11px;color:var(--text-subtle);margin:8px 0 4px;}
+.g-bar-track{height:4px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;}
+.g-bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,#16a34a,#4ade80);width:0;transition:width 1s .1s ease;}
 @media(max-width:700px){
-  .nav-links{
-    display:none;
-  }
-
-  .nav-menu{
-    display:block;
-  }
-}
-
-/* =========================================================
-   COMMON
-========================================================= */
-
-.section{
-  position:relative;
-  padding:150px clamp(20px,6vw,100px);
-}
-
-.container{
-  width:min(1200px,100%);
-  margin:auto;
-}
-
-.eyebrow{
-  font-size:11px;
-  letter-spacing:.22em;
-  text-transform:uppercase;
-  color:var(--muted);
-  margin-bottom:22px;
-}
-
-.section-title{
-  font-family:'Cormorant Garamond',serif;
-  font-weight:300;
-  font-size:clamp(48px,7vw,92px);
-  line-height:.95;
-  letter-spacing:-.045em;
-}
-
-.section-description{
-  max-width:580px;
-  margin-top:28px;
-  color:var(--muted);
-  font-size:17px;
-  line-height:1.75;
-}
-
-.reveal{
-  opacity:0;
-  transform:translateY(60px);
-  transition:opacity 1s cubic-bezier(.2,.8,.2,1),
-             transform 1s cubic-bezier(.2,.8,.2,1);
-}
-
-.reveal.visible{
-  opacity:1;
-  transform:none;
-}
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero{
-  min-height:100svh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-  overflow:hidden;
-  background:#f5f5f7;
-}
-
-.hero-inner{
-  width:min(1300px,100%);
-  padding:130px 30px 80px;
-  text-align:center;
-}
-
-.hero-small{
-  font-size:12px;
-  color:#777;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  margin-bottom:32px;
-}
-
-.hero-title{
-  font-family:'Cormorant Garamond',serif;
-  font-weight:300;
-  font-size:clamp(65px,13vw,185px);
-  line-height:.78;
-  letter-spacing:-.065em;
-  color:#111;
-}
-
-.hero-title .hey{
-  display:block;
-  font-family:'DM Sans',sans-serif;
-  font-size:clamp(16px,2vw,25px);
-  line-height:1;
-  letter-spacing:.04em;
-  font-weight:300;
-  margin-bottom:28px;
-  color:#777;
-}
-
-.hero-title .mourya{
-  display:inline-block;
-  position:relative;
-  background:linear-gradient(
-    110deg,
-    #111 0%,
-    #111 35%,
-    #777 48%,
-    #111 60%,
-    #111 100%
-  );
-  background-size:250% 100%;
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  animation:nameShimmer 6s ease-in-out infinite;
-}
-
-.hero-title .dusi{
-  display:block;
-  font-size:.45em;
-  letter-spacing:.08em;
-  margin-top:18px;
-  color:#777;
-}
-
-@keyframes nameShimmer{
-  0%,100%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-}
-
-.hero-role{
-  margin-top:55px;
-  font-size:clamp(15px,2vw,21px);
-  color:#555;
-  letter-spacing:.02em;
-}
-
-.hero-role strong{
-  color:#111;
-  font-weight:500;
-}
-
-.hero-scroll{
-  position:absolute;
-  bottom:30px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:10px;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  color:#999;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:12px;
-}
-
-.hero-scroll span{
-  width:1px;
-  height:45px;
-  background:#aaa;
-  animation:scrollLine 1.8s infinite;
-}
-
-@keyframes scrollLine{
-  0%{transform:scaleY(0);transform-origin:top;opacity:0}
-  30%{transform:scaleY(1);opacity:1}
-  70%{transform:scaleY(1);transform-origin:bottom;opacity:1}
-  100%{transform:scaleY(0);transform-origin:bottom;opacity:0}
-}
-
-/* =========================================================
-   PHOTO / TAP TO REVEAL
-========================================================= */
-
-.photo-section{
-  background:#fff;
-  padding-top:130px;
-  padding-bottom:150px;
-}
-
-.photo-layout{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:90px;
-  align-items:center;
-}
-
-.photo-copy h2{
-  font-family:'Cormorant Garamond',serif;
-  font-weight:300;
-  font-size:clamp(48px,6vw,80px);
-  line-height:.95;
-  letter-spacing:-.04em;
-}
-
-.photo-copy p{
-  margin-top:28px;
-  color:var(--muted);
-  line-height:1.8;
-  max-width:470px;
-}
-
-.photo-card{
-  width:min(430px,100%);
-  aspect-ratio:4/5;
-  margin:auto;
-  perspective:1400px;
-  cursor:pointer;
-  position:relative;
-}
-
-.photo-card-inner{
-  position:absolute;
-  inset:0;
-  transition:transform .9s cubic-bezier(.2,.8,.2,1);
-  transform-style:preserve-3d;
-}
-
-.photo-card.revealed .photo-card-inner{
-  transform:rotateY(180deg);
-}
-
-.photo-face{
-  position:absolute;
-  inset:0;
-  backface-visibility:hidden;
-  -webkit-backface-visibility:hidden;
-  border-radius:32px;
-  overflow:hidden;
-}
-
-.photo-front{
-  background:
-    radial-gradient(circle at 50% 30%,rgba(255,255,255,.2),transparent 30%),
-    linear-gradient(145deg,#222,#080808);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  color:white;
-}
-
-.photo-front::before{
-  content:"";
-  position:absolute;
-  inset:25px;
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:24px;
-}
-
-.tap-symbol{
-  width:64px;
-  height:64px;
-  border:1px solid rgba(255,255,255,.4);
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:20px;
-  margin-bottom:20px;
-}
-
-.tap-text{
-  font-size:11px;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  color:#aaa;
-}
-
-.photo-back{
-  transform:rotateY(180deg);
-  background:#111;
-}
-
-.photo-back img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.photo-back-overlay{
-  position:absolute;
-  inset:auto 0 0;
-  padding:30px;
-  background:linear-gradient(transparent,rgba(0,0,0,.85));
-  color:white;
-}
-
-.photo-back-overlay strong{
-  font-family:'Cormorant Garamond',serif;
-  font-size:30px;
-  font-weight:300;
-}
-
-.photo-back-overlay span{
-  display:block;
-  margin-top:6px;
-  font-size:11px;
-  color:#aaa;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-}
-
-@media(max-width:800px){
-  .photo-layout{
-    grid-template-columns:1fr;
-    gap:60px;
-  }
-}
-
-/* =========================================================
-   ABOUT
-========================================================= */
-
-.about{
-  background:#f5f5f7;
-}
-
-.about-grid{
-  margin-top:100px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:100px;
-}
-
-.about-placeholder{
-  min-height:300px;
-  border-top:1px solid var(--line);
-  padding-top:25px;
-}
-
-.about-placeholder span{
-  font-size:11px;
-  color:#999;
-  letter-spacing:.15em;
-  text-transform:uppercase;
-}
-
-.about-placeholder h3{
-  font-family:'Cormorant Garamond',serif;
-  font-size:44px;
-  font-weight:300;
-  margin-top:25px;
-}
-
-.about-placeholder p{
-  margin-top:20px;
-  color:#777;
-  line-height:1.8;
-}
-
-.about-facts{
-  display:flex;
-  flex-direction:column;
-}
-
-.about-fact{
-  border-top:1px solid var(--line);
-  padding:25px 0;
-  display:grid;
-  grid-template-columns:150px 1fr;
-  gap:30px;
-}
-
-.about-fact:last-child{
-  border-bottom:1px solid var(--line);
-}
-
-.about-fact-label{
-  font-size:10px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:#999;
-}
-
-.about-fact-value{
-  color:#333;
-  line-height:1.6;
-}
-
-@media(max-width:800px){
-  .about-grid{
-    grid-template-columns:1fr;
-    gap:50px;
-  }
-}
-
-/* =========================================================
-   BEYOND THE CODE
-========================================================= */
-
-.beyond{
-  background:#050505;
-  color:#fff;
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-}
-
-.beyond .eyebrow{
-  color:#666;
-}
-
-.beyond .section-title{
-  color:#fff;
-}
-
-.beyond-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:80px;
-  margin-top:90px;
-}
-
-.beyond-item{
-  padding:35px 0;
-  border-top:1px solid rgba(255,255,255,.12);
-}
-
-.beyond-number{
-  color:#555;
-  font-size:11px;
-  letter-spacing:.15em;
-}
-
-.beyond-item h3{
-  font-family:'Cormorant Garamond',serif;
-  font-size:42px;
-  font-weight:300;
-  margin-top:25px;
-}
-
-.beyond-item p{
-  color:#888;
-  line-height:1.8;
-  margin-top:15px;
-}
-
-.beyond-link{
-  display:inline-block;
-  margin-top:20px;
-  font-size:12px;
-  color:#fff;
-  border-bottom:1px solid #555;
-  padding-bottom:5px;
-}
-
-@media(max-width:800px){
-  .beyond-grid{
-    grid-template-columns:1fr;
-  }
-}
-
-/* =========================================================
-   PROJECTS
-========================================================= */
-
-.projects{
-  background:#f5f5f7;
-  overflow:hidden;
-}
-
-.projects-intro{
-  display:flex;
-  justify-content:space-between;
-  gap:40px;
-  align-items:end;
-}
-
-.projects-hint{
-  color:#999;
-  font-size:11px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-}
-
-.projects-stage{
-  margin-top:90px;
-  position:relative;
-  height:500px;
-}
-
-.projects-track{
-  display:flex;
-  gap:28px;
-  position:absolute;
-  left:0;
-  top:0;
-  will-change:transform;
-}
-
-.project-card{
-  width:min(520px,78vw);
-  height:440px;
-  flex-shrink:0;
-  border-radius:32px;
-  overflow:hidden;
-  position:relative;
-  background:#111;
-  color:#fff;
-  transform:scale(.94);
-  transition:transform .5s ease,box-shadow .5s ease;
-}
-
-.project-card:hover{
-  transform:scale(1);
-  box-shadow:0 30px 80px rgba(0,0,0,.18);
-}
-
-.project-visual{
-  position:absolute;
-  inset:0;
-  overflow:hidden;
-}
-
-.project-visual.one{
-  background:
-    radial-gradient(circle at 30% 25%,#7dd3fc,transparent 28%),
-    radial-gradient(circle at 80% 70%,#8b5cf6,transparent 30%),
-    linear-gradient(135deg,#0f172a,#111827);
-}
-
-.project-visual.two{
-  background:
-    radial-gradient(circle at 70% 30%,#34d399,transparent 25%),
-    radial-gradient(circle at 20% 80%,#2563eb,transparent 30%),
-    linear-gradient(135deg,#071a13,#08111f);
-}
-
-.project-visual.three{
-  background:
-    radial-gradient(circle at 50% 30%,#f59e0b,transparent 25%),
-    radial-gradient(circle at 20% 80%,#ef4444,transparent 30%),
-    linear-gradient(135deg,#1c1010,#17100a);
-}
-
-.project-visual.four{
-  background:
-    radial-gradient(circle at 70% 60%,#ec4899,transparent 25%),
-    radial-gradient(circle at 25% 25%,#6366f1,transparent 30%),
-    linear-gradient(135deg,#171026,#0d111f);
-}
-
-.project-glow{
-  position:absolute;
-  width:260px;
-  height:260px;
-  border-radius:50%;
-  background:rgba(255,255,255,.12);
-  filter:blur(70px);
-  left:30%;
-  top:20%;
-  animation:projectFloat 7s ease-in-out infinite alternate;
-}
-
-@keyframes projectFloat{
-  from{transform:translate(-30px,-20px)}
-  to{transform:translate(40px,30px)}
-}
-
-.project-content{
-  position:absolute;
-  inset:auto 0 0;
-  padding:32px;
-  background:linear-gradient(transparent,rgba(0,0,0,.85));
-  padding-top:100px;
-}
-
-.project-index{
-  font-size:10px;
-  color:#aaa;
-  letter-spacing:.2em;
-}
-
-.project-content h3{
-  font-family:'Cormorant Garamond',serif;
-  font-size:42px;
-  font-weight:300;
-  margin-top:10px;
-}
-
-.project-content p{
-  color:#bbb;
-  font-size:13px;
-  line-height:1.6;
-  max-width:400px;
-  margin-top:7px;
-}
-
-.project-tags{
-  display:flex;
-  gap:7px;
-  flex-wrap:wrap;
-  margin-top:16px;
-}
-
-.project-tag{
-  border:1px solid rgba(255,255,255,.18);
-  padding:5px 9px;
-  border-radius:50px;
-  color:#aaa;
-  font-size:9px;
-  letter-spacing:.08em;
-}
-
-.project-open{
-  position:absolute;
-  top:25px;
-  right:25px;
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  background:rgba(255,255,255,.1);
-  backdrop-filter:blur(10px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:18px;
-}
-
-@media(max-width:800px){
-  .projects-stage{
-    height:450px;
-  }
-
-  .project-card{
-    height:400px;
-  }
-}
-
-/* =========================================================
-   CERTIFICATIONS
-========================================================= */
-
-.certifications{
-  background:#fff;
-}
-
-.cert-filters{
-  display:flex;
-  flex-wrap:wrap;
-  gap:9px;
-  margin:70px 0 35px;
-}
-
-.cert-filter{
-  border:1px solid var(--line);
-  background:none;
-  border-radius:50px;
-  padding:9px 16px;
-  color:#777;
-  cursor:pointer;
-  font-size:11px;
-  transition:all .25s ease;
-}
-
-.cert-filter:hover,
-.cert-filter.active{
-  background:#111;
-  color:#fff;
-  border-color:#111;
-}
-
-.cert-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
-}
-
-.cert-card{
-  background:#f7f7f8;
-  border:1px solid rgba(0,0,0,.06);
-  border-radius:20px;
-  overflow:hidden;
-  transition:transform .35s ease,box-shadow .35s ease;
-}
-
-.cert-card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 20px 50px rgba(0,0,0,.08);
-}
-
-.cert-card-inner{
-  padding:23px 20px 20px;
-}
-
-.cert-issuer-bar{
-  display:flex;
-  align-items:center;
-  gap:9px;
-}
-
-.cert-issuer-icon{
-  width:28px;
-  height:28px;
-  border-radius:8px;
-  background:#111;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:11px;
-}
-
-.cert-issuer-name{
-  font-size:11px;
-  color:#777;
-}
-
-.cert-card-title{
-  font-size:15px;
-  line-height:1.5;
-  margin-top:25px;
-  min-height:67px;
-}
-
-.cert-card-footer{
-  margin-top:24px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-}
-
-.cert-date{
-  color:#999;
-  font-size:10px;
-}
-
-.cert-badge{
-  font-size:9px;
-  padding:5px 9px;
-  border-radius:50px;
-  background:#fff;
-  border:1px solid var(--line);
-  color:#777;
-}
-
-.cert-credential{
-  display:block;
-  padding:11px 20px;
-  border-top:1px solid var(--line);
-  font-size:10px;
-  color:#555;
-  letter-spacing:.06em;
-  transition:background .2s;
-}
-
-.cert-credential:hover{
-  background:#eee;
-  color:#111;
-}
-
-.cert-show-more{
-  display:block;
-  margin:30px auto 0;
-  border:1px solid #ddd;
-  background:none;
-  border-radius:50px;
-  padding:11px 20px;
-  font-size:11px;
-  cursor:pointer;
-  color:#555;
-}
-
-.cert-card.hidden-card{
-  display:none;
-}
-
-@media(max-width:950px){
-  .cert-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-
-@media(max-width:600px){
-  .cert-grid{
-    grid-template-columns:1fr;
-  }
-}
-
-/* =========================================================
-   GLOBE / JOURNEYS
-========================================================= */
-
-.journeys{
-  background:#050505;
-  color:#fff;
-}
-
-.journeys .eyebrow{
-  color:#666;
-}
-
-.journeys .section-title{
-  color:#fff;
-}
-
-.journey-subtitle{
-  color:#777;
-  font-size:12px;
-  letter-spacing:.1em;
-  margin-top:18px;
-}
-
-.globe-wrap{
-  margin-top:70px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:35px;
-  flex-wrap:wrap;
-}
-
-#globe-canvas{
-  width:min(520px,90vw);
-  height:auto;
-  cursor:grab;
-  border-radius:50%;
-  touch-action:none;
-}
-
-#globe-canvas:active{
-  cursor:grabbing;
-}
-
-#globe-panel{
-  width:300px;
-  background:#111;
-  border:1px solid rgba(255,255,255,.09);
-  border-radius:24px;
-  padding:25px;
-  opacity:0;
-  transform:translateX(15px);
-  pointer-events:none;
-  transition:opacity .35s ease,transform .35s ease;
-  max-height:460px;
-  overflow-y:auto;
-}
-
-#globe-panel.open{
-  opacity:1;
-  transform:none;
-  pointer-events:auto;
-}
-
-#globe-panel-close{
-  float:right;
-  border:0;
-  background:none;
-  color:#666;
-  font-size:23px;
-  cursor:pointer;
-}
-
-#gp-flag{
-  font-size:35px;
-  clear:both;
-  margin-bottom:12px;
-}
-
-#gp-name{
-  font-family:'Cormorant Garamond',serif;
-  font-size:30px;
-  font-weight:300;
-}
-
-#gp-tag{
-  color:#777;
-  font-size:11px;
-  margin-top:5px;
-}
-
-.gp-trip{
-  border-top:1px solid rgba(255,255,255,.08);
-  margin-top:18px;
-  padding-top:18px;
-}
-
-.gp-trip-title{
-  font-size:13px;
-  color:#ddd;
-}
-
-.gp-trip-text{
-  margin-top:7px;
-  color:#777;
-  font-size:11px;
-  line-height:1.7;
-}
-
-.globe-hint{
-  text-align:center;
-  margin-top:25px;
-  color:#555;
-  font-size:10px;
-  letter-spacing:.15em;
-  text-transform:uppercase;
-}
-
-/* =========================================================
-   CONTACT
-========================================================= */
-
-.contact{
-  background:#f5f5f7;
-  min-height:80vh;
-  display:flex;
-  align-items:center;
-}
-
-.contact-grid{
-  display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:100px;
-  align-items:end;
-}
-
-.contact-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(60px,9vw,125px);
-  line-height:.8;
-  font-weight:300;
-  letter-spacing:-.06em;
-}
-
-.contact-email{
-  display:inline-block;
-  margin-top:45px;
-  font-size:18px;
-  border-bottom:1px solid #999;
-  padding-bottom:8px;
-}
-
-.contact-right{
-  color:#666;
-  font-size:14px;
-  line-height:1.8;
-}
-
-.contact-right p+p{
-  margin-top:20px;
-}
-
-.availability-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  border:1px solid #ddd;
-  background:#fff;
-  padding:8px 13px;
-  border-radius:50px;
-  font-size:10px;
-  color:#555;
-  margin-bottom:25px;
-}
-
-.status-dot{
-  width:7px;
-  height:7px;
-  background:#22c55e;
-  border-radius:50%;
-  box-shadow:0 0 0 4px rgba(34,197,94,.1);
-}
-
-.socials{
-  display:flex;
-  gap:10px;
-  margin-top:35px;
-  flex-wrap:wrap;
-}
-
-.social{
-  border:1px solid #ddd;
-  background:#fff;
-  padding:9px 14px;
-  border-radius:50px;
-  font-size:10px;
-  color:#555;
-  transition:all .2s;
-}
-
-.social:hover{
-  background:#111;
-  color:#fff;
-  border-color:#111;
-}
-
-@media(max-width:800px){
-  .contact-grid{
-    grid-template-columns:1fr;
-    gap:60px;
-  }
-}
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer{
-  background:#f5f5f7;
-  padding:30px clamp(20px,6vw,100px) 45px;
-  border-top:1px solid var(--line);
-  display:flex;
-  justify-content:space-between;
-  gap:20px;
-  color:#999;
-  font-size:10px;
-  letter-spacing:.06em;
-}
-
-@media(max-width:600px){
-  footer{
-    flex-direction:column;
-  }
-}
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:600px){
-  .section{
-    padding-top:100px;
-    padding-bottom:100px;
-  }
-
-  .hero-inner{
-    padding-left:18px;
-    padding-right:18px;
-  }
-
-  .hero-title{
-    font-size:clamp(60px,18vw,110px);
-  }
-
-  .section-description{
-    font-size:15px;
-  }
-
-  .photo-section{
-    padding-top:100px;
-  }
-}
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
-@media(prefers-reduced-motion:reduce){
-  *,
-  *::before,
-  *::after{
-    animation-duration:.01ms!important;
-    animation-iteration-count:1!important;
-    scroll-behavior:auto!important;
-    transition-duration:.01ms!important;
-  }
+  #globe-panel{width:100%!important;max-width:340px;transform:translateY(8px)!important;}
+  #globe-panel.show{transform:translateY(0)!important;}
+  #globe-canvas{width:300px!important;height:300px!important;}
 }
 </style>
 
-</head>
+<!-- Contact -->
+<section id="contact">
+  <div class="section-label">06 — Contact</div>
+  <div class="contact-grid reveal">
+    <div class="contact-left">
+      <h2 class="section-title">Let's build<br><em>something</em></h2>
+      <a href="mailto:mouryadusi@outlook.com" class="big-email">mouryadusi@outlook.com</a>
+      <div class="social-links">
+        <a href="https://linkedin.com/in/mouryadusi-dxb" target="_blank" class="social-link"><span>LinkedIn</span><span>↗</span></a>
+        <a href="https://github.com/mouryadusi" target="_blank" class="social-link"><span>GitHub</span><span>↗</span></a>
 
-<body>
-
-<!-- ========================================================
-     OPENING
-========================================================= -->
-
-<div id="intro-screen">
-  <div class="intro-content">
-    <div class="intro-kicker">Welcome</div>
-
-```
-<div class="intro-name" aria-label="Mourya">
-  <span>M</span><span>o</span><span>u</span><span>r</span><span>y</span><span>a</span>
-</div>
-
-<div class="intro-role">AI &amp; Data Science</div>
-
-<div class="intro-thanks" id="intro-thanks">Thanks for visiting</div>
-<div class="intro-line"></div>
-```
-
-  </div>
-</div>
-
-<!-- ========================================================
-     NAVIGATION
-========================================================= -->
-
-<nav class="nav">
-  <a href="#home" class="nav-logo">MD.</a>
-
-  <div class="nav-links">
-    <a href="#about">About</a>
-    <a href="#beyond">Beyond the Code</a>
-    <a href="#projects">Projects</a>
-    <a href="#certifications">Credentials</a>
-    <a href="#journeys">Journey</a>
-    <a href="#contact">Contact</a>
-  </div>
-
-  <button class="nav-menu" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-    ↑
-  </button>
-</nav>
-
-<!-- ========================================================
-     HERO
-========================================================= -->
-
-<main>
-
-<section class="hero" id="home">
-  <div class="hero-inner reveal">
-
-```
-<div class="hero-small">
-  AI &amp; Data Science · Engineer · Builder
-</div>
-
-<h1 class="hero-title">
-  <span class="hey">Hey, I am</span>
-
-  <span class="mourya">Mourya</span>
-
-  <span class="dusi">Dusi</span>
-</h1>
-
-<p class="hero-role">
-  I work at the intersection of
-  <strong>Artificial Intelligence</strong>,
-  <strong>Data</strong> and
-  <strong>Technology</strong>.
-</p>
-```
-
-  </div>
-
-  <div class="hero-scroll">
-    Scroll to explore
-    <span></span>
+      <!-- phone: +971559315412 -->
+      </div>
+    </div>
+    <div class="contact-right">
+      <div class="availability-badge"><span class="status-dot"></span>Immediate availability</div>
+      <p>Currently based in Dubai, UAE. Open to full-time roles in AI & Data Science, remote positions, and relocation opportunities.</p>
+      <p>If you're building something interesting in AI, machine learning, or data infrastructure — I'd love to hear about it.</p>
+      <p style="color:var(--text-subtle);font-size:13px;">UAE Resident · Open to Remote Work & Relocation</p>
+    </div>
   </div>
 </section>
 
-<!-- ========================================================
-     TAP TO REVEAL
-========================================================= -->
-
-<section class="photo-section section" id="me">
-  <div class="container photo-layout">
-
-```
-<div class="photo-copy reveal">
-  <div class="eyebrow">A little more than code</div>
-
-  <h2>
-    There is a person
-    behind the
-    algorithms.
-  </h2>
-
-  <p>
-    Tap the photograph to reveal a little more about Mourya.
-    The rest of the story is still being written.
-  </p>
-</div>
-
-<div class="photo-card reveal" id="photo-card" tabindex="0" role="button" aria-label="Tap to reveal Mourya's photo">
-  <div class="photo-card-inner">
-
-    <div class="photo-face photo-front">
-      <div class="tap-symbol">↗</div>
-      <div class="tap-text">Tap to reveal</div>
-    </div>
-
-    <div class="photo-face photo-back">
-      <img src="assets/mourya.jpg" alt="Mourya Dusi">
-
-      <div class="photo-back-overlay">
-        <strong>Mourya Dusi</strong>
-        <span>AI &amp; Data Science</span>
+<!-- Guestbook -->
+<section id="guestbook" style="border-top:1px solid var(--border);">
+  <div style="max-width:1200px;margin:0 auto;padding:120px clamp(24px,5vw,60px);">
+    <div class="section-label">07 — Guestbook</div>
+    <div style="display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:start;">
+      <div>
+        <h2 class="section-title reveal">Leave a<br><em>message</em></h2>
+        <p style="font-size:15px;color:var(--text-muted);font-weight:300;margin-top:16px;line-height:1.7;max-width:480px;">Say hello, share a thought, or just let me know you were here. All messages appear live.</p>
+        <div id="gb-feed" style="margin-top:48px;display:flex;flex-direction:column;gap:12px;"></div>
+        <div id="gb-empty" style="display:none;"></div>
       </div>
-    </div>
-
-  </div>
-</div>
-```
-
-  </div>
-</section>
-
-<!-- ========================================================
-     ABOUT
-========================================================= -->
-
-<section class="about section" id="about">
-  <div class="container">
-
-```
-<div class="eyebrow reveal">About Mourya</div>
-
-<h2 class="section-title reveal">
-  Beyond<br>
-  the code.
-</h2>
-
-<p class="section-description reveal">
-  <!-- WRITE YOUR ABOUT INTRODUCTION HERE LATER -->
-  This space is intentionally left open for Mourya's story.
-  What shaped me, what I believe in, what I am learning,
-  and where I want to go next.
-</p>
-
-<div class="about-grid">
-
-  <div class="about-placeholder reveal">
-    <span>My story</span>
-
-    <h3>
-      A blank canvas
-      for the next chapter.
-    </h3>
-
-    <p>
-      <!-- WRITE YOUR PERSONAL STORY HERE -->
-      Add your personal introduction, background, experiences,
-      interests, values and anything else you want visitors to know.
-    </p>
-  </div>
-
-  <div class="about-facts reveal">
-
-    <div class="about-fact">
-      <div class="about-fact-label">Focus</div>
-      <div class="about-fact-value">
-        Artificial Intelligence · Machine Learning · Data Science
-      </div>
-    </div>
-
-    <div class="about-fact">
-      <div class="about-fact-label">Building</div>
-      <div class="about-fact-value">
-        Intelligent systems, data-driven applications and experiments.
-      </div>
-    </div>
-
-    <div class="about-fact">
-      <div class="about-fact-label">Learning</div>
-      <div class="about-fact-value">
-        AI systems · Cloud · Data infrastructure · MLOps
-      </div>
-    </div>
-
-    <div class="about-fact">
-      <div class="about-fact-label">Based</div>
-      <div class="about-fact-value">
-        Dubai, UAE
-      </div>
-    </div>
-
-  </div>
-
-</div>
-```
-
-  </div>
-</section>
-
-<!-- ========================================================
-     BEYOND THE CODE
-========================================================= -->
-
-<section class="beyond section" id="beyond">
-  <div class="container">
-
-```
-<div class="eyebrow reveal">Beyond the code</div>
-
-<h2 class="section-title reveal">
-  The things<br>
-  that make me,<br>
-  me.
-</h2>
-
-<div class="beyond-grid">
-
-  <article class="beyond-item reveal">
-    <div class="beyond-number">01</div>
-    <h3>Curiosity</h3>
-    <p>
-      <!-- EDIT LATER -->
-      I enjoy exploring new ideas, technologies and questions
-      that sit beyond the obvious answer.
-    </p>
-  </article>
-
-  <article class="beyond-item reveal">
-    <div class="beyond-number">02</div>
-    <h3>Learning</h3>
-    <p>
-      <!-- EDIT LATER -->
-      Every project is another opportunity to learn something
-      that can be carried into the next one.
-    </p>
-  </article>
-
-  <article class="beyond-item reveal">
-    <div class="beyond-number">03</div>
-    <h3>Experiences</h3>
-    <p>
-      <!-- EDIT LATER -->
-      Places, people and experiences shape how I think
-      just as much as technology does.
-    </p>
-  </article>
-
-  <article class="beyond-item reveal">
-    <div class="beyond-number">04</div>
-    <h3>Perspective</h3>
-    <p>
-      <!-- EDIT LATER -->
-      Technology matters most when it solves something meaningful.
-    </p>
-  </article>
-
-</div>
-```
-
-  </div>
-</section>
-
-<!-- ========================================================
-     PROJECTS
-========================================================= -->
-
-<section class="projects section" id="projects">
-
-  <div class="container">
-
-```
-<div class="projects-intro">
-
-  <div>
-    <div class="eyebrow reveal">Selected work</div>
-
-    <h2 class="section-title reveal">
-      Projects.
-    </h2>
-  </div>
-
-  <div class="projects-hint reveal">
-    Scroll to explore →
-  </div>
-
-</div>
-
-<div class="projects-stage">
-
-  <div class="projects-track" id="projects-track">
-
-    <!-- PROJECT 01 -->
-    <article class="project-card">
-
-      <div class="project-visual one">
-        <div class="project-glow"></div>
-      </div>
-
-      <div class="project-open">↗</div>
-
-      <div class="project-content">
-        <div class="project-index">01 / AI</div>
-
-        <h3>AI Project</h3>
-
-        <p>
-          <!-- REPLACE WITH YOUR PROJECT -->
-          Intelligent application built around machine learning
-          and real-world data.
-        </p>
-
-        <div class="project-tags">
-          <span class="project-tag">Python</span>
-          <span class="project-tag">Machine Learning</span>
-          <span class="project-tag">AI</span>
+      <div class="reveal">
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:32px;">
+          <div style="margin-bottom:20px;">
+            <label style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);display:block;margin-bottom:8px;">Your name</label>
+            <input id="gb-name" type="text" maxlength="40" placeholder="Satya" style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:14px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;">
+          </div>
+          <div style="margin-bottom:20px;">
+            <label style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);display:block;margin-bottom:8px;">Message</label>
+            <textarea id="gb-msg" maxlength="280" placeholder="Say something nice..." rows="4" style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:14px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;resize:none;transition:border-color .2s;line-height:1.6;"></textarea>
+            <div style="text-align:right;font-size:11px;color:var(--text-subtle);margin-top:4px;"><span id="gb-count">0</span>/280</div>
+          </div>
+          <button id="gb-submit" style="width:100%;padding:14px;background:var(--text);color:var(--bg);border:none;border-radius:10px;font-size:14px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:opacity .2s,transform .2s;font-weight:400;">Post message →</button>
+          <div id="gb-status" style="text-align:center;font-size:12px;color:var(--text-subtle);margin-top:12px;min-height:18px;"></div>
         </div>
       </div>
-
-    </article>
-
-    <!-- PROJECT 02 -->
-    <article class="project-card">
-
-      <div class="project-visual two">
-        <div class="project-glow"></div>
-      </div>
-
-      <div class="project-open">↗</div>
-
-      <div class="project-content">
-        <div class="project-index">02 / DATA</div>
-
-        <h3>Data Science</h3>
-
-        <p>
-          <!-- REPLACE WITH YOUR PROJECT -->
-          A data-driven project focused on discovering patterns,
-          generating insights and communicating results.
-        </p>
-
-        <div class="project-tags">
-          <span class="project-tag">Python</span>
-          <span class="project-tag">Data</span>
-          <span class="project-tag">Analytics</span>
-        </div>
-      </div>
-
-    </article>
-
-    <!-- PROJECT 03 -->
-    <article class="project-card">
-
-      <div class="project-visual three">
-        <div class="project-glow"></div>
-      </div>
-
-      <div class="project-open">↗</div>
-
-      <div class="project-content">
-        <div class="project-index">03 / CLOUD</div>
-
-        <h3>Cloud System</h3>
-
-        <p>
-          <!-- REPLACE WITH YOUR PROJECT -->
-          Cloud architecture and infrastructure work designed
-          for scalable applications.
-        </p>
-
-        <div class="project-tags">
-          <span class="project-tag">AWS</span>
-          <span class="project-tag">Cloud</span>
-          <span class="project-tag">Architecture</span>
-        </div>
-      </div>
-
-    </article>
-
-    <!-- PROJECT 04 -->
-    <article class="project-card">
-
-      <div class="project-visual four">
-        <div class="project-glow"></div>
-      </div>
-
-      <div class="project-open">↗</div>
-
-      <div class="project-content">
-        <div class="project-index">04 / EXPERIMENT</div>
-
-        <h3>Coming Next</h3>
-
-        <p>
-          <!-- REPLACE WITH YOUR PROJECT -->
-          An experimental space for the next idea.
-        </p>
-
-        <div class="project-tags">
-          <span class="project-tag">Experiment</span>
-          <span class="project-tag">Research</span>
-        </div>
-      </div>
-
-    </article>
-
-  </div>
-
-</div>
-```
-
+    </div>
   </div>
 </section>
 
-<!-- ========================================================
-     CERTIFICATIONS
-========================================================= -->
-
-<section class="certifications section" id="certifications">
-
-  <div class="container">
-
-```
-<div class="eyebrow reveal">Credentials</div>
-
-<h2 class="section-title reveal">
-  Things I've<br>
-  learned.
-</h2>
-
-<div class="cert-filters reveal">
-  <button class="cert-filter active" data-filter="all">All</button>
-  <button class="cert-filter" data-filter="ai">AI &amp; ML</button>
-  <button class="cert-filter" data-filter="cloud">Cloud</button>
-  <button class="cert-filter" data-filter="devops">DevOps</button>
-  <button class="cert-filter" data-filter="agile">Agile</button>
-  <button class="cert-filter" data-filter="python">Python</button>
-  <button class="cert-filter" data-filter="security">Security</button>
-  <button class="cert-filter" data-filter="other">Other</button>
-</div>
-
-<div class="cert-grid" id="cert-grid">
-
-  <div class="cert-card" data-cat="ai">
-    <div class="cert-card-inner">
-      <div class="cert-issuer-bar">
-        <div class="cert-issuer-icon">S</div>
-        <div class="cert-issuer-name">Skillsoft</div>
-      </div>
-      <div class="cert-card-title">AWS AI Practitioner — Machine Learning Operations (MLOps)</div>
-      <div class="cert-card-footer">
-        <span class="cert-date">May 2025</span>
-        <span class="cert-badge">AI &amp; ML</span>
-      </div>
-    </div>
-    <a class="cert-credential" href="https://skillsoft.digitalbadges.skillsoft.com/48dbf664-1313-4a6e-bb91-ee870b5fdde0" target="_blank" rel="noopener noreferrer">View credential ↗</a>
-  </div>
-
-  <div class="cert-card" data-cat="ai">
-    <div class="cert-card-inner">
-      <div class="cert-issuer-bar">
-        <div class="cert-issuer-icon">S</div>
-        <div class="cert-issuer-name">Skillsoft</div>
-      </div>
-      <div class="cert-card-title">Implementing AI with Amazon Machine Learning</div>
-      <div class="cert-card-footer">
-        <span class="cert-date">May 2025</span>
-        <span class="cert-badge">AI &amp; ML</span>
-      </div>
-    </div>
-    <a class="cert-credential" href="https://skillsoft.digitalbadges.skillsoft.com/4e1556f7-43de-45c9-a9bf-a216adfb8e8c" target="_blank" rel="noopener noreferrer">View credential ↗</a>
-  </div>
-
-  <div class="cert-card" data-cat="security">
-    <div class="cert-card-inner">
-      <div class="cert-issuer-bar">
-        <div class="cert-issuer-icon">S</div>
-        <div class="cert-issuer-name">Skillsoft</div>
-      </div>
-      <div class="cert-card-title">CBROPS: The CIA Triad &amp; Security Approaches</div>
-      <div class="cert-card-footer">
-        <span class="cert-date">May 2025</span>
-        <span class="cert-badge">Security</span>
-      </div>
-    </div>
-    <a class="cert-credential" href="https://skillsoft.digitalbadges.skillsoft.com/73d48c78-ccca-4d1d-b5dd-d670850c73e5" target="_blank" rel="noopener noreferrer">View credential ↗</a>
-  </div>
-
-  <div class="cert-card" data-cat="cloud">
-    <div class="cert-card-inner">
-      <div class="cert-issuer-bar">
-        <div class="cert-issuer-icon">S</div>
-        <div class="cert-issuer-name">Skillsoft</div>
-      </div>
-      <div class="cert-card-title">AWS Certified Solutions Architect Associate Bootcamp</div>
-      <div class="cert-card-footer">
-        <span class="cert-date">Dec 2024</span>
-        <span class="cert-badge">Cloud</span>
-      </div>
-    </div>
-    <a class="cert-credential" href="https://skillsoft.digitalbadges.skillsoft.com/21010f49-2f71-4f51-ab4a-b828d8fc1129" target="_blank" rel="noopener noreferrer">View credential ↗</a>
-  </div>
-
-  <div class="cert-card" data-cat="cloud">
-    <div class="cert-card-inner">
-      <div class="cert-issuer-bar">
-        <div class="cert-issuer-icon">S</div>
-        <div class="cert-issuer-name">Skillsoft</div>
-      </div>
-      <div class="cert-card-title">Google Professional Cloud Architect: Cloud Architecture &amp; System Design</div>
-      <div class="cert-card-footer">
-        <span class="cert-date">Dec 2024</span>
-        <span class="cert-badge">Cloud</span>
-      </div>
-    </div>
-    <a class="cert-credential" href="https://skillsoft.digitalbadges.skillsoft.com/d0db326d-4914-463c-903e-622fe2a27bb7" target="_blank" rel="noopener noreferrer">View credential ↗</a>
-  </div>
-
-  <div class="cert-card" data-cat="cloud">
-    <div class="cert-card-inner">
-      <div class="cert-issuer-bar">
-        <div class="cert-issuer-icon">S</div>
-        <div class="cert-issuer-name">Skillsoft</div>
-      </div>
-      <div class="cert-card-title">Google Professional Cloud Architect: Google Cloud Fundamentals</div>
-      <div class="cert-card-footer">
-        <span class="cert-date">Dec 2024</span>
-        <span class="cert-badge">Cloud</span>
-      </div>
-    </div>
-    <a class="cert-credential" href="https://skillsoft.digitalbadges.skillsoft.com/dfd0c5a0-8f5c-4a5d-9643-9ac556078f49" target="_blank" rel="noopener noreferrer">View credential ↗</a>
-  </div>
-
-  <div class="cert-card" data-cat="cloud">
-    <div class="cert-card-inner">
-      <div class="cert-issuer-bar">
-        <div class="cert-issuer-icon">S</div>
-        <div class="cert-issuer-name">Skillsoft</div>
-      </div>
-      <div class="cert-card-title">MS-102: Implementing a Microsoft 365 Tenant</div>
-      <div class="cert-card-footer">
-        <span class="cert-date">Dec 2024</span>
-        <span class="cert-badge">Cloud</span>
-      </div>
-    </div>
-    <a class="cert-credential" href="https://skillsoft.digitalbadges.skillsoft.com/82ea4d99-275c-41d2-b07f-134d5d6a11bb" target="_blank" rel="noopener noreferrer">View credential ↗</a>
-  </div>
-
-  <div class="cert-card" data-cat="devops">
-    <div class="cert-card-inner">
-      <div class="cert-issuer-bar">
-        <div class="cert-issuer-icon">S</div>
-        <div class="cert-issuer-name">Skillsoft</div>
-      </div>
-      <div class="cert-card-title">IT Infrastructure Automation: Getting Started</div>
-      <div class="cert-card-footer">
-        <span class="cert-date">Nov 2024</span>
-        <span class="cert-badge">DevOps</span>
-      </div>
-    </div>
-    <a class="cert-credential" href="https://skillsoft.digitalbadges.skillsoft.com/a4ca4636-247a-4d6f-9b7c-d618819b3779" target="_blank" rel="noopener noreferrer">View credential ↗</a>
-  </div>
-
-  <div class="cert-card" data-cat="devops">
-    <div class="cert-card-inner">
-      <div class="cert-issuer-bar">
-        <div class="cert-issuer-icon">S</div>
-        <div class="cert-issuer-name">Skillsoft</div>
-      </div>
-      <div class="cert-card-title">The Language of DevOps: DevOps Tools &amp; Processes</div>
-      <div class="cert-card-footer">
-        <span class="cert-date">Nov 2024</span>
-        <span class="cert-badge">DevOps</span>
-      </div>
-    </div>
-    <a class="cert-credential" href="https://skillsoft.digitalbadges.skillsoft.com/09975ccb-a064-4cf7-aaaf-3e2963e9261c" target="_blank" rel="noopener noreferrer">View credential ↗</a>
-  </div>
-
-  <div class="cert-card" data-cat="devops">
-    <div class="cert-card-inner">
-      <div class="cert-issuer-bar">
-        <div class="cert-issuer-icon">S</div>
-        <div class="cert-issuer-name">Skillsoft</div>
-      </div>
-      <div class="cert-card-title">Exploring Business Process Automation</div>
-      <div class="cert-card-footer">
-        <span class="cert-date">Nov 2024</span>
-        <span class="cert-badge">DevOps</span>
-      </div>
-    </div>
-    <a class="cert-credential" href="https://skillsoft.digitalbadges.skillsoft.com/8e12f1ce-1b65-44bd-a2c2-4b20f94ad469" target="_blank" rel="noopener noreferrer">View credential ↗</a>
-  </div>
-
-  <div class="cert-card" data-cat="devops">
-    <div class="cert-card-inner">
-      <div class="cert-issuer-bar">
-        <div class="cert-issuer-icon">S</div>
-        <div class="cert-issuer-name">Skillsoft</div>
-      </div>
-      <div class="cert-card-title">Using Robots and RPA in the Workplace</div>
-      <div class="cert-card-footer">
-        <span class="cert-date">Nov 2024</span>
-        <span class="cert-badge">DevOps</span>
-      </div>
-    </div>
-    <a class="cert-credential" href="https://skillsoft.digitalbadges.skillsoft.com/98bb76ea-5486-4fba-a240-42a737e68aca" target="_blank" rel="noopener noreferrer">View credential ↗</a>
-  </div>
-
-  <div class="cert-card" data-cat="agile">
-    <div class="cert-card-inner">
-      <div class="cert-issuer-bar">
-        <div class="cert-issuer-icon">S</div>
-        <div class="cert-issuer-name">Skillsoft</div>
-      </div>
-      <div class="cert-card-title">Agile Best Practices for Tech Leaders: Core Concepts</div>
-      <div class="cert-card-footer">
-        <span class="cert-date">Nov 2024</span>
-        <span class="cert-badge">Agile</span>
-      </div>
-    </div>
-    <a class="cert-credential" href="https://skillsoft.digitalbadges.skillsoft.com/1a009b26-9bdf-4656-9f4f-95ae5a8360cb" target="_blank" rel="noopener noreferrer">View credential ↗</a>
-  </div>
-
-  <div class="cert-card" data-cat="agile">
-    <div class="cert-card-inner">
-      <div class="cert-issuer-bar">
-        <div class="cert-issuer-icon">S</div>
-        <div class="cert-issuer-name">Skillsoft</div>
-      </div>
-      <div class="cert-card-title">Agile Best Practices for Tech Leaders: The Scrum Framework</div>
-      <div class="cert-card-footer">
-        <span class="cert-date">Nov 2024</span>
-        <span class="cert-badge">Agile</span>
-      </div>
-    </div>
-    <a class="cert-credential" href="https://skillsoft.digitalbadges.skillsoft.com/126d98cb-64d3-40c7-9653-40430e832974" target="_blank" rel="noopener noreferrer">View credential ↗</a>
-  </div>
-
-  <div class="cert-card" data-cat="agile">
-    <div class="cert-card-inner">
-      <div class="cert-issuer-bar">
-        <div class="cert-issuer-icon">S</div>
-        <div class="cert-issuer-name">Skillsoft</div>
-      </div>
-      <div class="cert-card-title">Agile Best Practices for Tech Leaders: The Scrum Phases</div>
-      <div class="cert-card-footer">
-        <span class="cert-date">Nov 2024</span>
-        <span class="cert-badge">Agile</span>
-      </div>
-    </div>
-    <a class="cert-credential" href="https://skillsoft.digitalbadges.skillsoft.com/54ad40c8-bfd5-4897-bc1e-ca4c06802956" target="_blank" rel="noopener noreferrer">View credential ↗</a>
-  </div>
-
-  <div class="cert-card" data-cat="other">
-    <div class="cert-card-inner">
-      <div class="cert-issuer-bar">
-        <div class="cert-issuer-icon">S</div>
-        <div class="cert-issuer-name">Skillsoft</div>
-      </div>
-      <div class="cert-card-title">Software Design &amp; Development: Methodologies</div>
-      <div class="cert-card-footer">
-        <span class="cert-date">Nov 2024</span>
-        <span class="cert-badge">Engineering</span>
-      </div>
-    </div>
-    <a class="cert-credential" href="https://skillsoft.digitalbadges.skillsoft.com/9d237755-1b3c-44a4-aed6-029d675467ab" target="_blank" rel="noopener noreferrer">View credential ↗</a>
-  </div>
-
-  <div class="cert-card" data-cat="other">
-    <div class="cert-card-inner">
-      <div class="cert-issuer-bar">
-        <div class="cert-issuer-icon">S</div>
-        <div class="cert-issuer-name">Skillsoft</div>
-      </div>
-      <div class="cert-card-title">Software Design &amp; Development: Software Engineering &amp; SDLC Phases</div>
-      <div class="cert-card-footer">
-        <span class="cert-date">Nov 2024</span>
-        <span class="cert-badge">Engineering</span>
-      </div>
-    </div>
-    <a class="cert-credential" href="https://skillsoft.digitalbadges.skillsoft.com/8679a933-dd38-4c18-ba44-100cbcfacce1" target="_blank" rel="noopener noreferrer">View credential ↗</a>
-  </div>
-
-  <div class="cert-card" data-cat="other">
-    <div class="cert-card-inner">
-      <div class="cert-issuer-bar">
-        <div class="cert-issuer-icon">S</div>
-        <div class="cert-issuer-name">Skillsoft</div>
-      </div>
-      <div class="cert-card-title">Being an Effective Team Member</div>
-      <div class="cert-card-footer">
-        <span class="cert-date">Feb 2025</span>
-        <span class="cert-badge">Leadership</span>
-      </div>
-    </div>
-    <a class="cert-credential" href="https://skillsoft.digitalbadges.skillsoft.com/4cb93caa-c828-4460-a981-2525aa59e349" target="_blank" rel="noopener noreferrer">View credential ↗</a>
-  </div>
-
-  <div class="cert-card" data-cat="cloud">
-    <div class="cert-card-inner">
-      <div class="cert-issuer-bar">
-        <div class="cert-issuer-icon">P</div>
-        <div class="cert-issuer-name">Pluralsight</div>
-      </div>
-      <div class="cert-card-title">5G &amp; Edge Computing</div>
-      <div class="cert-card-footer">
-        <span class="cert-date">Nov 2024</span>
-        <span class="cert-badge">Cloud</span>
-      </div>
-    </div>
-    <a class="cert-credential" href="https://app.pluralsight.com/achievements/share/b5fd9399-a4d2-4f0b-92bb-807608597726" target="_blank" rel="noopener noreferrer">View credential ↗</a>
-  </div>
-
-  <div class="cert-card" data-cat="python">
-    <div class="cert-card-inner">
-      <div class="cert-issuer-bar">
-        <div class="cert-issuer-icon">U</div>
-        <div class="cert-issuer-name">Udemy</div>
-      </div>
-      <div class="cert-card-title">100 Days of Code: The Complete Python Pro Bootcamp</div>
-      <div class="cert-card-footer">
-        <span class="cert-date">May 2024</span>
-        <span class="cert-badge">Python</span>
-      </div>
-    </div>
-    <a class="cert-credential" href="https://ude.my/UC-5eee6069-97e5-455d-bf39-561f00a28b65" target="_blank" rel="noopener noreferrer">View credential ↗</a>
-  </div>
-
-  <div class="cert-card" data-cat="other">
-    <div class="cert-card-inner">
-      <div class="cert-issuer-bar">
-        <div class="cert-issuer-icon">S</div>
-        <div class="cert-issuer-name">Skillsoft</div>
-      </div>
-      <div class="cert-card-title">AWS Certified AI Practitioner</div>
-      <div class="cert-card-footer">
-        <span class="cert-date">Jun 2025</span>
-        <span class="cert-badge">AI &amp; ML</span>
-      </div>
-    </div>
-    <a class="cert-credential" href="#" onclick="return false;">Credential pending</a>
-  </div>
-
-</div>
-
-<button class="cert-show-more" id="cert-toggle">
-  <span id="cert-toggle-text">Show all 20 credentials</span>
-  <span id="cert-toggle-icon">↓</span>
-</button>
-```
-
-  </div>
-</section>
-
-<!-- ========================================================
-     JOURNEYS / GLOBE
-========================================================= -->
-
-<section class="journeys section" id="journeys">
-
-  <div class="container">
-
-```
-<div class="eyebrow reveal">Places &amp; stories</div>
-
-<h2 class="section-title reveal">
-  Beyond<br>
-  the screen.
-</h2>
-
-<p class="journey-subtitle reveal">
-  Drag to rotate · Click a glowing country for the story
-</p>
-
-<div class="globe-wrap">
-
-  <canvas
-    id="globe-canvas"
-    width="520"
-    height="520">
-  </canvas>
-
-  <div id="globe-panel">
-
-    <button id="globe-panel-close">×</button>
-
-    <div id="gp-flag"></div>
-    <div id="gp-name"></div>
-    <div id="gp-tag"></div>
-
-    <div style="height:1px;background:rgba(255,255,255,.08);margin-top:20px;"></div>
-
-    <div id="gp-trips"></div>
-
-  </div>
-
-</div>
-
-<div class="globe-hint">
-  A map of places that matter to the story
-</div>
-```
-
-  </div>
-</section>
-
-<!-- ========================================================
-     CONTACT
-========================================================= -->
-
-<section class="contact section" id="contact">
-
-  <div class="container contact-grid">
-
-```
-<div class="contact-left reveal">
-
-  <div class="eyebrow">Let's connect</div>
-
-  <h2 class="contact-title">
-    Let's make<br>
-    something<br>
-    intelligent.
-  </h2>
-
-  <a
-    class="contact-email"
-    href="mailto:your-email@example.com">
-    your-email@example.com ↗
-  </a>
-
-  <div class="socials">
-    <a class="social" href="https://github.com/mouryadusi" target="_blank" rel="noopener noreferrer">GitHub</a>
-    <a class="social" href="#" onclick="return false;">LinkedIn</a>
-    <a class="social" href="#" onclick="return false;">Resume</a>
-  </div>
-
-</div>
-
-<div class="contact-right reveal">
-
-  <div class="availability-badge">
-    <span class="status-dot"></span>
-    Immediate availability
-  </div>
-
-  <p>
-    Currently based in Dubai, UAE.
-    Open to full-time roles in AI &amp; Data Science,
-    remote positions, and relocation opportunities.
-  </p>
-
-  <p>
-    If you're building something interesting in AI,
-    machine learning, or data infrastructure —
-    I'd love to hear from you.
-  </p>
-
-  <p style="color:#999;font-size:12px;">
-    UAE Resident · Open to Remote Work &amp; Relocation
-  </p>
-
-</div>
-```
-
-  </div>
-
-</section>
-
-</main>
-
-<!-- ========================================================
-     FOOTER
-========================================================= -->
-
+<!-- Footer -->
 <footer>
-  <span>© <span id="year"></span> Mourya Dusi</span>
-  <span>AI &amp; Data Science</span>
-  <span>Built with curiosity.</span>
+  <span>© 2026 Mourya Dusi</span>
+  <span>Dubai, UAE</span>
+  <span>Built with ❤</span>
 </footer>
 
+<!-- D3 Globe Script -->
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script>
+(function(){
+  // ── TRAVEL STORIES — all keys valid, all trips have correct structure ──
+  const STORIES = {
+    IN: {
+      flag:'🇮🇳', name:'India', tag:'Home. Where every journey begins and ends.',
+      trips:[
+        {n:'Home Base', t:'Vijayawada, Andhra Pradesh', d:'The city that grounds me no matter how far I wander.'},
+        {n:'States Visited', t:'13 of 28 states', bar:{v:13,tot:28}},
+        {n:'Union Territories', t:'2 of 8 UTs', bar:{v:2,tot:8}},
+        {n:'Coverage', t:'39% of India explored so far', d:'India never runs out — still so much left.'},
+      ]
+    },
+    MY: {
+      flag:'🇲🇾', name:'Malaysia', tag:'Where the travel bug first bit.',
+      trips:[
+        {n:'Trip 01 · With Dad', t:'My very first international trip. The Petronas Towers at night lit something in me that never went out.'},
+      ]
+    },
+    AE: {
+      flag:'🇦🇪', name:'UAE', tag:'A place I keep coming back to.',
+      trips:[
+        {n:'Home away from home', t:'From city lights to desert nights — this place has my heart. 5+ visits, lived across Dubai, Abu Dhabi, Sharjah and Ajman.'},
+      ]
+    },
+    SG: {
+      flag:'🇸🇬', name:'Singapore', tag:'The city that always surprises.',
+      trips:[
+        {n:'Trip 01 · Solo', t:'Gardens by the Bay at night. Hawker food that changes your benchmarks. A city that just works.'},
+        {n:'Trip 02 · With Buddies', t:'Same city, completely different energy with the squad. Clarke Quay, Sentosa, late nights.'},
+      ]
+    },
+    TH: {
+      flag:'🇹🇭', name:'Thailand', tag:'The trip that became a legend.',
+      trips:[
+        {n:'Two trips, zero regrets', t:'From beaches to chaotic laughs to amazing food and nature — definitely worth coming back again.'},
+      ]
+    },
+    US: {
+      flag:'🇺🇸', name:'USA', tag:'The great American road trip.',
+      trips:[
+        {n:'Road Trip', t:'My favourite road trip — highways, deserts, mountains, and a new way of seeing distance. Texas → Colorado → New Mexico → Nevada → Utah → Arizona.'},
+      ]
+    },
+    NP: {
+      flag:'🇳🇵', name:'Nepal', tag:'Humbling in every way.',
+      trips:[
+        {n:'Trip 01 · With Parents', t:'Kathmandu with mom and dad. The Himalayas make your ambitions feel simultaneously tiny and impossibly big.'},
+      ]
+    },
+    VN: {
+      flag:'🇻🇳', name:'Vietnam', tag:'Underrated, unforgettable.',
+      trips:[
+        {n:'Trip 01 · With Buddies', t:'The food is extraordinary. Pure chaos in the best way.'},
+      ]
+    },
+    LK: {
+      flag:'🇱🇰', name:'Sri Lanka', tag:'An island that surprises you.',
+      trips:[
+        {n:'Recent visit', t:'Tea highlands, ancient temples, golden beaches. Sri Lanka packs extraordinary variety into one island — a neighbour worth exploring.'},
+      ]
+    },
+  };
 
-/* =========================================================
-   INTRO — MULTILINGUAL THANK YOU
-========================================================= */
+  const VISITED = new Set(['IN','MY','AE','SG','TH','US','NP','VN','LK']);
+  const N2A = {356:'IN',458:'MY',784:'AE',702:'SG',764:'TH',840:'US',524:'NP',704:'VN',144:'LK',4:'AF',8:'AL',12:'DZ',24:'AO',32:'AR',36:'AU',40:'AT',50:'BD',56:'BE',76:'BR',100:'BG',116:'KH',120:'CM',124:'CA',144:'LK',152:'CL',156:'CN',170:'CO',180:'CD',188:'CR',191:'HR',192:'CU',203:'CZ',208:'DK',218:'EC',818:'EG',231:'ET',246:'FI',250:'FR',276:'DE',288:'GH',300:'GR',348:'HU',360:'ID',364:'IR',368:'IQ',372:'IE',376:'IL',380:'IT',392:'JP',404:'KE',410:'KR',418:'LA',434:'LY',484:'MX',496:'MN',104:'MM',508:'MZ',528:'NL',566:'NG',578:'NO',586:'PK',604:'PE',608:'PH',616:'PL',620:'PT',642:'RO',643:'RU',682:'SA',710:'ZA',724:'ES',752:'SE',756:'CH',760:'SY',788:'TN',792:'TR',804:'UA',826:'GB',858:'UY',887:'YE',716:'ZW'};
 
-const introScreen = document.getElementById('intro-screen');
-const introThanks = document.getElementById('intro-thanks');
+  const canvas = document.getElementById('globe-canvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height, cx = W/2, cy = H/2;
 
-const thankYouLanguages = [
-  'Thanks for visiting',
-  'ధన్యవాదాలు',
-  'Gracias por visitar',
-  'شكراً لزيارتك',
-  'धन्यवाद',
-  'Merci de votre visite'
-];
+  const proj = d3.geoOrthographic().scale(W/2-4).translate([cx,cy]).clipAngle(90);
+  const path = d3.geoPath(proj, ctx);
+  let rotation = [60, -20]; // start centered on India/Asia region
+  let isDragging = false, lastPos = null, velRot = [0,0], worldData = null;
 
-let thankIndex = 0;
+  function isDark(){ return document.documentElement.getAttribute('data-theme') !== 'light'; }
 
-function cycleThanks(){
-  introThanks.style.opacity = '0';
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    ctx.beginPath(); path({type:'Sphere'});
+    const g = ctx.createRadialGradient(cx-60,cy-60,20,cx,cy,W/2);
+    if(isDark()){ g.addColorStop(0,'#152540'); g.addColorStop(1,'#060e1a'); }
+    else { g.addColorStop(0,'#c8dff5'); g.addColorStop(1,'#8ab8e0'); }
+    ctx.fillStyle=g; ctx.fill();
 
-  setTimeout(()=>{
-    thankIndex = (thankIndex + 1) % thankYouLanguages.length;
-    introThanks.textContent = thankYouLanguages[thankIndex];
-    introThanks.style.opacity = '1';
-  },350);
-}
+    if(!worldData) return;
 
-const thankInterval = setInterval(cycleThanks,1500);
+    // Grid lines
+    ctx.beginPath(); path(d3.geoGraticule()());
+    ctx.strokeStyle = isDark()?'rgba(255,255,255,0.04)':'rgba(0,0,0,0.06)';
+    ctx.lineWidth=0.5; ctx.stroke();
 
-setTimeout(()=>{
-  clearInterval(thankInterval);
-  introScreen.classList.add('hide');
-  document.body.classList.remove('no-scroll');
-},6500);
+    // Countries
+    worldData.features.forEach(f=>{
+      const iso=N2A[parseInt(f.id)], v=VISITED.has(iso);
+      ctx.beginPath(); path(f);
+      if(v){ ctx.fillStyle=isDark()?'#1d7a4a':'#22a05a'; ctx.strokeStyle='#4ade80'; ctx.lineWidth=1.0; }
+      else { ctx.fillStyle=isDark()?'#1a2c40':'#c0d4e8'; ctx.strokeStyle=isDark()?'rgba(255,255,255,0.08)':'rgba(0,0,0,0.1)'; ctx.lineWidth=0.4; }
+      ctx.fill(); ctx.stroke();
+    });
 
+    // Glow pass
+    worldData.features.forEach(f=>{
+      if(!VISITED.has(N2A[parseInt(f.id)])) return;
+      ctx.beginPath(); path(f); ctx.fillStyle='rgba(74,222,128,0.12)'; ctx.fill();
+    });
 
-/* =========================================================
-   YEAR
-========================================================= */
+    // Dots with manual centers for accuracy
+    const centers = {IN:[78,22],MY:[109,3.8],AE:[54,24],SG:[103.8,1.35],TH:[100.5,15],US:[-98.5,39.5],NP:[84,28.4],VN:[107.8,16],LK:[80.7,7.9]};
+    const t = Date.now()/1000;
+    Object.entries(centers).forEach(([iso,coords])=>{
+      const angle = d3.geoDistance(coords, [-rotation[0],-rotation[1]]);
+      if(angle > Math.PI/2) return;
+      const px = proj(coords); if(!px) return;
+      const [x,y] = px;
+      const pulse = 0.5+0.5*Math.sin(t*2+iso.charCodeAt(0));
+      ctx.beginPath(); ctx.arc(x,y,6+pulse*4,0,Math.PI*2);
+      ctx.strokeStyle=`rgba(74,222,128,${0.15+pulse*0.2})`; ctx.lineWidth=1.5; ctx.stroke();
+      ctx.beginPath(); ctx.arc(x,y,5,0,Math.PI*2);
+      ctx.fillStyle='#4ade80'; ctx.fill();
+      ctx.strokeStyle='#fff'; ctx.lineWidth=1; ctx.stroke();
+    });
 
-document.getElementById('year').textContent = new Date().getFullYear();
+    // Atmosphere
+    ctx.beginPath(); path({type:'Sphere'});
+    const rim = ctx.createRadialGradient(cx,cy,W/2-8,cx,cy,W/2+2);
+    rim.addColorStop(0,'rgba(100,180,255,0.0)'); rim.addColorStop(1,'rgba(100,180,255,0.12)');
+    ctx.strokeStyle=rim; ctx.lineWidth=8; ctx.stroke();
+  }
 
+  function animate(){
+    requestAnimationFrame(animate);
+    if(!isDragging){ velRot[0]*=0.92; velRot[1]*=0.92; rotation[0]+=0.12+velRot[0]; rotation[1]+=velRot[1]; rotation[1]=Math.max(-60,Math.min(60,rotation[1])); }
+    proj.rotate(rotation); draw();
+  }
 
-/* =========================================================
-   SCROLL REVEALS
-========================================================= */
+  function topojsonFeature(topo,obj){
+    const arcs=topo.arcs,sc=topo.transform.scale,tr=topo.transform.translate;
+    function a2c(i){ const rv=i<0,raw=arcs[rv?~i:i];let x=0,y=0;const pts=raw.map(([dx,dy])=>{x+=dx;y+=dy;return[x*sc[0]+tr[0],y*sc[1]+tr[1]]});return rv?pts.reverse():pts; }
+    function bg(g){ if(g.type==='Polygon')return{type:'Polygon',coordinates:g.arcs.map(r=>r.flatMap(a2c))};if(g.type==='MultiPolygon')return{type:'MultiPolygon',coordinates:g.arcs.map(p=>p.map(r=>r.flatMap(a2c)))};return g; }
+    return{type:'FeatureCollection',features:obj.geometries.map(g=>({type:'Feature',id:g.id,geometry:bg(g)}))};
+  }
 
-const revealObserver = new IntersectionObserver(
-  entries=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
+  fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+    .then(r=>r.json())
+    .then(world=>{ worldData=topojsonFeature(world,world.objects.countries); animate(); startCounters(); })
+    .catch(()=>{ animate(); startCounters(); });
+
+  let clickOk=true;
+  canvas.addEventListener('mousedown',e=>{ isDragging=true;clickOk=true;lastPos=[e.clientX,e.clientY];velRot=[0,0];canvas.style.cursor='grabbing'; });
+  canvas.addEventListener('touchstart',e=>{ isDragging=true;clickOk=true;lastPos=[e.touches[0].clientX,e.touches[0].clientY];velRot=[0,0]; },{passive:true});
+  window.addEventListener('mousemove',e=>{
+    if(!isDragging||!lastPos)return;
+    const dx=e.clientX-lastPos[0],dy=e.clientY-lastPos[1];
+    if(Math.abs(dx)>3||Math.abs(dy)>3)clickOk=false;
+    velRot[0]=dx*0.3;velRot[1]=-dy*0.3;rotation[0]+=velRot[0];rotation[1]+=velRot[1];rotation[1]=Math.max(-60,Math.min(60,rotation[1]));lastPos=[e.clientX,e.clientY];
+  });
+  window.addEventListener('touchmove',e=>{
+    if(!isDragging||!lastPos)return;
+    const dx=e.touches[0].clientX-lastPos[0],dy=e.touches[0].clientY-lastPos[1];
+    clickOk=false;velRot[0]=dx*0.3;velRot[1]=-dy*0.3;rotation[0]+=velRot[0];rotation[1]+=velRot[1];rotation[1]=Math.max(-60,Math.min(60,rotation[1]));lastPos=[e.touches[0].clientX,e.touches[0].clientY];
+  },{passive:true});
+  window.addEventListener('mouseup',()=>{ isDragging=false;canvas.style.cursor='grab'; });
+  window.addEventListener('touchend',()=>{ isDragging=false; });
+
+  canvas.addEventListener('click',e=>{
+    if(!clickOk||!worldData)return;
+    const rect=canvas.getBoundingClientRect();
+    const scaleX=W/rect.width,scaleY=H/rect.height;
+    const coords=proj.invert([(e.clientX-rect.left)*scaleX,(e.clientY-rect.top)*scaleY]);
+    if(!coords)return;
+    let hitISO=null;
+    worldData.features.forEach(f=>{ const iso=N2A[parseInt(f.id)]; if(VISITED.has(iso)&&d3.geoContains(f,coords)) hitISO=iso; });
+    if(!hitISO){
+      const centers={IN:[78,22],MY:[109,3.8],AE:[54,24],SG:[103.8,1.35],TH:[100.5,15],US:[-98.5,39.5],NP:[84,28.4],VN:[107.8,16],LK:[80.7,7.9]};
+      let minDist=Infinity;
+      Object.entries(centers).forEach(([iso,c])=>{ const d=d3.geoDistance(coords,c); if(d<minDist){minDist=d;hitISO=iso;} });
+      if(minDist>0.32)hitISO=null;
+    }
+    if(hitISO)showPanel(hitISO); else closePanel();
+  });
+
+  function showPanel(iso){
+    const s=STORIES[iso];if(!s)return;
+    document.getElementById('gp-flag').textContent=s.flag;
+    document.getElementById('gp-name').textContent=s.name;
+    document.getElementById('gp-tag').textContent=s.tag;
+    const tc=document.getElementById('gp-trips');tc.innerHTML='';
+    s.trips.forEach((trip,i)=>{
+      const div=document.createElement('div');div.className='gt';div.style.animationDelay=(i*.07)+'s';
+      let h=`<div class="gt-n">${trip.n||''}</div><div class="gt-t">${trip.t||''}</div>`;
+      if(trip.d)h+=`<div class="gt-d">${trip.d}</div>`;
+      if(trip.bar){
+        const pct=Math.round(trip.bar.v/trip.bar.tot*100);
+        h+=`<div class="g-bar-row"><span>${trip.bar.v}/${trip.bar.tot}</span><span>${pct}%</span></div><div class="g-bar-track"><div class="g-bar-fill" id="gbar${i}"></div></div>`;
       }
+      div.innerHTML=h;tc.appendChild(div);
+      if(trip.bar){setTimeout(()=>{ const b=document.getElementById('gbar'+i);if(b)b.style.width=Math.round(trip.bar.v/trip.bar.tot*100)+'%'; },100+i*60);}
     });
-  },
-  {
-    threshold:.12,
-    rootMargin:'0px 0px -50px 0px'
+    document.getElementById('globe-panel').classList.add('show');
   }
-);
+  function closePanel(){ document.getElementById('globe-panel').classList.remove('show'); }
+  document.getElementById('globe-panel-close').addEventListener('click',closePanel);
 
-document.querySelectorAll('.reveal').forEach(el=>{
-  revealObserver.observe(el);
+  function startCounters(){
+    function run(el,target,dur,fmt){ let s=null;const f=ts=>{if(!s)s=ts;const p=Math.min((ts-s)/dur,1),e=1-Math.pow(1-p,3);el.innerHTML=fmt(Math.round(e*target));if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f); }
+    const obs=new IntersectionObserver(entries=>{
+      if(!entries[0].isIntersecting)return;
+      run(document.getElementById('g-cn'),10,1400,v=>`${v}`);
+      run(document.getElementById('g-mi'),158,2000,v=>`${v}<span style="font-size:22px;color:var(--text-subtle)">k</span>`);
+      obs.disconnect();
+    },{threshold:.3});
+    const sec=document.getElementById('globe-section');if(sec)obs.observe(sec);
+  }
+})();
+</script>
+
+<!-- Main Scripts -->
+<script>
+// Loader
+window.addEventListener('load',()=>{
+  setTimeout(()=>{ const l=document.getElementById('loader');l.classList.add('fade-out');setTimeout(()=>l.style.display='none',800); },2400);
 });
 
-
-/* =========================================================
-   TAP TO REVEAL PHOTO
-========================================================= */
-
-const photoCard = document.getElementById('photo-card');
-
-function togglePhoto(){
-  photoCard.classList.toggle('revealed');
-}
-
-photoCard.addEventListener('click',togglePhoto);
-
-photoCard.addEventListener('keydown',e=>{
-  if(e.key==='Enter' || e.key===' '){
-    e.preventDefault();
-    togglePhoto();
-  }
+// Cursor
+const dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');
+if('ontouchstart' in window||navigator.maxTouchPoints>0){ document.body.style.cursor='auto';if(dot)dot.style.display='none';if(ring)ring.style.display='none'; }
+let mouseX=0,mouseY=0,ringX=0,ringY=0;
+document.addEventListener('mousemove',e=>{ mouseX=e.clientX;mouseY=e.clientY;if(dot){dot.style.left=mouseX+'px';dot.style.top=mouseY+'px';} });
+function animateRing(){ ringX+=(mouseX-ringX)*0.12;ringY+=(mouseY-ringY)*0.12;if(ring){ring.style.left=ringX+'px';ring.style.top=ringY+'px';}requestAnimationFrame(animateRing); }
+animateRing();
+document.querySelectorAll('a,button,.project-item,.country-pill,.interest-card,.edu-card,.cert-item,.skill-tag').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));
 });
+document.querySelectorAll('input,textarea,select').forEach(el=>el.style.cursor='text');
 
+// Theme
+const themeToggle=document.getElementById('theme-toggle'),html=document.documentElement;
+html.setAttribute('data-theme',localStorage.getItem('theme')||'dark');
+themeToggle.addEventListener('click',()=>{ const n=html.getAttribute('data-theme')==='dark'?'light':'dark';html.setAttribute('data-theme',n);localStorage.setItem('theme',n); });
 
-/* =========================================================
-   PROJECT HORIZONTAL SCROLL
-========================================================= */
+// Header scroll
+const header=document.getElementById('site-header');
+window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>40),{passive:true});
 
-const projectSection = document.querySelector('.projects');
-const projectTrack = document.getElementById('projects-track');
+// Mobile nav
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobile-nav').classList.add('open'));
+document.getElementById('mobile-close').addEventListener('click',()=>document.getElementById('mobile-nav').classList.remove('open'));
+document.querySelectorAll('.mn-link').forEach(l=>l.addEventListener('click',()=>document.getElementById('mobile-nav').classList.remove('open')));
 
-function updateProjects(){
+// Clocks
+function fmtTime(tz){ return new Date().toLocaleTimeString('en-US',{timeZone:tz,hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true}); }
+function updateClocks(){ document.getElementById('clock-dubai').textContent=fmtTime('Asia/Dubai');document.getElementById('clock-local').textContent=new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true}); }
+updateClocks();setInterval(updateClocks,1000);
 
-  if(!projectSection || !projectTrack) return;
+// Scroll reveal
+const revObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revObserver.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>revObserver.observe(el));
+</script>
 
-  const cards = projectTrack.querySelectorAll('.project-card');
-
-  if(!cards.length) return;
-
-  const isMobile = window.innerWidth < 700;
-
-  const trackWidth = projectTrack.scrollWidth;
-  const viewport = window.innerWidth;
-
-  const maxTranslate = Math.max(
-    0,
-    trackWidth - viewport + (isMobile ? 30 : 80)
-  );
-
-  const rect = projectSection.getBoundingClientRect();
-
-  const totalTravel = projectSection.offsetHeight - window.innerHeight;
-
-  if(totalTravel <= 0){
-    projectTrack.style.transform = 'translateX(0)';
-    return;
-  }
-
-  const progress = Math.min(
-    1,
-    Math.max(
-      0,
-      -rect.top / totalTravel
-    )
-  );
-
-  const translate = maxTranslate * progress;
-
-  projectTrack.style.transform =
-    `translate3d(${-translate}px,0,0)`;
-
-}
-
-window.addEventListener('scroll',updateProjects,{passive:true});
-window.addEventListener('resize',updateProjects);
-window.addEventListener('load',updateProjects);
-
-
-/* =========================================================
-   CERTIFICATION FILTER
-========================================================= */
-
-const certButtons =
-  document.querySelectorAll('.cert-filter');
-
-const certCards =
-  document.querySelectorAll('.cert-card');
-
-const certToggle =
-  document.getElementById('cert-toggle');
-
-const certToggleText =
-  document.getElementById('cert-toggle-text');
-
-const certToggleIcon =
-  document.getElementById('cert-toggle-icon');
-
-let certExpanded = false;
-
-function renderCertificates(filter='all'){
-
-  certCards.forEach((card,index)=>{
-
-    const matches =
-      filter === 'all' ||
-      card.dataset.cat === filter;
-
-    if(!matches){
-      card.style.display='none';
-      return;
+<!-- Letter Explosion -->
+<script>
+(function(){
+  function initExplosion(){
+    const heroIntro=document.getElementById('hero-intro');if(!heroIntro)return;
+    function wrapNode(node,container){
+      if(node.nodeType===3){
+        node.textContent.split('').forEach(ch=>{
+          const s=document.createElement('span');s.className='explode-char';
+          s.textContent=ch===' '?'\u00a0':ch;
+          s.style.setProperty('--rx','0px');s.style.setProperty('--ry','0px');s.style.setProperty('--rr','0deg');
+          container.appendChild(s);
+        });
+      } else { container.appendChild(node.cloneNode(true)); }
     }
-
-    if(!certExpanded && filter==='all' && index>=6){
-      card.style.display='none';
-    }else{
-      card.style.display='';
-    }
-
-  });
-
-  if(filter !== 'all'){
-    certToggle.style.display='none';
-  }else{
-    certToggle.style.display='block';
+    const explodeSpan=heroIntro.querySelector('.explode-text');if(!explodeSpan)return;
+    const children=Array.from(explodeSpan.childNodes);explodeSpan.innerHTML='';
+    children.forEach(n=>wrapNode(n,explodeSpan));
+    let exploded=false,reformTimer=null;
+    function setVectors(){ explodeSpan.querySelectorAll('.explode-char').forEach(c=>{c.style.setProperty('--rx',((Math.random()-.5)*220)+'px');c.style.setProperty('--ry',((Math.random()-.5)*180)+'px');c.style.setProperty('--rr',((Math.random()-.5)*900)+'deg');}); }
+    function explode(){ if(exploded)return;exploded=true;setVectors();explodeSpan.querySelectorAll('.explode-char').forEach(c=>{c.classList.remove('reform');void c.offsetWidth;c.classList.add('pop');});clearTimeout(reformTimer);reformTimer=setTimeout(reform,1500); }
+    function reform(){ exploded=false;explodeSpan.querySelectorAll('.explode-char').forEach(c=>{c.classList.remove('pop');void c.offsetWidth;c.classList.add('reform');});setTimeout(()=>explodeSpan.querySelectorAll('.explode-char').forEach(c=>c.classList.remove('reform')),700); }
+    heroIntro.addEventListener('mouseenter',explode);heroIntro.style.cursor='default';
+    heroIntro.addEventListener('click',()=>exploded?reform():explode());
   }
+  setTimeout(initExplosion,3400);
+})();
+</script>
 
-}
-
-certButtons.forEach(button=>{
-
-  button.addEventListener('click',()=>{
-
-    certButtons.forEach(btn=>{
-      btn.classList.remove('active');
+<!-- Guestbook -->
+<script>
+(function(){
+  const KEY='mourya_guestbook_v1',PWD='mourya2026';
+  function load(){ try{return JSON.parse(localStorage.getItem(KEY))||[];}catch{return[];} }
+  function save(msgs){ localStorage.setItem(KEY,JSON.stringify(msgs)); }
+  function ago(ts){ const d=Date.now()-ts,m=Math.floor(d/60000),h=Math.floor(m/60),dy=Math.floor(h/24);if(m<1)return'just now';if(m<60)return m+'m ago';if(h<24)return h+'h ago';if(dy<7)return dy+'d ago';return new Date(ts).toLocaleDateString('en-US',{month:'short',day:'numeric'}); }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function render(){
+    const feed=document.getElementById('gb-feed'),empty=document.getElementById('gb-empty');if(!feed)return;
+    const msgs=load();feed.innerHTML='';
+    if(!msgs.length){if(empty)empty.style.display='block';return;}
+    if(empty)empty.style.display='none';
+    msgs.slice().reverse().forEach((msg,ri)=>{
+      const i=msgs.length-1-ri,card=document.createElement('div');
+      card.style.cssText='background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:18px 20px;animation:gbIn .4s ease both;opacity:0;position:relative;';
+      card.style.animationDelay=(ri*0.05)+'s';
+      const ini=(msg.name||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+      const cols=['#4ade80','#60a5fa','#f472b6','#fb923c','#a78bfa'];
+      const col=cols[msg.name.charCodeAt(0)%cols.length];
+      card.innerHTML=`<div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;"><div style="width:34px;height:34px;border-radius:50%;background:${col}22;border:1px solid ${col}44;display:flex;align-items:center;justify-content:center;font-size:11px;color:${col};font-weight:500;flex-shrink:0;">${ini}</div><div><div style="font-size:13px;color:var(--text);font-weight:400;">${esc(msg.name)}</div><div style="font-size:11px;color:var(--text-subtle);">${ago(msg.ts)}</div></div><button onclick="gbDelete(${i})" style="margin-left:auto;background:none;border:none;color:var(--text-subtle);font-size:16px;cursor:pointer;opacity:0;transition:opacity .2s;padding:4px 8px;border-radius:6px;line-height:1;" class="gb-del">×</button></div><p style="font-size:14px;color:var(--text-muted);line-height:1.65;margin:0;">${esc(msg.message)}</p>`;
+      card.addEventListener('mouseenter',()=>{const d=card.querySelector('.gb-del');if(d)d.style.opacity='0.6';});
+      card.addEventListener('mouseleave',()=>{const d=card.querySelector('.gb-del');if(d)d.style.opacity='0';});
+      feed.appendChild(card);
     });
-
-    button.classList.add('active');
-
-    renderCertificates(button.dataset.filter);
-
-  });
-
-});
-
-certToggle.addEventListener('click',()=>{
-
-  certExpanded = !certExpanded;
-
-  if(certExpanded){
-
-    certToggleText.textContent =
-      'Show fewer credentials';
-
-    certToggleIcon.textContent='↑';
-
-  }else{
-
-    certToggleText.textContent =
-      'Show all 20 credentials';
-
-    certToggleIcon.textContent='↓';
-
-    document.getElementById('certifications')
-      .scrollIntoView({
-        behavior:'smooth',
-        block:'start'
-      });
-
   }
-
-  renderCertificates('all');
-
-});
-
-renderCertificates();
-
-
-/* =========================================================
-   INTERACTIVE GLOBE
-========================================================= */
-
-const canvas = document.getElementById('globe-canvas');
-const ctx = canvas.getContext('2d');
-
-const globePanel =
-  document.getElementById('globe-panel');
-
-const globeClose =
-  document.getElementById('globe-panel-close');
-
-const gpFlag =
-  document.getElementById('gp-flag');
-
-const gpName =
-  document.getElementById('gp-name');
-
-const gpTag =
-  document.getElementById('gp-tag');
-
-const gpTrips =
-  document.getElementById('gp-trips');
-
-
-/*
-  These are intentionally easy to edit.
-
-  Add more countries later by adding:
-  {
-    name:'Country',
-    flag:'🇮🇳',
-    tag:'Short description',
-    x:.5,
-    y:.5,
-    story:'Your story'
+  window.gbDelete=function(i){ const pw=prompt('Enter admin password to delete:');if(pw!==PWD){alert('Incorrect password.');return;}const msgs=load();msgs.splice(i,1);save(msgs);render(); };
+  const nameEl=document.getElementById('gb-name'),msgEl=document.getElementById('gb-msg'),countEl=document.getElementById('gb-count'),submitEl=document.getElementById('gb-submit'),statusEl=document.getElementById('gb-status');
+  if(msgEl)msgEl.addEventListener('input',()=>{if(countEl)countEl.textContent=msgEl.value.length;});
+  [nameEl,msgEl].forEach(el=>{if(!el)return;el.addEventListener('focus',()=>el.style.borderColor='var(--border-hover)');el.addEventListener('blur',()=>el.style.borderColor='var(--border)');});
+  if(submitEl){
+    submitEl.addEventListener('click',()=>{
+      const name=nameEl?nameEl.value.trim():'',message=msgEl?msgEl.value.trim():'';
+      if(!name){flash('Please enter your name.');nameEl&&nameEl.focus();return;}
+      if(!message){flash('Please write a message.');msgEl&&msgEl.focus();return;}
+      const msgs=load();msgs.push({name,message,ts:Date.now()});save(msgs);
+      nameEl.value='';msgEl.value='';if(countEl)countEl.textContent='0';flash('✓ Message posted!');render();
+    });
+    submitEl.addEventListener('mouseenter',()=>{submitEl.style.opacity='.85';submitEl.style.transform='translateY(-1px)';});
+    submitEl.addEventListener('mouseleave',()=>{submitEl.style.opacity='1';submitEl.style.transform='';});
   }
-*/
+  function flash(msg){if(!statusEl)return;statusEl.textContent=msg;setTimeout(()=>statusEl.textContent='',3000);}
+  const style=document.createElement('style');
+  style.textContent='@keyframes gbIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}#gb-feed>*{opacity:1!important}#guestbook input::placeholder,#guestbook textarea::placeholder{color:var(--text-subtle)}@media(max-width:760px){#guestbook [style*="grid-template-columns:1fr 420px"]{grid-template-columns:1fr!important;gap:40px!important}}';
+  document.head.appendChild(style);
+  render();
+  window.addEventListener('storage',e=>{if(e.key===KEY)render();});
+})();
+</script>
 
-const globePlaces = [
-
-  {
-    name:'India',
-    flag:'🇮🇳',
-    tag:'Roots & beginnings',
-    x:.68,
-    y:.58,
-    story:'A place connected to beginnings, learning, family and the experiences that shaped me.'
-  },
-
-  {
-    name:'United Arab Emirates',
-    flag:'🇦🇪',
-    tag:'Present chapter',
-    x:.58,
-    y:.52,
-    story:'Dubai is where the current chapter of the journey is taking place.'
-  },
-
-  {
-    name:'United States',
-    flag:'🇺🇸',
-    tag:'Technology & possibility',
-    x:.25,
-    y:.42,
-    story:'A place connected to technology, innovation and the global AI ecosystem.'
-  },
-
-  {
-    name:'Spain',
-    flag:'🇪🇸',
-    tag:'A future story',
-    x:.46,
-    y:.40,
-    story:'A place waiting for a future chapter.'
-  },
-
-  {
-    name:'Singapore',
-    flag:'🇸🇬',
-    tag:'Technology & curiosity',
-    x:.76,
-    y:.68,
-    story:'A technology-focused destination that represents curiosity and exploration.'
+<!-- ═══════════════════════════════════════════════════════════
+     FEATURE 1: MOOD SYSTEM — palette shifts with Dubai time
+     ═══════════════════════════════════════════════════════════ -->
+<script>
+(function(){
+  function applyMood(){
+    const hour = new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Dubai'})).getHours();
+    const root = document.documentElement;
+    let accent, accentRgb, label;
+    if(hour>=5 && hour<9){       accent='#f59e0b'; accentRgb='245,158,11';  label='sunrise'; }
+    else if(hour>=9 && hour<17){ accent='#f0f0f0'; accentRgb='240,240,240'; label='day';     }
+    else if(hour>=17&& hour<20){ accent='#f97316'; accentRgb='249,115,22';  label='sunset';  }
+    else{                         accent='#818cf8'; accentRgb='129,140,248'; label='night';   }
+    root.style.setProperty('--mood-accent', accent);
+    root.style.setProperty('--mood-rgb', accentRgb);
+    document.querySelectorAll('.clock-dot,.status-dot,.fp-badge-dot').forEach(el=>{
+      el.style.background = accent;
+    });
+    document.querySelectorAll('.availability-badge').forEach(el=>{
+      el.style.borderColor = `rgba(${accentRgb},.3)`;
+      el.style.color = accent;
+    });
   }
-
-];
-
-let globeRotation = 0;
-let globeDragging = false;
-let globeLastX = 0;
-let globeVelocity = .0015;
-
-function drawGlobe(){
-
-  const rect = canvas.getBoundingClientRect();
-
-  const ratio =
-    window.devicePixelRatio || 1;
-
-  const size =
-    Math.min(rect.width,520);
-
-  canvas.width =
-    size * ratio;
-
-  canvas.height =
-    size * ratio;
-
-  ctx.setTransform(
-    ratio,
-    0,
-    0,
-    ratio,
-    0,
-    0
-  );
-
-  const cx = size/2;
-  const cy = size/2;
-  const radius = size*.43;
-
-  ctx.clearRect(0,0,size,size);
-
-  /* Outer atmosphere */
-
-  const atmosphere =
-    ctx.createRadialGradient(
-      cx-radius*.15,
-      cy-radius*.2,
-      radius*.15,
-      cx,
-      cy,
-      radius*1.15
-    );
-
-  atmosphere.addColorStop(0,'rgba(255,255,255,.06)');
-  atmosphere.addColorStop(.65,'rgba(50,100,255,.04)');
-  atmosphere.addColorStop(1,'rgba(0,0,0,0)');
-
-  ctx.fillStyle=atmosphere;
-
-  ctx.beginPath();
-  ctx.arc(cx,cy,radius*1.1,0,Math.PI*2);
-  ctx.fill();
-
-  /* Globe */
-
-  const globeGradient =
-    ctx.createRadialGradient(
-      cx-radius*.35,
-      cy-radius*.35,
-      0,
-      cx,
-      cy,
-      radius
-    );
-
-  globeGradient.addColorStop(0,'#20252c');
-  globeGradient.addColorStop(.65,'#0c1015');
-  globeGradient.addColorStop(1,'#030405');
-
-  ctx.fillStyle=globeGradient;
-
-  ctx.beginPath();
-  ctx.arc(cx,cy,radius,0,Math.PI*2);
-  ctx.fill();
-
-  /* Latitude */
-
-  ctx.strokeStyle='rgba(255,255,255,.06)';
-  ctx.lineWidth=1;
-
-  for(let i=-2;i<=2;i++){
-
-    const y =
-      cy + i*radius*.25;
-
-    const half =
-      Math.sqrt(
-        Math.max(
-          0,
-          radius*radius -
-          Math.pow(y-cy,2)
-        )
-      );
-
-    ctx.beginPath();
-    ctx.ellipse(
-      cx,
-      y,
-      half,
-      Math.max(3,Math.abs(i)*radius*.12),
-      0,
-      0,
-      Math.PI*2
-    );
-    ctx.stroke();
-
-  }
-
-  /* Longitude */
-
-  for(let i=-2;i<=2;i++){
-
-    const x =
-      cx+i*radius*.25;
-
-    const half =
-      Math.sqrt(
-        Math.max(
-          0,
-          radius*radius -
-          Math.pow(x-cx,2)
-        )
-      );
-
-    ctx.beginPath();
-
-    ctx.ellipse(
-      x,
-      cy,
-      Math.max(3,Math.abs(i)*radius*.12),
-      half,
-      0,
-      0,
-      Math.PI*2
-    );
-
-    ctx.stroke();
-
-  }
-
-  /* Decorative stars / land-like particles */
-
-  const seedPoints = [];
-
-  for(let i=0;i<150;i++){
-
-    const angle =
-      i*2.399963;
-
-    const distance =
-      Math.sqrt((i+10)/160)*radius*.9;
-
-    const x =
-      cx+
-      Math.cos(angle+globeRotation*.15)*
-      distance;
-
-    const y =
-      cy+
-      Math.sin(angle*1.7+globeRotation*.12)*
-      distance*.62;
-
-    const inside =
-      Math.pow(x-cx,2)+
-      Math.pow(y-cy,2) <
-      radius*radius;
-
-    if(inside){
-
-      seedPoints.push({x,y});
-
-    }
-
-  }
-
-  seedPoints.forEach((p,i)=>{
-
-    ctx.fillStyle =
-      i%7===0
-        ? 'rgba(110,170,255,.18)'
-        : 'rgba(255,255,255,.08)';
-
-    ctx.beginPath();
-    ctx.arc(
-      p.x,
-      p.y,
-      i%11===0 ? 1.7 : .8,
-      0,
-      Math.PI*2
-    );
-    ctx.fill();
-
-  });
-
-  /* Places */
-
-  globePlaces.forEach(place=>{
-
-    const px =
-      cx+(place.x-.5)*radius*1.55;
-
-    const py =
-      cy+(place.y-.5)*radius*1.55;
-
-    const visible =
-      Math.pow(px-cx,2)+
-      Math.pow(py-cy,2) <
-      radius*radius;
-
-    if(!visible) return;
-
-    ctx.shadowBlur=18;
-    ctx.shadowColor='#64a8ff';
-    ctx.fillStyle='#82b9ff';
-
-    ctx.beginPath();
-    ctx.arc(px,py,4,0,Math.PI*2);
-    ctx.fill();
-
-    ctx.shadowBlur=0;
-
-    ctx.strokeStyle='rgba(130,185,255,.3)';
-    ctx.beginPath();
-    ctx.arc(px,py,10,0,Math.PI*2);
-    ctx.stroke();
-
-  });
-
+  window.addEventListener('load', applyMood);
+})();
+</script>
+
+<!-- ═══════════════════════════════════════════════════════════
+     FEATURE 2: NEWSPAPER PROJECTS — toggle view
+     ═══════════════════════════════════════════════════════════ -->
+<style>
+#newspaper-toggle{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--text-subtle);cursor:pointer;border:none;background:none;
+  margin-top:32px;padding:8px 16px;border:1px solid var(--border);
+  border-radius:100px;transition:all .2s;font-family:'DM Sans',sans-serif;
 }
+#newspaper-toggle:hover{color:var(--text);border-color:var(--border-hover);}
+#newspaper-view{display:none;margin-top:40px;}
+#newspaper-view.visible{display:block;}
+.np-masthead{
+  text-align:center;border-top:3px solid var(--text);
+  border-bottom:1px solid var(--text);padding:12px 0 8px;margin-bottom:24px;
+}
+.np-masthead h2{
+  font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,56px);
+  font-weight:700;letter-spacing:-.02em;color:var(--text);line-height:1;
+}
+.np-masthead .np-sub{
+  font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--text-muted);margin-top:6px;
+}
+.np-date{font-size:11px;color:var(--text-subtle);margin-top:4px;}
+.np-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr;
+  gap:0;border-top:1px solid var(--border);
+}
+.np-col{padding:20px;border-right:1px solid var(--border);}
+.np-col:last-child{border-right:none;}
+.np-headline{
+  font-family:'Playfair Display',serif;font-size:clamp(18px,2.5vw,26px);
+  font-weight:700;line-height:1.15;letter-spacing:-.01em;
+  color:var(--text);margin-bottom:10px;
+}
+.np-byline{font-size:11px;color:var(--text-subtle);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;border-bottom:1px solid var(--border);padding-bottom:8px;}
+.np-body{font-size:13px;color:var(--text-muted);line-height:1.7;}
+.np-stat-box{
+  background:var(--text);color:var(--bg);
+  padding:10px 14px;margin:14px 0;
+  font-family:'Playfair Display',serif;font-size:22px;font-weight:700;
+}
+.np-stat-box span{display:block;font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:.15em;text-transform:uppercase;margin-top:2px;opacity:.7;}
+.np-kicker{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:6px;}
+.np-footer-rule{border:none;border-top:1px solid var(--border);margin:20px 0 0;}
+@media(max-width:700px){.np-grid{grid-template-columns:1fr}.np-col{border-right:none;border-bottom:1px solid var(--border)}}
+</style>
 
-function animateGlobe(){
+<!-- ═══════════════════════════════════════════════════════════
+     FEATURE 3: HIRE ME IN 60 SECONDS
+     ═══════════════════════════════════════════════════════════ -->
+<style>
+#pitch-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 28px;background:var(--text);color:var(--bg);
+  border:none;border-radius:100px;font-size:14px;
+  font-family:'DM Sans',sans-serif;cursor:pointer;
+  transition:all .25s;margin-top:48px;
+}
+#pitch-btn:hover{opacity:.85;transform:translateY(-2px);}
+#pitch-overlay{
+  position:fixed;inset:0;background:var(--bg);z-index:9000;
+  display:none;flex-direction:column;align-items:center;justify-content:center;
+  padding:40px 24px;
+}
+#pitch-overlay.open{display:flex;}
+#pitch-close{
+  position:absolute;top:24px;right:28px;
+  background:none;border:none;color:var(--text-subtle);
+  font-size:24px;cursor:pointer;line-height:1;
+}
+#pitch-timer-ring{position:relative;width:80px;height:80px;margin-bottom:32px;}
+#pitch-svg circle{fill:none;stroke:var(--border);}
+#pitch-progress-ring{
+  stroke:var(--text);stroke-linecap:round;
+  stroke-dasharray:220;stroke-dashoffset:0;
+  transform:rotate(-90deg);transform-origin:50% 50%;
+  transition:stroke-dashoffset .1s linear;
+}
+#pitch-seconds{
+  position:absolute;inset:0;display:flex;align-items:center;
+  justify-content:center;font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-weight:300;color:var(--text);
+}
+.pitch-slide{display:none;text-align:center;max-width:640px;animation:pitchIn .4s ease;}
+.pitch-slide.active{display:block;}
+@keyframes pitchIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.pitch-label{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:16px;}
+.pitch-title{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,52px);font-weight:400;color:var(--text);line-height:1.15;margin-bottom:16px;}
+.pitch-body{font-size:16px;color:var(--text-muted);line-height:1.75;font-weight:300;}
+.pitch-big{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,10vw,96px);font-weight:300;color:var(--text);line-height:1;}
+#pitch-dots{display:flex;gap:8px;margin-top:32px;justify-content:center;}
+.pitch-dot{width:6px;height:6px;border-radius:50%;background:var(--border);}
+.pitch-dot.active{background:var(--text);}
+</style>
 
-  if(!globeDragging){
-    globeRotation += globeVelocity;
+<!-- ═══════════════════════════════════════════════════════════
+     FEATURE 4: FLIGHT TRACKER
+     ═══════════════════════════════════════════════════════════ -->
+<style>
+#flight-map-section{margin-top:80px;}
+#flight-map-section h3{
+  font-family:'Playfair Display',serif;font-size:28px;font-weight:400;
+  letter-spacing:-.01em;margin-bottom:8px;
+}
+#flight-map-section>p{font-size:14px;color:var(--text-muted);margin-bottom:32px;}
+#flight-canvas-wrap{position:relative;width:100%;max-width:860px;margin:0 auto;}
+#flight-svg{width:100%;border-radius:16px;background:var(--bg2);border:1px solid var(--border);}
+.flight-path{fill:none;stroke-linecap:round;opacity:.6;}
+.flight-path.animated{stroke-dasharray:600;stroke-dashoffset:600;animation:drawPath 2s ease forwards;}
+@keyframes drawPath{to{stroke-dashoffset:0;}}
+.flight-dot{cursor:pointer;transition:r .2s;}
+.flight-dot:hover{r:7;}
+.flight-tooltip{
+  position:absolute;background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;padding:12px 16px;font-size:12px;color:var(--text);
+  pointer-events:none;opacity:0;transition:opacity .2s;white-space:nowrap;
+  box-shadow:0 8px 24px rgba(0,0,0,.3);z-index:10;
+}
+.flight-tooltip strong{display:block;font-size:14px;margin-bottom:4px;}
+.flight-tooltip span{color:var(--text-muted);}
+</style>
+
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     FEATURE 6: AI CHAT — "Ask Mourya"
+     ═══════════════════════════════════════════════════════════ -->
+<style>
+#ai-bubble{
+  position:fixed;bottom:28px;right:28px;z-index:5000;
+  width:52px;height:52px;border-radius:50%;
+  background:var(--text);color:var(--bg);
+  border:none;cursor:pointer;font-size:22px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(0,0,0,.4);
+  transition:transform .2s,opacity .2s;
+}
+#ai-bubble:hover{transform:scale(1.08);}
+#ai-panel{
+  position:fixed;bottom:90px;right:28px;z-index:5000;
+  width:340px;background:var(--bg2);
+  border:1px solid var(--border);border-radius:20px;
+  display:none;flex-direction:column;overflow:hidden;
+  box-shadow:0 16px 48px rgba(0,0,0,.5);
+  animation:panelUp .3s cubic-bezier(.22,1,.36,1);
+}
+#ai-panel.open{display:flex;}
+@keyframes panelUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+#ai-header{
+  padding:16px 20px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+#ai-header .ai-name{font-size:14px;font-weight:400;color:var(--text);}
+#ai-header .ai-sub{font-size:11px;color:var(--text-muted);margin-top:2px;}
+#ai-close{background:none;border:none;color:var(--text-subtle);font-size:20px;cursor:pointer;}
+#ai-messages{
+  padding:16px;display:flex;flex-direction:column;gap:10px;
+  height:260px;overflow-y:auto;scrollbar-width:thin;
+}
+.ai-msg{max-width:85%;padding:10px 14px;border-radius:14px;font-size:13px;line-height:1.6;}
+.ai-msg.bot{background:var(--bg3);color:var(--text);border-bottom-left-radius:4px;align-self:flex-start;}
+.ai-msg.user{background:var(--text);color:var(--bg);border-bottom-right-radius:4px;align-self:flex-end;}
+.ai-msg.typing{opacity:.6;}
+#ai-input-row{
+  padding:12px 16px;border-top:1px solid var(--border);
+  display:flex;gap:8px;align-items:center;
+}
+#ai-input{
+  flex:1;background:var(--bg3);border:1px solid var(--border);
+  border-radius:100px;padding:9px 16px;font-size:13px;
+  color:var(--text);font-family:'DM Sans',sans-serif;outline:none;
+}
+#ai-send{
+  background:var(--text);color:var(--bg);border:none;
+  border-radius:50%;width:34px;height:34px;cursor:pointer;
+  font-size:16px;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:opacity .2s;
+}
+#ai-send:hover{opacity:.8;}
+.ai-suggestions{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 12px;}
+.ai-sug{
+  font-size:11px;padding:5px 12px;border:1px solid var(--border);
+  border-radius:100px;color:var(--text-muted);cursor:pointer;
+  background:none;font-family:'DM Sans',sans-serif;transition:all .2s;
+}
+.ai-sug:hover{border-color:var(--border-hover);color:var(--text);}
+@media(max-width:500px){#ai-panel{width:calc(100vw - 32px);right:16px;bottom:80px;}#ai-bubble{bottom:20px;right:16px;}}
+</style>
+
+<!-- ═══════════════════════════════════════════════════════════
+     EASTER EGG in source — only visible in DevTools
+     ═══════════════════════════════════════════════════════════ -->
+<!--
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║                                                                  ║
+  ║   Hey, you opened DevTools. I respect that.                      ║
+  ║                                                                  ║
+  ║   Here's a puzzle — solve it and you get my personal email:      ║
+  ║                                                                  ║
+  ║   Base64 decode this:                                            ║
+  ║   bW91cnlhZHVzaUBvdXRsb29rLmNvbQ==                              ║
+  ║                                                                  ║
+  ║   Or just run this in your console:                              ║
+  ║   atob('bW91cnlhZHVzaUBvdXRsb29rLmNvbQ==')                     ║
+  ║                                                                  ║
+  ║   Stack: Python · TensorFlow · AWS · D3 · Dubai ☀️              ║
+  ║   Currently: MSc AI @ Middlesex University Dubai                 ║
+  ║   Open to: ML Engineer / Data Scientist roles                    ║
+  ║                                                                  ║
+  ║   You clearly look at source code. So do I. We'd get along.     ║
+  ║                                                                  ║
+  ╚══════════════════════════════════════════════════════════════════╝
+-->
+<script>
+/* Easter egg in console — open DevTools to see */
+setTimeout(()=>{
+  const s=[
+    '%c ',
+    '%c Hey, you opened DevTools. I respect that. ',
+    '%c ',
+    '%c Solve this → atob("bW91cnlhZHVzaUBvdXRsb29rLmNvbQ==") ',
+    '%c Stack: Python · TensorFlow · AWS · SageMaker · D3 ',
+    '%c Currently building: AI systems that are simple and useful ',
+    '%c Open to: ML Engineer / Data Scientist roles in Dubai & beyond ',
+    '%c ',
+  ];
+  const bg='background:#111;color:#4ade80;font-family:monospace;font-size:12px;padding:4px 12px;';
+  const hd='background:#0a0a0a;color:#f0f0f0;font-family:monospace;font-size:13px;padding:6px 12px;font-weight:bold;';
+  const bl='background:#111;color:#888;font-family:monospace;font-size:11px;padding:3px 12px;';
+  console.log(s.join('\n'),hd,hd,hd,bg,bl,bl,bl,hd);
+},1000);
+</script>
+
+<!-- ═══════════════════════════════════════════════════════════
+     NOW INJECT HTML SECTIONS into the DOM + run all JS
+     ═══════════════════════════════════════════════════════════ -->
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+
+  // ── INJECT PITCH BUTTON into contact section ──
+  const contactTitle = document.querySelector('#contact .section-title');
+  if(contactTitle){
+    const btn = document.createElement('button');
+    btn.id='pitch-btn';
+    btn.innerHTML='▶ Hire me in 60 seconds';
+    btn.onclick = startPitch;
+    contactTitle.parentElement.insertBefore(btn, contactTitle.nextSibling);
   }
 
-  drawGlobe();
+  // ── INJECT PITCH OVERLAY ──
+  const pitchSlides = [
+    {label:'The problem',    title:'You need someone who ships ML — not just studies it.',  body:'Most candidates at my level have notebooks. I have production deployments on AWS SageMaker, real pipelines, and a live AI product used by real people.'},
+    {label:'Who I am',       big:'Mourya Dusi',   body:'ML Engineer · Data Scientist · MSc AI, Dubai · AWS Certified · 9 months Accenture · Based in UAE'},
+    {label:'What I built',   title:'destination.com — a full AI travel platform.',          body:'Voice AI (ARIA), live flights, visa guidance, route optimisation. Built alone. Deployed on Vercel. Working right now.'},
+    {label:'The number',     big:'50,000+',        body:'records processed per week in my Accenture ML pipeline. Not a toy dataset. Production data. Real stakeholders.'},
+    {label:'What I want',    title:'A role where I can build things that matter.',           body:'ML Engineer · Junior Data Scientist · AI Engineer. Dubai or remote. Available from September 2026. Open to relocation.'},
+    {label:'Next step',      title:'mouryadusi@outlook.com',                                 body:'That\'s it. One email. I\'ll respond within the hour.'},
+  ];
+  const overlay = document.createElement('div');
+  overlay.id='pitch-overlay';
+  overlay.innerHTML=`
+    <button id="pitch-close" onclick="closePitch()">×</button>
+    <div id="pitch-timer-ring">
+      <svg id="pitch-svg" viewBox="0 0 80 80" width="80" height="80">
+        <circle cx="40" cy="40" r="35" stroke-width="3"/>
+        <circle id="pitch-progress-ring" cx="40" cy="40" r="35" stroke-width="3"/>
+      </svg>
+      <div id="pitch-seconds">60</div>
+    </div>
+    ${pitchSlides.map((s,i)=>`
+      <div class="pitch-slide${i===0?' active':''}" id="ps${i}">
+        <div class="pitch-label">${s.label}</div>
+        ${s.big?`<div class="pitch-big">${s.big}</div>`:''}
+        ${s.title?`<div class="pitch-title">${s.title}</div>`:''}
+        <div class="pitch-body">${s.body}</div>
+      </div>`).join('')}
+    <div id="pitch-dots">${pitchSlides.map((_,i)=>`<div class="pitch-dot${i===0?' active':''}"></div>`).join('')}</div>
+  `;
+  document.body.appendChild(overlay);
 
-  requestAnimationFrame(animateGlobe);
+  // ── INJECT NEWSPAPER TOGGLE into projects section ──
+  const projectsList = document.querySelector('.projects-list');
+  if(projectsList){
+    const toggle = document.createElement('button');
+    toggle.id='newspaper-toggle';
+    toggle.innerHTML='📰 Read as The Mourya Times';
+    toggle.onclick=toggleNewspaper;
+    projectsList.parentElement.insertBefore(toggle, projectsList);
 
-}
-
-canvas.addEventListener('pointerdown',e=>{
-
-  globeDragging=true;
-  globeLastX=e.clientX;
-  canvas.setPointerCapture(e.pointerId);
-
-});
-
-canvas.addEventListener('pointermove',e=>{
-
-  if(!globeDragging) return;
-
-  const delta =
-    e.clientX-globeLastX;
-
-  globeLastX=e.clientX;
-
-  globeRotation += delta*.004;
-  globeVelocity = delta*.0008;
-
-});
-
-canvas.addEventListener('pointerup',e=>{
-
-  globeDragging=false;
-
-});
-
-canvas.addEventListener('pointercancel',()=>{
-  globeDragging=false;
-});
-
-canvas.addEventListener('click',e=>{
-
-  const rect =
-    canvas.getBoundingClientRect();
-
-  const x =
-    e.clientX-rect.left;
-
-  const y =
-    e.clientY-rect.top;
-
-  const scale =
-    rect.width/520;
-
-  const actualX=x/scale;
-  const actualY=y/scale;
-
-  const cx=260;
-  const cy=260;
-  const radius=224;
-
-  let selected=null;
-
-  globePlaces.forEach(place=>{
-
-    const px =
-      cx+(place.x-.5)*radius*1.55;
-
-    const py =
-      cy+(place.y-.5)*radius*1.55;
-
-    const distance =
-      Math.hypot(
-        actualX-px,
-        actualY-py
-      );
-
-    if(distance<24){
-      selected=place;
-    }
-
-  });
-
-  if(selected){
-
-    gpFlag.textContent=selected.flag;
-    gpName.textContent=selected.name;
-    gpTag.textContent=selected.tag;
-
-    gpTrips.innerHTML=`
-      <div class="gp-trip">
-        <div class="gp-trip-title">The story</div>
-        <div class="gp-trip-text">
-          ${selected.story}
+    const npView = document.createElement('div');
+    npView.id='newspaper-view';
+    npView.innerHTML=`
+      <div class="np-masthead">
+        <div class="np-kicker">Special Edition · Work & Projects</div>
+        <h2>The Mourya Times</h2>
+        <div class="np-sub">Dispatches from the intersection of AI, data, and ambition</div>
+        <div class="np-date">Dubai, UAE · ${new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'})}</div>
+      </div>
+      <div class="np-grid">
+        <div class="np-col">
+          <div class="np-kicker">AI Travel · Live Product</div>
+          <div class="np-headline">Local Engineer Builds AI Travel Platform Alone; Platform Actually Works</div>
+          <div class="np-byline">By Mourya Dusi · Vercel, Dubai</div>
+          <p class="np-body">In a move that surprised exactly no one who knows him, Mourya Dusi shipped destination.com — a full-stack AI travel platform featuring voice AI (ARIA), live flight tracking, visa guidance, and a layover city explorer — without a team, without a budget, and without breaking a sweat.</p>
+          <div class="np-stat-box">ARIA<span>Voice AI, powered by Groq</span></div>
+          <p class="np-body">The platform, now live on Vercel, handles real-time route optimisation, visa requirements by country pair, and even features an aviation arcade. Sources confirmed it loads in under two seconds.</p>
+        </div>
+        <div class="np-col">
+          <div class="np-kicker">Machine Learning · Education</div>
+          <div class="np-headline">At-Risk Students Now Identified With 92% Accuracy</div>
+          <div class="np-byline">Predictive Analytics Desk</div>
+          <div class="np-stat-box">92%<span>Model accuracy</span></div>
+          <p class="np-body">An end-to-end ML pipeline trained on educational data can now predict student failure before it happens. Institutions are reportedly thrilled. Students less so.</p>
+          <hr class="np-footer-rule">
+          <div class="np-kicker" style="margin-top:20px;">NLP · University Tech</div>
+          <div class="np-headline">Chatbot Handles 1,000 Student Queries Per Day; Human Staff Take Long Lunch</div>
+          <div class="np-byline">Campus Technology Reporter</div>
+          <p class="np-body">TensorFlow. Flask. MongoDB. Three words that apparently add up to a 35% reduction in administrative workload. The chatbot is available 24/7 and has never once asked for annual leave.</p>
+        </div>
+        <div class="np-col">
+          <div class="np-kicker">IoT · Privacy Technology</div>
+          <div class="np-headline">Taxi Passengers Can Now Retrieve Lost Items Without Sacrificing Privacy</div>
+          <div class="np-byline">Transport Correspondent</div>
+          <p class="np-body">A new sensor-based detection system uses pressure, infrared, and ultrasonic arrays — zero cameras — to locate forgotten belongings. All processing happens on-device. Your secrets remain yours.</p>
+          <hr class="np-footer-rule">
+          <div class="np-kicker" style="margin-top:20px;">Smart Home · ML</div>
+          <div class="np-headline">App Reminds You To Bring Your Keys So You Don't Have To Remember</div>
+          <p class="np-body">The Smart Exit Reminder uses Wi-Fi, GPS, and BLE sensor fusion to learn your routine and alert you to essential items the moment you leave home. Tested. Automated. Running 24/7.</p>
         </div>
       </div>
     `;
-
-    globePanel.classList.add('open');
-
+    projectsList.parentElement.insertBefore(npView, projectsList);
   }
 
+  // ── INJECT FLIGHT MAP into personal section ──
+  const countriesSection = document.querySelector('.countries-section');
+  if(countriesSection){
+    const flightSection = document.createElement('div');
+    flightSection.id='flight-map-section';
+    flightSection.className='reveal';
+    flightSection.innerHTML=`
+      <h3>Flight paths</h3>
+
+      <div id="flight-canvas-wrap">
+        <svg id="flight-svg" viewBox="0 0 860 420" xmlns="http://www.w3.org/2000/svg"></svg>
+        <div class="flight-tooltip" id="flight-tip"></div>
+      </div>
+    `;
+    countriesSection.parentElement.insertBefore(flightSection, countriesSection);
+    initFlightMap();
+  }
+
+
+
+  // ── INJECT AI CHAT BUBBLE ──
+  const bubble = document.createElement('button');
+  bubble.id='ai-bubble';
+  bubble.title='Ask Mourya anything';
+  bubble.innerHTML='💬';
+  bubble.onclick=toggleAI;
+  document.body.appendChild(bubble);
+
+  const panel = document.createElement('div');
+  panel.id='ai-panel';
+  panel.innerHTML=`
+    <div id="ai-header">
+      <div>
+        <div class="ai-name">Mourya — AI</div>
+        <div class="ai-sub">Ask me anything about my work</div>
+      </div>
+      <button id="ai-close" onclick="toggleAI()">×</button>
+    </div>
+    <div id="ai-messages">
+      <div class="ai-msg bot">Hey! I'm an AI trained on Mourya's profile. Ask me about his skills, projects, experience — or whether he'd be a good fit for your team.</div>
+    </div>
+    <div class="ai-suggestions">
+      <button class="ai-sug" onclick="aiAsk(this.textContent)">What can he build?</button>
+      <button class="ai-sug" onclick="aiAsk(this.textContent)">Is he available?</button>
+      <button class="ai-sug" onclick="aiAsk(this.textContent)">Best projects?</button>
+      <button class="ai-sug" onclick="aiAsk(this.textContent)">Tech stack?</button>
+    </div>
+    <div id="ai-input-row">
+      <input id="ai-input" placeholder="Ask anything..." onkeydown="if(event.key==='Enter')sendAI()">
+      <button id="ai-send" onclick="sendAI()">↑</button>
+    </div>
+  `;
+  document.body.appendChild(panel);
+
+  // Scroll reveal for new sections
+  document.querySelectorAll('#flight-map-section').forEach(el=>{
+    const obs=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+    },{threshold:.1});
+    obs.observe(el);
+  });
 });
 
-globeClose.addEventListener('click',()=>{
-  globePanel.classList.remove('open');
-});
+// ── PITCH FUNCTIONS ──
+let pitchInterval, pitchCurrent=0, pitchTime=60;
+const PITCH_TOTAL=6;
+function startPitch(){
+  document.getElementById('pitch-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  pitchCurrent=0; pitchTime=60;
+  showSlide(0);
+  pitchInterval = setInterval(()=>{
+    pitchTime--;
+    document.getElementById('pitch-seconds').textContent=pitchTime;
+    const ring=document.getElementById('pitch-progress-ring');
+    ring.style.strokeDashoffset=220*(1-pitchTime/60);
+    if(pitchTime<=0){closePitch();return;}
+    const slide=Math.floor((60-pitchTime)/10);
+    if(slide!==pitchCurrent&&slide<PITCH_TOTAL){pitchCurrent=slide;showSlide(slide);}
+  },1000);
+}
+function showSlide(i){
+  document.querySelectorAll('.pitch-slide').forEach((s,j)=>{s.classList.toggle('active',j===i);});
+  document.querySelectorAll('.pitch-dot').forEach((d,j)=>{d.classList.toggle('active',j===i);});
+}
+function closePitch(){
+  clearInterval(pitchInterval);
+  document.getElementById('pitch-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+window.closePitch=closePitch;
+window.startPitch=startPitch;
 
-animateGlobe();
+// ── NEWSPAPER TOGGLE ──
+function toggleNewspaper(){
+  const nv=document.getElementById('newspaper-view');
+  const pl=document.querySelector('.projects-list');
+  const btn=document.getElementById('newspaper-toggle');
+  const show=!nv.classList.contains('visible');
+  nv.classList.toggle('visible',show);
+  pl.style.display=show?'none':'flex';
+  btn.innerHTML=show?'← Back to projects':'📰 Read as The Mourya Times';
+}
+window.toggleNewspaper=toggleNewspaper;
 
+// ── FLIGHT MAP ──
+function initFlightMap(){
+  const svg=document.getElementById('flight-svg');
+  if(!svg)return;
+  const W=860,H=420;
+  // Cities: [name, x, y, story]
+  const cities=[
+    {id:'VIZ',n:'Vijayawada',x:620,y:230,story:'Home base. Every journey starts and ends here.',home:true},
+    {id:'DXB',n:'Dubai, UAE',x:530,y:195,story:'5+ trips. Now a second home. Sharjah, Abu Dhabi, Ajman explored.'},
+    {id:'KUL',n:'Kuala Lumpur',x:690,y:260,story:'First international trip — with Dad. Petronas Towers at night.'},
+    {id:'SIN',n:'Singapore',x:700,y:278,story:'Twice — solo, then with buddies. Gardens by the Bay. Hawker food.'},
+    {id:'BKK',n:'Bangkok',x:672,y:242,story:'Thailand — twice. Beaches, temples, chaos. Zero regrets.'},
+    {id:'NYC',n:'USA',x:195,y:165,story:'Road trip: Texas→Colorado→New Mexico→Nevada→Utah→Arizona.'},
+    {id:'KTM',n:'Kathmandu',x:632,y:215,story:'With parents. The Himalayas make everything feel possible and tiny.'},
+    {id:'HCM',n:'Ho Chi Minh City',x:686,y:258,story:'Vietnam with the squad. The food is extraordinary.'},
+    {id:'CMB',n:'Colombo',x:607,y:258,story:'Sri Lanka — recent visit. Tea highlands, temples, golden beaches.'},
+  ];
+  // Draw paths first
+  const colors=['#4ade80','#60a5fa','#f472b6','#fb923c','#a78bfa','#34d399','#fbbf24','#f87171','#818cf8'];
+  const viz=cities[0];
+  cities.slice(1).forEach((city,i)=>{
+    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+    const mx=(viz.x+city.x)/2;
+    const my=Math.min(viz.y,city.y)-60-Math.abs(viz.x-city.x)*0.08;
+    path.setAttribute('d',`M${viz.x},${viz.y} Q${mx},${my} ${city.x},${city.y}`);
+    path.setAttribute('class','flight-path animated');
+    path.setAttribute('stroke',colors[i%colors.length]);
+    path.setAttribute('stroke-width','1.5');
+    path.style.animationDelay=(i*0.2)+'s';
+    svg.appendChild(path);
+  });
+  // Draw dots + labels
+  const tip=document.getElementById('flight-tip');
+  cities.forEach((city,i)=>{
+    const g=document.createElementNS('http://www.w3.org/2000/svg','g');
+    const circle=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    circle.setAttribute('cx',city.x);circle.setAttribute('cy',city.y);
+    circle.setAttribute('r',city.home?7:5);
+    circle.setAttribute('fill',city.home?'#f0f0f0':colors[(i-1+colors.length)%colors.length]);
+    circle.setAttribute('class','flight-dot');
+    circle.setAttribute('stroke','#0a0a0a');circle.setAttribute('stroke-width','1.5');
+    const label=document.createElementNS('http://www.w3.org/2000/svg','text');
+    label.setAttribute('x',city.x);label.setAttribute('y',city.y-12);
+    label.setAttribute('text-anchor','middle');
+    label.setAttribute('fill','#888');label.setAttribute('font-size','10');
+    label.setAttribute('font-family','DM Sans,sans-serif');
+    label.textContent=city.n;
+    g.appendChild(circle);g.appendChild(label);
+    g.style.cursor='pointer';
+    g.addEventListener('mouseenter',e=>{
+      const rect=svg.getBoundingClientRect();
+      const wrap=document.getElementById('flight-canvas-wrap').getBoundingClientRect();
+      tip.innerHTML=`<strong>${city.n}</strong><span>${city.story}</span>`;
+      tip.style.opacity='1';
+      tip.style.left=(e.clientX-wrap.left+12)+'px';
+      tip.style.top=(e.clientY-wrap.top-20)+'px';
+    });
+    g.addEventListener('mouseleave',()=>{tip.style.opacity='0';});
+    svg.appendChild(g);
+  });
+}
 
-/* =========================================================
-   BASIC VISITOR TRACKING
-   Compatible with Admin.html localStorage structure
-========================================================= */
+// ── KNOWLEDGE GRAPH ──
 
-const VISITOR_KEY='mourya_visitors_v2';
+// ── AI CHAT ──
+// ── AI CHAT — smart rule-based engine (no API needed, works everywhere) ──
+const AI_KB = [
+  { k:['build','can he','what does','create','make','develop','ship'],
+    a:"Mourya builds production ML systems — pipelines that processed 50,000+ records a week at Accenture, models deployed on AWS SageMaker, and full-stack AI products. His live project destination.com has voice AI, real-time flights, and visa guidance, all built solo." },
+  { k:['available','hire','open','looking','job','role','work','opportunity','join','recruit'],
+    a:"Yes — Mourya is actively looking for ML Engineer, Data Scientist, or AI Engineer roles. He's completing his MSc in Dubai in September 2026 and is open to Dubai-based, remote, or relocation opportunities. Email him at mouryadusi@outlook.com." },
+  { k:['project','built','destination','travel','smart exit','taxi','chatbot','student','portfolio'],
+    a:"His standout project is destination.com — a full AI travel platform with voice AI (ARIA), live flight tracking, and visa guidance, deployed on Vercel. He's also built a taxi lost-item detector, a student performance predictor at 92% accuracy, and an NLP university chatbot." },
+  { k:['stack','skill','tech','language','tool','python','tensorflow','aws','cloud','framework'],
+    a:"Mourya's core stack is Python, TensorFlow, Scikit-learn, and AWS (SageMaker, EC2, S3). He also works with SQL, Power BI, Flask, NLP, and D3.js. He holds AWS AI Practitioner, Google Cloud Architect, and AWS Solutions Architect certifications." },
+  { k:['experience','accenture','work history','background','career','company'],
+    a:"He spent 9 months at Accenture in Hyderabad as an ML Engineer — building production pipelines processing 50,000+ records weekly, deploying models on AWS SageMaker, and creating Power BI dashboards for stakeholders." },
+  { k:['education','degree','msc','master','university','middlesex','mdx','study','thesis'],
+    a:"Mourya is completing his MSc in Data Science & AI at Middlesex University Dubai, graduating September 2026. He also holds a BSc in Computer Science from Krishna University, India." },
+  { k:['certif','aws','google cloud','badge','credential'],
+    a:"He's certified in AWS AI Practitioner (MLOps), Implementing AI with Amazon ML, Google Professional Cloud Architect, and AWS Solutions Architect Associate — all earned in 2024–2025." },
+  { k:['travel','country','visit','trip','malaysia','singapore','uae','dubai','thailand','usa','nepal','vietnam','sri lanka'],
+    a:"Mourya has visited 10 countries — India (home), UAE (based there now), Malaysia, Singapore, Thailand, Vietnam, USA, Nepal, Sri Lanka, and counting. He travels mostly solo and finds it sharpens his problem-solving instincts." },
+  { k:['contact','email','reach','linkedin','github','social','message','touch'],
+    a:"Best way to reach Mourya: mouryadusi@outlook.com — he responds quickly. You can also find him on LinkedIn at linkedin.com/in/mouryadusi-dxb or on GitHub at github.com/mouryadusi." },
+  { k:['who','mourya','about','introduce','tell me','yourself','person','he'],
+    a:"Mourya Dusi is an ML Engineer and Data Scientist based in Dubai, UAE, currently completing his MSc in AI at Middlesex University. He's worked at Accenture, built live AI products, holds multiple cloud certifications, and travels to 10+ countries in his spare time." },
+  { k:['salary','pay','rate','compensation','expect','cost'],
+    a:"Mourya is targeting ML Engineer or Data Scientist roles — for current market rates and his expectations, just reach out directly at mouryadusi@outlook.com. He's open to a conversation." },
+  { k:['location','based','where','dubai','india','remote','relocat'],
+    a:"He's currently based in Dubai, UAE (studying at MDX Dubai) and is also spending time in India while working remotely on his thesis. He's open to Dubai, remote, or relocation roles globally." },
+  { k:['music','hobby','interest','outside','personal','fun','free time'],
+    a:"Outside of work, Mourya is into music — it's always on whether he's coding or commuting. He travels solo most of the time and is genuinely fascinated by where AI is headed and what it means for people, not just systems." },
+  { k:['fit','good','suitable','match','right','perfect','team','culture'],
+    a:"He's a strong fit for teams that value shipping over theorising — he's gone from notebook to production deployment, built solo products used by real people, and works well in Agile environments. He's collaborative, certified, and immediately available." },
+];
 
-function getVisitors(){
-
-  try{
-    return JSON.parse(
-      localStorage.getItem(VISITOR_KEY)
-    ) || [];
-  }catch{
-    return [];
+function getAIReply(q){
+  const ql = q.toLowerCase();
+  for(const entry of AI_KB){
+    if(entry.k.some(kw => ql.includes(kw))) return entry.a;
   }
-
-}
-
-function saveVisitor(visitor){
-
-  try{
-
-    const visitors=getVisitors();
-
-    visitors.push(visitor);
-
-    localStorage.setItem(
-      VISITOR_KEY,
-      JSON.stringify(visitors)
-    );
-
-  }catch(e){
-
-    console.warn(
-      'Visitor tracking unavailable:',
-      e
-    );
-
+  // Fuzzy fallback — check any word overlap
+  const words = ql.split(/\s+/).filter(w=>w.length>3);
+  for(const entry of AI_KB){
+    if(words.some(w => entry.k.some(kw=>kw.includes(w)||w.includes(kw)))) return entry.a;
   }
-
+  return "Great question — I don't have a specific answer for that, but Mourya would love to chat. Drop him an email at mouryadusi@outlook.com and he'll respond quickly.";
 }
 
-function getDevice(){
-
-  return /Mobi|Android|iPhone|iPad/i.test(
-    navigator.userAgent
-  )
-    ? 'Mobile'
-    : 'Desktop';
-
+function toggleAI(){
+  document.getElementById('ai-panel').classList.toggle('open');
 }
+window.toggleAI=toggleAI;
 
-function getBrowser(){
-
-  const ua=navigator.userAgent;
-
-  if(ua.includes('Edg/')) return 'Edge';
-  if(ua.includes('Chrome/')) return 'Chrome';
-  if(ua.includes('Firefox/')) return 'Firefox';
-  if(ua.includes('Safari/')) return 'Safari';
-
-  return 'Other';
-
+function aiAsk(q){
+  document.getElementById('ai-input').value=q;
+  sendAI();
 }
+window.aiAsk=aiAsk;
 
-function getOS(){
-
-  const ua=navigator.userAgent;
-
-  if(/Windows/i.test(ua)) return 'Windows';
-  if(/Mac OS/i.test(ua)) return 'macOS';
-  if(/Android/i.test(ua)) return 'Android';
-  if(/iPhone|iPad/i.test(ua)) return 'iOS';
-  if(/Linux/i.test(ua)) return 'Linux';
-
-  return 'Other';
-
+function sendAI(){
+  const input=document.getElementById('ai-input');
+  const q=input.value.trim();
+  if(!q)return;
+  input.value='';
+  addMsg(q,'user');
+  // Simulate brief typing delay for realism
+  const typingEl=addMsg('typing…','bot typing');
+  setTimeout(()=>{
+    typingEl.textContent=getAIReply(q);
+    typingEl.classList.remove('typing');
+    document.getElementById('ai-messages').scrollTop=9999;
+  }, 600 + Math.random()*400);
 }
+window.sendAI=sendAI;
 
-function trackVisitor(){
-
-  /*
-    Prevent duplicate logging on every refresh
-    within the same browser session.
-  */
-
-  const sessionKey='mourya_visit_logged';
-
-  if(sessionStorage.getItem(sessionKey)==='1'){
-    return;
-  }
-
-  const visitor={
-    ts:Date.now(),
-    ip:'',
-    city:'',
-    region:'',
-    country:'',
-    country_code:'',
-    org:'',
-    timezone:Intl.DateTimeFormat().resolvedOptions().timeZone || '',
-    device:getDevice(),
-    browser:getBrowser(),
-    os:getOS(),
-    screen:`${window.innerWidth}x${window.innerHeight}`,
-    lang:navigator.language || '',
-    ref:document.referrer || 'Direct'
-  };
-
-  saveVisitor(visitor);
-
-  sessionStorage.setItem(
-    sessionKey,
-    '1'
-  );
-
+function addMsg(text,type){
+  const msgs=document.getElementById('ai-messages');
+  const div=document.createElement('div');
+  div.className='ai-msg '+(type.includes('user')?'user':'bot');
+  if(type.includes('typing'))div.classList.add('typing');
+  div.textContent=text;
+  msgs.appendChild(div);
+  msgs.scrollTop=msgs.scrollHeight;
+  return div;
 }
-
-trackVisitor();
-
-
-/* =========================================================
-   NAV ACTIVE FEEDBACK
-========================================================= */
-
-const navLinks =
-  document.querySelectorAll('.nav-links a');
-
-const sections =
-  document.querySelectorAll('main section[id]');
-
-const sectionObserver =
-  new IntersectionObserver(
-    entries=>{
-
-      entries.forEach(entry=>{
-
-        if(entry.isIntersecting){
-
-          navLinks.forEach(link=>{
-            link.style.color =
-              link.getAttribute('href') ===
-              '#'+entry.target.id
-                ? '#000'
-                : '';
-          });
-
-        }
-
-      });
-
-    },
-    {
-      rootMargin:'-40% 0px -50% 0px'
-    }
-  );
-
-sections.forEach(section=>{
-  sectionObserver.observe(section);
-});
-
-
-/* =========================================================
-   INITIAL PROJECT POSITION
-========================================================= */
-
-setTimeout(updateProjects,300);
-
 </script>
-
 </body>
 </html>
