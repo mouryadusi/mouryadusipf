@@ -624,7 +624,7 @@
 .pte-tab.active{color:var(--text);}.pte-tab.active::after{right:0;}
 .pte-stage{position:absolute;inset:0;}
 .pte-panel{position:absolute;inset:0;padding:clamp(105px,13vh,145px) clamp(24px,8vw,110px) 100px;display:flex;align-items:flex-end;opacity:0;visibility:hidden;transform:translate3d(0,9%,0) scale(.94);clip-path:inset(100% 0 0 0 round 0);filter:blur(2px);will-change:transform,opacity,clip-path,filter;z-index:1;}
-.pte-panel.active{visibility:visible;}
+.pte-panel.active{visibility:visible;opacity:1;transform:none;filter:none;clip-path:inset(0 0 0 0 round 0);}
 .pte-panel-bg{position:absolute;inset:clamp(76px,10vh,108px) clamp(16px,4vw,55px) clamp(62px,8vh,90px);border:1px solid var(--border);border-radius:clamp(18px,2vw,30px);overflow:hidden;background:var(--bg2);display:flex;align-items:center;justify-content:center;}
 .pte-panel-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 65% 35%,rgba(255,255,255,.1),transparent 35%),linear-gradient(135deg,transparent,rgba(255,255,255,.025));}
 .pte-panel-bg span{font:300 clamp(70px,16vw,220px)/.8 'Cormorant Garamond',serif;letter-spacing:-.07em;color:var(--text);opacity:.08;position:relative;}
@@ -751,12 +751,36 @@
 </style>
 
 <style id="mourya-greeting-signature-loader">
-#welcome-screen .mourya-signature{position:absolute;left:50%;bottom:clamp(44px,7vh,72px);transform:translateX(-50%) rotate(-4deg);z-index:20;font-family:"Segoe Print","Bradley Hand","Comic Sans MS",cursive;font-size:clamp(2rem,4vw,3.5rem);font-weight:600;font-style:italic;letter-spacing:-.055em;line-height:1;white-space:nowrap;color:currentColor;opacity:.88;pointer-events:none;user-select:none}
+
 #welcome-screen .mourya-loader{position:absolute;left:50%;bottom:clamp(20px,3.2vh,34px);transform:translateX(-50%);width:min(190px,34vw);z-index:20;pointer-events:none;color:currentColor}
 #welcome-screen .mourya-loader-row{display:flex;justify-content:space-between;gap:10px;margin-bottom:5px;font:500 9px/1 "Inter",system-ui,sans-serif;letter-spacing:.14em;opacity:.62}
 #welcome-screen .mourya-loader-track{width:100%;height:1px;background:currentColor;opacity:.18;overflow:hidden}
 #welcome-screen .mourya-loader-fill{width:0;height:100%;background:currentColor;transform-origin:left center}
-@media(max-width:600px){#welcome-screen .mourya-signature{bottom:52px;font-size:2rem}#welcome-screen .mourya-loader{bottom:22px;width:150px}}
+@media(max-width:600px){#welcome-screen .mourya-loader{bottom:22px;width:150px}}
+</style>
+
+
+<style id="main-mourya-signature-style">
+footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
+.main-mourya-signature{
+  position:absolute;
+  left:50%;
+  bottom:34px;
+  transform:translateX(-50%) rotate(-4deg);
+  font-family:"Segoe Print","Bradley Hand","Comic Sans MS",cursive;
+  font-size:clamp(2.6rem,5vw,5rem);
+  font-weight:600;
+  font-style:italic;
+  letter-spacing:-.07em;
+  line-height:1;
+  white-space:nowrap;
+  color:var(--text);
+  opacity:.9;
+  pointer-events:none;
+  user-select:none;
+  z-index:2;
+}
+@media(max-width:600px){.main-mourya-signature{font-size:clamp(2.4rem,13vw,3.6rem);bottom:28px}footer{padding-bottom:90px!important}}
 </style>
 
 </head>
@@ -805,6 +829,10 @@
   <div id="loader-line"></div>
   <div id="loader-sub">AI &amp; Data Science</div>
   <div id="loader-greeting" aria-live="polite">Thanks for visiting</div>
+  <div class="mourya-loader" aria-hidden="true">
+    <div class="mourya-loader-row"><span>LOADING</span><span class="mourya-loader-value">0</span></div>
+    <div class="mourya-loader-track"><div class="mourya-loader-fill"></div></div>
+  </div>
   <div id="loader-progress"></div>
 </div>
 
@@ -1546,6 +1574,7 @@
 
 <!-- Footer -->
 <footer>
+  <div class="main-mourya-signature" aria-label="Mourya signature">Mourya</div>
   <span>© 2026 Mourya Dusi</span>
   <span>Dubai, UAE</span>
   <span>Built with ❤</span>
@@ -1778,10 +1807,10 @@
 (function(){
   const greetings = [
     'Thanks for visiting',
-    'धन्यवाद',
+    'ధన్యవాదాలు',
     'Gracias por visitar',
     'شكرًا لزيارتك',
-    'आने के लिए धन्यवाद',
+    'మీరు వచ్చినందుకు ధన్యవాదాలు',
     '訪れてくれてありがとう'
   ];
   const el=document.getElementById('loader-greeting');
@@ -2808,6 +2837,50 @@ function addMsg(text,type){
   const start=performance.now(),duration=6000;
   function tick(now){const p=Math.max(0,Math.min(1,(now-start)/duration));const n=Math.round(p*100);fill.style.width=n+'%';value.textContent=n;if(p<1)requestAnimationFrame(tick)}
   requestAnimationFrame(tick);
+})();
+</script>
+
+
+<script id="project-loading-fix">
+(function(){
+  const root=document.getElementById('project-tab-experience');
+  if(!root)return;
+  const panels=[...root.querySelectorAll('.pte-panel')];
+  const tabs=[...root.querySelectorAll('.pte-tab')];
+  if(!panels.length||!tabs.length)return;
+
+  function activate(index){
+    index=Math.max(0,Math.min(index,panels.length-1));
+    panels.forEach((panel,i)=>{
+      const on=i===index;
+      panel.classList.toggle('active',on);
+      panel.style.visibility=on?'visible':'hidden';
+      panel.style.opacity=on?'1':'0';
+      panel.style.transform=on?'none':'translate3d(0,14%,0) scale(.94)';
+      panel.style.filter=on?'none':'blur(4px)';
+      panel.style.clipPath=on?'inset(0 0 0 0 round 0)':'inset(100% 0 0 0 round 0)';
+      panel.style.zIndex=on?'20':'1';
+      panel.setAttribute('aria-hidden',on?'false':'true');
+    });
+    tabs.forEach((tab,i)=>{
+      const on=i===index;
+      tab.classList.toggle('active',on);
+      tab.setAttribute('aria-selected',on?'true':'false');
+    });
+  }
+
+  activate(0);
+  tabs.forEach((tab,i)=>tab.addEventListener('click',function(e){
+    e.preventDefault();
+    activate(i);
+    const range=Math.max(root.offsetHeight-window.innerHeight,1);
+    const target=window.scrollY+root.getBoundingClientRect().top+range*(i/Math.max(panels.length-1,1));
+    window.scrollTo({top:target,behavior:'smooth'});
+  }));
+
+  // Ensure the existing scroll controller gets an initial paint after layout.
+  requestAnimationFrame(()=>window.dispatchEvent(new Event('scroll')));
+  window.addEventListener('load',()=>window.dispatchEvent(new Event('scroll')),{once:true});
 })();
 </script>
 
