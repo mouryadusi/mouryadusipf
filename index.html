@@ -6,7 +6,7 @@
 <title>Mourya Dusi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
 
 <style>
   :root {
@@ -21,6 +21,7 @@
     --text-subtle: #555;
     --accent: #e8e0d0;
     --accent2: #c8b896;
+    --surface-noise-opacity: .22;
     --cursor-size: 12px;
     --cursor-ring: 36px;
   }
@@ -36,12 +37,13 @@
     --text-subtle: #aaa;
     --accent: #2a2a2a;
     --accent2: #8a7a5a;
+    --surface-noise-opacity: .34;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Inter', 'Inter', sans-serif;
     background: var(--bg);
     color: var(--text);
     line-height: 1.6;
@@ -104,7 +106,7 @@
   @keyframes fadeIn { to { opacity: 1; } }
   #loader-greeting {
     min-height: 18px; margin-top: 14px;
-    font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 300;
+    font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 300;
     letter-spacing: 0.18em; color: var(--text-muted);
     opacity: 0.9; text-align: center; transition: opacity 0.18s ease, transform 0.18s ease;
   }
@@ -199,7 +201,7 @@
   .hero-intro .heart { color: #e06060; }
   .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; opacity: 0; animation: slideUp 0.8s 2.7s ease forwards; }
   .btn {
-    padding: 13px 28px; border-radius: 100px; font-family: 'DM Sans', sans-serif;
+    padding: 13px 28px; border-radius: 100px; font-family: 'Inter', sans-serif;
     font-size: 14px; font-weight: 400; text-decoration: none; cursor: none;
     transition: all 0.25s ease; display: inline-block;
   }
@@ -210,10 +212,10 @@
 
   .hero-photo-wrap { position: relative; opacity: 0; animation: fadeSlideRight 1s 2.8s ease forwards; }
   .hero-photo-frame {
-    width: 100%; aspect-ratio: 3/4;
-    border-radius: 200px 200px 160px 160px; overflow: hidden; background: var(--bg3);
+    width: 100%; height: auto;
+    border-radius: 200px 200px 160px 160px; overflow: visible; background: var(--bg3);
   }
-  .hero-photo-frame img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(20%); transition: filter 0.4s ease; }
+  .hero-photo-frame img { display:block; width:100%; height:auto; max-height:none; object-fit:contain; object-position:center top; border-radius:inherit; filter:grayscale(20%); transition:filter .4s ease; }
   .hero-photo-frame:hover img { filter: grayscale(0%); }
   .photo-placeholder {
     width: 100%; height: 100%; display: flex; flex-direction: column;
@@ -373,7 +375,7 @@
   .cert-filter {
     padding: 6px 16px; border-radius: 100px; font-size: 12px;
     border: 1px solid var(--border); color: var(--text-muted);
-    background: none; cursor: pointer; font-family: 'DM Sans', sans-serif;
+    background: none; cursor: pointer; font-family: 'Inter', sans-serif;
     transition: all .2s;
   }
   .cert-filter:hover, .cert-filter.active {
@@ -432,7 +434,7 @@
     display: flex; align-items: center; justify-content: center; gap: 10px;
     margin-top: 24px; width: 100%; padding: 14px;
     border: 1px dashed var(--border); border-radius: 12px;
-    background: none; color: var(--text-muted); font-family: 'DM Sans', sans-serif;
+    background: none; color: var(--text-muted); font-family: 'Inter', sans-serif;
     font-size: 13px; cursor: pointer; transition: all .2s;
   }
   .cert-show-more:hover { border-color: var(--border-hover); color: var(--text); }
@@ -573,6 +575,70 @@
 }
 </style>
 
+
+<style id="final-polish-system">
+/* Rayoti-inspired light surface: warm off-white + restrained procedural grain. */
+[data-theme="light"] body, [data-theme="light"] #project-detail {
+  background-color:#f7f5ef;
+  background-image:
+    radial-gradient(circle at 18% 12%, rgba(0,0,0,.035), transparent 28%),
+    radial-gradient(circle at 82% 76%, rgba(0,0,0,.025), transparent 32%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.055'/%3E%3C/svg%3E");
+  background-size:auto,auto,180px 180px;
+}
+[data-theme="light"] #site-header.scrolled{background:rgba(247,245,239,.84);}
+
+/* Grey-to-black cursor-responsive typography. Touch devices keep the normal state. */
+.cursor-reactive,.cursor-reactive *{transition:color .28s cubic-bezier(.22,1,.36,1);}
+@media (hover:hover) and (pointer:fine){
+  .cursor-reactive{color:var(--text-muted)!important;}
+  .cursor-reactive:hover{color:#000!important;}
+  [data-theme="dark"] .cursor-reactive:hover{color:#fff!important;}
+  nav a,.project-info h3,.project-info p,.project-item .project-num,.project-item .project-arrow,.section-label,.social-link,.reachout-row,.btn{transition:color .28s cubic-bezier(.22,1,.36,1),transform .35s cubic-bezier(.22,1,.36,1),opacity .28s ease;}
+  nav a:hover,.social-link:hover,.project-item:hover .project-info h3,.project-item:hover .project-num,.project-item:hover .project-arrow{color:#000!important;}
+  [data-theme="dark"] nav a:hover,[data-theme="dark"] .social-link:hover,[data-theme="dark"] .project-item:hover .project-info h3,[data-theme="dark"] .project-item:hover .project-num,[data-theme="dark"] .project-item:hover .project-arrow{color:#fff!important;}
+}
+
+/* Complete portrait: natural aspect ratio, no forced crop. */
+.hero-photo-frame{height:auto!important;aspect-ratio:auto!important;overflow:visible!important;}
+.hero-photo-frame img{height:auto!important;max-height:none!important;object-fit:contain!important;object-position:center top!important;}
+
+/* Reach Out */
+.reachout-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:clamp(50px,9vw,130px);align-items:end;}
+.reachout-kicker{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:28px;}
+.reachout-note{max-width:520px;margin-top:22px;color:var(--text-muted);font-size:15px;line-height:1.8;}
+.reachout-links{border-top:1px solid var(--border);}
+.reachout-row{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:24px 0;border-bottom:1px solid var(--border);text-decoration:none;color:var(--text-muted);font-size:clamp(17px,2.1vw,25px);}
+.reachout-row:hover{padding-left:10px;}
+.reachout-row small{display:block;font-size:9px;letter-spacing:.25em;color:var(--text-subtle);margin-bottom:5px;}
+@media(max-width:760px){.reachout-grid{grid-template-columns:1fr;gap:50px}.reachout-row{font-size:18px}.reachout-row:hover{padding-left:0}}
+
+/* Scroll-driven project tabs: each panel is a new page opening over the previous one. */
+#project-tab-experience{height:520vh;margin-top:58px;position:relative;}
+.pte-pin{position:sticky;top:0;height:100svh;min-height:680px;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg);}
+.pte-tabs{position:absolute;z-index:20;left:clamp(18px,5vw,60px);right:clamp(18px,5vw,60px);top:24px;display:grid;grid-template-columns:repeat(5,1fr);gap:1px;border-bottom:1px solid var(--border);}
+.pte-tab{appearance:none;border:0;background:none;color:var(--text-subtle);padding:13px 8px 16px;text-align:left;font:500 10px/1 'Inter','Inter',sans-serif;letter-spacing:.18em;cursor:pointer;position:relative;transition:color .35s ease;}
+.pte-tab::after{content:'';position:absolute;left:0;right:100%;bottom:-1px;height:2px;background:var(--text);transition:right .45s cubic-bezier(.22,1,.36,1);}
+.pte-tab.active{color:var(--text);}.pte-tab.active::after{right:0;}
+.pte-stage{position:absolute;inset:0;}
+.pte-panel{position:absolute;inset:0;padding:clamp(105px,13vh,145px) clamp(24px,8vw,110px) 100px;display:flex;align-items:flex-end;opacity:0;visibility:hidden;transform:translate3d(0,9%,0) scale(.94);clip-path:inset(100% 0 0 0 round 0);filter:blur(2px);will-change:transform,opacity,clip-path,filter;z-index:1;}
+.pte-panel.active{visibility:visible;}
+.pte-panel-bg{position:absolute;inset:clamp(76px,10vh,108px) clamp(16px,4vw,55px) clamp(62px,8vh,90px);border:1px solid var(--border);border-radius:clamp(18px,2vw,30px);overflow:hidden;background:var(--bg2);display:flex;align-items:center;justify-content:center;}
+.pte-panel-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 65% 35%,rgba(255,255,255,.1),transparent 35%),linear-gradient(135deg,transparent,rgba(255,255,255,.025));}
+.pte-panel-bg span{font:300 clamp(70px,16vw,220px)/.8 'Cormorant Garamond',serif;letter-spacing:-.07em;color:var(--text);opacity:.08;position:relative;}
+.pte-destination{background:linear-gradient(135deg,#07111e,#111827 55%,#090d16);}.pte-exit{background:linear-gradient(135deg,#10120f,#1c2417 50%,#0b0d0b);}.pte-taxi{background:linear-gradient(135deg,#141012,#21161d 50%,#0d0b0e);}.pte-student{background:linear-gradient(135deg,#11111a,#17172b 50%,#0b0b12);}.pte-chatbot{background:linear-gradient(135deg,#111,#1a1815 55%,#0c0c0c);}
+.pte-panel-copy{position:relative;z-index:5;width:min(760px,100%);padding:clamp(24px,4vw,52px);border:1px solid rgba(255,255,255,.12);background:rgba(8,8,8,.52);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:20px;}
+[data-theme="light"] .pte-panel-copy{background:rgba(255,255,255,.68);border-color:var(--border);}
+.pte-meta{display:flex;justify-content:space-between;gap:20px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:22px;}
+.pte-panel h3{font:400 clamp(42px,7vw,92px)/.88 'Cormorant Garamond',serif;letter-spacing:-.055em;margin-bottom:22px;}
+.pte-panel p{max-width:650px;color:var(--text-muted);font-size:clamp(13px,1.45vw,16px);line-height:1.8;margin-bottom:28px;}
+.pte-panel a,.pte-static{display:inline-flex;color:var(--text);font-size:11px;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--border-hover);padding-bottom:6px;}
+.pte-footer{position:absolute;z-index:20;bottom:24px;left:clamp(18px,5vw,60px);right:clamp(18px,5vw,60px);display:grid;grid-template-columns:auto minmax(100px,1fr) auto;align-items:center;gap:18px;color:var(--text-subtle);font-size:9px;letter-spacing:.16em;}
+.pte-progress{height:1px;background:var(--border);overflow:hidden;}.pte-progress span{display:block;height:100%;width:0;background:var(--text);transform-origin:left;will-change:width;}
+@media(max-width:760px){#project-tab-experience{height:500vh;margin-top:42px}.pte-pin{min-height:620px}.pte-tabs{top:16px;left:14px;right:14px}.pte-tab{font-size:8px;letter-spacing:.1em;padding:12px 4px}.pte-panel{padding:86px 14px 72px;align-items:flex-end}.pte-panel-bg{inset:65px 10px 54px}.pte-panel-copy{padding:22px;border-radius:16px}.pte-meta{font-size:8px}.pte-panel h3{font-size:clamp(40px,13vw,64px)}.pte-panel p{font-size:13px;line-height:1.65}.pte-footer{left:14px;right:14px;grid-template-columns:auto 1fr;font-size:8px}.pte-footer>span:last-child{display:none}}
+@media(prefers-reduced-motion:reduce){#project-tab-experience{height:auto}.pte-pin{position:relative;height:auto;min-height:0;padding:80px 20px}.pte-tabs{position:relative;left:auto;right:auto;top:auto;margin-bottom:20px}.pte-stage{position:relative;inset:auto}.pte-panel{position:relative;inset:auto!important;display:none!important;opacity:1!important;visibility:visible!important;transform:none!important;clip-path:none!important;filter:none!important;min-height:70vh}.pte-panel.active{display:flex!important}.pte-footer{position:relative;left:auto;right:auto;bottom:auto;margin-top:20px}}
+</style>
+
 <style id="project-experience-system">
 /* Immersive project detail + AI-driven Engineer scroll */
 #project-detail{position:fixed;inset:0;z-index:12000;background:var(--bg);color:var(--text);overflow-y:auto;overscroll-behavior:contain;display:none;opacity:0;transition:opacity .45s ease}
@@ -638,6 +704,10 @@
 @media(prefers-reduced-motion:reduce){.pd-media,.pd-title,.pd-index,.pd-subtitle{animation:none;opacity:1;transform:none}.pd-engineer{height:auto}.pd-engineer-pin{position:relative;height:auto;min-height:80vh;padding:120px 24px}.eng-char,.eng-statement span{opacity:1!important;transform:none!important;filter:none!important}.pd-scroll{display:none}}
 </style>
 
+<style id="hide-legacy-projects">
+#projects > .featured-project, #projects > .projects-list.editorial-projects {display:none!important;}
+</style>
+
 </head>
 <body>
 
@@ -696,7 +766,7 @@
     <a href="#experience">Experience</a>
     <a href="#personal">Personal</a>
     <a href="#guestbook">Guestbook</a>
-    <a href="#contact">Contact</a>
+    <a href="#contact">Reach Out</a>
     <button id="theme-toggle" aria-label="Toggle theme"></button>
   </nav>
   <button id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -710,7 +780,7 @@
   <a href="#experience" class="mn-link">Experience</a>
   <a href="#personal" class="mn-link">Personal</a>
   <a href="#guestbook" class="mn-link">Guestbook</a>
-  <a href="#contact" class="mn-link">Contact</a>
+  <a href="#contact" class="mn-link">Reach Out</a>
 </div>
 
 <!-- Clock Bar -->
@@ -741,7 +811,7 @@
     </p>
     <div class="hero-cta">
       <a href="#projects" class="btn btn-primary">See my work</a>
-      <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      <a href="#contact" class="btn btn-ghost">Reach Out</a>
     </div>
   </div>
   <div class="hero-photo-wrap hero-parallax" id="hero-portrait-wrap">
@@ -802,6 +872,40 @@
 <section id="projects" style="border-top:1px solid var(--border);">
   <div class="section-label">02 — Work</div>
   <h2 class="section-title reveal">Selected<br><em>projects</em></h2>
+  <div id="project-tab-experience" aria-label="Project tabs">
+    <div class="pte-pin">
+      <div class="pte-tabs" role="tablist" aria-label="Projects">
+        <button class="pte-tab active" type="button" role="tab" aria-selected="true" data-pte="0">PROJECT 01</button>
+        <button class="pte-tab" type="button" role="tab" aria-selected="false" data-pte="1">PROJECT 02</button>
+        <button class="pte-tab" type="button" role="tab" aria-selected="false" data-pte="2">PROJECT 03</button>
+        <button class="pte-tab" type="button" role="tab" aria-selected="false" data-pte="3">PROJECT 04</button>
+        <button class="pte-tab" type="button" role="tab" aria-selected="false" data-pte="4">PROJECT 05</button>
+      </div>
+      <div class="pte-stage">
+        <article class="pte-panel active" data-pte-panel="0">
+          <div class="pte-panel-bg pte-destination"><span>DESTINATION</span></div>
+          <div class="pte-panel-copy"><div class="pte-meta"><span>01 / 05</span><span>AI · REAL-TIME · VOICE</span></div><h3>destination.com</h3><p>AI Travel Intelligence — real-time route optimisation, ARIA voice AI, live flights, visa guidance, itinerary planning and an aviation arcade.</p><a href="https://destination-com-dun.vercel.app" target="_blank" rel="noopener">Visit project ↗</a></div>
+        </article>
+        <article class="pte-panel" data-pte-panel="1">
+          <div class="pte-panel-bg pte-exit"><span>EXIT</span></div>
+          <div class="pte-panel-copy"><div class="pte-meta"><span>02 / 05</span><span>MOBILE · AI/ML · IOT</span></div><h3>Smart Exit Reminder</h3><p>An intelligent mobile system using Wi-Fi, GPS and BLE sensor fusion to learn routines and remind users of essential items when leaving home.</p><a href="https://mouryadusi.github.io/smart-exit-reminder.html" target="_blank" rel="noopener">Visit project ↗</a></div>
+        </article>
+        <article class="pte-panel" data-pte-panel="2">
+          <div class="pte-panel-bg pte-taxi"><span>PRIVACY</span></div>
+          <div class="pte-panel-copy"><div class="pte-meta"><span>03 / 05</span><span>IOT · EDGE · PRIVACY</span></div><h3>Taxi Lost Item Detection</h3><p>A camera-free sensor system using pressure, infrared and ultrasonic arrays to detect forgotten belongings while keeping processing on-device.</p><a href="https://mouryadusi.github.io/taxi-lost-item-detection.html" target="_blank" rel="noopener">Visit project ↗</a></div>
+        </article>
+        <article class="pte-panel" data-pte-panel="3">
+          <div class="pte-panel-bg pte-student"><span>92%</span></div>
+          <div class="pte-panel-copy"><div class="pte-meta"><span>04 / 05</span><span>PYTHON · ML · SCIKIT-LEARN</span></div><h3>Student Performance Prediction</h3><p>An end-to-end predictive pipeline identifying at-risk students with 92% accuracy so institutions can intervene earlier.</p><span class="pte-static">Case study in portfolio ↗</span></div>
+        </article>
+        <article class="pte-panel" data-pte-panel="4">
+          <div class="pte-panel-bg pte-chatbot"><span>24/7</span></div>
+          <div class="pte-panel-copy"><div class="pte-meta"><span>05 / 05</span><span>NLP · TENSORFLOW · FLASK</span></div><h3>Intelligent University Chatbot</h3><p>An NLP assistant handling 1000+ student queries per day, reducing administrative workload through intent recognition and automation.</p><span class="pte-static">Case study in portfolio ↗</span></div>
+        </article>
+      </div>
+      <div class="pte-footer"><span id="pte-counter">01 / 05</span><div class="pte-progress"><span id="pte-progress-bar"></span></div><span>SCROLL TO OPEN THE NEXT TAB</span></div>
+    </div>
+  </div>
 
   <a class="featured-project reveal" href="https://destination-com-dun.vercel.app" target="_blank" data-project="destination">
     <div class="featured-project-preview">
@@ -1318,23 +1422,18 @@
 
 <!-- Contact -->
 <section id="contact">
-  <div class="section-label">06 — Contact</div>
-  <div class="contact-grid reveal">
-    <div class="contact-left">
+  <div class="section-label">06 — Reach Out</div>
+  <div class="reachout-grid reveal">
+    <div class="reachout-intro">
+      <p class="reachout-kicker">If the work feels worth building, let's talk.</p>
       <h2 class="section-title">Let's build<br><em>something</em></h2>
-      <a href="mailto:mouryadusi@outlook.com" class="big-email">mouryadusi@outlook.com</a>
-      <div class="social-links">
-        <a href="https://linkedin.com/in/mouryadusi-dxb" target="_blank" class="social-link"><span>LinkedIn</span><span>↗</span></a>
-        <a href="https://github.com/mouryadusi" target="_blank" class="social-link"><span>GitHub</span><span>↗</span></a>
-
-      <!-- phone: +971559315412 -->
-      </div>
+      <p class="reachout-note">AI, data, useful products, or a problem that has been sitting on your desk for too long.</p>
     </div>
-    <div class="contact-right">
-      <div class="availability-badge"><span class="status-dot"></span>Immediate availability</div>
-      <p>Currently based in Dubai, UAE. Open to full-time roles in AI & Data Science, remote positions, and relocation opportunities.</p>
-      <p>If you're building something interesting in AI, machine learning, or data infrastructure — I'd love to hear about it.</p>
-      <p style="color:var(--text-subtle);font-size:13px;">UAE Resident · Open to Remote Work & Relocation</p>
+    <div class="reachout-links">
+      <a href="https://linkedin.com/in/mouryadusi-dxb" target="_blank" rel="noopener" class="reachout-row cursor-reactive"><span><small>SOCIAL</small>LinkedIn</span><span>↗</span></a>
+      <a href="mailto:mouryadusi@outlook.com" class="reachout-row cursor-reactive"><span><small>EMAIL</small>mouryadusi@outlook.com</span><span>↗</span></a>
+      <a href="tel:+971559315412" class="reachout-row cursor-reactive"><span><small>PHONE</small>Yes, I still answer calls.</span><span>↗</span></a>
+      <a href="https://github.com/mouryadusi" target="_blank" rel="noopener" class="reachout-row cursor-reactive"><span><small>CODE</small>GitHub</span><span>↗</span></a>
     </div>
   </div>
 </section>
@@ -1354,14 +1453,14 @@
         <div style="background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:32px;">
           <div style="margin-bottom:20px;">
             <label style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);display:block;margin-bottom:8px;">Your name</label>
-            <input id="gb-name" type="text" maxlength="40" placeholder="Satya" style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:14px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;">
+            <input id="gb-name" type="text" maxlength="40" placeholder="Satya" style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:14px;color:var(--text);font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;">
           </div>
           <div style="margin-bottom:20px;">
             <label style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);display:block;margin-bottom:8px;">Message</label>
-            <textarea id="gb-msg" maxlength="280" placeholder="Say something nice..." rows="4" style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:14px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;resize:none;transition:border-color .2s;line-height:1.6;"></textarea>
+            <textarea id="gb-msg" maxlength="280" placeholder="Say something nice..." rows="4" style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:14px;color:var(--text);font-family:'Inter',sans-serif;outline:none;resize:none;transition:border-color .2s;line-height:1.6;"></textarea>
             <div style="text-align:right;font-size:11px;color:var(--text-subtle);margin-top:4px;"><span id="gb-count">0</span>/280</div>
           </div>
-          <button id="gb-submit" style="width:100%;padding:14px;background:var(--text);color:var(--bg);border:none;border-radius:10px;font-size:14px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:opacity .2s,transform .2s;font-weight:400;">Post message →</button>
+          <button id="gb-submit" style="width:100%;padding:14px;background:var(--text);color:var(--bg);border:none;border-radius:10px;font-size:14px;font-family:'Inter',sans-serif;cursor:pointer;transition:opacity .2s,transform .2s;font-weight:400;">Post message →</button>
           <div id="gb-status" style="text-align:center;font-size:12px;color:var(--text-subtle);margin-top:12px;min-height:18px;"></div>
         </div>
       </div>
@@ -1614,7 +1713,7 @@
   const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!el||!loader)return;
   let i=0;
-  const interval=reduced?1400:1800;
+  const interval=reduced?1000:1000;
   el.textContent=greetings[0];
   const timer=setInterval(()=>{
     i++;
@@ -1694,7 +1793,7 @@
   'smart-exit':{num:'01',title:'Smart Exit Reminder',subtitle:'Mobile AI · Sensor fusion · Automation',kicker:'MOBILE / AI / IOT',media:'Remember what matters when you leave.',copy:'An intelligent reminder system using Wi-Fi, GPS and BLE signals to learn routines and surface essential items at the right moment.',lede:'The product disappears into the routine. The intelligence only appears when it is useful.',meta:'The project combines sensor fusion with machine-learning logic to detect context and trigger reminders without requiring a manual checklist.',facts:[['Signals','Wi-Fi · GPS · BLE'],['Mode','Automated'],['Focus','Routine learning']],story:[['01','Context','Leaving home is a tiny decision repeated thousands of times. The system observes contextual signals instead of asking the user to remember another task.','SENSOR FUSION'],['02','Inference','Signals become a lightweight representation of routine. The product learns patterns and uses them to decide when a reminder has genuine value.','CONTEXT → ACTION'],['03','Interaction','The best notification is the one that arrives at exactly the right moment — then gets out of the way.','QUIET AUTOMATION']]},
   'taxi-lost':{num:'02',title:'Taxi Lost Item Detection',subtitle:'Edge AI · IoT · Privacy-first',kicker:'EDGE / IOT / PRIVACY',media:'Detect the object. Protect the passenger.',copy:'A sensor-based system for detecting forgotten belongings in taxis without cameras, with processing kept on-device.',lede:'Useful intelligence does not require surveillance. This system is designed around the opposite principle.',meta:'Pressure, infrared and ultrasonic sensing are combined to detect forgotten objects while keeping the data path local and camera-free.',facts:[['Sensors','Pressure · IR · Ultrasonic'],['Privacy','No cameras'],['Compute','On-device']],story:[['01','The problem','A lost item is obvious only after the passenger has left. The system moves detection earlier, into the moment when recovery is still possible.','DETECTION'],['02','Privacy','Instead of observing people, it observes physical signals. The architecture keeps processing on-device and avoids camera-based identification.','LOCAL PROCESSING'],['03','Reliability','Multiple sensing modalities can complement one another, turning a single ambiguous signal into a more reliable event.','MULTI-SENSOR']]},
   'student-performance':{num:'03',title:'Student Performance Prediction',subtitle:'Machine Learning · Predictive analytics',kicker:'ML / ANALYTICS / EDUCATION',media:'Predict earlier. Intervene sooner.',copy:'An end-to-end machine-learning pipeline designed to identify students at risk and support earlier intervention.',lede:'Prediction becomes valuable when it changes what happens next.',meta:'The project uses Python, Scikit-learn and Pandas to model student outcomes and surface risk signals for earlier action.',facts:[['Result','92% accuracy'],['Models','5+'],['Tools','Python · Scikit-learn']],story:[['01','The signal','Academic outcomes leave patterns in data. The pipeline looks for those patterns before failure becomes visible.','PREDICTIVE SIGNAL'],['02','The model','Multiple approaches can be compared, evaluated and interpreted before selecting a useful predictive workflow.','MODEL COMPARISON'],['03','The outcome','The objective is not prediction for its own sake. It is earlier visibility for people who can actually intervene.','EARLY ACTION']]},
-  'university-chatbot':{num:'04',title:'Intelligent University Chatbot',subtitle:'NLP · TensorFlow · Flask',kicker:'NLP / AUTOMATION / PRODUCT',media:'Answer the question before the queue forms.',copy:'An NLP-powered university assistant built to handle recurring student questions and reduce administrative workload.',lede:'Good automation removes friction without removing the human option.',meta:'The system combines intent recognition with a Flask application and MongoDB-backed workflows to provide always-on assistance.',facts:[['Volume','1,000+ queries/day'],['Availability','24/7'],['Impact','35% workload reduction']],story:[['01','The queue','Repeated questions create repeated work. A conversational interface can absorb the predictable layer of that demand.','INTENT RECOGNITION'],['02','The system','NLP maps natural-language questions to useful responses while keeping the application simple enough to maintain.','TENSORFLOW / FLASK'],['03','The experience','Students get an immediate answer; staff can spend more time on questions that actually require a person.','HUMAN + AUTOMATION']]}}
+  'university-chatbot':{num:'04',title:'Intelligent University Chatbot',subtitle:'NLP · TensorFlow · Flask',kicker:'NLP / AUTOMATION / PRODUCT',media:'Answer the question before the queue forms.',copy:'An NLP-powered university assistant built to handle recurring student questions and reduce administrative workload.',lede:'Good automation removes friction without removing the human option.',meta:'The system combines intent recognition with a Flask application and MongoDB-backed workflows to provide always-on assistance.',facts:[['Volume','1,000+ queries/day'],['Availability','24/7'],['Impact','35% workload reduction']],story:[['01','The queue','Repeated questions create repeated work. A conversational interface can absorb the predictable layer of that demand.','INTENT RECOGNITION'],['02','The system','NLP maps natural-language questions to useful responses while keeping the application simple enough to maintain.','TENSORFLOW / FLASK'],['03','The experience','Students get an immediate answer; staff can spend more time on questions that actually require a person.','HUMAN + AUTOMATION']]}
  };
  let active=null,locked=false;
  function open(slug){const d=DATA[slug];if(!d)return;active=d;locked=true;document.body.dataset.projectOpen='true';document.body.style.overflow='hidden';detail.classList.add('open');detail.setAttribute('aria-hidden','false');detail.scrollTop=0;
@@ -1726,6 +1825,50 @@
  window.addEventListener('popstate',()=>{if(detail.classList.contains('open'))close()});
  window.__openProject=open;
 })();
+</script>
+
+
+<script id="final-interaction-system">
+(function(){
+  const root=document.getElementById('project-tab-experience');
+  if(!root)return;
+  const pin=root.querySelector('.pte-pin'), panels=[...root.querySelectorAll('.pte-panel')], tabs=[...root.querySelectorAll('.pte-tab')], bar=document.getElementById('pte-progress-bar'), counter=document.getElementById('pte-counter');
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let raf=0;
+  function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;}
+  function update(){
+    raf=0;
+    if(reduced)return;
+    const r=root.getBoundingClientRect();
+    const range=Math.max(root.offsetHeight-window.innerHeight,1);
+    const p=Math.max(0,Math.min(0.999999,(-r.top)/range));
+    const scaled=p*(panels.length-1);
+    const idx=Math.floor(scaled);
+    const local=ease(scaled-idx);
+    panels.forEach((panel,i)=>{
+      let opacity=0, y=8, scale=.94, blur=2, clip=100, z=1;
+      if(i===idx){opacity=1-local*.18;y=-local*5;scale=1-local*.04;blur=local*1.5;clip=local*100;z=10;}
+      else if(i===idx+1){opacity=.12+local*.88;y=(1-local)*10;scale=.94+local*.06;blur=(1-local)*2;clip=(1-local)*100;z=11;}
+      else if(i<idx){opacity=.12;y=-7;scale=.92;blur=3;clip=0;z=2;}
+      panel.style.opacity=opacity;panel.style.transform=`translate3d(0,${y}%,0) scale(${scale})`;panel.style.filter=`blur(${blur}px)`;panel.style.clipPath=`inset(${clip}% 0 0 0 round 0)`;panel.style.zIndex=z;
+    });
+    const active=Math.min(panels.length-1,Math.round(scaled));
+    tabs.forEach((tab,i)=>{const on=i===active;tab.classList.toggle('active',on);tab.setAttribute('aria-selected',on?'true':'false');});
+    counter.textContent=String(active+1).padStart(2,'0')+' / 05';
+    bar.style.width=(p*100)+'%';
+  }
+  function request(){if(!raf)raf=requestAnimationFrame(update);}
+  window.addEventListener('scroll',request,{passive:true});window.addEventListener('resize',request,{passive:true});request();
+  tabs.forEach((tab,i)=>tab.addEventListener('click',()=>{
+    const range=Math.max(root.offsetHeight-window.innerHeight,1);
+    window.scrollTo({top:window.scrollY+root.getBoundingClientRect().top+range*(i/(panels.length-1)),behavior:'smooth'});
+  }));
+})();
+
+// Add the cursor-responsive treatment to existing interactive typography without creating persistent touch hover.
+if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+  document.querySelectorAll('nav a,.project-info h3,.project-info p,.social-link,.reachout-row,.featured-project .fp-title,.featured-project .fp-desc').forEach(el=>el.classList.add('cursor-reactive'));
+}
 </script>
 
 <!-- Main Scripts -->
@@ -1884,7 +2027,7 @@ document.querySelectorAll('.reveal').forEach(el=>revObserver.observe(el));
   font-size:11px;letter-spacing:.15em;text-transform:uppercase;
   color:var(--text-subtle);cursor:pointer;border:none;background:none;
   margin-top:32px;padding:8px 16px;border:1px solid var(--border);
-  border-radius:100px;transition:all .2s;font-family:'DM Sans',sans-serif;
+  border-radius:100px;transition:all .2s;font-family:'Inter',sans-serif;
 }
 #newspaper-toggle:hover{color:var(--text);border-color:var(--border-hover);}
 #newspaper-view{display:none;margin-top:40px;}
@@ -1920,7 +2063,7 @@ document.querySelectorAll('.reveal').forEach(el=>revObserver.observe(el));
   padding:10px 14px;margin:14px 0;
   font-family:'Playfair Display',serif;font-size:22px;font-weight:700;
 }
-.np-stat-box span{display:block;font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:.15em;text-transform:uppercase;margin-top:2px;opacity:.7;}
+.np-stat-box span{display:block;font-family:'Inter',sans-serif;font-size:10px;letter-spacing:.15em;text-transform:uppercase;margin-top:2px;opacity:.7;}
 .np-kicker{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:6px;}
 .np-footer-rule{border:none;border-top:1px solid var(--border);margin:20px 0 0;}
 @media(max-width:700px){.np-grid{grid-template-columns:1fr}.np-col{border-right:none;border-bottom:1px solid var(--border)}}
@@ -1934,7 +2077,7 @@ document.querySelectorAll('.reveal').forEach(el=>revObserver.observe(el));
   display:inline-flex;align-items:center;gap:10px;
   padding:14px 28px;background:var(--text);color:var(--bg);
   border:none;border-radius:100px;font-size:14px;
-  font-family:'DM Sans',sans-serif;cursor:pointer;
+  font-family:'Inter',sans-serif;cursor:pointer;
   transition:all .25s;margin-top:48px;
 }
 #pitch-btn:hover{opacity:.85;transform:translateY(-2px);}
@@ -2049,7 +2192,7 @@ document.querySelectorAll('.reveal').forEach(el=>revObserver.observe(el));
 #ai-input{
   flex:1;background:var(--bg3);border:1px solid var(--border);
   border-radius:100px;padding:9px 16px;font-size:13px;
-  color:var(--text);font-family:'DM Sans',sans-serif;outline:none;
+  color:var(--text);font-family:'Inter',sans-serif;outline:none;
 }
 #ai-send{
   background:var(--text);color:var(--bg);border:none;
@@ -2062,7 +2205,7 @@ document.querySelectorAll('.reveal').forEach(el=>revObserver.observe(el));
 .ai-sug{
   font-size:11px;padding:5px 12px;border:1px solid var(--border);
   border-radius:100px;color:var(--text-muted);cursor:pointer;
-  background:none;font-family:'DM Sans',sans-serif;transition:all .2s;
+  background:none;font-family:'Inter',sans-serif;transition:all .2s;
 }
 .ai-sug:hover{border-color:var(--border-hover);color:var(--text);}
 @media(max-width:500px){#ai-panel{width:calc(100vw - 32px);right:16px;bottom:80px;}#ai-bubble{bottom:20px;right:16px;}}
@@ -2363,7 +2506,7 @@ function initFlightMap(){
     label.setAttribute('x',city.x);label.setAttribute('y',city.y-12);
     label.setAttribute('text-anchor','middle');
     label.setAttribute('fill','#888');label.setAttribute('font-size','10');
-    label.setAttribute('font-family','DM Sans,sans-serif');
+    label.setAttribute('font-family','Inter,sans-serif');
     label.textContent=city.n;
     g.appendChild(circle);g.appendChild(label);
     g.style.cursor='pointer';
