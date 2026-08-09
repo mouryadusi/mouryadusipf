@@ -1,12 +1,3 @@
-<!--
-  Inspiration / Reference — design research only; no source code, branding, layouts, text, or assets copied.
-  Akriti Purbey: https://akritipurbey.framer.website/
-  Raghav Dua: https://www.wallofportfolios.in/portfolios/raghav-dua/
-  Priyashree: https://priyashree.in/
-  Priyashree About: https://priyashree.in/about
-  Gayatri Ketharaman: https://www.wallofportfolios.in/portfolios/gayatri-ketharaman/
-  Existing portfolio reference: https://mouryadusi-github-io.vercel.app/
--->
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
@@ -498,32 +489,220 @@
     .project-item { grid-template-columns: 40px 1fr; }
     .project-arrow { display: none; }
   }
+</style>
+<style>
 
-  /* PREMIUM UPGRADE LAYER */
-  #loader-greeting{font-family:'Playfair Display',serif;font-size:clamp(18px,2.5vw,26px);font-style:italic;color:var(--text-muted);opacity:0;margin-top:26px;min-height:32px;transition:opacity .35s ease,transform .35s ease;}
-  #loader-greeting.show{opacity:1;transform:translateY(0);}
-  .kinetic-title{perspective:900px;transform-style:preserve-3d;}
-  .kinetic-title>span{display:inline-block;will-change:transform;transition:transform .7s cubic-bezier(.16,1,.3,1);}
-  .kinetic-title em{display:inline-block;position:relative;font-style:italic;color:var(--text-muted);will-change:transform;transition:transform .8s cubic-bezier(.16,1,.3,1),color .3s ease;}
-  .kinetic-title em::after{content:'';position:absolute;left:0;right:0;bottom:-.08em;height:1px;background:var(--text-muted);transform:scaleX(0);transform-origin:left;transition:transform .7s cubic-bezier(.16,1,.3,1);}
-  .kinetic-title:hover em::after{transform:scaleX(1);}
-  .hero-photo-frame.photo-reveal{cursor:pointer;position:relative;isolation:isolate;outline:none;}
-  .photo-reveal-cover{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:7px;background:linear-gradient(145deg,rgba(10,10,10,.92),rgba(10,10,10,.48));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}
-  .photo-reveal-cover span{font-family:'Playfair Display',serif;font-size:22px;color:#fff;font-style:italic;}
-  .photo-reveal-cover small{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);}
-  .photo-reveal.revealed .photo-reveal-cover{opacity:0;transform:scale(1.04);pointer-events:none;}
-  .photo-reveal.revealed img{transform:scale(1.02);filter:grayscale(0%);}
-  .photo-reveal img{transition:filter .7s ease,transform 1s cubic-bezier(.16,1,.3,1);}
-  .photo-reveal:focus-visible{box-shadow:0 0 0 2px var(--text);}
-  .project-item{position:relative;overflow:hidden;transform:translate3d(0,0,0);will-change:transform,opacity;}
-  .project-item::after{content:'';position:absolute;left:0;bottom:0;width:100%;height:1px;background:var(--text);transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.16,1,.3,1);}
-  .project-item:hover::after{transform:scaleX(1);}
-  .project-item .project-info{transition:transform .65s cubic-bezier(.16,1,.3,1);}
-  .project-item:hover .project-info{transform:translateX(5px);}
-  #mood-indicator{display:inline-flex;align-items:center;gap:7px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-subtle);margin-left:auto;}
-  #mood-indicator i{width:6px;height:6px;border-radius:50%;background:var(--mood-accent,var(--text));box-shadow:0 0 12px rgba(var(--mood-rgb,240,240,240),.45);}
-  @media(max-width:700px){#loader-greeting{font-size:18px}.photo-reveal-cover span{font-size:19px}.kinetic-title>span{transition:none}}
-  @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.photo-reveal-cover{backdrop-filter:none;-webkit-backdrop-filter:none}}
+
+/* Welcome experience */
+#welcome-experience{
+  position:fixed;inset:0;z-index:11000;background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  padding:clamp(24px,5vw,72px);overflow:hidden;
+  opacity:1;visibility:visible;
+  transition:opacity .8s cubic-bezier(.22,1,.36,1),visibility .8s;
+}
+#welcome-experience.dismissed{opacity:0;visibility:hidden;pointer-events:none;}
+#welcome-experience::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 18% 20%,rgba(255,255,255,.035),transparent 34%),
+    radial-gradient(circle at 82% 78%,rgba(255,255,255,.025),transparent 32%);
+  pointer-events:none;
+}
+.welcome-inner{width:min(1120px,100%);position:relative;z-index:1;}
+.welcome-kicker{
+  font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--text-subtle);margin-bottom:28px;
+}
+.welcome-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(64px,12vw,150px);font-weight:300;line-height:.8;
+  letter-spacing:-.045em;margin-left:-.06em;
+}
+.welcome-role{
+  margin-top:22px;font-size:clamp(14px,2vw,18px);
+  letter-spacing:.18em;text-transform:uppercase;color:var(--text-muted);
+}
+.welcome-greeting-wrap{
+  min-height:clamp(105px,14vw,165px);display:flex;align-items:center;
+  margin-top:52px;border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);position:relative;
+}
+.welcome-greeting{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(28px,5.2vw,68px);font-weight:400;line-height:1.08;
+  letter-spacing:-.025em;color:var(--text);opacity:0;
+  transform:translateY(16px);transition:opacity .55s ease,transform .55s ease;
+}
+.welcome-greeting.active{opacity:1;transform:translateY(0);}
+.welcome-greeting[dir="rtl"]{font-family:'DM Sans',sans-serif;font-weight:300;}
+.welcome-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:28px;margin-top:26px;flex-wrap:wrap;
+}
+.welcome-languages{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+.welcome-language{
+  border:1px solid var(--border);background:transparent;color:var(--text-subtle);
+  border-radius:999px;padding:7px 11px;font:11px 'DM Sans',sans-serif;
+  letter-spacing:.08em;cursor:pointer;transition:all .25s ease;
+}
+.welcome-language:hover,.welcome-language.active{
+  color:var(--text);border-color:var(--border-hover);background:var(--bg2);
+}
+.welcome-language.active{box-shadow:inset 0 -1px 0 var(--text);}
+.welcome-controls{display:flex;align-items:center;gap:14px;}
+.welcome-progress{width:min(220px,30vw);height:1px;background:var(--border);overflow:hidden;}
+.welcome-progress-bar{height:100%;width:0;background:var(--text);transform-origin:left;}
+.welcome-progress-bar.running{animation:welcomeProgress 1.55s linear forwards;}
+@keyframes welcomeProgress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.welcome-skip{
+  border:0;background:none;color:var(--text-muted);font:11px 'DM Sans',sans-serif;
+  letter-spacing:.12em;text-transform:uppercase;cursor:pointer;padding:8px 0;
+}
+.welcome-skip:hover{color:var(--text);}
+@media(max-width:650px){
+  #welcome-experience{align-items:flex-start;padding-top:18vh;}
+  .welcome-name{font-size:clamp(58px,18vw,100px);}
+  .welcome-greeting-wrap{margin-top:40px;min-height:120px;}
+  .welcome-bottom{display:block;}
+  .welcome-controls{margin-top:18px;}
+  .welcome-progress{width:150px;}
+}
+
+/* Kinetic signature hero */
+#hero{position:relative;perspective:1200px;}
+.hero-left{position:relative;z-index:2;}
+.hero-title{
+  font-size:clamp(68px,10.5vw,142px)!important;
+  letter-spacing:-.055em!important;line-height:.82!important;
+  margin-left:-.06em!important;
+}
+.hero-title em{
+  display:inline-block;color:var(--text)!important;
+  font-style:italic;transform:skewX(-7deg);
+  text-shadow:0 .03em 0 rgba(255,255,255,.04);
+}
+.hero-title em::after{
+  content:'';display:block;height:1px;width:72%;margin:.13em 0 0 .08em;
+  background:var(--text);transform:scaleX(.18);transform-origin:left;
+  transition:transform .8s cubic-bezier(.22,1,.36,1);
+}
+#hero:hover .hero-title em::after{transform:scaleX(1);}
+.hero-identity{
+  margin:-6px 0 34px;font-size:11px;letter-spacing:.28em;
+  text-transform:uppercase;color:var(--text-subtle);
+}
+.hero-greeting-rail{
+  display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:26px;
+}
+.hero-greeting-rail span{
+  font-size:10px;letter-spacing:.08em;color:var(--text-subtle);
+  border:1px solid var(--border);padding:6px 9px;border-radius:999px;
+}
+.hero-greeting-live{
+  min-width:210px;font-family:'Playfair Display',serif;font-size:18px;
+  color:var(--text-muted);display:inline-block;transition:opacity .35s ease;
+}
+.hero-parallax{will-change:transform;transition:transform .12s linear;}
+
+/* Tap-to-reveal portrait */
+.hero-photo-wrap{isolation:isolate;}
+.hero-photo-frame{position:relative;cursor:pointer;}
+.hero-photo-frame img{transition:filter .7s ease,transform .9s cubic-bezier(.22,1,.36,1),clip-path .9s cubic-bezier(.22,1,.36,1);}
+.hero-photo-frame.photo-hidden img{
+  filter:blur(18px) grayscale(100%);transform:scale(1.08);
+  clip-path:inset(14% 14% 14% 14% round 28px);
+}
+.photo-reveal-overlay{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  z-index:3;background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.22));
+  transition:opacity .5s ease;pointer-events:none;
+}
+.photo-reveal-overlay span{
+  background:rgba(10,10,10,.72);border:1px solid rgba(255,255,255,.18);
+  color:#fff;border-radius:999px;padding:11px 17px;font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;backdrop-filter:blur(12px);
+}
+.hero-photo-frame.photo-revealed .photo-reveal-overlay{opacity:0;}
+.hero-photo-frame.photo-revealed img{filter:grayscale(0%);transform:scale(1);clip-path:none;}
+.photo-reveal-note{
+  margin-top:12px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text-subtle);text-align:center;
+}
+
+/* Editorial project storytelling */
+.projects-list.editorial-projects{gap:0;margin-top:56px;}
+.editorial-projects .project-item{
+  min-height:clamp(420px,68vh,720px);padding:clamp(42px,7vw,90px) 0;
+  display:grid;grid-template-columns:80px minmax(0,1fr) 120px;
+  align-items:center;position:relative;overflow:hidden;
+  transition:padding .55s cubic-bezier(.22,1,.36,1),border-color .3s ease;
+}
+.editorial-projects .project-item::before{
+  content:'';position:absolute;left:0;top:50%;width:3px;height:0;
+  background:var(--text);transform:translateY(-50%);
+  transition:height .7s cubic-bezier(.22,1,.36,1);
+}
+.editorial-projects .project-item.active::before{height:70%;}
+.editorial-projects .project-num{
+  align-self:start;padding-top:9px;font-family:'Cormorant Garamond',serif;
+  font-size:20px;color:var(--text-subtle);
+}
+.editorial-projects .project-info h3{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(34px,6vw,82px);line-height:.95;letter-spacing:-.04em;
+  margin-bottom:22px;transform:translateX(0);transition:transform .7s cubic-bezier(.22,1,.36,1);
+}
+.editorial-projects .project-item.active .project-info h3{transform:translateX(14px);}
+.editorial-projects .project-info p{
+  font-size:clamp(14px,1.5vw,17px);max-width:680px;
+  line-height:1.75;opacity:.82;
+}
+.editorial-projects .project-tags{margin-top:22px;}
+.editorial-projects .project-arrow{
+  font-size:38px;justify-self:end;align-self:start;
+  transition:transform .5s cubic-bezier(.22,1,.36,1);
+}
+.editorial-projects .project-item.active .project-arrow{transform:translate(8px,-8px) rotate(-3deg);}
+.project-progress{
+  position:absolute;right:0;bottom:18px;width:min(180px,24vw);height:1px;background:var(--border);
+}
+.project-progress span{display:block;height:100%;width:0;background:var(--text);transition:width .15s linear;}
+@media(max-width:700px){
+  .editorial-projects .project-item{
+    min-height:520px;grid-template-columns:38px 1fr;padding:55px 0;
+  }
+  .editorial-projects .project-arrow{display:none;}
+  .editorial-projects .project-info h3{font-size:clamp(34px,13vw,58px);}
+  .editorial-projects .project-item.active .project-info h3{transform:translateX(6px);}
+  .project-progress{width:100%;bottom:14px;}
+}
+
+/* Mood system actually affects accents */
+:root{--mood-accent:#f0f0f0;--mood-rgb:240,240,240;}
+.clock-dot,.status-dot,.fp-badge-dot{box-shadow:0 0 0 5px rgba(var(--mood-rgb),.08);}
+.availability-badge,.hero-photo-tag{transition:border-color .4s ease,box-shadow .4s ease;}
+.availability-badge{box-shadow:0 0 30px rgba(var(--mood-rgb),.05);}
+
+#references{padding-top:72px;padding-bottom:88px;border-top:1px solid var(--border);}
+.reference-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:1px;
+  border:1px solid var(--border);background:var(--border);margin-top:36px;
+}
+.reference-card{background:var(--bg);padding:22px 18px;min-height:150px;display:flex;flex-direction:column;justify-content:space-between;}
+.reference-card small{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-subtle);}
+.reference-card strong{font-family:'Playfair Display',serif;font-size:18px;font-weight:400;margin-top:18px;}
+.reference-card a{font-size:11px;color:var(--text-muted);text-decoration:none;margin-top:18px;word-break:break-word;}
+.reference-card a:hover{color:var(--text);}
+@media(max-width:900px){.reference-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:520px){.reference-grid{grid-template-columns:1fr;}}
+
+/* Accessibility / reduced motion */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;}
+  .welcome-progress-bar{animation:none!important;}
+}
 </style>
 </head>
 <body>
@@ -543,8 +722,33 @@
   </div>
   <div id="loader-line"></div>
   <div id="loader-sub">AI & Data Science</div>
-  <div id="loader-greeting" aria-live="polite">Thanks for visiting</div>
   <div id="loader-progress"></div>
+</div>
+
+<!-- Multilingual welcome experience -->
+<div id="welcome-experience" aria-label="Welcome">
+  <div class="welcome-inner">
+    <div class="welcome-kicker">Welcome</div>
+    <div class="welcome-name">Mourya Dusi</div>
+    <div class="welcome-role">AI &amp; Data Science</div>
+    <div class="welcome-greeting-wrap">
+      <div class="welcome-greeting active" id="welcome-greeting" aria-live="polite">Thanks for visiting</div>
+    </div>
+    <div class="welcome-bottom">
+      <div class="welcome-languages" role="tablist" aria-label="Greeting languages">
+        <button class="welcome-language active" type="button" data-index="0">English</button>
+        <button class="welcome-language" type="button" data-index="1">తెలుగు</button>
+        <button class="welcome-language" type="button" data-index="2">Español</button>
+        <button class="welcome-language" type="button" data-index="3">العربية</button>
+        <button class="welcome-language" type="button" data-index="4">हिन्दी</button>
+        <button class="welcome-language" type="button" data-index="5">日本語</button>
+      </div>
+      <div class="welcome-controls">
+        <div class="welcome-progress" aria-hidden="true"><div class="welcome-progress-bar" id="welcome-progress"></div></div>
+        <button class="welcome-skip" id="welcome-skip" type="button">Enter portfolio →</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Header -->
@@ -583,7 +787,6 @@
     </div>
   </div>
   <div class="clock-sep"></div>
-  <div id="mood-indicator"><i></i><span id="mood-label">Dubai mood</span></div>
   <div class="clock-item">
     <div>
       <div class="clock-label">Your Time</div>
@@ -594,27 +797,35 @@
 
 <!-- Hero -->
 <section id="hero">
-  <div class="hero-left">
-    <h1 class="hero-title kinetic-title"><span>Hey,</span><br><span>I'm <em data-kinetic-name>Mourya.</em></span></h1>
+  <div class="hero-left hero-parallax" id="hero-copy">
+    <div class="hero-identity">AI &amp; Data Science</div>
+    <h1 class="hero-title">Hey,<br>I'm <em>Mourya.</em></h1>
     <p class="hero-intro" id="hero-intro">
       <span class="explode-text">Here, you can check out what I'm working on. I try my best to create things with <span class="heart">❤</span> — or maybe something very much better but very simple. AI & Data Science, built with intention.</span>
     </p>
+    <div class="hero-greeting-rail" aria-label="Multilingual greeting">
+      <span class="hero-greeting-live" id="hero-greeting-live" aria-live="polite">Thanks for visiting</span>
+      <span>EN</span><span>TE</span><span>ES</span><span>AR</span><span>HI</span><span>JA</span>
+    </div>
     <div class="hero-cta">
       <a href="#projects" class="btn btn-primary">See my work</a>
       <a href="#contact" class="btn btn-ghost">Get in touch</a>
     </div>
   </div>
-  <div class="hero-photo-wrap">
-    <div class="hero-photo-frame photo-reveal" id="photo-reveal" tabindex="0" role="button" aria-label="Tap to reveal Mourya's photograph">
-      <img src="assets/mourya.jpg" alt="Mourya Dusi" id="hero-img" onerror="if(this.src.indexOf('photo.jpg')===-1){this.src='photo.jpg';}else{this.parentElement.innerHTML='<div class=\'photo-placeholder\'><svg width=\'48\' height=\'48\' viewBox=\'0 0 48 48\' fill=\'none\'><circle cx=\'24\' cy=\'18\' r=\'8\' stroke=\'currentColor\' stroke-width=\'1.5\'/><path d=\'M6 42C6 32 14 26 24 26C34 26 42 32 42 42\' stroke=\'currentColor\' stroke-width=\'1.5\' stroke-linecap=\'round\'/></svg><span>Add your photo here</span></div>';}">
-      <div class="photo-reveal-cover"><span>Tap to reveal</span><small>Mourya Dusi · AI &amp; Data Science</small></div>
+  <div class="hero-photo-wrap hero-parallax" id="hero-portrait-wrap">
+    <div class="hero-photo-frame photo-hidden" id="photo-reveal" role="button" tabindex="0" aria-label="Tap to reveal Mourya's photograph" aria-pressed="false">
+      <img src="assets/mourya.jpg" alt="Mourya Dusi" id="hero-img"
+        onerror="this.onerror=null;this.src='photo.jpg';">
+      <div class="photo-reveal-overlay"><span>Tap to reveal</span></div>
     </div>
+    <div class="photo-reveal-note" id="photo-reveal-note">Click / tap the portrait</div>
     <div class="hero-photo-tag">
       <strong>Mourya Dusi</strong>
       Dubai, UAE · Open to work
     </div>
   </div>
 </section>
+
 
 <!-- About -->
 <section id="about">
@@ -696,7 +907,7 @@
     </div>
   </a>
 
-  <div class="projects-list reveal">
+  <div class="projects-list editorial-projects reveal">
     <a class="project-item" href="https://mouryadusi.github.io/smart-exit-reminder.html" target="_blank">
       <span class="project-num">01</span>
       <div class="project-info">
@@ -706,7 +917,7 @@
         <div class="project-tags"><span class="tag">Mobile</span><span class="tag">AI/ML</span><span class="tag">IoT</span><span class="tag">React Native</span></div>
       </div>
       <span class="project-arrow">↗</span>
-    </a>
+    <div class="project-progress" aria-hidden="true"><span></span></div></a>
     <a class="project-item" href="https://mouryadusi.github.io/taxi-lost-item-detection.html" target="_blank">
       <span class="project-num">02</span>
       <div class="project-info">
@@ -716,7 +927,7 @@
         <div class="project-tags"><span class="tag">IoT</span><span class="tag">Edge Computing</span><span class="tag">Privacy Tech</span></div>
       </div>
       <span class="project-arrow">↗</span>
-    </a>
+    <div class="project-progress" aria-hidden="true"><span></span></div></a>
     <div class="project-item" style="cursor:none;">
       <span class="project-num">03</span>
       <div class="project-info">
@@ -726,7 +937,7 @@
         <div class="project-tags"><span class="tag">Python</span><span class="tag">Scikit-learn</span><span class="tag">Pandas</span></div>
       </div>
       <span class="project-arrow" style="opacity:0.3">—</span>
-    </div>
+    <div class="project-progress" aria-hidden="true"><span></span></div></div>
     <div class="project-item" style="cursor:none;">
       <span class="project-num">04</span>
       <div class="project-info">
@@ -736,7 +947,7 @@
         <div class="project-tags"><span class="tag">NLP</span><span class="tag">TensorFlow</span><span class="tag">Flask</span><span class="tag">MongoDB</span></div>
       </div>
       <span class="project-arrow" style="opacity:0.3">—</span>
-    </div>
+    <div class="project-progress" aria-hidden="true"><span></span></div></div>
   </div>
 </section>
 
@@ -1228,6 +1439,9 @@
   </div>
 </section>
 
+
+
+
 <!-- Footer -->
 <footer>
   <span>© 2026 Mourya Dusi</span>
@@ -1456,22 +1670,156 @@
 })();
 </script>
 
-<!-- Premium interaction layer -->
+
+<!-- Reference-driven interactions -->
 <script>
 (function(){
-  const root=document.documentElement; const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const greetings=['Thanks for visiting','ధన్యవాదాలు','Gracias por visitar','شكرًا لزيارتك','आने के लिए धन्यवाद','訪れてくれてありがとう'];
-  const greeting=document.getElementById('loader-greeting'); let gi=0;
-  function cycleGreeting(){if(!greeting)return;greeting.classList.remove('show');setTimeout(()=>{greeting.textContent=greetings[gi%greetings.length];greeting.classList.add('show');gi++;},180);}
-  if(greeting){cycleGreeting();if(!reduced)setInterval(cycleGreeting,1450);}
-  const photo=document.getElementById('photo-reveal');
-  if(photo){const reveal=()=>photo.classList.add('revealed');photo.addEventListener('click',reveal);photo.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();reveal();}});}
-  const hero=document.getElementById('hero'),name=document.querySelector('[data-kinetic-name]');let pointerX=0,pointerY=0;
-  if(hero&&name&&!reduced){window.addEventListener('pointermove',e=>{pointerX=(e.clientX/window.innerWidth-.5)*2;pointerY=(e.clientY/window.innerHeight-.5)*2;name.style.transform=`translate3d(${pointerX*7}px,${pointerY*4}px,0) rotate(${pointerX*1.2}deg)`;},{passive:true});window.addEventListener('scroll',()=>{const r=hero.getBoundingClientRect(),p=Math.max(-1,Math.min(1,(window.innerHeight/2-(r.top+r.height/2))/(window.innerHeight/2)));name.style.transform=`translate3d(${pointerX*5}px,${p*-16+pointerY*3}px,0) rotate(${pointerX*1.1}deg)`;},{passive:true});}
-  const projects=[...document.querySelectorAll('.projects-list .project-item')];
-  if(projects.length&&!reduced){const update=()=>{const vh=window.innerHeight;projects.forEach(el=>{const r=el.getBoundingClientRect(),distance=(r.top+r.height/2-vh/2)/(vh*.85),c=Math.max(-1,Math.min(1,distance));el.style.transform=`translate3d(${c*-10}px,${Math.abs(c)*5}px,0)`;el.style.opacity=String(.72+.28*(1-Math.abs(c)));});};update();window.addEventListener('scroll',update,{passive:true});}
-  window.__updateMouryaMood=function(){const hour=Number(new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Dubai',hour:'numeric',hour12:false}).format(new Date()));let label='night',accent='#818cf8',rgb='129,140,248';if(hour>=5&&hour<9){label='sunrise';accent='#f59e0b';rgb='245,158,11';}else if(hour>=9&&hour<17){label='day';accent='#f0f0f0';rgb='240,240,240';}else if(hour>=17&&hour<20){label='sunset';accent='#f97316';rgb='249,115,22';}root.style.setProperty('--mood-accent',accent);root.style.setProperty('--mood-rgb',rgb);const ml=document.getElementById('mood-label');if(ml)ml.textContent=`${label} · Dubai`;};
-  window.__updateMouryaMood();setInterval(window.__updateMouryaMood,60000);
+  const greetings = [
+    {text:'Thanks for visiting', lang:'English'},
+    {text:'ధన్యవాదాలు', lang:'Telugu'},
+    {text:'Gracias por visitar', lang:'Spanish'},
+    {text:'شكرًا لزيارتك', lang:'Arabic', dir:'rtl'},
+    {text:'आने के लिए धन्यवाद', lang:'Hindi'},
+    {text:'訪れてくれてありがとう', lang:'Japanese'}
+  ];
+  const welcome = document.getElementById('welcome-experience');
+  const greetingEl = document.getElementById('welcome-greeting');
+  const progress = document.getElementById('welcome-progress');
+  const buttons = Array.from(document.querySelectorAll('.welcome-language'));
+  const heroGreeting = document.getElementById('hero-greeting-live');
+  const skip = document.getElementById('welcome-skip');
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let index=0, timer=null, paused=false, entered=false;
+  const interval = 1550;
+
+  function paint(i, animate=true){
+    index=i;
+    const item=greetings[i];
+    if(animate){
+      greetingEl.classList.remove('active');
+      setTimeout(()=>{
+        greetingEl.textContent=item.text;
+        greetingEl.dir=item.dir||'ltr';
+        greetingEl.classList.add('active');
+      }, prefersReduced ? 0 : 80);
+    }else{
+      greetingEl.textContent=item.text;
+      greetingEl.dir=item.dir||'ltr';
+      greetingEl.classList.add('active');
+    }
+    buttons.forEach((b,j)=>b.classList.toggle('active',j===i));
+    if(heroGreeting) heroGreeting.textContent=item.text;
+    if(progress){
+      progress.classList.remove('running');
+      void progress.offsetWidth;
+      if(!prefersReduced && !paused) progress.classList.add('running');
+    }
+  }
+  function next(){
+    if(entered || paused) return;
+    if(index >= greetings.length-1){
+      enter();
+      return;
+    }
+    paint(index+1);
+  }
+  function schedule(){
+    clearInterval(timer);
+    timer=setInterval(next,interval);
+  }
+  function enter(){
+    if(entered)return;
+    entered=true; clearInterval(timer);
+    welcome.classList.add('dismissed');
+    document.body.style.overflow='';
+    setTimeout(()=>welcome.remove(),850);
+  }
+  buttons.forEach(b=>b.addEventListener('click',()=>{
+    paint(Number(b.dataset.index));
+    paused=true;
+    clearTimeout(window.__welcomeResume);
+    window.__welcomeResume=setTimeout(()=>{paused=false;schedule();},2200);
+  }));
+  ['mouseenter','focusin'].forEach(ev=>welcome.addEventListener(ev,()=>{paused=true;clearInterval(timer);}));
+  ['mouseleave','focusout'].forEach(ev=>welcome.addEventListener(ev,()=>{if(!entered){paused=false;schedule();}}));
+  skip.addEventListener('click',enter);
+  document.addEventListener('keydown',e=>{
+    if(entered)return;
+    if(e.key==='Escape' || e.key==='Enter') enter();
+    if(e.key==='ArrowRight'){paused=true;paint(Math.min(index+1,greetings.length-1));}
+    if(e.key==='ArrowLeft'){paused=true;paint(Math.max(index-1,0));}
+  });
+  document.body.style.overflow='hidden';
+  paint(0,false);
+  // The original loader remains visible first; begin the greeting cycle only after it clears.
+  setTimeout(schedule, 2550);
+  window.__mouryaGreetings=greetings;
+})();
+
+/* Portrait reveal — original interaction using the existing portrait */
+(function(){
+  const frame=document.getElementById('photo-reveal');
+  const note=document.getElementById('photo-reveal-note');
+  if(!frame)return;
+  function toggle(){
+    const revealed=frame.classList.toggle('photo-revealed');
+    frame.classList.toggle('photo-hidden',!revealed);
+    frame.setAttribute('aria-pressed',String(revealed));
+    frame.setAttribute('aria-label',revealed?'Hide Mourya photograph':'Tap to reveal Mourya photograph');
+    if(note)note.textContent=revealed?'Portrait revealed · tap to hide':'Click / tap the portrait';
+  }
+  frame.addEventListener('click',toggle);
+  frame.addEventListener('keydown',e=>{
+    if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}
+  });
+})();
+
+/* Pointer + scroll kinetic movement */
+(function(){
+  const copy=document.getElementById('hero-copy'), portrait=document.getElementById('hero-portrait-wrap');
+  if(!copy||!portrait)return;
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduced)return;
+  let tx=0,ty=0,px=0,py=0;
+  window.addEventListener('pointermove',e=>{
+    if(e.pointerType==='touch')return;
+    const x=(e.clientX/window.innerWidth-.5),y=(e.clientY/window.innerHeight-.5);
+    tx=x;ty=y;
+  },{passive:true});
+  function frame(){
+    px+=(tx-px)*.055;py+=(ty-py)*.055;
+    const scroll=Math.min(window.scrollY/900,1);
+    copy.style.transform=`translate3d(${px*10}px,${py*7-scroll*18}px,0)`;
+    portrait.style.transform=`translate3d(${px*-7}px,${py*-5-scroll*10}px,0)`;
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+/* Project scroll storytelling */
+(function(){
+  const items=Array.from(document.querySelectorAll('.editorial-projects .project-item'));
+  if(!items.length)return;
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function update(){
+    const vh=window.innerHeight;
+    items.forEach(item=>{
+      const r=item.getBoundingClientRect();
+      const center=r.top+r.height/2;
+      const distance=Math.abs(center-vh/2);
+      const p=Math.max(0,1-distance/(vh*.55));
+      item.style.setProperty('--project-progress',Math.round(p*100)+'%');
+      const bar=item.querySelector('.project-progress span');
+      if(bar)bar.style.width=Math.round(p*100)+'%';
+      if(p>.45)item.classList.add('active'); else item.classList.remove('active');
+    });
+  }
+  if(reduced)items.forEach(i=>i.classList.add('active'));
+  else{
+    window.addEventListener('scroll',update,{passive:true});
+    window.addEventListener('resize',update,{passive:true});
+    update();
+  }
 })();
 </script>
 
@@ -1880,13 +2228,13 @@ document.addEventListener('DOMContentLoaded', function(){
 
   // ── INJECT PITCH OVERLAY ──
   const pitchSlides = [
-    {label:'The focus', title:'AI & Data Science, built with intention.', body:'Mourya is a Machine Learning Engineer and Data Science professional based in Dubai, combining ML, cloud, analytics, and practical product work.'},
-    {label:'Who I am', big:'Mourya Dusi', body:'MSc Data Science & Artificial Intelligence · Middlesex University Dubai · BSc Computer Science · Krishna University'},
-    {label:'What I build', title:'From intelligent apps to production ML systems.', body:'Projects include destination.com, Smart Exit Reminder, Taxi Lost Item Detection, Student Performance Prediction, and an Intelligent University Chatbot.'},
-    {label:'Professional experience', big:'Accenture', body:'Associate Software Engineer · ML Engineering & Data Science · Hyderabad · Oct 2024 – Jul 2025'},
-    {label:'What I want', title:'A role where I can build useful intelligent systems.', body:'Open to AI, Machine Learning, and Data Science opportunities in Dubai, remote environments, and relocation opportunities.'},
-    {label:'Next step', title:'mouryadusi@outlook.com', body:'Explore the portfolio, connect on LinkedIn, or reach out directly.'},
-  ]
+    {label:'The problem',    title:'You need someone who ships ML — not just studies it.',  body:'Most candidates at my level have notebooks. I have production deployments on AWS SageMaker, real pipelines, and a live AI product used by real people.'},
+    {label:'Who I am',       big:'Mourya Dusi',   body:'ML Engineer · Data Scientist · MSc AI, Dubai · AWS Certified · 9 months Accenture · Based in UAE'},
+    {label:'What I built',   title:'destination.com — a full AI travel platform.',          body:'Voice AI (ARIA), live flights, visa guidance, route optimisation. Built alone. Deployed on Vercel. Working right now.'},
+    {label:'The number',     big:'50,000+',        body:'records processed per week in my Accenture ML pipeline. Not a toy dataset. Production data. Real stakeholders.'},
+    {label:'What I want',    title:'A role where I can build things that matter.',           body:'ML Engineer · Junior Data Scientist · AI Engineer. Dubai or remote. Available from September 2026. Open to relocation.'},
+    {label:'Next step',      title:'mouryadusi@outlook.com',                                 body:'That\'s it. One email. I\'ll respond within the hour.'},
+  ];
   const overlay = document.createElement('div');
   overlay.id='pitch-overlay';
   overlay.innerHTML=`
@@ -2026,17 +2374,6 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 });
 
-
-// Global keyboard escape for overlays and menus
-document.addEventListener('keydown',e=>{
-  if(e.key!=='Escape')return;
-  if(typeof closePitch==='function')closePitch();
-  const ai=document.getElementById('ai-panel');
-  if(ai)ai.classList.remove('open');
-  const mobile=document.getElementById('mobile-nav');
-  if(mobile)mobile.classList.remove('open');
-});
-
 // ── PITCH FUNCTIONS ──
 let pitchInterval, pitchCurrent=0, pitchTime=60;
 const PITCH_TOTAL=6;
@@ -2128,24 +2465,15 @@ function initFlightMap(){
     label.textContent=city.n;
     g.appendChild(circle);g.appendChild(label);
     g.style.cursor='pointer';
-    g.setAttribute('tabindex','0');
-    g.setAttribute('role','button');
-    g.setAttribute('aria-label',`${city.n}: ${city.story}`);
-    const showFlightTip=(e)=>{
+    g.addEventListener('mouseenter',e=>{
+      const rect=svg.getBoundingClientRect();
       const wrap=document.getElementById('flight-canvas-wrap').getBoundingClientRect();
       tip.innerHTML=`<strong>${city.n}</strong><span>${city.story}</span>`;
       tip.style.opacity='1';
-      if(e && typeof e.clientX==='number'){
-        tip.style.left=(e.clientX-wrap.left+12)+'px';
-        tip.style.top=(e.clientY-wrap.top-20)+'px';
-      }
-    };
-    g.addEventListener('mouseenter',showFlightTip);
-    g.addEventListener('focus',showFlightTip);
-    g.addEventListener('click',showFlightTip);
-    g.addEventListener('touchstart',showFlightTip,{passive:true});
+      tip.style.left=(e.clientX-wrap.left+12)+'px';
+      tip.style.top=(e.clientY-wrap.top-20)+'px';
+    });
     g.addEventListener('mouseleave',()=>{tip.style.opacity='0';});
-    g.addEventListener('blur',()=>{tip.style.opacity='0';});
     svg.appendChild(g);
   });
 }
@@ -2155,18 +2483,34 @@ function initFlightMap(){
 // ── AI CHAT ──
 // ── AI CHAT — smart rule-based engine (no API needed, works everywhere) ──
 const AI_KB = [
-  {k:['build','can he','what does','create','make','develop','ship'],a:"Mourya works across machine learning, data science, cloud, and full-stack AI projects. His portfolio includes destination.com, Smart Exit Reminder, Taxi Lost Item Detection, Student Performance Prediction, and an Intelligent University Chatbot."},
-  {k:['available','hire','open','looking','job','role','work','opportunity','join','recruit'],a:"Mourya's portfolio says he is available and open to full-time AI & Data Science roles, remote positions, and relocation opportunities. Contact: mouryadusi@outlook.com."},
-  {k:['project','built','destination','travel','smart exit','taxi','chatbot','student','portfolio'],a:"Featured work includes destination.com — an AI travel platform — plus Smart Exit Reminder, Taxi Lost Item Detection, Student Performance Prediction, and an Intelligent University Chatbot."},
-  {k:['stack','skill','tech','language','tool','python','tensorflow','aws','cloud','framework'],a:"The portfolio lists Python, TensorFlow, Scikit-learn, Pandas, NumPy, NLP, Deep Learning, Predictive Modeling, Java, JavaScript, SQL, AWS SageMaker, AWS Solutions, Google Cloud, CI/CD, Git, GitHub, Power BI, Tableau, Matplotlib, Seaborn, MySQL, Flask, and REST APIs."},
-  {k:['experience','accenture','work history','background','career','company'],a:"Mourya worked at Accenture as an Associate Software Engineer from October 2024 to July 2025 in Hyderabad, with ML engineering and data science responsibilities."},
-  {k:['education','degree','msc','master','university','middlesex','mdx','study'],a:"Mourya is pursuing an MSc in Data Science & Artificial Intelligence at Middlesex University, Dubai (Sep 2025 — Sep 2026). He also holds a BSc in Computer Science from Krishna University, India."},
-  {k:['certif','aws','google cloud','badge','credential'],a:"The portfolio contains a certification vault with credentials from Skillsoft, Pluralsight, and Udemy, covering AI & ML, cloud, DevOps, Agile, Python, security, and engineering."},
-  {k:['travel','country','visit','trip','malaysia','singapore','uae','dubai','thailand','usa','nepal','vietnam','sri lanka'],a:"The portfolio lists India, UAE, Malaysia, Singapore, Thailand, Vietnam, USA, Nepal, and Sri Lanka in its travel section. It also includes an interactive globe and flight-path visualization."},
-  {k:['contact','email','reach','linkedin','github','social','message','touch'],a:"Mourya can be reached at mouryadusi@outlook.com. The portfolio also links to LinkedIn and GitHub."},
-  {k:['who','mourya','about','introduce','tell me','yourself','person','he'],a:"Mourya Dusi is a Machine Learning Engineer and Data Science professional based in Dubai, currently pursuing an MSc in Data Science & Artificial Intelligence at Middlesex University Dubai."},
-  {k:['location','based','where','dubai','india','remote','relocat'],a:"The portfolio lists Dubai, UAE as Mourya's location and says he is open to remote work and relocation."},
-  {k:['music','hobby','interest','outside','personal','fun','free time'],a:"The personal section highlights music, travel, and AI & the future."},
+  { k:['build','can he','what does','create','make','develop','ship'],
+    a:"Mourya builds production ML systems — pipelines that processed 50,000+ records a week at Accenture, models deployed on AWS SageMaker, and full-stack AI products. His live project destination.com has voice AI, real-time flights, and visa guidance, all built solo." },
+  { k:['available','hire','open','looking','job','role','work','opportunity','join','recruit'],
+    a:"Yes — Mourya is actively looking for ML Engineer, Data Scientist, or AI Engineer roles. He's completing his MSc in Dubai in September 2026 and is open to Dubai-based, remote, or relocation opportunities. Email him at mouryadusi@outlook.com." },
+  { k:['project','built','destination','travel','smart exit','taxi','chatbot','student','portfolio'],
+    a:"His standout project is destination.com — a full AI travel platform with voice AI (ARIA), live flight tracking, and visa guidance, deployed on Vercel. He's also built a taxi lost-item detector, a student performance predictor at 92% accuracy, and an NLP university chatbot." },
+  { k:['stack','skill','tech','language','tool','python','tensorflow','aws','cloud','framework'],
+    a:"Mourya's core stack is Python, TensorFlow, Scikit-learn, and AWS (SageMaker, EC2, S3). He also works with SQL, Power BI, Flask, NLP, and D3.js. He holds AWS AI Practitioner, Google Cloud Architect, and AWS Solutions Architect certifications." },
+  { k:['experience','accenture','work history','background','career','company'],
+    a:"He spent 9 months at Accenture in Hyderabad as an ML Engineer — building production pipelines processing 50,000+ records weekly, deploying models on AWS SageMaker, and creating Power BI dashboards for stakeholders." },
+  { k:['education','degree','msc','master','university','middlesex','mdx','study','thesis'],
+    a:"Mourya is completing his MSc in Data Science & AI at Middlesex University Dubai, graduating September 2026. He also holds a BSc in Computer Science from Krishna University, India." },
+  { k:['certif','aws','google cloud','badge','credential'],
+    a:"He's certified in AWS AI Practitioner (MLOps), Implementing AI with Amazon ML, Google Professional Cloud Architect, and AWS Solutions Architect Associate — all earned in 2024–2025." },
+  { k:['travel','country','visit','trip','malaysia','singapore','uae','dubai','thailand','usa','nepal','vietnam','sri lanka'],
+    a:"Mourya has visited 10 countries — India (home), UAE (based there now), Malaysia, Singapore, Thailand, Vietnam, USA, Nepal, Sri Lanka, and counting. He travels mostly solo and finds it sharpens his problem-solving instincts." },
+  { k:['contact','email','reach','linkedin','github','social','message','touch'],
+    a:"Best way to reach Mourya: mouryadusi@outlook.com — he responds quickly. You can also find him on LinkedIn at linkedin.com/in/mouryadusi-dxb or on GitHub at github.com/mouryadusi." },
+  { k:['who','mourya','about','introduce','tell me','yourself','person','he'],
+    a:"Mourya Dusi is an ML Engineer and Data Scientist based in Dubai, UAE, currently completing his MSc in AI at Middlesex University. He's worked at Accenture, built live AI products, holds multiple cloud certifications, and travels to 10+ countries in his spare time." },
+  { k:['salary','pay','rate','compensation','expect','cost'],
+    a:"Mourya is targeting ML Engineer or Data Scientist roles — for current market rates and his expectations, just reach out directly at mouryadusi@outlook.com. He's open to a conversation." },
+  { k:['location','based','where','dubai','india','remote','relocat'],
+    a:"He's currently based in Dubai, UAE (studying at MDX Dubai) and is also spending time in India while working remotely on his thesis. He's open to Dubai, remote, or relocation roles globally." },
+  { k:['music','hobby','interest','outside','personal','fun','free time'],
+    a:"Outside of work, Mourya is into music — it's always on whether he's coding or commuting. He travels solo most of the time and is genuinely fascinated by where AI is headed and what it means for people, not just systems." },
+  { k:['fit','good','suitable','match','right','perfect','team','culture'],
+    a:"He's a strong fit for teams that value shipping over theorising — he's gone from notebook to production deployment, built solo products used by real people, and works well in Agile environments. He's collaborative, certified, and immediately available." },
 ];
 
 function getAIReply(q){
@@ -2179,7 +2523,7 @@ function getAIReply(q){
   for(const entry of AI_KB){
     if(words.some(w => entry.k.some(kw=>kw.includes(w)||w.includes(kw)))) return entry.a;
   }
-  return "Great question — I don't have a specific answer for that, but Mourya would love to chat. Drop him an email at mouryadusi@outlook.com.";
+  return "Great question — I don't have a specific answer for that, but Mourya would love to chat. Drop him an email at mouryadusi@outlook.com and he'll respond quickly.";
 }
 
 function toggleAI(){
@@ -2219,6 +2563,23 @@ function addMsg(text,type){
   msgs.scrollTop=msgs.scrollHeight;
   return div;
 }
+</script>
+
+<script>
+(function(){
+  // Keep new overlays keyboard-friendly and avoid trapping users.
+  document.addEventListener('keydown',e=>{
+    if(e.key!=='Escape')return;
+    const mobile=document.getElementById('mobile-nav');
+    if(mobile && mobile.classList.contains('open')) mobile.classList.remove('open');
+    const ai=document.getElementById('ai-panel');
+    if(ai && ai.classList.contains('open')) ai.classList.remove('open');
+    if(typeof closePitch==='function'){
+      const pitch=document.getElementById('pitch-overlay');
+      if(pitch && pitch.classList.contains('open')) closePitch();
+    }
+  });
+})();
 </script>
 </body>
 </html>
