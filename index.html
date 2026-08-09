@@ -600,8 +600,10 @@
 }
 
 /* Complete portrait: natural aspect ratio, no forced crop. */
-.hero-photo-frame{height:auto!important;aspect-ratio:auto!important;overflow:visible!important;}
-.hero-photo-frame img{height:auto!important;max-height:none!important;object-fit:contain!important;object-position:center top!important;}
+.hero-photo-frame{width:min(500px,42vw)!important;aspect-ratio:1/1!important;height:auto!important;overflow:hidden!important;border-radius:28px!important;background:var(--bg3);}
+.hero-photo-frame img{width:100%!important;height:100%!important;max-height:none!important;object-fit:contain!important;object-position:center center!important;border-radius:inherit!important;}
+@media(max-width:900px){.hero-photo-frame{width:min(430px,62vw)!important;}}
+@media(max-width:700px){.hero-photo-frame{width:min(380px,82vw)!important;}}
 
 /* Reach Out */
 .reachout-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:clamp(50px,9vw,130px);align-items:end;}
@@ -708,6 +710,45 @@
 #projects > .featured-project, #projects > .projects-list.editorial-projects {display:none!important;}
 </style>
 
+
+<style id="about-fullpage-system">
+#about-fullpage{position:fixed;inset:0;z-index:11900;background:var(--bg);color:var(--text);overflow-y:auto;display:none;opacity:0;transform:translateY(18px);transition:opacity .45s cubic-bezier(.22,1,.36,1),transform .55s cubic-bezier(.22,1,.36,1);}
+#about-fullpage.open{display:block;opacity:1;transform:none;}
+.about-full-inner{min-height:100svh;padding:clamp(100px,12vh,150px) clamp(24px,7vw,100px) 90px;display:grid;grid-template-rows:auto 1fr auto;gap:70px;}
+.about-full-top{display:flex;justify-content:space-between;align-items:center;gap:20px;}
+.about-full-close{border:1px solid var(--border-hover);background:transparent;color:var(--text);border-radius:999px;padding:11px 18px;cursor:pointer;font:inherit;}
+.about-full-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);gap:clamp(50px,10vw,150px);align-items:center;}
+.about-full-title{font-family:'Cormorant Garamond',serif;font-size:clamp(58px,11vw,160px);font-weight:300;line-height:.82;letter-spacing:-.06em;margin:0;}
+.about-full-copy{max-width:760px;margin-top:36px;color:var(--text-muted);font-size:clamp(16px,1.6vw,20px);line-height:1.85;}
+.about-full-copy p{margin:0 0 24px;}
+.about-full-facts{border-top:1px solid var(--border);}
+.about-full-fact{padding:18px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;gap:20px;color:var(--text-muted);}
+.about-full-fact b{font-weight:400;color:var(--text);}
+.about-full-foot{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-subtle);}
+@media(max-width:760px){.about-full-grid{grid-template-columns:1fr;align-items:start}.about-full-inner{gap:45px}.about-full-title{font-size:clamp(58px,20vw,105px)}.about-full-fact{font-size:13px}}
+</style>
+
+<style id="final-five-additions">
+/* Persistent project navigation/progress: preserves the existing scroll choreography. */
+#project-tab-experience .pte-tabs{position:sticky;top:14px;z-index:40;padding-top:10px;background:linear-gradient(to bottom,var(--bg) 70%,transparent);}
+#project-tab-experience .pte-tab.active{font-weight:600;letter-spacing:.2em;}
+#project-tab-experience .pte-tab.active::before{content:'';position:absolute;left:0;top:4px;width:4px;height:4px;border-radius:50%;background:var(--text);}
+#project-tab-experience .pte-progress{height:2px;background:var(--border);}
+#project-tab-experience .pte-progress span{height:100%;background:var(--text);transform-origin:left center;will-change:width;}
+
+/* Scroll-driven B&W -> colour wipe for the main portrait. */
+.hero-photo-wipe{position:relative;width:100%;height:100%;overflow:hidden;}
+.hero-photo-wipe img{position:absolute!important;inset:0;width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important;}
+.hero-photo-wipe .photo-bw{filter:grayscale(1);}
+.hero-photo-wipe .photo-color{clip-path:inset(0 100% 0 0);filter:none;will-change:clip-path;}
+
+/* Hand-drawn SVG scribble annotations. */
+.scribble-target{position:relative;display:inline-block!important;}
+.scribble-target .scribble-svg{position:absolute;inset:-9px -12px;overflow:visible;pointer-events:none;width:calc(100% + 24px);height:calc(100% + 18px);z-index:3;}
+.scribble-target .scribble-path{fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;opacity:.78;transition:stroke-dashoffset .5s cubic-bezier(.22,1,.36,1),opacity .25s ease;}
+.scribble-target:hover .scribble-path,.scribble-target:focus-visible .scribble-path{stroke-dashoffset:0;}
+@media (hover:none),(pointer:coarse){.scribble-target .scribble-path{display:none;}}
+</style>
 </head>
 <body>
 
@@ -988,10 +1029,10 @@
 <!-- Experience -->
 <section id="experience" style="border-top:1px solid var(--border);">
   <div class="section-label">03 — Experience</div>
-  <h2 class="section-title reveal">Where I've<br><em>worked</em></h2>
+  <h2 class="section-title reveal">My <em>Work</em></h2>
   <div class="exp-list reveal">
     <div class="exp-item">
-      <div class="exp-meta"><strong>Accenture</strong>Associate Software Engineer<br><br>Oct 2024 – Jul 2025<br>Hyderabad, India</div>
+      <div class="exp-meta"><strong>Accenture</strong>Associate Software Engineer<br><br>Hyderabad, India</div>
       <div class="exp-content">
         <h3>ML Engineering & Data Science</h3>
         <ul>
@@ -1420,12 +1461,37 @@
 }
 </style>
 
+
+<!-- Full-page About view -->
+<div id="about-fullpage" aria-hidden="true">
+  <div class="about-full-inner">
+    <div class="about-full-top"><span class="section-label">ABOUT — MOURYA DUSI</span><button class="about-full-close" id="about-full-close" type="button">Back to portfolio</button></div>
+    <div class="about-full-grid">
+      <div>
+        <h2 class="about-full-title">Built with<br><em>curiosity.</em></h2>
+        <div class="about-full-copy">
+          <p>I'm a Machine Learning Engineer and Data Science professional pursuing my MSc in Data Science &amp; AI in Dubai. I like working where data, software and useful products meet.</p>
+          <p>I've built production ML pipelines, deployed models on AWS SageMaker, and created AI products that are meant to be used rather than merely demonstrated. Outside the technical work, travel, music and curiosity keep me moving.</p>
+        </div>
+      </div>
+      <div class="about-full-facts">
+        <div class="about-full-fact"><b>Based</b><span>Dubai, UAE</span></div>
+        <div class="about-full-fact"><b>Focus</b><span>ML · AI · Data Science</span></div>
+        <div class="about-full-fact"><b>Education</b><span>MSc Data Science &amp; AI</span></div>
+        <div class="about-full-fact"><b>Work</b><span>Accenture · ML Engineering</span></div>
+        <div class="about-full-fact"><b>Interests</b><span>AI · Travel · Music</span></div>
+      </div>
+    </div>
+    <div class="about-full-foot">A little more of the person behind the systems.</div>
+  </div>
+</div>
+
 <!-- Contact -->
 <section id="contact">
   <div class="section-label">06 — Reach Out</div>
   <div class="reachout-grid reveal">
     <div class="reachout-intro">
-      <p class="reachout-kicker">If the work feels worth building, let's talk.</p>
+      <p class="reachout-kicker">Have something worth building? Let's talk.</p>
       <h2 class="section-title">Let's build<br><em>something</em></h2>
       <p class="reachout-note">AI, data, useful products, or a problem that has been sitting on your desk for too long.</p>
     </div>
@@ -1702,7 +1768,7 @@
 (function(){
   const greetings = [
     'Thanks for visiting',
-    'ధన్యవాదాలు',
+    'धन्यवाद',
     'Gracias por visitar',
     'شكرًا لزيارتك',
     'आने के लिए धन्यवाद',
@@ -2659,6 +2725,66 @@ function addMsg(text,type){
       if(pitch && pitch.classList.contains('open')) closePitch();
     }
   });
+})();
+</script>
+
+<script id="final-five-additions-js">
+(function(){
+  // Full-page About view; the original #about section remains untouched.
+  const about=document.getElementById('about-fullpage'), close=document.getElementById('about-full-close');
+  const aboutLinks=[...document.querySelectorAll('a[href="#about"]')];
+  function openAbout(e){e.preventDefault(); if(!about)return; about.classList.add('open');about.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';history.pushState({about:true},'', '#about');}
+  function closeAbout(){if(!about)return;about.classList.remove('open');about.setAttribute('aria-hidden','true');document.body.style.overflow='';if(location.hash==='#about')history.replaceState(null,'',location.pathname+location.search);}
+  aboutLinks.forEach(a=>a.addEventListener('click',openAbout));
+  close&&close.addEventListener('click',closeAbout);
+  window.addEventListener('popstate',()=>{if(about?.classList.contains('open'))closeAbout();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&about?.classList.contains('open'))closeAbout();});
+
+  // Turn the existing hero photograph into two layers for a true wipe, not a fade.
+  const frame=document.querySelector('.hero-photo-frame'), img=document.getElementById('hero-img');
+  if(frame&&img&&!frame.querySelector('.hero-photo-wipe')){
+    const src=img.currentSrc||img.src;
+    const wrap=document.createElement('div');wrap.className='hero-photo-wipe';
+    const bw=img.cloneNode(true), color=img.cloneNode(true);
+    bw.className='photo-bw';color.className='photo-color';
+    bw.removeAttribute('id');color.removeAttribute('id');
+    wrap.append(bw,color); img.remove(); frame.prepend(wrap);
+    function wipe(){
+      const r=frame.getBoundingClientRect(), vh=innerHeight;
+      const start=vh*.9,end=vh*.12;
+      const p=Math.max(0,Math.min(1,(start-r.top)/(start-end)));
+      color.style.clipPath='inset(0 '+((1-p)*100)+'% 0 0)';
+    }
+    addEventListener('scroll',()=>requestAnimationFrame(wipe),{passive:true});addEventListener('resize',wipe);wipe();
+  }
+
+  // Independent SVG scribbles for contact links and AI/ML/DS terminology.
+  const targets=new Set();
+  document.querySelectorAll('.reachout-row > span:first-child').forEach(el=>targets.add(el));
+  document.querySelectorAll('.hero-identity').forEach(el=>{
+    const text=el.textContent;
+    if(/AI & Data Science/i.test(text)){
+      el.innerHTML=text.replace(/(AI & Data Science)/i,'<span class="scribble-term">$1</span>');
+      targets.add(el.querySelector('.scribble-term'));
+    }
+  });
+  document.querySelectorAll('.tag,.project-tags,.pte-meta').forEach(parent=>{
+    [...parent.childNodes].forEach(node=>{
+      if(node.nodeType===3 && /^(ML|AI|DS)$/i.test(node.textContent.trim())){
+        const span=document.createElement('span');span.className='scribble-term';span.textContent=node.textContent;node.replaceWith(span);targets.add(span);
+      }
+    });
+  });
+  function attach(el){
+    if(!el||el.classList.contains('scribble-target'))return;
+    el.classList.add('scribble-target');
+    const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.classList.add('scribble-svg');svg.setAttribute('viewBox','0 0 100 40');svg.setAttribute('preserveAspectRatio','none');
+    const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.classList.add('scribble-path');
+    path.setAttribute('pathLength','1');path.setAttribute('d','M4,22 C8,7 24,9 37,8 C52,7 68,9 82,7 C94,6 98,12 95,20 C92,31 75,32 62,31 C45,30 27,34 13,31 C5,30 2,26 4,22 Z');
+    svg.appendChild(path);el.appendChild(svg);
+    el.addEventListener('focus',()=>el.classList.add('is-scribbled'));el.addEventListener('blur',()=>el.classList.remove('is-scribbled'));
+  }
+  targets.forEach(attach);
 })();
 </script>
 </body>
