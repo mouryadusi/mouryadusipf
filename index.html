@@ -1838,22 +1838,57 @@
   function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;}
   function update(){
     raf=0;
-    if(reduced)return;
     const r=root.getBoundingClientRect();
     const range=Math.max(root.offsetHeight-window.innerHeight,1);
-    const p=Math.max(0,Math.min(0.999999,(-r.top)/range));
+    const p=Math.max(0,Math.min(.999999,(-r.top)/range));
     const scaled=p*(panels.length-1);
     const idx=Math.floor(scaled);
     const local=ease(scaled-idx);
-    panels.forEach((panel,i)=>{
-      let opacity=0, y=8, scale=.94, blur=2, clip=100, z=1;
-      if(i===idx){opacity=1-local*.18;y=-local*5;scale=1-local*.04;blur=local*1.5;clip=local*100;z=10;}
-      else if(i===idx+1){opacity=.12+local*.88;y=(1-local)*10;scale=.94+local*.06;blur=(1-local)*2;clip=(1-local)*100;z=11;}
-      else if(i<idx){opacity=.12;y=-7;scale=.92;blur=3;clip=0;z=2;}
-      panel.style.opacity=opacity;panel.style.transform=`translate3d(0,${y}%,0) scale(${scale})`;panel.style.filter=`blur(${blur}px)`;panel.style.clipPath=`inset(${clip}% 0 0 0 round 0)`;panel.style.zIndex=z;
-    });
     const active=Math.min(panels.length-1,Math.round(scaled));
-    tabs.forEach((tab,i)=>{const on=i===active;tab.classList.toggle('active',on);tab.setAttribute('aria-selected',on?'true':'false');});
+
+    panels.forEach((panel,i)=>{
+      const d=i-scaled;
+      const dist=Math.abs(d);
+      let opacity=0, y=0, scale=.92, blur=4, z=1;
+      if(i===idx){
+        opacity=1-local*.18;
+        y=-local*7;
+        scale=1-local*.035;
+        blur=local*1.2;
+        z=20;
+      } else if(i===idx+1){
+        opacity=.18+local*.82;
+        y=(1-local)*12;
+        scale=.94+local*.06;
+        blur=(1-local)*2.5;
+        z=21;
+      } else if(i<idx){
+        opacity=Math.max(.08,.20-dist*.025);
+        y=-8;
+        scale=.91;
+        blur=3;
+        z=5;
+      } else {
+        opacity=.06;
+        y=14;
+        scale=.90;
+        blur=5;
+        z=2;
+      }
+      panel.style.opacity=String(opacity);
+      panel.style.transform=`translate3d(0,${y}%,0) scale(${scale})`;
+      panel.style.filter=`blur(${blur}px)`;
+      panel.style.clipPath='inset(0 0 0 0 round 0)';
+      panel.style.visibility=opacity>.02?'visible':'hidden';
+      panel.style.zIndex=String(z);
+      panel.classList.toggle('active',i===active);
+      panel.setAttribute('aria-hidden',i===active?'false':'true');
+    });
+    tabs.forEach((tab,i)=>{
+      const on=i===active;
+      tab.classList.toggle('active',on);
+      tab.setAttribute('aria-selected',on?'true':'false');
+    });
     counter.textContent=String(active+1).padStart(2,'0')+' / 05';
     bar.style.width=(p*100)+'%';
   }
