@@ -783,6 +783,16 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 @media(max-width:600px){.main-mourya-signature{font-size:clamp(2.4rem,13vw,3.6rem);bottom:28px}footer{padding-bottom:90px!important}}
 </style>
 
+
+<style id="final-project-fixes">
+/* Final project stability fixes */
+#project-tab-experience{position:relative;}
+#project-tab-experience .pte-tabs{position:sticky;top:12px;z-index:100;background:var(--bg);padding:14px 0;}
+#project-tab-experience .pte-stage{overflow:hidden;isolation:isolate;}
+#project-tab-experience .pte-panel{backface-visibility:hidden;will-change:transform,opacity;pointer-events:none;}
+#project-tab-experience .pte-panel.active{pointer-events:auto;}
+#project-tab-experience .pte-panel-bg{opacity:.98;}
+</style>
 </head>
 <body>
 
@@ -830,6 +840,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
   <div id="loader-sub">AI &amp; Data Science</div>
   <div id="loader-greeting" aria-live="polite">Thanks for visiting</div>
   <div class="mourya-loader" aria-hidden="true">
+    <div class="mourya-loader-row"><span>LOADING</span><span class="mourya-loader-value">0</span></div>
     <div class="mourya-loader-track"><div class="mourya-loader-fill"></div></div>
   </div>
   <div id="loader-progress"></div>
@@ -1809,7 +1820,13 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
     'ధన్యవాదాలు',
     'Gracias por visitar',
     'شكرًا لزيارتك',
-    'आने के लिए धन्यवाद',
+    'Français — Merci de votre visite',
+    'தமிழ் — வருகைக்கு நன்றி',
+    '中文 — 感谢您的访问',
+    '한국어 — 방문해 주셔서 감사합니다',
+    'Deutsch — Danke für Ihren Besuch',
+    'Italiano — Grazie per la visita',
+    'మీరు వచ్చినందుకు ధన్యవాదాలు',
     '訪れてくれてありがとう'
   ];
   const el=document.getElementById('loader-greeting');
@@ -1817,7 +1834,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
   const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!el||!loader)return;
   let i=0;
-  const interval=reduced?1000:1000;
+  const interval=reduced?350:320;
   el.textContent=greetings[0];
   const timer=setInterval(()=>{
     i++;
@@ -1825,7 +1842,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
       clearInterval(timer);
       setTimeout(()=>{
         loader.classList.add('fade-out');
-        setTimeout(()=>{ loader.style.display='none'; document.body.style.overflow=''; },900);
+        setTimeout(()=>{ loader.style.display='none'; document.body.style.overflow=''; },500);
       },interval);
       return;
     }
@@ -1834,7 +1851,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
       el.textContent=greetings[i];
       el.dir=(i===3)?'rtl':'ltr';
       el.classList.add('show');
-    },120);
+    },70);
   },interval);
 })();
 
@@ -2840,48 +2857,54 @@ function addMsg(text,type){
 </script>
 
 
-<script id="project-loading-fix">
+
+
+<script id="final-project-controller-v2">
 (function(){
-  const root=document.getElementById('project-tab-experience');
-  if(!root)return;
-  const panels=[...root.querySelectorAll('.pte-panel')];
-  const tabs=[...root.querySelectorAll('.pte-tab')];
-  if(!panels.length||!tabs.length)return;
+ const root=document.getElementById('project-tab-experience');
+ if(!root)return;
+ const panels=[...root.querySelectorAll('.pte-panel')];
+ const tabs=[...root.querySelectorAll('.pte-tab')];
+ if(!panels.length)return;
+ let current=0;
+ function setActive(i){
+  current=i;
+  panels.forEach((p,n)=>{
+   const on=n===i;
+   p.classList.toggle('active',on);
+   p.style.opacity=on?'1':'0';
+   p.style.visibility=on?'visible':'hidden';
+   p.style.zIndex=on?'30':'0';
+   p.style.pointerEvents=on?'auto':'none';
+   if(on){p.style.transform='translate3d(0,0,0) scale(1)';p.style.filter='none';}
+  });
+  tabs.forEach((t,n)=>{t.classList.toggle('active',n===i);t.setAttribute('aria-selected',n===i?'true':'false');});
+ }
+ function update(){
+  const r=root.getBoundingClientRect();
+  const range=Math.max(root.offsetHeight-window.innerHeight,1);
+  const progress=Math.max(0,Math.min(1,-r.top/range));
+  const idx=Math.min(panels.length-1,Math.floor(progress*panels.length));
+  if(idx!==current)setActive(idx);
+ }
+ tabs.forEach((t,i)=>t.addEventListener('click',()=>{
+  const range=Math.max(root.offsetHeight-window.innerHeight,1);
+  window.scrollTo({top:window.scrollY+root.getBoundingClientRect().top+(range*i/(panels.length-1)),behavior:'smooth'});
+  setActive(i);
+ }));
+ window.addEventListener('scroll',()=>requestAnimationFrame(update),{passive:true});
+ setActive(0); update();
 
-  function activate(index){
-    index=Math.max(0,Math.min(index,panels.length-1));
-    panels.forEach((panel,i)=>{
-      const on=i===index;
-      panel.classList.toggle('active',on);
-      panel.style.visibility=on?'visible':'hidden';
-      panel.style.opacity=on?'1':'0';
-      panel.style.transform=on?'none':'translate3d(0,14%,0) scale(.94)';
-      panel.style.filter=on?'none':'blur(4px)';
-      panel.style.clipPath=on?'inset(0 0 0 0 round 0)':'inset(100% 0 0 0 round 0)';
-      panel.style.zIndex=on?'20':'1';
-      panel.setAttribute('aria-hidden',on?'false':'true');
-    });
-    tabs.forEach((tab,i)=>{
-      const on=i===index;
-      tab.classList.toggle('active',on);
-      tab.setAttribute('aria-selected',on?'true':'false');
-    });
-  }
-
-  activate(0);
-  tabs.forEach((tab,i)=>tab.addEventListener('click',function(e){
-    e.preventDefault();
-    activate(i);
-    const range=Math.max(root.offsetHeight-window.innerHeight,1);
-    const target=window.scrollY+root.getBoundingClientRect().top+range*(i/Math.max(panels.length-1,1));
-    window.scrollTo({top:target,behavior:'smooth'});
-  }));
-
-  // Ensure the existing scroll controller gets an initial paint after layout.
-  requestAnimationFrame(()=>window.dispatchEvent(new Event('scroll')));
-  window.addEventListener('load',()=>window.dispatchEvent(new Event('scroll')),{once:true});
+ // project cards/details navigation
+ document.querySelectorAll('.project-item, .pte-panel a, [data-project]').forEach(el=>{
+  el.addEventListener('click',e=>{
+   const href=el.getAttribute('href');
+   if(href && href!=='#') return;
+   const n=Number(el.dataset.project||el.dataset.pte||0);
+   if(!Number.isNaN(n)) {e.preventDefault();setActive(n);}
+  });
+ });
 })();
 </script>
-
 </body>
 </html>
