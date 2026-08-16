@@ -414,7 +414,8 @@
     font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 20px;
   }
   h2.section-title em { font-style: italic; color: var(--text-muted); }
-  .gb-title{ white-space: nowrap; }
+  .gb-title{ white-space: nowrap; margin-bottom: 18px; }
+  .gb-title + p{ margin-top: 0 !important; }
   @media(max-width:430px){ .gb-title{ font-size: clamp(26px,7.6vw,40px); white-space: normal; } }
 
   /* A quiet interactive graph of drifting, connecting nodes — the one
@@ -804,7 +805,7 @@
 .pte-panel-bg{position:absolute;inset:clamp(76px,10vh,108px) clamp(16px,4vw,55px) clamp(62px,8vh,90px);border:1px solid var(--border);border-radius:clamp(18px,2vw,30px);overflow:hidden;background:var(--bg2);display:flex;align-items:center;justify-content:center;}
 .pte-panel-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 65% 35%,rgba(255,255,255,.1),transparent 35%),linear-gradient(135deg,transparent,rgba(255,255,255,.025));}
 .pte-panel-bg span{font:300 clamp(70px,16vw,220px)/.8 'Cormorant Garamond',serif;letter-spacing:-.07em;color:var(--text);opacity:.08;position:relative;}
-.pte-destination{background:linear-gradient(135deg,#07111e,#111827 55%,#090d16);}.pte-exit{background:linear-gradient(135deg,#10120f,#1c2417 50%,#0b0d0b);}.pte-taxi{background:linear-gradient(135deg,#141012,#21161d 50%,#0d0b0e);}.pte-student{background:linear-gradient(135deg,#11111a,#17172b 50%,#0b0b12);}.pte-chatbot{background:linear-gradient(135deg,#111,#1a1815 55%,#0c0c0c);}
+.pte-destination{background:linear-gradient(135deg,#07111e,#111827 55%,#090d16);}.pte-exit{background:linear-gradient(135deg,#10120f,#1c2417 50%,#0b0d0b);}.pte-taxi{background:linear-gradient(135deg,#141012,#21161d 50%,#0d0b0e);}.pte-student{background:linear-gradient(135deg,#11111a,#17172b 50%,#0b0b12);}.pte-chatbot{background:linear-gradient(135deg,#111,#1a1815 55%,#0c0c0c);}.pte-telugu{background:linear-gradient(135deg,#1a0c0e,#2c1013 50%,#120709);}
 .pte-panel-copy{position:relative;z-index:5;width:min(760px,100%);padding:clamp(24px,4vw,52px);border:1px solid rgba(255,255,255,.12);background:rgba(8,8,8,.52);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:20px;}
 [data-theme="light"] .pte-panel-copy{background:rgba(255,255,255,.68);border-color:var(--border);}
 .pte-meta{display:flex;justify-content:space-between;gap:20px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:22px;}
@@ -1187,36 +1188,41 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
   <h2 class="section-title reveal">Selected<br><em>projects</em></h2>
   <div id="project-tab-experience" aria-label="Project tabs">
     <div class="pte-pin">
-      <div class="pte-tabs" role="tablist" aria-label="Projects">
+      <div class="pte-tabs" role="tablist" aria-label="Projects" style="grid-template-columns:repeat(6,1fr);">
         <button class="pte-tab active" type="button" role="tab" aria-selected="true" data-pte="0">PROJECT 01</button>
         <button class="pte-tab" type="button" role="tab" aria-selected="false" data-pte="1">PROJECT 02</button>
         <button class="pte-tab" type="button" role="tab" aria-selected="false" data-pte="2">PROJECT 03</button>
         <button class="pte-tab" type="button" role="tab" aria-selected="false" data-pte="3">PROJECT 04</button>
         <button class="pte-tab" type="button" role="tab" aria-selected="false" data-pte="4">PROJECT 05</button>
+        <button class="pte-tab" type="button" role="tab" aria-selected="false" data-pte="5">PROJECT 06</button>
       </div>
       <div class="pte-stage">
         <article class="pte-panel active" data-pte-panel="0">
           <div class="pte-panel-bg pte-destination"><span>DESTINATION</span></div>
-          <div class="pte-panel-copy"><div class="pte-meta"><span>01 / 05</span><span>AI · REAL-TIME · VOICE</span></div><h3>destination.com</h3><p>AI Travel Intelligence — real-time route optimisation, ARIA voice AI, live flights, visa guidance, itinerary planning and an aviation arcade.</p><a href="https://destination-com-dun.vercel.app" target="_blank" rel="noopener">Visit project ↗</a></div>
+          <div class="pte-panel-copy"><div class="pte-meta"><span>01 / 06</span><span>AI · REAL-TIME · VOICE</span></div><h3>destination.com</h3><p>AI Travel Intelligence — real-time route optimisation, ARIA voice AI, live flights, visa guidance, itinerary planning and an aviation arcade.</p><a href="https://destination-com-dun.vercel.app" target="_blank" rel="noopener">Visit project ↗</a></div>
         </article>
         <article class="pte-panel" data-pte-panel="1">
           <div class="pte-panel-bg pte-exit"><span>EXIT</span></div>
-          <div class="pte-panel-copy"><div class="pte-meta"><span>02 / 05</span><span>MOBILE · AI/ML · IOT</span></div><h3>Smart Exit Reminder</h3><p>An intelligent mobile system using Wi-Fi, GPS and BLE sensor fusion to learn routines and remind users of essential items when leaving home.</p><a href="https://mouryadusi.github.io/smart-exit-reminder.html" target="_blank" rel="noopener">Visit project ↗</a></div>
+          <div class="pte-panel-copy"><div class="pte-meta"><span>02 / 06</span><span>MOBILE · AI/ML · IOT</span></div><h3>Smart Exit Reminder</h3><p>An intelligent mobile system using Wi-Fi, GPS and BLE sensor fusion to learn routines and remind users of essential items when leaving home.</p><a href="https://mouryadusi.github.io/smart-exit-reminder.html" target="_blank" rel="noopener">Visit project ↗</a></div>
         </article>
         <article class="pte-panel" data-pte-panel="2">
           <div class="pte-panel-bg pte-taxi"><span>PRIVACY</span></div>
-          <div class="pte-panel-copy"><div class="pte-meta"><span>03 / 05</span><span>IOT · EDGE · PRIVACY</span></div><h3>Taxi Lost Item Detection</h3><p>A camera-free sensor system using pressure, infrared and ultrasonic arrays to detect forgotten belongings while keeping processing on-device.</p><a href="https://mouryadusi.github.io/taxi-lost-item-detection.html" target="_blank" rel="noopener">Visit project ↗</a></div>
+          <div class="pte-panel-copy"><div class="pte-meta"><span>03 / 06</span><span>IOT · EDGE · PRIVACY</span></div><h3>Taxi Lost Item Detection</h3><p>A camera-free sensor system using pressure, infrared and ultrasonic arrays to detect forgotten belongings while keeping processing on-device.</p><a href="https://mouryadusi.github.io/taxi-lost-item-detection.html" target="_blank" rel="noopener">Visit project ↗</a></div>
         </article>
         <article class="pte-panel" data-pte-panel="3">
           <div class="pte-panel-bg pte-student"><span>92%</span></div>
-          <div class="pte-panel-copy"><div class="pte-meta"><span>04 / 05</span><span>PYTHON · ML · SCIKIT-LEARN</span></div><h3>Student Performance Prediction</h3><p>An end-to-end predictive pipeline identifying at-risk students with 92% accuracy so institutions can intervene earlier.</p><span class="pte-static">Case study in portfolio ↗</span></div>
+          <div class="pte-panel-copy"><div class="pte-meta"><span>04 / 06</span><span>PYTHON · ML · SCIKIT-LEARN</span></div><h3>Student Performance Prediction</h3><p>An end-to-end predictive pipeline identifying at-risk students with 92% accuracy so institutions can intervene earlier.</p><span class="pte-static">Case study in portfolio ↗</span></div>
         </article>
         <article class="pte-panel" data-pte-panel="4">
           <div class="pte-panel-bg pte-chatbot"><span>24/7</span></div>
-          <div class="pte-panel-copy"><div class="pte-meta"><span>05 / 05</span><span>NLP · TENSORFLOW · FLASK</span></div><h3>Intelligent University Chatbot</h3><p>An NLP assistant handling 1000+ student queries per day, reducing administrative workload through intent recognition and automation.</p><span class="pte-static">Case study in portfolio ↗</span></div>
+          <div class="pte-panel-copy"><div class="pte-meta"><span>05 / 06</span><span>NLP · TENSORFLOW · FLASK</span></div><h3>Intelligent University Chatbot</h3><p>An NLP assistant handling 1000+ student queries per day, reducing administrative workload through intent recognition and automation.</p><span class="pte-static">Case study in portfolio ↗</span></div>
+        </article>
+        <article class="pte-panel" data-pte-panel="5">
+          <div class="pte-panel-bg pte-telugu"><span>3D</span></div>
+          <div class="pte-panel-copy"><div class="pte-meta"><span>06 / 06</span><span>THREE.JS · WEBGL · CREATIVE DEV</span></div><h3>Telugu Cinema</h3><p>An interactive 3D poster universe of Telugu cinema — drag, orbit and click through a spatial archive of posters rendered in real time, with adjustable motion and cursor settings for comfort.</p><a href="https://telugucinema.vercel.app" target="_blank" rel="noopener">Visit project ↗</a></div>
         </article>
       </div>
-      <div class="pte-footer"><span id="pte-counter">01 / 05</span><div class="pte-progress"><span id="pte-progress-bar"></span></div><span>SCROLL TO OPEN THE NEXT TAB</span></div>
+      <div class="pte-footer"><span id="pte-counter">01 / 06</span><div class="pte-progress"><span id="pte-progress-bar"></span></div><span>SCROLL TO OPEN THE NEXT TAB</span></div>
     </div>
   </div>
 
@@ -2240,7 +2246,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
       tab.classList.toggle('active',on);
       tab.setAttribute('aria-selected',on?'true':'false');
     });
-    counter.textContent=String(active+1).padStart(2,'0')+' / 05';
+    counter.textContent=String(active+1).padStart(2,'0')+' / 06';
     bar.style.width=(p*100)+'%';
   }
   function request(){if(!raf)raf=requestAnimationFrame(update);}
@@ -3153,7 +3159,10 @@ function addMsg(text,type){
     });
 
     // scene titles: scrub reveal tied to actual scroll position, not a timer
-    document.querySelectorAll('.section-title.reveal').forEach(t=>{
+    // (.gb-title excluded — it already has a paragraph sitting close beneath
+    // it, and having both this scrub transform and the CSS .reveal fade-up
+    // drive the same element's transform at once was what caused the overlap)
+    document.querySelectorAll('.section-title.reveal:not(.gb-title)').forEach(t=>{
       gsap.fromTo(t, {yPercent:16}, {yPercent:0, ease:'none',
         scrollTrigger:{ trigger:t, start:'top 92%', end:'top 55%', scrub:true }});
     });
