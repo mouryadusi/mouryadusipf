@@ -41,18 +41,20 @@
     --text-muted: #b7a992;
     --text-subtle: #7c6f5a;
     --accent: #ecdfc4;
-    --accent2: #cba86e;
+    --accent2: #8B93FF;
     --surface-noise-opacity: .18;
     --cursor-size: 12px;
     --cursor-ring: 36px;
     /* chapter accent system — a distinct hue owns each scene, shifted
-       live as the reader scrolls, rather than one accent used everywhere */
-    --ch-hero: #cba86e;
-    --ch-about: #cba86e;
-    --ch-work: #8fb0c4;
-    --ch-experience: #cf9868;
-    --ch-personal: #96bf9c;
-    --ch-contact: #c9a2b0;
+       live as the reader scrolls, rather than one accent used everywhere.
+       cool indigo → blue → violet → teal → magenta spectrum, modern and
+       consistent rather than the earlier earthy/brass family */
+    --ch-hero: #8B93FF;
+    --ch-about: #8B93FF;
+    --ch-work: #6FB4E8;
+    --ch-experience: #AC93FF;
+    --ch-personal: #52D9C4;
+    --ch-contact: #CC8FE8;
     --chapter: var(--ch-hero);
   }
   [data-theme="light"] {
@@ -66,14 +68,14 @@
     --text-muted: #666;
     --text-subtle: #aaa;
     --accent: #2a2a2a;
-    --accent2: #8a7a5a;
+    --accent2: #4C5FEA;
     --surface-noise-opacity: .34;
-    --ch-hero: #8a7a5a; --ch-about: #8a7a5a; --ch-work: #4d7691;
-    --ch-experience: #a8623a; --ch-personal: #4c8259; --ch-contact: #935a72;
+    --ch-hero: #4C5FEA; --ch-about: #4C5FEA; --ch-work: #2E86D6;
+    --ch-experience: #7B5CF0; --ch-personal: #17A992; --ch-contact: #9A4FD1;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: auto; } /* Lenis owns smooth scrolling now — CSS smooth-scroll fights it */
   body {
     font-family: 'Inter', 'Inter', sans-serif;
     background: var(--bg);
@@ -233,24 +235,25 @@
      ACCESSIBILITY / PERSONALIZATION — real, applied transformations,
      not decorative toggles. Each one changes actual rendering.
      ============================================================ */
-  html.a11y-protan{ filter: saturate(1.35) hue-rotate(-10deg) contrast(1.05); }
-  html.a11y-deuter{ filter: saturate(1.35) hue-rotate(10deg) contrast(1.05); }
-  html.a11y-tritan{ filter: saturate(1.3) hue-rotate(18deg); }
-  html.a11y-achroma{ filter: grayscale(1) contrast(1.12); }
-  html.a11y-colorvision{ filter: saturate(1.25) contrast(1.08); }
-  html.a11y-lowvision, html.a11y-impaired, html.a11y-amd, html.a11y-presbyopia{ font-size: 114%; }
-  html.a11y-impaired{ filter: contrast(1.18); }
+  html.a11y-protan{ filter: saturate(1.7) hue-rotate(-18deg) contrast(1.1); }
+  html.a11y-deuter{ filter: saturate(1.7) hue-rotate(18deg) contrast(1.1); }
+  html.a11y-tritan{ filter: saturate(1.55) hue-rotate(28deg) contrast(1.08); }
+  html.a11y-achroma{ filter: grayscale(1) contrast(1.15); }
+  html.a11y-colorvision{ filter: saturate(1.5) contrast(1.12); }
+  html.a11y-lowvision, html.a11y-impaired, html.a11y-amd, html.a11y-presbyopia{ font-size: 122%; }
+  html.a11y-impaired{ filter: contrast(1.24); }
   html.a11y-impaired a{ text-decoration: underline; }
-  html.a11y-cataract{ filter: contrast(1.22) brightness(1.06); }
-  html.a11y-migraine{ filter: brightness(.88) contrast(.92) saturate(.85); }
+  html.a11y-cataract{ filter: contrast(1.3) brightness(1.08); }
+  html.a11y-migraine{ filter: brightness(.82) contrast(.88) saturate(.78); }
   html.a11y-migraine *{ animation-duration: 1.6s !important; }
-  html.a11y-bluelight{ filter: sepia(.16) saturate(.92) hue-rotate(-8deg); }
+  html.a11y-bluelight{ filter: sepia(.28) saturate(.85) hue-rotate(-12deg); }
   html.a11y-motor{ cursor: auto !important; }
   html.a11y-motor #cursor-dot, html.a11y-motor #cursor-ring{ display: none !important; }
-  html.a11y-motor a, html.a11y-motor button, html.a11y-motor .project-item, html.a11y-motor .cert-filter, html.a11y-motor .pte-tab{ padding-top: .35em !important; padding-bottom: .35em !important; }
+  html.a11y-motor a, html.a11y-motor button, html.a11y-motor .project-item, html.a11y-motor .cert-filter, html.a11y-motor .pte-tab{ padding-top: .55em !important; padding-bottom: .55em !important; }
+  html.a11y-motor .project-item, html.a11y-motor a, html.a11y-motor button{ outline-offset: 3px; }
   html.a11y-attention #hero-gl, html.a11y-attention #node-canvas, html.a11y-attention .chapter-curve{ display: none !important; }
   html.a11y-attention *{ animation-duration: .6s !important; }
-  html.a11y-dyslexia, html.a11y-dyslexia p, html.a11y-dyslexia li, html.a11y-dyslexia span, html.a11y-dyslexia div{ letter-spacing: .025em !important; word-spacing: .08em !important; line-height: 1.85 !important; }
+  html.a11y-dyslexia, html.a11y-dyslexia p, html.a11y-dyslexia li, html.a11y-dyslexia span, html.a11y-dyslexia div{ letter-spacing: .045em !important; word-spacing: .16em !important; line-height: 2 !important; }
   html.a11y-fatigue{ filter: contrast(.94) brightness(.97); }
   html.a11y-fatigue *{ animation-duration: 1.3s !important; }
   html.a11y-photosafe *{ animation: none !important; transition-duration: .12s !important; }
@@ -286,6 +289,9 @@
   .a11y-opt.active .chk::after{ content:'✓'; }
   .a11y-reset{ margin: 0 20px 18px; padding: 11px; border-radius: 10px; border: 1px solid var(--border); background: none; color: var(--text-subtle); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; cursor: none; }
   .a11y-reset:hover{ color: var(--text); border-color: var(--border-hover); }
+  #a11y-toast{ position: fixed; left: 22px; bottom: 78px; z-index: 960; background: var(--text); color: var(--bg); font-size: 12.5px; letter-spacing: .03em; padding: 11px 18px; border-radius: 10px; transform: translateY(8px); opacity: 0; pointer-events: none; transition: transform .3s cubic-bezier(.22,1,.36,1), opacity .3s ease; }
+  #a11y-toast.show{ transform: translateY(0); opacity: 1; }
+  @media(max-width:700px){ #a11y-toast{ left: 16px; bottom: 64px; } }
 
   .hero-title { margin-bottom: 40px; }
   .hero-greet {
@@ -993,11 +999,12 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(reduced || typeof Lenis==='undefined'){ window.__lenis=null; return; }
   const lenis = new Lenis({
-    duration: 1.05,
-    easing: t => Math.min(1, 1.001 - Math.pow(2, -10*t)),
+    duration: 0.75,
+    easing: t => 1 - Math.pow(1 - t, 3),
     smoothWheel: true,
     smoothTouch: false, // native touch scroll stays untouched — smoothing wheel/keys only
-    touchMultiplier: 1
+    touchMultiplier: 1,
+    wheelMultiplier: 1
   });
   window.__lenis = lenis;
   if(window.gsap && window.ScrollTrigger){
@@ -2240,7 +2247,9 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
   window.addEventListener('scroll',request,{passive:true});window.addEventListener('resize',request,{passive:true});request();
   function goTo(i){
     const range=Math.max(root.offsetHeight-window.innerHeight,1);
-    window.scrollTo({top:window.scrollY+root.getBoundingClientRect().top+range*(i/(panels.length-1)),behavior:reduced?'auto':'smooth'});
+    const target=window.scrollY+root.getBoundingClientRect().top+range*(i/(panels.length-1));
+    if(window.__lenis){ window.__lenis.scrollTo(target, {duration: reduced?0:1.0}); }
+    else { window.scrollTo({top:target,behavior:reduced?'auto':'smooth'}); }
   }
   tabs.forEach((tab,i)=>tab.addEventListener('click',()=>goTo(i)));
   // clicking a project card or its "open" link also scrolls the pinned
@@ -3115,7 +3124,8 @@ function addMsg(text,type){
   CHAPTERS.forEach(id=>{ const el=document.getElementById(id); if(el) chapterIO.observe(el); });
   railDots.forEach(d=>d.addEventListener('click',()=>{
     const t=document.getElementById(d.dataset.scene);
-    t&&t.scrollIntoView({behavior:reduced?'auto':'smooth'});
+    if(window.__lenis){ window.__lenis.scrollTo(t, {duration: reduced?0:1.1}); }
+    else { t&&t.scrollIntoView({behavior:reduced?'auto':'smooth'}); }
   }));
 
   /* ---------- curved chapter dividers: scroll-scrubbed morph ---------- */
@@ -3131,7 +3141,7 @@ function addMsg(text,type){
       const state = { t: 0 };
       gsap.to(state, {
         t: 1, ease:'none',
-        scrollTrigger:{ trigger: section, start:'top bottom', end:'top 55%', scrub: 0.6 },
+        scrollTrigger:{ trigger: section, start:'top bottom', end:'top 55%', scrub: 0.25 },
         onUpdate(){
           const a = amp * state.t;
           const mid = 70 + a;
@@ -3199,7 +3209,7 @@ function addMsg(text,type){
     }
     const geo = new THREE.BufferGeometry();
     geo.setAttribute('position', new THREE.BufferAttribute(positions,3));
-    const accentHex = 0xc8b896;
+    const accentHex = 0x7C86F5;
     const mat = new THREE.PointsMaterial({ color: accentHex, size: 0.045, transparent:true, opacity:.85 });
     const points = new THREE.Points(geo, mat);
     scene.add(points);
@@ -3305,14 +3315,14 @@ function addMsg(text,type){
           const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y;
           const d=Math.hypot(dx,dy);
           if(d < 110*devicePixelRatio){
-            ctx.strokeStyle = `rgba(200,184,150,${(1-d/(110*devicePixelRatio))*0.35})`;
+            ctx.strokeStyle = `rgba(124,134,245,${(1-d/(110*devicePixelRatio))*0.35})`;
             ctx.lineWidth = devicePixelRatio*0.6;
             ctx.beginPath(); ctx.moveTo(nodes[i].x,nodes[i].y); ctx.lineTo(nodes[j].x,nodes[j].y); ctx.stroke();
           }
         }
       }
       nodes.forEach(n=>{
-        ctx.beginPath(); ctx.fillStyle='rgba(200,184,150,.8)';
+        ctx.beginPath(); ctx.fillStyle='rgba(124,134,245,.8)';
         ctx.arc(n.x,n.y,n.r,0,Math.PI*2); ctx.fill();
       });
       requestAnimationFrame(tick);
@@ -3347,6 +3357,7 @@ function addMsg(text,type){
   <div class="a11y-options" id="a11y-options"></div>
   <button class="a11y-reset" id="a11y-reset">Reset all</button>
 </div>
+<div id="a11y-toast" aria-live="polite"></div>
 
 <script id="a11y-system">
 (function(){
@@ -3430,9 +3441,21 @@ function addMsg(text,type){
       const themeToggle=document.getElementById('theme-toggle');
       if(themeToggle) themeToggle.click();
     }
+    const turningOn=!active.has(id);
     if(active.has(id)) active.delete(id); else active.add(id);
     applyClasses();
     renderOptions(document.querySelector('.a11y-cat.active').dataset.cat);
+    showToast(opt.label+': '+(turningOn?'On':'Off'));
+  }
+
+  const toastEl=document.getElementById('a11y-toast');
+  let toastTimer=null;
+  function showToast(msg){
+    if(!toastEl) return;
+    toastEl.textContent=msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer=setTimeout(()=>toastEl.classList.remove('show'), 1800);
   }
 
   catBtns.forEach(b=>b.addEventListener('click',()=>{
