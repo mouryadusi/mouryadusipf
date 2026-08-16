@@ -1,29 +1,59 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mourya Dusi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..500;1,6..96,400..500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
 <style>
+  /*
+    TYPOGRAPHY NOTE — the "Mourya Dusi" wordmark below is modelled on the
+    BEGG hero lettering: an extreme-contrast, tall-waisted Didone serif set
+    in a large italic, paired with a small-caps-weight roman word beneath it.
+    That reference's hero title is delivered as flattened artwork (not a
+    live web font we could inspect or load), so rather than guess at a
+    "similar-looking" font, the closest legally-embeddable match to that
+    contrast/proportion family is Bodoni Moda (a Didone with the same
+    hairline/thick-stroke swing, tall x-height ratio and ball terminals),
+    pushed hard with negative tracking, a steep italic on the first word,
+    and an oversized scale so the wordmark reads as a designed object
+    rather than a page heading.
+  */
   :root {
-    --bg: #0a0a0a;
-    --bg2: #111111;
-    --bg3: #1a1a1a;
-    --surface: #1e1e1e;
-    --border: rgba(255,255,255,0.08);
-    --border-hover: rgba(255,255,255,0.15);
-    --text: #f0f0f0;
-    --text-muted: #888;
-    --text-subtle: #555;
-    --accent: #e8e0d0;
-    --accent2: #c8b896;
-    --surface-noise-opacity: .22;
+    /* this is the "night" palette — reached only via the theme toggle or
+       night-mode accessibility option. It's built from the same warm
+       ivory/brass family as the light mode below, just inverted in
+       weight, rather than a separate generic near-black UI. */
+    --bg: #17130f;
+    --bg2: #1e1912;
+    --bg3: #262018;
+    --surface: #221c15;
+    --border: rgba(240,232,216,0.09);
+    --border-hover: rgba(240,232,216,0.18);
+    --text: #f1e9da;
+    --text-muted: #b7a992;
+    --text-subtle: #7c6f5a;
+    --accent: #ecdfc4;
+    --accent2: #cba86e;
+    --surface-noise-opacity: .18;
     --cursor-size: 12px;
     --cursor-ring: 36px;
+    /* chapter accent system — a distinct hue owns each scene, shifted
+       live as the reader scrolls, rather than one accent used everywhere */
+    --ch-hero: #cba86e;
+    --ch-about: #cba86e;
+    --ch-work: #8fb0c4;
+    --ch-experience: #cf9868;
+    --ch-personal: #96bf9c;
+    --ch-contact: #c9a2b0;
+    --chapter: var(--ch-hero);
   }
   [data-theme="light"] {
     --bg: #fafaf8;
@@ -38,6 +68,8 @@
     --accent: #2a2a2a;
     --accent2: #8a7a5a;
     --surface-noise-opacity: .34;
+    --ch-hero: #8a7a5a; --ch-about: #8a7a5a; --ch-work: #4d7691;
+    --ch-experience: #a8623a; --ch-personal: #4c8259; --ch-contact: #935a72;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -72,7 +104,17 @@
   }
   [data-theme="light"] #cursor-ring { border-color: rgba(0,0,0,0.25); }
   body.cursor-hover #cursor-dot { width: 6px; height: 6px; }
-  body.cursor-hover #cursor-ring { width: 50px; height: 50px; }
+  body.cursor-hover #cursor-ring { width: 50px; height: 50px; border-color: var(--chapter); }
+  /* cursor states: view / drag / grab — the pointer becomes a small label
+     rather than only a ring, so it reads as part of the interface */
+  #cursor-ring{ transition: width .35s cubic-bezier(.22,1,.36,1), height .35s cubic-bezier(.22,1,.36,1), border-color .35s ease, background .35s ease; display:flex; align-items:center; justify-content:center; }
+  #cursor-ring .cl{ opacity:0; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--bg); white-space:nowrap; transition:opacity .25s ease .05s; }
+  body.cursor-view #cursor-ring{ width:74px; height:74px; background:var(--chapter); border-color:transparent; }
+  body.cursor-view #cursor-dot{ opacity:0; }
+  body.cursor-view #cursor-ring .cl{ opacity:1; }
+  body.cursor-drag #cursor-ring{ width:64px; height:64px; background:var(--text); border-color:transparent; }
+  body.cursor-drag #cursor-dot{ opacity:0; }
+  body.cursor-drag #cursor-ring .cl{ opacity:1; color:var(--bg); }
 
   /* LOADER */
   #loader {
@@ -80,9 +122,9 @@
     display: flex; align-items: center; justify-content: center; flex-direction: column;
   }
   #loader-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(34px, 6vw, 58px); font-weight: 300;
-    letter-spacing: 0.12em; color: var(--text);
+    font-family: 'Bodoni Moda', serif; font-style: italic;
+    font-size: clamp(32px, 6vw, 56px); font-weight: 500;
+    letter-spacing: -0.01em; color: var(--text);
     overflow: hidden; display: flex; position: relative;
   }
   .loader-char {
@@ -166,20 +208,117 @@
 
   /* HERO */
   #hero {
+    position: relative; overflow: hidden;
     min-height: 100svh; display: grid; grid-template-columns: 1fr 380px;
     gap: 60px; align-items: center;
     padding: 120px clamp(24px,5vw,60px) 80px; max-width: 1200px; margin: 0 auto;
   }
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif; font-size: clamp(52px,8vw,100px);
-    font-weight: 300; line-height: 1.0; letter-spacing: 0.02em; margin-bottom: 32px;
-    opacity: 0; animation: slideUp 0.8s 2.5s ease forwards;
+  #hero-gl{
+    position: fixed; top:0; left:0; width:100vw; height:100svh; z-index:-1;
+    opacity:.75; pointer-events:none;
   }
+  /* a quiet field of drifting nodes/lines behind the wordmark — reads as
+     a loose data-graph rather than a decorative starfield, tying the
+     background to "AI & Data Science" without illustrating it literally */
+  #scene-rail{
+    position: fixed; right: 26px; top: 50%; transform: translateY(-50%);
+    z-index: 500; display: flex; flex-direction: column; gap: 14px;
+  }
+  #scene-rail .sr-dot{ width:6px; height:6px; border-radius:50%; background: var(--border-hover); transition: background .3s ease, transform .3s ease; cursor: none; }
+  #scene-rail .sr-dot.active{ background: var(--chapter); transform: scale(1.6); }
+  @media(max-width:900px){ #scene-rail{ display:none; } }
+  @media(prefers-reduced-motion: reduce){ #hero-gl{ display:none; } }
+
+  /* ============================================================
+     ACCESSIBILITY / PERSONALIZATION — real, applied transformations,
+     not decorative toggles. Each one changes actual rendering.
+     ============================================================ */
+  html.a11y-protan{ filter: saturate(1.35) hue-rotate(-10deg) contrast(1.05); }
+  html.a11y-deuter{ filter: saturate(1.35) hue-rotate(10deg) contrast(1.05); }
+  html.a11y-tritan{ filter: saturate(1.3) hue-rotate(18deg); }
+  html.a11y-achroma{ filter: grayscale(1) contrast(1.12); }
+  html.a11y-colorvision{ filter: saturate(1.25) contrast(1.08); }
+  html.a11y-lowvision, html.a11y-impaired, html.a11y-amd, html.a11y-presbyopia{ font-size: 114%; }
+  html.a11y-impaired{ filter: contrast(1.18); }
+  html.a11y-impaired a{ text-decoration: underline; }
+  html.a11y-cataract{ filter: contrast(1.22) brightness(1.06); }
+  html.a11y-migraine{ filter: brightness(.88) contrast(.92) saturate(.85); }
+  html.a11y-migraine *{ animation-duration: 1.6s !important; }
+  html.a11y-bluelight{ filter: sepia(.16) saturate(.92) hue-rotate(-8deg); }
+  html.a11y-motor{ cursor: auto !important; }
+  html.a11y-motor #cursor-dot, html.a11y-motor #cursor-ring{ display: none !important; }
+  html.a11y-motor a, html.a11y-motor button, html.a11y-motor .project-item, html.a11y-motor .cert-filter, html.a11y-motor .pte-tab{ padding-top: .35em !important; padding-bottom: .35em !important; }
+  html.a11y-attention #hero-gl, html.a11y-attention #node-canvas, html.a11y-attention .chapter-curve{ display: none !important; }
+  html.a11y-attention *{ animation-duration: .6s !important; }
+  html.a11y-dyslexia, html.a11y-dyslexia p, html.a11y-dyslexia li, html.a11y-dyslexia span, html.a11y-dyslexia div{ letter-spacing: .025em !important; word-spacing: .08em !important; line-height: 1.85 !important; }
+  html.a11y-fatigue{ filter: contrast(.94) brightness(.97); }
+  html.a11y-fatigue *{ animation-duration: 1.3s !important; }
+  html.a11y-photosafe *{ animation: none !important; transition-duration: .12s !important; }
+  html.a11y-comfort{ filter: contrast(.97); }
+  html.a11y-comfort *{ animation-duration: 1s !important; }
+  html.a11y-reduced-motion *{ animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  html.a11y-reduced-motion #hero-gl, html.a11y-reduced-motion #node-canvas{ display: none !important; }
+  html[class*="a11y-"]{ transition: filter .35s ease; }
+
+  #a11y-trigger{ position: fixed; left: 22px; bottom: 22px; z-index: 950; width: 46px; height: 46px; border-radius: 50%; background: var(--bg2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: none; transition: transform .3s cubic-bezier(.22,1,.36,1), border-color .3s ease, background .3s ease; }
+  #a11y-trigger:hover{ transform: translateY(-3px); border-color: var(--accent2); }
+  #a11y-trigger svg{ width: 20px; height: 20px; stroke: var(--text); fill: none; }
+  #a11y-trigger.has-active::after{ content:''; position:absolute; top:6px; right:6px; width:7px; height:7px; border-radius:50%; background:var(--accent2); }
+  @media(max-width:700px){ #a11y-trigger{ left: 16px; bottom: 16px; width: 42px; height: 42px; } }
+
+  #a11y-panel{ position: fixed; left: 22px; bottom: 80px; z-index: 951; width: min(360px, calc(100vw - 44px)); max-height: min(560px, 72vh); background: var(--bg2); border: 1px solid var(--border); border-radius: 18px; box-shadow: 0 30px 60px rgba(0,0,0,.18); display: flex; flex-direction: column; overflow: hidden; transform-origin: bottom left; transform: scale(.92) translateY(10px); opacity: 0; visibility: hidden; transition: transform .35s cubic-bezier(.22,1,.36,1), opacity .3s ease, visibility 0s .35s; }
+  #a11y-panel.open{ transform: scale(1) translateY(0); opacity: 1; visibility: visible; transition: transform .4s cubic-bezier(.22,1,.36,1), opacity .3s ease; }
+  @media(max-width:700px){ #a11y-panel{ left: 16px; bottom: 66px; } }
+  .a11y-head{ display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--border); }
+  .a11y-head .a11y-title{ font-family:'Bodoni Moda',serif; font-style: italic; font-size: 18px; color: var(--text); }
+  #a11y-close{ background: none; border: none; color: var(--text-subtle); font-size: 20px; cursor: none; line-height: 1; padding: 4px 8px; }
+  .a11y-cats{ display: flex; gap: 6px; flex-wrap: wrap; padding: 14px 20px 0; }
+  .a11y-cat{ appearance: none; border: 1px solid var(--border); background: none; color: var(--text-muted); font-size: 10.5px; letter-spacing: .07em; text-transform: uppercase; padding: 7px 13px; border-radius: 999px; cursor: none; transition: border-color .25s ease, color .25s ease; }
+  .a11y-cat.active, .a11y-cat:hover{ border-color: var(--accent2); color: var(--text); }
+  .a11y-options{ padding: 14px 20px 18px; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; }
+  .a11y-group-label{ font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-subtle); margin: 12px 0 4px; }
+  .a11y-group-label:first-child{ margin-top: 0; }
+  .a11y-opt{ display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; text-align: left; appearance: none; border: 1px solid transparent; background: none; color: var(--text-muted); font-size: 13.5px; padding: 9px 10px; border-radius: 10px; cursor: none; transition: background .2s ease, color .2s ease; }
+  .a11y-opt:hover{ background: var(--bg3); color: var(--text); }
+  .a11y-opt.active{ color: var(--text); background: var(--bg3); border-color: var(--border-hover); }
+  .a11y-opt .chk{ width: 15px; height: 15px; border-radius: 4px; border: 1px solid var(--border-hover); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--bg2); }
+  .a11y-opt.active .chk{ background: var(--accent2); border-color: var(--accent2); }
+  .a11y-opt.active .chk::after{ content:'✓'; }
+  .a11y-reset{ margin: 0 20px 18px; padding: 11px; border-radius: 10px; border: 1px solid var(--border); background: none; color: var(--text-subtle); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; cursor: none; }
+  .a11y-reset:hover{ color: var(--text); border-color: var(--border-hover); }
+
+  .hero-title { margin-bottom: 40px; }
+  .hero-greet {
+    font-family:'Inter',sans-serif; font-size:13px; font-weight:400; letter-spacing:.28em;
+    text-transform:uppercase; color:var(--text-subtle); margin-bottom:18px;
+    opacity:0; animation: slideUp 0.7s 2.2s ease forwards;
+  }
+  /* the wordmark: oversized italic Didone first name (BEGG-style hero
+     lettering — extreme stroke contrast, tall proportions, tight negative
+     tracking) with a smaller roman surname set beneath it, echoing the
+     two-tier word relationship in the reference. Each word is one
+     unbreakable unit — clamp() scales the whole mark down before either
+     word is allowed to wrap. */
+  .hero-name-wrap{ line-height:.86; }
+  .hero-name-first{
+    display:block; font-family:'Bodoni Moda',serif; font-style:italic; font-weight:500;
+    font-optical-sizing:auto; font-size: clamp(72px, 13.5vw, 216px);
+    letter-spacing:-0.03em; color:var(--text); white-space:nowrap;
+    opacity:0; transform:translateY(38px); animation: nameRise 1s 2.35s cubic-bezier(.16,1,.3,1) forwards;
+  }
+  .hero-name-last{
+    display:block; font-family:'Bodoni Moda',serif; font-style:normal; font-weight:400;
+    font-size: clamp(28px, 4.6vw, 60px); letter-spacing:.14em; text-transform:uppercase;
+    color:var(--text-muted); margin-top:.14em; white-space:nowrap;
+    opacity:0; transform:translateY(24px); animation: nameRise 1s 2.65s cubic-bezier(.16,1,.3,1) forwards;
+  }
+  @keyframes nameRise{ to{ opacity:1; transform:translateY(0); } }
   .hero-title em { font-style: italic; color: var(--text-muted); }
 
   /* LETTER EXPLOSION */
   .explode-text { display: inline; }
   .explode-char { display: inline-block; position: relative; cursor: default; }
+  .explode-word { display: inline-block; white-space: nowrap; }
   .explode-char.pop { animation: charPop 0.6s cubic-bezier(0.36,0.07,0.19,0.97) forwards; }
   @keyframes charPop {
     0%   { transform: translate(0,0) rotate(0deg) scale(1); opacity: 1; }
@@ -196,10 +335,10 @@
   .hero-intro {
     font-size: clamp(16px,2vw,19px); color: var(--text-muted); line-height: 1.75;
     max-width: 520px; margin-bottom: 48px; font-weight: 300;
-    opacity: 0; animation: slideUp 0.8s 2.6s ease forwards;
+    opacity: 0; animation: slideUp 0.8s 2.95s ease forwards;
   }
   .hero-intro .heart { color: #e06060; }
-  .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; opacity: 0; animation: slideUp 0.8s 2.7s ease forwards; }
+  .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; opacity: 0; animation: slideUp 0.8s 3.1s ease forwards; }
   .btn {
     padding: 13px 28px; border-radius: 100px; font-family: 'Inter', sans-serif;
     font-size: 14px; font-weight: 400; text-decoration: none; cursor: none;
@@ -247,6 +386,15 @@
   .clock-time { font-size: 14px; color: var(--text); font-weight: 300; font-variant-numeric: tabular-nums; }
   .clock-sep { width: 1px; height: 24px; background: var(--border); flex-shrink: 0; }
 
+  /* CHAPTER CURVES — a physically-bending boundary between scenes rather
+     than a static rule or repeated clip-path. Each one is a single SVG
+     path whose control points are pushed by ScrollTrigger as the
+     following section arrives, so the seam appears to flex open. */
+  .chapter-curve{ position:absolute; top:0; left:0; width:100%; height:130px; overflow:hidden; pointer-events:none; transform:translateY(-100%); z-index:3; }
+  .chapter-curve svg{ width:100%; height:100%; display:block; }
+  .chapter-curve path{ fill:var(--curve-color); opacity:.09; }
+  @media(max-width:700px){ .chapter-curve{ height:70px; } }
+
   /* SECTIONS */
   section { padding: 120px clamp(24px,5vw,60px); max-width: 1200px; margin: 0 auto; }
   .section-label {
@@ -260,6 +408,16 @@
     font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 20px;
   }
   h2.section-title em { font-style: italic; color: var(--text-muted); }
+  .gb-title{ white-space: nowrap; }
+  @media(max-width:430px){ .gb-title{ font-size: clamp(26px,7.6vw,40px); white-space: normal; } }
+
+  /* A quiet interactive graph of drifting, connecting nodes — the one
+     original "character" moment, standing in for a mascot with something
+     closer to the actual subject matter (a small model of connected
+     data). It leans gently toward the cursor when nearby. */
+  .node-graphic{ position:absolute; top:20px; right:clamp(0px,1vw,10px); width:300px; height:300px; opacity:.6; z-index:1; }
+  #node-canvas{ width:100%; height:100%; display:block; }
+  @media(max-width:1050px){ .node-graphic{ display:none; } }
 
   /* ABOUT */
   .about-grid { display: grid; grid-template-columns: 1fr 300px; gap: 80px; align-items: start; }
@@ -479,11 +637,23 @@
   /* REVEAL */
   .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
+  /* motion variants — deliberately different per moment rather than one
+     fade-up repeated everywhere */
+  .reveal.rv-mask { opacity: 1; transform: none; clip-path: inset(0 0 100% 0); transition: clip-path 1s cubic-bezier(.16,1,.3,1); }
+  .reveal.rv-mask.visible { clip-path: inset(0 0 0% 0); }
+  .reveal.rv-scale { opacity: 0; transform: scale(.94); transition: opacity .7s ease, transform .9s cubic-bezier(.22,1,.36,1); }
+  .reveal.rv-scale.visible { opacity: 1; transform: scale(1); }
+  .reveal.rv-slide-l { opacity: 0; transform: translateX(-56px); transition: opacity .8s ease, transform .8s cubic-bezier(.16,1,.3,1); }
+  .reveal.rv-slide-l.visible { opacity: 1; transform: translateX(0); }
+  .reveal.rv-slide-r { opacity: 0; transform: translateX(56px); transition: opacity .8s ease, transform .8s cubic-bezier(.16,1,.3,1); }
+  .reveal.rv-slide-r.visible { opacity: 1; transform: translateX(0); }
 
   /* RESPONSIVE */
   @media (max-width: 900px) {
     #hero { grid-template-columns: 1fr; gap: 60px; }
     .hero-photo-wrap { max-width: 300px; order: -1; }
+    .hero-name-first { font-size: clamp(52px, 15.5vw, 216px); }
+    .hero-name-last { font-size: clamp(22px, 6.4vw, 60px); letter-spacing: .1em; }
     .about-grid { grid-template-columns: 1fr; }
     .about-sidebar { position: static; }
     .exp-item { grid-template-columns: 1fr; gap: 8px; }
@@ -750,6 +920,14 @@
 @media (hover:none),(pointer:coarse){.scribble-target .scribble-path{display:none;}}
 </style>
 
+<style id="mourya-greeting-signature-loader">
+
+#welcome-screen .mourya-loader{position:absolute;left:50%;bottom:clamp(20px,3.2vh,34px);transform:translateX(-50%);width:min(190px,34vw);z-index:20;pointer-events:none;color:currentColor}
+#welcome-screen .mourya-loader-row{display:flex;justify-content:space-between;gap:10px;margin-bottom:5px;font:500 9px/1 "Inter",system-ui,sans-serif;letter-spacing:.14em;opacity:.62}
+#welcome-screen .mourya-loader-track{width:100%;height:1px;background:currentColor;opacity:.18;overflow:hidden}
+#welcome-screen .mourya-loader-fill{width:0;height:100%;background:currentColor;transform-origin:left center}
+@media(max-width:600px){#welcome-screen .mourya-loader{bottom:22px;width:150px}}
+</style>
 
 
 <style id="main-mourya-signature-style">
@@ -810,8 +988,38 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 </div>
 
 
+<script id="smooth-scroll-system">
+(function(){
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduced || typeof Lenis==='undefined'){ window.__lenis=null; return; }
+  const lenis = new Lenis({
+    duration: 1.05,
+    easing: t => Math.min(1, 1.001 - Math.pow(2, -10*t)),
+    smoothWheel: true,
+    smoothTouch: false, // native touch scroll stays untouched — smoothing wheel/keys only
+    touchMultiplier: 1
+  });
+  window.__lenis = lenis;
+  if(window.gsap && window.ScrollTrigger){
+    gsap.registerPlugin(ScrollTrigger);
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time)=>{ lenis.raf(time*1000); });
+    gsap.ticker.lagSmoothing(0);
+  } else {
+    function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+  }
+  // exposed so the accessibility panel's "reduce motion" toggle can turn
+  // the inertial feel off without touching every other script
+  window.__setSmoothScroll = function(on){
+    if(!window.__lenis) return;
+    if(on) window.__lenis.start(); else window.__lenis.stop();
+  };
+})();
+</script>
+
 <div id="cursor-dot"></div>
-<div id="cursor-ring"></div>
+<div id="cursor-ring"><span class="cl" id="cursor-label"></span></div>
 
 <!-- Original centered greeting / loader -->
 <div id="loader" aria-label="Mourya Dusi introduction">
@@ -831,9 +1039,6 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
   <div id="loader-line"></div>
   <div id="loader-sub">AI &amp; Data Science</div>
   <div id="loader-greeting" aria-live="polite">Thanks for visiting</div>
-  <div class="mourya-loader" aria-hidden="true">
-    <div class="mourya-loader-track"><div class="mourya-loader-fill"></div></div>
-  </div>
   <div id="loader-progress"></div>
 </div>
 
@@ -883,9 +1088,24 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 
 <!-- Hero -->
 <section id="hero">
+  <canvas id="hero-gl" aria-hidden="true"></canvas>
+  <div id="scene-rail" aria-hidden="true">
+    <span class="sr-dot active" data-scene="hero"></span>
+    <span class="sr-dot" data-scene="about"></span>
+    <span class="sr-dot" data-scene="projects"></span>
+    <span class="sr-dot" data-scene="experience"></span>
+    <span class="sr-dot" data-scene="personal"></span>
+    <span class="sr-dot" data-scene="contact"></span>
+  </div>
   <div class="hero-left hero-parallax" id="hero-copy">
     <div class="hero-identity">AI &amp; Data Science</div>
-    <h1 class="hero-title">Hey,<br>I'm <em>Mourya.</em></h1>
+    <div class="hero-greet">Hey — I'm</div>
+    <h1 class="hero-title">
+      <span class="hero-name-wrap">
+        <span class="hero-name-first">Mourya</span>
+        <span class="hero-name-last">Dusi</span>
+      </span>
+    </h1>
     <p class="hero-intro" id="hero-intro">
       <span class="explode-text">Here, you can check out what I'm working on. I try my best to create things with <span class="heart">❤</span> — or maybe something very much better but very simple. AI & Data Science, built with intention.</span>
     </p>
@@ -908,7 +1128,11 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 
 
 <!-- About -->
-<section id="about">
+<section id="about" style="position:relative;">
+  <div class="chapter-curve" data-curve-idx="0" style="--curve-color:var(--ch-about);"><svg viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path class="curve-path" d="M0,70 C300,70 300,70 600,70 C900,70 900,70 1200,70 L1200,140 L0,140 Z"></path></svg></div>
+
+  <div class="node-graphic" id="node-graphic" aria-hidden="true"><canvas id="node-canvas"></canvas></div>
+
   <div class="section-label">01 — About</div>
   <div class="about-grid">
     <div class="about-text reveal">
@@ -927,7 +1151,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
       <div class="sidebar-item"><span class="key">Countries</span><span class="val">10 visited</span></div>
     </div>
   </div>
-  <div style="margin-top:100px;" class="reveal">
+  <div style="margin-top:100px;" class="reveal rv-mask">
     <div class="section-label">Skills</div>
     <div class="skill-category">Programming & ML</div>
     <div class="skills-grid">
@@ -949,7 +1173,9 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 </section>
 
 <!-- Projects -->
-<section id="projects" style="border-top:1px solid var(--border);">
+<section id="projects" style="border-top:1px solid var(--border);position:relative;">
+  <div class="chapter-curve" data-curve-idx="1" style="--curve-color:var(--ch-work);"><svg viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path class="curve-path" d="M0,70 C300,70 300,70 600,70 C900,70 900,70 1200,70 L1200,140 L0,140 Z"></path></svg></div>
+
   <div class="section-label">02 — Work</div>
   <h2 class="section-title reveal">Selected<br><em>projects</em></h2>
   <div id="project-tab-experience" aria-label="Project tabs">
@@ -987,7 +1213,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
     </div>
   </div>
 
-  <a class="featured-project reveal" href="https://destination-com-dun.vercel.app" target="_blank" data-project="destination">
+  <a class="featured-project reveal rv-scale" href="https://destination-com-dun.vercel.app" target="_blank" data-project="destination">
     <div class="featured-project-preview">
       <div class="fp-grid"></div><div class="fp-glow"></div>
       <div class="fp-ui-mock">
@@ -1022,7 +1248,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
   </a>
 
   <div class="projects-list editorial-projects reveal">
-    <a class="project-item" href="https://mouryadusi.github.io/smart-exit-reminder.html" target="_blank" data-project="smart-exit">
+    <a class="project-item reveal rv-slide-l" href="https://mouryadusi.github.io/smart-exit-reminder.html" target="_blank" data-project="smart-exit">
       <span class="project-num">01</span>
       <div class="project-info">
         <h3>Smart Exit Reminder</h3>
@@ -1032,7 +1258,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
       </div>
       <span class="project-arrow">↗</span>
     <div class="project-progress" aria-hidden="true"><span></span></div></a>
-    <a class="project-item" href="https://mouryadusi.github.io/taxi-lost-item-detection.html" target="_blank" data-project="taxi-lost">
+    <a class="project-item reveal rv-slide-r" href="https://mouryadusi.github.io/taxi-lost-item-detection.html" target="_blank" data-project="taxi-lost">
       <span class="project-num">02</span>
       <div class="project-info">
         <h3>Taxi Lost Item Detection</h3>
@@ -1042,7 +1268,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
       </div>
       <span class="project-arrow">↗</span>
     <div class="project-progress" aria-hidden="true"><span></span></div></a>
-    <div class="project-item" style="cursor:none;" data-project="student-performance" tabindex="0" role="button" aria-label="Open Student Performance Prediction project">
+    <div class="project-item reveal rv-slide-l" style="cursor:none;" data-project="student-performance" tabindex="0" role="button" aria-label="Open Student Performance Prediction project">
       <span class="project-num">03</span>
       <div class="project-info">
         <h3>Student Performance Prediction</h3>
@@ -1052,7 +1278,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
       </div>
       <span class="project-arrow" style="opacity:0.3">—</span>
     <div class="project-progress" aria-hidden="true"><span></span></div></div>
-    <div class="project-item" style="cursor:none;" data-project="university-chatbot" tabindex="0" role="button" aria-label="Open Intelligent University Chatbot project">
+    <div class="project-item reveal rv-slide-r" style="cursor:none;" data-project="university-chatbot" tabindex="0" role="button" aria-label="Open Intelligent University Chatbot project">
       <span class="project-num">04</span>
       <div class="project-info">
         <h3>Intelligent University Chatbot</h3>
@@ -1066,7 +1292,9 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 </section>
 
 <!-- Experience -->
-<section id="experience" style="border-top:1px solid var(--border);">
+<section id="experience" style="border-top:1px solid var(--border);position:relative;">
+  <div class="chapter-curve" data-curve-idx="2" style="--curve-color:var(--ch-experience);"><svg viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path class="curve-path" d="M0,70 C300,70 300,70 600,70 C900,70 900,70 1200,70 L1200,140 L0,140 Z"></path></svg></div>
+
   <div class="section-label">03 — Experience</div>
   <h2 class="section-title reveal">My <em>Work</em></h2>
   <div class="exp-list reveal">
@@ -1096,7 +1324,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
   </div>
   <div class="section-label" style="margin-top:60px;">Certifications</div>
 
-  <div class="cert-vault-wrap reveal">
+  <div class="cert-vault-wrap reveal rv-scale">
     <!-- Stats row -->
     <div class="cert-vault-header">
       <div class="cert-stats">
@@ -1433,10 +1661,12 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 </section>
 
 <!-- Personal -->
-<section id="personal">
+<section id="personal" style="position:relative;">
+  <div class="chapter-curve" data-curve-idx="3" style="--curve-color:var(--ch-personal);"><svg viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path class="curve-path" d="M0,70 C300,70 300,70 600,70 C900,70 900,70 1200,70 L1200,140 L0,140 Z"></path></svg></div>
+
   <div class="section-label">05 — Personal</div>
   <h2 class="section-title reveal">Beyond<br><em>the code</em></h2>
-  <div class="interests-grid reveal" style="margin-top:48px;">
+  <div class="interests-grid reveal rv-mask" style="margin-top:48px;">
     <div class="interest-card"><div class="interest-icon">🎵</div><h3>Music</h3><p>Music is my constant companion — whether I'm commuting through Dubai, deep in a coding session, or just unwinding. From indie to classical, it shapes how I think and create.</p></div>
     <div class="interest-card"><div class="interest-icon">✈️</div><h3>Travel</h3><p>I travel most of the time solo — there's something uniquely clarifying about navigating a new country on your own terms. Every city teaches you something a group trip never could.</p></div>
     <div class="interest-card"><div class="interest-icon">🤖</div><h3>AI & The Future</h3><p>I'm fascinated by how AI will reshape everyday life — not just the technical side, but the human side too. Building things that are simple and genuinely useful is what drives me.</p></div>
@@ -1526,7 +1756,9 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 </div>
 
 <!-- Contact -->
-<section id="contact">
+<section id="contact" style="position:relative;">
+  <div class="chapter-curve" data-curve-idx="4" style="--curve-color:var(--ch-contact);"><svg viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path class="curve-path" d="M0,70 C300,70 300,70 600,70 C900,70 900,70 1200,70 L1200,140 L0,140 Z"></path></svg></div>
+
   <div class="section-label">06 — Reach Out</div>
   <div class="reachout-grid reveal">
     <div class="reachout-intro">
@@ -1535,7 +1767,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
       <p class="reachout-note">AI, data, useful products, or a problem that has been sitting on your desk for too long.</p>
     </div>
     <div class="reachout-links">
-      <a href="https://linkedin.com/in/mouryadusi" target="_blank" rel="noopener" class="reachout-row cursor-reactive"><span><small>SOCIAL</small>LinkedIn</span><span>↗</span></a>
+      <a href="https://linkedin.com/in/mouryadusi-dxb" target="_blank" rel="noopener" class="reachout-row cursor-reactive"><span><small>SOCIAL</small>LinkedIn</span><span>↗</span></a>
       <a href="mailto:mouryadusi@outlook.com" class="reachout-row cursor-reactive"><span><small>EMAIL</small>mouryadusi@outlook.com</span><span>↗</span></a>
       <a href="tel:+971559315412" class="reachout-row cursor-reactive"><span><small>PHONE</small>Yes, I still answer calls.</span><span>↗</span></a>
       <a href="https://github.com/mouryadusi" target="_blank" rel="noopener" class="reachout-row cursor-reactive"><span><small>CODE</small>GitHub</span><span>↗</span></a>
@@ -1549,7 +1781,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
     <div class="section-label">07 — Guestbook</div>
     <div style="display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:start;">
       <div>
-        <h2 class="section-title reveal">Leave a<br><em>message</em></h2>
+        <h2 class="section-title reveal gb-title">Leave a message</h2>
         <p style="font-size:15px;color:var(--text-muted);font-weight:300;margin-top:16px;line-height:1.7;max-width:480px;">Say hello, share a thought, or just let me know you were here. All messages appear live.</p>
         <div id="gb-feed" style="margin-top:48px;display:flex;flex-direction:column;gap:12px;"></div>
         <div id="gb-empty" style="display:none;"></div>
@@ -1817,6 +2049,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
     '한국어 — 방문해 주셔서 감사합니다',
     'Deutsch — Danke für Ihren Besuch',
     'Italiano — Grazie per la visita',
+    'మీరు వచ్చినందుకు ధన్యవాదాలు',
     '訪れてくれてありがとう'
   ];
   const el=document.getElementById('loader-greeting');
@@ -2005,10 +2238,22 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
   }
   function request(){if(!raf)raf=requestAnimationFrame(update);}
   window.addEventListener('scroll',request,{passive:true});window.addEventListener('resize',request,{passive:true});request();
-  tabs.forEach((tab,i)=>tab.addEventListener('click',()=>{
+  function goTo(i){
     const range=Math.max(root.offsetHeight-window.innerHeight,1);
-    window.scrollTo({top:window.scrollY+root.getBoundingClientRect().top+range*(i/(panels.length-1)),behavior:'smooth'});
-  }));
+    window.scrollTo({top:window.scrollY+root.getBoundingClientRect().top+range*(i/(panels.length-1)),behavior:reduced?'auto':'smooth'});
+  }
+  tabs.forEach((tab,i)=>tab.addEventListener('click',()=>goTo(i)));
+  // clicking a project card or its "open" link also scrolls the pinned
+  // stage to that project, instead of a second independent controller
+  // fighting this one over the same panels
+  document.querySelectorAll('.project-item, .pte-panel a, [data-project]').forEach(el=>{
+    el.addEventListener('click',e=>{
+      const href=el.getAttribute('href');
+      if(href && href!=='#') return;
+      const n=Number(el.dataset.project||el.dataset.pte||0);
+      if(!Number.isNaN(n)){ e.preventDefault(); goTo(n); }
+    });
+  });
 })();
 
 // Add the cursor-responsive treatment to existing interactive typography without creating persistent touch hover.
@@ -2036,7 +2281,7 @@ document.querySelectorAll('input,textarea,select').forEach(el=>el.style.cursor='
 
 // Theme
 const themeToggle=document.getElementById('theme-toggle'),html=document.documentElement;
-html.setAttribute('data-theme',localStorage.getItem('theme')||'dark');
+html.setAttribute('data-theme',localStorage.getItem('theme')||'light');
 themeToggle.addEventListener('click',()=>{ const n=html.getAttribute('data-theme')==='dark'?'light':'dark';html.setAttribute('data-theme',n);localStorage.setItem('theme',n); });
 
 // Header scroll
@@ -2065,11 +2310,19 @@ document.querySelectorAll('.reveal').forEach(el=>revObserver.observe(el));
     const heroIntro=document.getElementById('hero-intro');if(!heroIntro)return;
     function wrapNode(node,container){
       if(node.nodeType===3){
-        node.textContent.split('').forEach(ch=>{
-          const s=document.createElement('span');s.className='explode-char';
-          s.textContent=ch===' '?'\u00a0':ch;
-          s.style.setProperty('--rx','0px');s.style.setProperty('--ry','0px');s.style.setProperty('--rr','0deg');
-          container.appendChild(s);
+        const tokens=node.textContent.split(/(\s+)/);
+        tokens.forEach(tok=>{
+          if(tok==='')return;
+          if(/^\s+$/.test(tok)){ container.appendChild(document.createTextNode(tok)); return; }
+          const word=document.createElement('span');
+          word.className='explode-word';
+          [...tok].forEach(ch=>{
+            const s=document.createElement('span');s.className='explode-char';
+            s.textContent=ch;
+            s.style.setProperty('--rx','0px');s.style.setProperty('--ry','0px');s.style.setProperty('--rr','0deg');
+            word.appendChild(s);
+          });
+          container.appendChild(word);
         });
       } else { container.appendChild(node.cloneNode(true)); }
     }
@@ -2691,7 +2944,7 @@ const AI_KB = [
   { k:['travel','country','visit','trip','malaysia','singapore','uae','dubai','thailand','usa','nepal','vietnam','sri lanka'],
     a:"Mourya has visited 10 countries — India (home), UAE (based there now), Malaysia, Singapore, Thailand, Vietnam, USA, Nepal, Sri Lanka, and counting. He travels mostly solo and finds it sharpens his problem-solving instincts." },
   { k:['contact','email','reach','linkedin','github','social','message','touch'],
-    a:"The portfolio lists mouryadusi@outlook.com as the contact email. You can also find him on LinkedIn at linkedin.com/in/mouryadusi or on GitHub at github.com/mouryadusi." },
+    a:"The portfolio lists mouryadusi@outlook.com as the contact email. You can also find him on LinkedIn at linkedin.com/in/mouryadusi-dxb or on GitHub at github.com/mouryadusi." },
   { k:['who','mourya','about','introduce','tell me','yourself','person','he'],
     a:"Mourya Dusi is an ML Engineer and Data Scientist based in Dubai, UAE, currently completing his MSc in AI at Middlesex University. He's worked at Accenture, built live AI products, holds multiple cloud certifications, and travels to 10+ countries in his spare time." },
   { k:['salary','pay','rate','compensation','expect','cost'],
@@ -2833,67 +3086,381 @@ function addMsg(text,type){
 })();
 </script>
 
-<script id="mourya-greeting-loader-script">
+
+
+<!-- ============================================================
+     NEW SYSTEMS — chapter color, curved scene dividers, WebGL
+     hero field, richer cursor states, interactive node graph.
+     Additive: everything above (globe, guestbook, cert vault,
+     project modal, AI panel, clock bar) is untouched.
+     ============================================================ -->
+<script id="visual-wonder-systems">
 (function(){
-  const screen=document.getElementById('welcome-screen');
-  if(!screen)return;
-  const fill=screen.querySelector('.mourya-loader-fill');
-  const value=screen.querySelector('.mourya-loader-value');
-  if(!fill||!value)return;
-  const start=performance.now(),duration=6000;
-  function tick(now){const p=Math.max(0,Math.min(1,(now-start)/duration));const n=Math.round(p*100);fill.style.width=n+'%';value.textContent=n;if(p<1)requestAnimationFrame(tick)}
-  requestAnimationFrame(tick);
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const root = document.documentElement;
+  const CHAPTERS = ['hero','about','projects','experience','personal','contact'];
+  const CHVAR = {hero:'--ch-hero',about:'--ch-about',projects:'--ch-work',experience:'--ch-experience',personal:'--ch-personal',contact:'--ch-contact'};
+
+  /* ---------- chapter color + scene rail sync ---------- */
+  const railDots = [...document.querySelectorAll('#scene-rail .sr-dot')];
+  function setChapter(id){
+    const varName = CHVAR[id]; if(!varName) return;
+    const val = getComputedStyle(root).getPropertyValue(varName).trim();
+    if(val) root.style.setProperty('--chapter', val);
+    railDots.forEach(d=>d.classList.toggle('active', d.dataset.scene===id));
+  }
+  const chapterIO = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) setChapter(e.target.id); });
+  },{threshold:0.5});
+  CHAPTERS.forEach(id=>{ const el=document.getElementById(id); if(el) chapterIO.observe(el); });
+  railDots.forEach(d=>d.addEventListener('click',()=>{
+    const t=document.getElementById(d.dataset.scene);
+    t&&t.scrollIntoView({behavior:reduced?'auto':'smooth'});
+  }));
+
+  /* ---------- curved chapter dividers: scroll-scrubbed morph ---------- */
+  if(window.gsap && window.ScrollTrigger && !reduced){
+    gsap.registerPlugin(ScrollTrigger);
+    document.querySelectorAll('.chapter-curve').forEach((wrap,i)=>{
+      const path = wrap.querySelector('.curve-path');
+      const section = wrap.closest('section');
+      if(!path || !section) return;
+      // amplitude/phase differ per chapter so no two seams move identically
+      const amp = [46,-38,54,-30,42][i%5];
+      const skew = [1,-1,1,-1,1][i%5];
+      const state = { t: 0 };
+      gsap.to(state, {
+        t: 1, ease:'none',
+        scrollTrigger:{ trigger: section, start:'top bottom', end:'top 55%', scrub: 0.6 },
+        onUpdate(){
+          const a = amp * state.t;
+          const mid = 70 + a;
+          const q1 = 70 + a*0.4*skew;
+          const q3 = 70 - a*0.4*skew;
+          path.setAttribute('d', `M0,${q1} C300,${q1} 300,${mid} 600,${mid} C900,${mid} 900,${q3} 1200,${q3} L1200,140 L0,140 Z`);
+        }
+      });
+    });
+
+    // scene titles: scrub reveal tied to actual scroll position, not a timer
+    document.querySelectorAll('.section-title.reveal').forEach(t=>{
+      gsap.fromTo(t, {yPercent:16}, {yPercent:0, ease:'none',
+        scrollTrigger:{ trigger:t, start:'top 92%', end:'top 55%', scrub:true }});
+    });
+
+    // hero: name drifts slower than the page (parallax), photo drifts faster
+    gsap.to('.hero-name-wrap', { yPercent:-8, ease:'none', scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true} });
+    gsap.to('#hero-portrait-wrap', { yPercent:16, ease:'none', scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true} });
+  }
+
+  /* ---------- cursor states: view / drag ---------- */
+  const label = document.getElementById('cursor-label');
+  function setCursorState(state, text){
+    document.body.classList.remove('cursor-view','cursor-drag');
+    if(state){ document.body.classList.add('cursor-'+state); }
+    if(label) label.textContent = text || '';
+  }
+  if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    document.querySelectorAll('.project-item, .featured-project').forEach(el=>{
+      el.addEventListener('mouseenter', ()=>setCursorState('view','View'));
+      el.addEventListener('mouseleave', ()=>setCursorState(null));
+    });
+    const globeCanvas = document.getElementById('globe-canvas');
+    if(globeCanvas){
+      globeCanvas.addEventListener('mouseenter', ()=>setCursorState('drag','Drag'));
+      globeCanvas.addEventListener('mouseleave', ()=>setCursorState(null));
+    }
+    document.querySelectorAll('.cert-card, .country-pill').forEach(el=>{
+      el.addEventListener('mouseenter', ()=>setCursorState('view','Open'));
+      el.addEventListener('mouseleave', ()=>setCursorState(null));
+    });
+  }
+
+  /* ---------- hero WebGL field (Three.js) ---------- */
+  (function(){
+    const canvas = document.getElementById('hero-gl');
+    if(!canvas || reduced || !window.THREE) return;
+    if(window.matchMedia('(pointer:coarse)').matches && innerWidth < 640) return; // skip on small touch devices
+
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha:true, antialias:true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(55, innerWidth/innerHeight, 0.1, 100);
+    camera.position.z = 9;
+
+    const COUNT = innerWidth < 900 ? 60 : 130;
+    const positions = new Float32Array(COUNT*3);
+    const speeds = [];
+    for(let i=0;i<COUNT;i++){
+      positions[i*3]   = (Math.random()-0.5)*16;
+      positions[i*3+1] = (Math.random()-0.5)*9;
+      positions[i*3+2] = (Math.random()-0.5)*6;
+      speeds.push(0.05+Math.random()*0.12);
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(positions,3));
+    const accentHex = 0xc8b896;
+    const mat = new THREE.PointsMaterial({ color: accentHex, size: 0.045, transparent:true, opacity:.85 });
+    const points = new THREE.Points(geo, mat);
+    scene.add(points);
+
+    // faint connecting lines between near neighbours (recomputed lightly)
+    const lineGeo = new THREE.BufferGeometry();
+    const maxLines = COUNT*2;
+    const linePos = new Float32Array(maxLines*2*3);
+    const lineMat = new THREE.LineBasicMaterial({ color: accentHex, transparent:true, opacity:.12 });
+    lineGeo.setAttribute('position', new THREE.BufferAttribute(linePos,3));
+    const lines = new THREE.LineSegments(lineGeo, lineMat);
+    scene.add(lines);
+
+    function rebuildLines(){
+      let idx=0;
+      for(let i=0;i<COUNT && idx<maxLines;i++){
+        for(let j=i+1;j<COUNT && idx<maxLines;j++){
+          const dx=positions[i*3]-positions[j*3], dy=positions[i*3+1]-positions[j*3+1], dz=positions[i*3+2]-positions[j*3+2];
+          const d=dx*dx+dy*dy+dz*dz;
+          if(d<2.1){
+            linePos[idx*6]=positions[i*3]; linePos[idx*6+1]=positions[i*3+1]; linePos[idx*6+2]=positions[i*3+2];
+            linePos[idx*6+3]=positions[j*3]; linePos[idx*6+4]=positions[j*3+1]; linePos[idx*6+5]=positions[j*3+2];
+            idx++;
+          }
+        }
+      }
+      for(let k=idx;k<maxLines;k++){ linePos[k*6]=0;linePos[k*6+1]=0;linePos[k*6+2]=0;linePos[k*6+3]=0;linePos[k*6+4]=0;linePos[k*6+5]=0; }
+      lineGeo.attributes.position.needsUpdate = true;
+      lineGeo.setDrawRange(0, idx*2);
+    }
+
+    let mx=0,my=0, targetRotX=0, targetRotY=0;
+    addEventListener('mousemove', e=>{
+      mx = (e.clientX/innerWidth - .5); my = (e.clientY/innerHeight - .5);
+      targetRotY = mx*0.25; targetRotX = my*0.15;
+    }, {passive:true});
+
+    function resize(){
+      const w = innerWidth, h = innerHeight;
+      renderer.setSize(w,h);
+      camera.aspect = w/h; camera.updateProjectionMatrix();
+    }
+    resize(); addEventListener('resize', resize);
+
+    let frame=0, running=true;
+    const io = new IntersectionObserver(es=>{ running = es[0].isIntersecting; }, {threshold:0});
+    io.observe(document.getElementById('hero'));
+
+    function tick(){
+      requestAnimationFrame(tick);
+      if(!running) return;
+      frame++;
+      for(let i=0;i<COUNT;i++){
+        positions[i*3+1] += Math.sin(frame*0.01 + i)*0.0018*speeds[i]*8;
+        positions[i*3]   += Math.cos(frame*0.008 + i)*0.0012*speeds[i]*8;
+      }
+      geo.attributes.position.needsUpdate = true;
+      if(frame % 4 === 0) rebuildLines();
+      points.rotation.y += (targetRotY - points.rotation.y)*0.03;
+      points.rotation.x += (targetRotX - points.rotation.x)*0.03;
+      lines.rotation.copy(points.rotation);
+      renderer.render(scene, camera);
+    }
+    tick();
+  })();
+
+  /* ---------- About section: interactive node graph ---------- */
+  (function(){
+    const canvas = document.getElementById('node-canvas');
+    if(!canvas || reduced) return;
+    const ctx = canvas.getContext('2d');
+    let w,h,nodes=[];
+    function size(){
+      const rect = canvas.getBoundingClientRect();
+      w = canvas.width = rect.width * devicePixelRatio;
+      h = canvas.height = rect.height * devicePixelRatio;
+    }
+    function init(){
+      size();
+      nodes = Array.from({length:16}, ()=>({
+        x: Math.random()*w, y: Math.random()*h,
+        vx:(Math.random()-.5)*.25, vy:(Math.random()-.5)*.25,
+        r: (Math.random()*1.6+1.4)*devicePixelRatio
+      }));
+    }
+    let px=-9999, py=-9999;
+    canvas.addEventListener('mousemove', e=>{
+      const rect = canvas.getBoundingClientRect();
+      px = (e.clientX-rect.left)*devicePixelRatio; py=(e.clientY-rect.top)*devicePixelRatio;
+    });
+    canvas.addEventListener('mouseleave', ()=>{ px=-9999; py=-9999; });
+    function tick(){
+      ctx.clearRect(0,0,w,h);
+      nodes.forEach(n=>{
+        n.x+=n.vx; n.y+=n.vy;
+        if(n.x<0||n.x>w) n.vx*=-1;
+        if(n.y<0||n.y>h) n.vy*=-1;
+        const dx=px-n.x, dy=py-n.y, d=Math.hypot(dx,dy);
+        if(d<120*devicePixelRatio){ n.x += dx*0.008; n.y += dy*0.008; }
+      });
+      for(let i=0;i<nodes.length;i++){
+        for(let j=i+1;j<nodes.length;j++){
+          const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y;
+          const d=Math.hypot(dx,dy);
+          if(d < 110*devicePixelRatio){
+            ctx.strokeStyle = `rgba(200,184,150,${(1-d/(110*devicePixelRatio))*0.35})`;
+            ctx.lineWidth = devicePixelRatio*0.6;
+            ctx.beginPath(); ctx.moveTo(nodes[i].x,nodes[i].y); ctx.lineTo(nodes[j].x,nodes[j].y); ctx.stroke();
+          }
+        }
+      }
+      nodes.forEach(n=>{
+        ctx.beginPath(); ctx.fillStyle='rgba(200,184,150,.8)';
+        ctx.arc(n.x,n.y,n.r,0,Math.PI*2); ctx.fill();
+      });
+      requestAnimationFrame(tick);
+    }
+    init(); tick();
+    let rt; addEventListener('resize', ()=>{ clearTimeout(rt); rt=setTimeout(init,200); });
+  })();
 })();
 </script>
 
+<!-- ============================================================
+     ACCESSIBILITY / PERSONALIZATION PANEL
+     Inspired by the interaction quality of Adidas Arena's filter
+     tool — an original implementation, no assets or code reused.
+     ============================================================ -->
+<button id="a11y-trigger" aria-haspopup="dialog" aria-expanded="false" aria-controls="a11y-panel" title="Personalize this site">
+  <svg viewBox="0 0 24 24" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3.2"/></svg>
+</button>
 
+<div id="a11y-panel" role="dialog" aria-modal="false" aria-label="Accessibility and personalization settings">
+  <div class="a11y-head">
+    <span class="a11y-title">Personalize</span>
+    <button id="a11y-close" aria-label="Close personalization panel">×</button>
+  </div>
+  <div class="a11y-cats" role="tablist" aria-label="Filter categories">
+    <button class="a11y-cat active" data-cat="all" role="tab" aria-selected="true">All</button>
+    <button class="a11y-cat" data-cat="vision" role="tab" aria-selected="false">Vision</button>
+    <button class="a11y-cat" data-cat="movement" role="tab" aria-selected="false">Movement</button>
+    <button class="a11y-cat" data-cat="cognitive" role="tab" aria-selected="false">Cognitive</button>
+    <button class="a11y-cat" data-cat="comfort" role="tab" aria-selected="false">Comfort</button>
+  </div>
+  <div class="a11y-options" id="a11y-options"></div>
+  <button class="a11y-reset" id="a11y-reset">Reset all</button>
+</div>
 
-
-<script id="final-project-controller-v2">
+<script id="a11y-system">
 (function(){
- const root=document.getElementById('project-tab-experience');
- if(!root)return;
- const panels=[...root.querySelectorAll('.pte-panel')];
- const tabs=[...root.querySelectorAll('.pte-tab')];
- if(!panels.length)return;
- let current=0;
- function setActive(i){
-  current=i;
-  panels.forEach((p,n)=>{
-   const on=n===i;
-   p.classList.toggle('active',on);
-   p.style.opacity=on?'1':'0';
-   p.style.visibility=on?'visible':'hidden';
-   p.style.zIndex=on?'30':'0';
-   p.style.pointerEvents=on?'auto':'none';
-   if(on){p.style.transform='translate3d(0,0,0) scale(1)';p.style.filter='none';}
-  });
-  tabs.forEach((t,n)=>{t.classList.toggle('active',n===i);t.setAttribute('aria-selected',n===i?'true':'false');});
- }
- function update(){
-  const r=root.getBoundingClientRect();
-  const range=Math.max(root.offsetHeight-window.innerHeight,1);
-  const progress=Math.max(0,Math.min(1,-r.top/range));
-  const idx=Math.min(panels.length-1,Math.floor(progress*panels.length));
-  if(idx!==current)setActive(idx);
- }
- tabs.forEach((t,i)=>t.addEventListener('click',()=>{
-  const range=Math.max(root.offsetHeight-window.innerHeight,1);
-  window.scrollTo({top:window.scrollY+root.getBoundingClientRect().top+(range*i/(panels.length-1)),behavior:'smooth'});
-  setActive(i);
- }));
- window.addEventListener('scroll',()=>requestAnimationFrame(update),{passive:true});
- setActive(0); update();
+  const OPTIONS = [
+    // VISION
+    {id:'colorvision', cat:'vision', label:'Color vision', cls:['a11y-colorvision']},
+    {id:'protan', cat:'vision', label:'Red color blindness', cls:['a11y-protan']},
+    {id:'deuter', cat:'vision', label:'Green color blindness', cls:['a11y-deuter']},
+    {id:'tritan', cat:'vision', label:'Blue color blindness', cls:['a11y-tritan']},
+    {id:'achroma', cat:'vision', label:'Achromatopsia', cls:['a11y-achroma']},
+    {id:'lowvision', cat:'vision', label:'Low vision', cls:['a11y-lowvision']},
+    {id:'impaired', cat:'vision', label:'Visual impairment', cls:['a11y-impaired']},
+    {id:'cataract', cat:'vision', label:'Cataract', cls:['a11y-cataract']},
+    {id:'amd', cat:'vision', label:'AMD', cls:['a11y-amd']},
+    {id:'presbyopia', cat:'vision', label:'Presbyopia', cls:['a11y-presbyopia']},
+    {id:'migraine', cat:'vision', label:'Retinal migraine', cls:['a11y-migraine']},
+    {id:'bluelight', cat:'vision', label:'Blue light', cls:['a11y-bluelight']},
+    // MOVEMENT
+    {id:'imprecise', cat:'movement', label:'Imprecise movements', cls:['a11y-motor']},
+    {id:'parkinsons', cat:'movement', label:"Parkinson's disease", cls:['a11y-motor']},
+    {id:'tremor', cat:'movement', label:'Essential tremor', cls:['a11y-motor']},
+    {id:'osteoarthritis', cat:'movement', label:'Osteoarthritis', cls:['a11y-motor']},
+    {id:'wilsons', cat:'movement', label:"Wilson's disease", cls:['a11y-motor']},
+    {id:'ms', cat:'movement', label:'Multiple sclerosis', cls:['a11y-motor']},
+    // COGNITIVE
+    {id:'attention', cat:'cognitive', label:'Attention disorder', cls:['a11y-attention']},
+    {id:'dyslexia', cat:'cognitive', label:'Dyslexia', cls:['a11y-dyslexia']},
+    // TEMPORARY / COMFORT
+    {id:'fatigue', cat:'comfort', label:'Visual fatigue', cls:['a11y-fatigue']},
+    {id:'photosensitive', cat:'comfort', label:'Photosensitive epilepsy', cls:['a11y-photosafe','a11y-reduced-motion']},
+    {id:'night', cat:'comfort', label:'Night mode', cls:[], special:'night'},
+    {id:'comfort', cat:'comfort', label:'Comfort', cls:['a11y-comfort']},
+    {id:'senior', cat:'comfort', label:'Senior', cls:['a11y-lowvision','a11y-motor','a11y-reduced-motion']},
+    {id:'reducemotion', cat:'comfort', label:'Reduce motion', cls:['a11y-reduced-motion'], special:'motion'}
+  ];
+  const CATS = {vision:'Vision',movement:'Movement',cognitive:'Cognitive / Attention',comfort:'Temporary / Comfort'};
 
- // project cards/details navigation
- document.querySelectorAll('.project-item, .pte-panel a, [data-project]').forEach(el=>{
-  el.addEventListener('click',e=>{
-   const href=el.getAttribute('href');
-   if(href && href!=='#') return;
-   const n=Number(el.dataset.project||el.dataset.pte||0);
-   if(!Number.isNaN(n)) {e.preventDefault();setActive(n);}
+  const trigger=document.getElementById('a11y-trigger'), panel=document.getElementById('a11y-panel');
+  const optionsWrap=document.getElementById('a11y-options'), closeBtn=document.getElementById('a11y-close');
+  const catBtns=[...document.querySelectorAll('.a11y-cat')];
+  const html=document.documentElement;
+  let active=new Set();
+  try{ active=new Set(JSON.parse(localStorage.getItem('a11y-active')||'[]')); }catch(e){ active=new Set(); }
+
+  function renderOptions(filterCat){
+    optionsWrap.innerHTML='';
+    let lastCat=null;
+    OPTIONS.forEach(opt=>{
+      if(filterCat!=='all' && opt.cat!==filterCat) return;
+      if(filterCat==='all' && opt.cat!==lastCat){
+        lastCat=opt.cat;
+        const lbl=document.createElement('div'); lbl.className='a11y-group-label'; lbl.textContent=CATS[opt.cat];
+        optionsWrap.appendChild(lbl);
+      }
+      const btn=document.createElement('button');
+      btn.className='a11y-opt'+(active.has(opt.id)?' active':'');
+      btn.type='button'; btn.setAttribute('aria-pressed', active.has(opt.id)?'true':'false');
+      btn.innerHTML=`<span>${opt.label}</span><span class="chk" aria-hidden="true"></span>`;
+      btn.addEventListener('click', ()=>toggle(opt.id));
+      optionsWrap.appendChild(btn);
+    });
+  }
+
+  function applyClasses(){
+    // union every class from every active option, then reconcile with <html>
+    const wanted=new Set();
+    OPTIONS.forEach(opt=>{ if(active.has(opt.id)) opt.cls.forEach(c=>wanted.add(c)); });
+    ['a11y-colorvision','a11y-protan','a11y-deuter','a11y-tritan','a11y-achroma','a11y-lowvision','a11y-impaired',
+     'a11y-cataract','a11y-amd','a11y-presbyopia','a11y-migraine','a11y-bluelight','a11y-motor','a11y-attention',
+     'a11y-dyslexia','a11y-fatigue','a11y-photosafe','a11y-comfort','a11y-reduced-motion'].forEach(c=>{
+      html.classList.toggle(c, wanted.has(c));
+    });
+    trigger.classList.toggle('has-active', active.size>0);
+    if(window.__setSmoothScroll) window.__setSmoothScroll(!wanted.has('a11y-reduced-motion'));
+    localStorage.setItem('a11y-active', JSON.stringify([...active]));
+  }
+
+  function toggle(id){
+    const opt=OPTIONS.find(o=>o.id===id); if(!opt) return;
+    if(opt.special==='night'){
+      const themeToggle=document.getElementById('theme-toggle');
+      if(themeToggle) themeToggle.click();
+    }
+    if(active.has(id)) active.delete(id); else active.add(id);
+    applyClasses();
+    renderOptions(document.querySelector('.a11y-cat.active').dataset.cat);
+  }
+
+  catBtns.forEach(b=>b.addEventListener('click',()=>{
+    catBtns.forEach(x=>{x.classList.remove('active');x.setAttribute('aria-selected','false');});
+    b.classList.add('active'); b.setAttribute('aria-selected','true');
+    renderOptions(b.dataset.cat);
+  }));
+
+  function openPanel(){ panel.classList.add('open'); trigger.setAttribute('aria-expanded','true'); }
+  function closePanel(){ panel.classList.remove('open'); trigger.setAttribute('aria-expanded','false'); }
+  trigger.addEventListener('click', ()=> panel.classList.contains('open') ? closePanel() : openPanel());
+  closeBtn.addEventListener('click', closePanel);
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape' && panel.classList.contains('open')) closePanel(); });
+  document.addEventListener('click', e=>{
+    if(panel.classList.contains('open') && !panel.contains(e.target) && e.target!==trigger && !trigger.contains(e.target)) closePanel();
   });
- });
+  document.getElementById('a11y-reset').addEventListener('click', ()=>{
+    active.clear(); applyClasses(); renderOptions(document.querySelector('.a11y-cat.active').dataset.cat);
+  });
+
+  renderOptions('all');
+  applyClasses();
+
+  // if the OS-level prefers-reduced-motion is set, reflect it as active
+  // in the panel too, so the two systems agree rather than fight
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches && !active.has('reducemotion')){
+    active.add('reducemotion'); applyClasses(); renderOptions('all');
+  }
 })();
 </script>
 </body>
