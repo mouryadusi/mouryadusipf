@@ -57,6 +57,9 @@
     --ch-fun: #E8A94C;
     --ch-contact: #CC8FE8;
     --chapter: var(--ch-hero);
+    --red: #E8412B;
+    --red-deep: #B82E1B;
+    --on-red: #FFF6EE;
   }
   [data-theme="light"] {
     --bg: #fafaf8;
@@ -73,6 +76,9 @@
     --surface-noise-opacity: .34;
     --ch-hero: #4C5FEA; --ch-about: #4C5FEA; --ch-work: #2E86D6;
     --ch-experience: #7B5CF0; --ch-personal: #17A992; --ch-fun: #C6822E; --ch-contact: #9A4FD1;
+    --red: #E23A22;
+    --red-deep: #A82918;
+    --on-red: #FFF6EE;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -444,7 +450,63 @@
   .skill-tag:hover { border-color: var(--border-hover); color: var(--text); transform: translateY(-2px); }
   .skill-category { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-subtle); margin-bottom: 16px; margin-top: 40px; }
 
-  /* PROJECTS — see .exhibit* rules further down for the current system */
+  /* PROJECTS */
+  .projects-list { display: flex; flex-direction: column; gap: 1px; margin-top: 48px; }
+  .project-item {
+    border-top: 1px solid var(--border); padding: 32px 0;
+    display: grid; grid-template-columns: 60px 1fr auto;
+    gap: 28px; align-items: start; cursor: none;
+    transition: all 0.2s ease; text-decoration: none; color: var(--text);
+  }
+  .project-item:hover { padding-left: 12px; }
+  .project-item:last-child { border-bottom: 1px solid var(--border); }
+  .project-num { font-size: 12px; color: var(--text-subtle); padding-top: 4px; font-variant-numeric: tabular-nums; }
+  .project-info h3 { font-size: 20px; font-weight: 400; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .project-info p { font-size: 14px; color: var(--text-muted); line-height: 1.6; max-width: 600px; }
+  .project-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
+  .tag { font-size: 11px; letter-spacing: 0.08em; padding: 4px 10px; border: 1px solid var(--border); border-radius: 100px; color: var(--text-subtle); }
+  .project-arrow { font-size: 20px; color: var(--text-subtle); transition: transform 0.2s ease, color 0.2s ease; padding-top: 4px; }
+  .project-item:hover .project-arrow { transform: translate(4px,-4px); color: var(--text); }
+  .project-stat { display: flex; gap: 20px; margin-top: 12px; }
+  .project-stat span { font-size: 12px; color: var(--text-subtle); }
+  .project-stat strong { color: var(--text); font-weight: 400; }
+
+  /* FEATURED PROJECT */
+  .featured-project { border: 1px solid var(--border); border-radius: 24px; overflow: hidden; margin-top: 48px; margin-bottom: 12px; transition: border-color 0.3s ease; text-decoration: none; color: var(--text); display: block; cursor: none; }
+  .featured-project:hover { border-color: var(--border-hover); }
+  .featured-project-preview { position: relative; width: 100%; height: 340px; background: #050b14; overflow: hidden; }
+  .fp-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(30,100,200,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(30,100,200,0.06) 1px,transparent 1px); background-size: 40px 40px; }
+  .fp-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle,rgba(14,90,200,0.18) 0%,transparent 70%); top: -200px; left: 50%; transform: translateX(-50%); pointer-events: none; }
+  .fp-ui-mock { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 16px; padding: 32px; }
+  .fp-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 20px 24px; color: #e0eaff; flex-shrink: 0; }
+  .fp-card-main { width: 340px; }
+  .fp-card-main .fp-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(120,160,255,0.7); margin-bottom: 10px; }
+  .fp-card-main .fp-heading { font-family: 'Playfair Display',serif; font-size: 26px; font-weight: 400; line-height: 1.2; color: #fff; margin-bottom: 12px; }
+  .fp-card-main .fp-sub { font-size: 12px; color: rgba(160,190,255,0.6); line-height: 1.6; }
+  .fp-bar { display: flex; gap: 6px; margin-top: 16px; }
+  .fp-pill { font-size: 10px; padding: 4px 10px; border: 1px solid rgba(100,150,255,0.25); border-radius: 100px; color: rgba(140,180,255,0.7); }
+  .fp-card-side { width: 180px; background: rgba(255,255,255,0.03); }
+  .fp-route { display: flex; flex-direction: column; gap: 8px; }
+  .fp-route-row { font-size: 12px; color: rgba(160,200,255,0.65); display: flex; align-items: center; gap: 8px; }
+  .fp-route-row::before { content: '✈'; font-size: 10px; color: rgba(100,160,255,0.5); }
+  .fp-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 10px; padding: 5px 10px; background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.2); border-radius: 100px; color: #4ade80; margin-top: 14px; }
+  .fp-badge-dot { width: 6px; height: 6px; background: #4ade80; border-radius: 50%; animation: pulse 2s ease infinite; }
+  .fp-overlay { position: absolute; bottom: 0; left: 0; right: 0; height: 80px; background: linear-gradient(transparent,rgba(5,11,20,0.9)); }
+  .featured-project-body { padding: 28px 32px 32px; display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: end; border-top: 1px solid var(--border); background: var(--bg2); }
+  .fp-title { font-size: 22px; font-weight: 400; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .fp-desc { font-size: 14px; color: var(--text-muted); line-height: 1.65; max-width: 600px; margin-bottom: 16px; }
+  .fp-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .fp-live-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; padding: 5px 12px; background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.2); border-radius: 100px; color: #4ade80; }
+  .fp-cta { font-size: 13px; color: var(--text); display: flex; align-items: center; gap: 8px; white-space: nowrap; padding: 12px 24px; border: 1px solid var(--border-hover); border-radius: 100px; transition: all 0.2s ease; }
+  .featured-project:hover .fp-cta { border-color: var(--text); transform: translate(2px,-2px); }
+  @media (max-width: 700px) {
+    .featured-project-preview { height: 220px; }
+    .fp-card-side { display: none; }
+    .fp-card-main { width: 280px; }
+    .fp-card-main .fp-heading { font-size: 20px; }
+    .featured-project-body { grid-template-columns: 1fr; }
+    .fp-cta { display: none; }
+  }
 
   /* EXPERIENCE */
   .exp-list { display: flex; flex-direction: column; gap: 40px; margin-top: 48px; }
@@ -553,33 +615,16 @@
 
   /* PERSONAL */
   #personal { border-top: 1px solid var(--border); }
-
-  /* Scrapbook fragments — three personal facts presented as offset,
-     wildly-scaled statements rather than uniform bordered cards, so the
-     section reads as a personality moment instead of an About block. */
-  .scrap{ margin-top:64px; display:flex; flex-direction:column; gap:clamp(64px,11vw,132px); }
-  .scrap-row{ display:grid; grid-template-columns:112px 1fr; align-items:start; column-gap:32px; }
-  .scrap-label{ font:500 10px/1.4 'Inter',sans-serif; letter-spacing:.28em; text-transform:uppercase; color:var(--text-subtle); padding-top:18px; grid-column:1; grid-row:1/3; }
-  .scrap-label--red{ color:var(--red); }
-  .scrap-fact{ grid-column:2; font-family:'Cormorant Garamond',serif; font-weight:300; letter-spacing:-.02em; line-height:.92; font-size:clamp(40px,7vw,86px); }
-  .scrap-fact em{ font-style:italic; color:var(--text-muted); }
-  .scrap-note{ grid-column:2; max-width:400px; color:var(--text-muted); font-size:14px; line-height:1.85; margin-top:20px; }
-  .scrap-row--b{ grid-template-columns:1fr 112px; text-align:right; }
-  .scrap-row--b .scrap-label{ grid-column:2; }
-  .scrap-row--b .scrap-fact,.scrap-row--b .scrap-note{ grid-column:1; }
-  .scrap-row--b .scrap-note{ margin-left:auto; }
-  .scrap-row--c{ margin-left:clamp(0px,10vw,110px); }
-  @media(max-width:700px){
-    .scrap{ gap:56px; margin-top:48px; }
-    .scrap-row,.scrap-row--b{ grid-template-columns:1fr; text-align:left; }
-    .scrap-row--b .scrap-label,.scrap-row--b .scrap-fact,.scrap-row--b .scrap-note{ grid-column:1; margin-left:0; text-align:left; }
-    .scrap-label{ padding-top:0; margin-bottom:10px; grid-row:auto; }
-    .scrap-fact{ font-size:clamp(34px,11vw,50px); }
-    .scrap-row--c{ margin-left:0; }
-  }
+  .interests-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 48px; }
+  .interest-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; padding: 32px 28px; transition: all 0.25s ease; }
+  .interest-card:hover { border-color: var(--border-hover); transform: translateY(-4px); }
+  .interest-icon { font-size: 28px; margin-bottom: 16px; }
+  .interest-card h3 { font-size: 18px; font-weight: 400; margin-bottom: 10px; }
+  .interest-card p { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
 
   .fun-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 48px; }
-  .fun-card { position: relative; display: flex; flex-direction: column; background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; transition: all 0.3s cubic-bezier(.22,1,.36,1); }
+  .fun-card { position: relative; display: flex; flex-direction: column; background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; transition: all 0.3s cubic-bezier(.22,1,.36,1); text-decoration: none; color: var(--text); }
+  .fun-card h3 { color: var(--text); }
   .fun-card:hover { border-color: var(--border-hover); transform: translateY(-4px); }
   .fun-card-visual { height: 150px; display: flex; align-items: center; justify-content: center; font-family:'Bodoni Moda',serif; font-style: italic; font-size: 30px; color: rgba(255,255,255,.9); }
   .fun-card-body { padding: 26px 24px 28px; }
@@ -590,14 +635,6 @@
   .fun-card-link { font-size: 12px; letter-spacing: .04em; color: var(--accent2); display: inline-flex; align-items: center; gap: 6px; }
   @media(max-width:900px){ .fun-grid { grid-template-columns: 1fr 1fr; } }
   @media(max-width:620px){ .fun-grid { grid-template-columns: 1fr; } }
-
-  /* Site favicons/logos — small identity marks pulled from each live
-     project/site link, inserted inline before the relevant heading so
-     they scale naturally with whatever typography they sit beside. */
-  img.site-favicon{ object-fit:contain; background:rgba(255,255,255,.95); box-shadow:0 2px 8px rgba(0,0,0,.3); display:inline-block; vertical-align:middle; }
-  [data-theme="light"] img.site-favicon{ background:#fff; box-shadow:0 2px 8px rgba(0,0,0,.15); }
-  .fun-card-body h3 img.site-favicon{ width:18px; height:18px; border-radius:5px; padding:3px; margin-right:8px; vertical-align:-3px; }
-  .pte-panel-copy h3 img.site-favicon{ width:0.56em; height:0.56em; border-radius:22%; padding:4px; margin-right:0.16em; vertical-align:-0.03em; }
 
   /* Countries */
   .countries-section { margin-top: 80px; }
@@ -630,8 +667,8 @@
   .reveal.visible { opacity: 1; transform: translateY(0); }
   /* motion variants — deliberately different per moment rather than one
      fade-up repeated everywhere */
-  .reveal.rv-mask { opacity: 0; transform: translateY(28px) scale(.985); transition: opacity .9s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1); }
-  .reveal.rv-mask.visible { opacity: 1; transform: translateY(0) scale(1); }
+  .reveal.rv-mask { opacity: 1; transform: none; clip-path: inset(0 0 99% 0); transition: clip-path 1s cubic-bezier(.16,1,.3,1); }
+  .reveal.rv-mask.visible { clip-path: inset(0 0 0% 0); }
   .reveal.rv-scale { opacity: 0; transform: scale(.94); transition: opacity .7s ease, transform .9s cubic-bezier(.22,1,.36,1); }
   .reveal.rv-scale.visible { opacity: 1; transform: scale(1); }
   .reveal.rv-slide-l { opacity: 0; transform: translateX(-56px); transition: opacity .8s ease, transform .8s cubic-bezier(.16,1,.3,1); }
@@ -674,65 +711,53 @@
 .hero-photo-frame{position:relative;}
 .hero-photo-frame img{display:block;width:100%;height:auto;}
 
-/* ============================================================
-   PROJECT EXHIBITS — a controlled vertical sequence, each project
-   its own poster-like piece with a strong red field as its visual
-   identity. Three alternating compositions (a/b/c) keep the system
-   readable while giving each project its own posture.
-   ============================================================ */
-:root{ --red:#e1372a; --red-deep:#9c2016; --red-ink:#fff3ee; }
-.exhibits{ display:flex; flex-direction:column; gap:clamp(90px,15vw,190px); margin-top:64px; }
-.exhibit{ display:flex; flex-direction:column; gap:26px; }
-.exhibit-head{ display:flex; align-items:baseline; gap:18px; }
-.exhibit-num{ font:500 11px/1 'Inter',sans-serif; letter-spacing:.22em; color:var(--text-subtle); font-variant-numeric:tabular-nums; }
-.exhibit-meta{ font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--text-subtle); }
-.exhibit-title{ font-family:'Cormorant Garamond',serif; font-weight:300; line-height:.86; letter-spacing:-.035em; font-size:clamp(50px,8.6vw,148px); }
-.exhibit-title-dim{ color:var(--text-muted); }
-.exhibit-visual{ position:relative; display:flex; align-items:flex-end; justify-content:space-between; gap:18px; flex-wrap:wrap;
-  min-height:clamp(260px,42vw,520px); border-radius:28px; overflow:hidden; padding:clamp(22px,3vw,40px);
-  background:linear-gradient(150deg,var(--red),var(--red-deep) 120%); text-decoration:none; color:var(--red-ink);
-  border:0; cursor:pointer; width:100%; text-align:left; font:inherit; }
-.exhibit-visual::before{ content:''; position:absolute; inset:0; background:radial-gradient(circle at 78% 18%,rgba(255,255,255,.22),transparent 46%); pointer-events:none; }
-.exhibit-visual-mark{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-align:center;
-  font:300 1px/.8 'Cormorant Garamond',serif; letter-spacing:-.06em; color:rgba(255,255,255,.17); pointer-events:none; padding:0 6%;
-  transition:transform .7s cubic-bezier(.22,1,.36,1); }
-.exhibit-visual:hover .exhibit-visual-mark, .exhibit-visual:focus-visible .exhibit-visual-mark{ transform:scale(1.035); }
-.exhibit-visual-live{ position:relative; z-index:2; display:inline-flex; align-items:center; gap:8px; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,243,238,.85); }
-.exhibit-live-dot{ width:6px; height:6px; border-radius:50%; background:#fff; box-shadow:0 0 0 4px rgba(255,255,255,.18); flex-shrink:0; }
-.exhibit-visual-cta{ position:relative; z-index:2; font-size:11px; letter-spacing:.16em; text-transform:uppercase; display:inline-flex; align-items:center; gap:8px;
-  border-bottom:1px solid rgba(255,255,255,.55); padding-bottom:6px; transition:gap .3s ease,border-color .3s ease; margin-left:auto; }
-.exhibit-visual:hover .exhibit-visual-cta, .exhibit-visual:focus-visible .exhibit-visual-cta{ gap:14px; border-color:#fff; }
-.exhibit-visual:focus-visible{ outline:2px solid var(--red-ink); outline-offset:3px; }
-.exhibit-foot{ display:flex; justify-content:space-between; gap:36px; align-items:flex-start; flex-wrap:wrap; }
-.exhibit-desc{ max-width:560px; color:var(--text-muted); font-size:15px; line-height:1.8; }
-.exhibit-tags{ display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end; }
-.exhibit-tags span{ font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-subtle); border:1px solid var(--border); padding:5px 11px; border-radius:999px; }
-
-/* variant a — left-aligned, near-full-bleed visual */
-.exhibit--a .exhibit-visual{ margin-right:0; }
-
-/* variant b — title & meta pulled right, visual gets an offset inset + asymmetric corner */
-.exhibit--b{ align-items:flex-end; text-align:right; }
-.exhibit--b .exhibit-head{ flex-direction:row-reverse; }
-.exhibit--b .exhibit-visual{ margin-left:clamp(0px,9vw,130px); border-radius:64px 28px 28px 28px; }
-.exhibit--b .exhibit-foot{ flex-direction:row-reverse; text-align:right; }
-.exhibit--b .exhibit-tags{ justify-content:flex-start; }
-
-/* variant c — tiny number set far from a tighter-cropped visual */
-.exhibit--c .exhibit-visual{ min-height:clamp(220px,34vw,420px); border-radius:28px 28px 64px 28px; margin-right:clamp(0px,11vw,150px); }
-
-@media(max-width:760px){
-  .exhibits{ gap:70px; margin-top:48px; }
-  .exhibit--b{ align-items:flex-start; text-align:left; }
-  .exhibit--b .exhibit-head{ flex-direction:row; }
-  .exhibit--b .exhibit-visual,.exhibit--c .exhibit-visual{ margin:0; border-radius:22px; min-height:280px; }
-  .exhibit--b .exhibit-foot{ flex-direction:column; text-align:left; }
-  .exhibit--b .exhibit-tags{ justify-content:flex-start; }
-  .exhibit-title{ font-size:clamp(38px,12.5vw,60px); }
-  .exhibit-visual{ padding:18px; }
+/* Editorial project storytelling */
+.projects-list.editorial-projects{gap:0;margin-top:56px;}
+.editorial-projects .project-item{
+  min-height:clamp(420px,68vh,720px);padding:clamp(42px,7vw,90px) 0;
+  display:grid;grid-template-columns:80px minmax(0,1fr) 120px;
+  align-items:center;position:relative;overflow:hidden;
+  transition:padding .55s cubic-bezier(.22,1,.36,1),border-color .3s ease;
 }
-@media(prefers-reduced-motion:reduce){ .exhibit-visual-mark{ transition:none; } }
-
+.editorial-projects .project-item::before{
+  content:'';position:absolute;left:0;top:50%;width:3px;height:0;
+  background:var(--text);transform:translateY(-50%);
+  transition:height .7s cubic-bezier(.22,1,.36,1);
+}
+.editorial-projects .project-item.active::before{height:70%;}
+.editorial-projects .project-num{
+  align-self:start;padding-top:9px;font-family:'Cormorant Garamond',serif;
+  font-size:20px;color:var(--text-subtle);
+}
+.editorial-projects .project-info h3{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(34px,6vw,82px);line-height:.95;letter-spacing:-.04em;
+  margin-bottom:22px;transform:translateX(0);transition:transform .7s cubic-bezier(.22,1,.36,1);
+}
+.editorial-projects .project-item.active .project-info h3{transform:translateX(14px);}
+.editorial-projects .project-info p{
+  font-size:clamp(14px,1.5vw,17px);max-width:680px;
+  line-height:1.75;opacity:.82;
+}
+.editorial-projects .project-tags{margin-top:22px;}
+.editorial-projects .project-arrow{
+  font-size:38px;justify-self:end;align-self:start;
+  transition:transform .5s cubic-bezier(.22,1,.36,1);
+}
+.editorial-projects .project-item.active .project-arrow{transform:translate(8px,-8px) rotate(-3deg);}
+.project-progress{
+  position:absolute;right:0;bottom:18px;width:min(180px,24vw);height:1px;background:var(--border);
+}
+.project-progress span{display:block;height:100%;width:0;background:var(--text);transition:width .15s linear;}
+@media(max-width:700px){
+  .editorial-projects .project-item{
+    min-height:520px;grid-template-columns:38px 1fr;padding:55px 0;
+  }
+  .editorial-projects .project-arrow{display:none;}
+  .editorial-projects .project-info h3{font-size:clamp(34px,13vw,58px);}
+  .editorial-projects .project-item.active .project-info h3{transform:translateX(6px);}
+  .project-progress{width:100%;bottom:14px;}
+}
 
 /* Mood system actually affects accents */
 :root{--mood-accent:#f0f0f0;--mood-rgb:240,240,240;}
@@ -1179,85 +1204,347 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 </section>
 
 <!-- Projects -->
-<section id="projects" style="border-top:1px solid var(--border);position:relative;">
+<section id="projects" style="border-top:1px solid var(--border);position:relative;background:var(--bg);">
   <div class="chapter-curve" data-curve-idx="1" style="--curve-color:var(--ch-work);"><svg viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path class="curve-path" d="M0,70 C300,70 300,70 600,70 C900,70 900,70 1200,70 L1200,140 L0,140 Z"></path></svg></div>
 
   <div class="section-label">02 — Work</div>
-  <h2 class="section-title reveal">Selected<br><em>projects</em></h2>
-  <div class="exhibits">
+  <h2 class="section-title reveal">Featured<br><em>projects</em></h2>
+  <p class="exhibit-intro reveal">Six things I've built, laid out like an exhibition rather than a grid. Scroll through — each one gets its own moment.</p>
 
-    <article class="exhibit exhibit--a reveal rv-mask">
-      <div class="exhibit-head"><span class="exhibit-num">01 / 05</span><span class="exhibit-meta">AI · Real-time · Voice AI · Full-stack</span></div>
-      <h3 class="exhibit-title">destination<span class="exhibit-title-dim">.com</span></h3>
-      <a class="exhibit-visual" href="https://destination-com-dun.vercel.app" target="_blank" rel="noopener" aria-label="Visit destination.com">
-        <span class="exhibit-visual-mark">DESTINATION</span>
-        <span class="exhibit-visual-live"><span class="exhibit-live-dot"></span>Live · Deployed</span>
-        <span class="exhibit-visual-cta">Visit project ↗</span>
-      </a>
-      <div class="exhibit-foot">
-        <p class="exhibit-desc">A full-stack AI travel platform with real-time route optimization, ARIA voice AI powered by Groq, live flight tracking, visa guidance, a layover city explorer and an AI itinerary planner — built and deployed on Vercel.</p>
-        <div class="exhibit-tags"><span>AI</span><span>Real-time</span><span>Voice AI</span><span>Full-stack</span><span>Groq</span></div>
+  <div class="exhibit-projects">
+
+    <!-- 01 — Again -->
+    <article class="exhibit-project v-a">
+      <div class="exhibit-row-top reveal">
+        <span class="exhibit-num">01</span>
+        <span class="exhibit-meta-line">2025 · WEB · PRODUCTIVITY</span>
+      </div>
+      <h3 class="exhibit-title reveal rv-mask">Again</h3>
+      <div class="exhibit-visual reveal rv-scale">
+        <div class="exhibit-red-field">
+          <div class="exhibit-visual-inner">
+            <div class="app-showcase">
+              <div class="showcase-header">Again · Tasks</div>
+              <div class="showcase-content">
+                <div class="task-item">✓ Design immersive UI</div>
+                <div class="task-item">Build scroll animations</div>
+                <div class="task-item">Deploy to production</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="exhibit-caption">Task management, reimagined</span>
+      </div>
+      <div class="exhibit-foot reveal">
+        <p class="exhibit-desc">Beautifully designed task management with real-time sync, smart organization, and seamless collaboration.</p>
+        <div class="exhibit-tags"><span>React</span><span>Next.js</span><span>Tailwind</span><span>Real-time</span></div>
+        <a href="https://getagain.netlify.app" target="_blank" rel="noopener" class="exhibit-link">View Project <span class="exhibit-arrow">→</span></a>
       </div>
     </article>
 
-    <article class="exhibit exhibit--b reveal rv-mask">
-      <div class="exhibit-head"><span class="exhibit-num">02 / 05</span><span class="exhibit-meta">Mobile · AI/ML · IoT</span></div>
-      <h3 class="exhibit-title">Smart Exit<br>Reminder</h3>
-      <a class="exhibit-visual" href="https://mouryadusi.github.io/smart-exit-reminder.html" target="_blank" rel="noopener" aria-label="Visit Smart Exit Reminder">
-        <span class="exhibit-visual-mark">EXIT</span>
-        <span class="exhibit-visual-live"><span class="exhibit-live-dot"></span>100% Automated · 24/7 Active</span>
-        <span class="exhibit-visual-cta">Visit project ↗</span>
-      </a>
-      <div class="exhibit-foot">
-        <p class="exhibit-desc">Intelligent mobile app that automatically reminds you of essential items the moment you leave home — sensor fusion across Wi-Fi, GPS and BLE, with ML that learns your daily routine.</p>
-        <div class="exhibit-tags"><span>Mobile</span><span>AI/ML</span><span>IoT</span><span>React Native</span></div>
+    <!-- 02 — destination -->
+    <article class="exhibit-project v-b">
+      <div class="exhibit-row-top reveal">
+        <span class="exhibit-num">02</span>
+        <span class="exhibit-meta-line">2025 · AI · TRAVEL</span>
+      </div>
+      <h3 class="exhibit-title reveal rv-mask">destination</h3>
+      <div class="exhibit-visual reveal rv-scale">
+        <div class="exhibit-red-field">
+          <div class="exhibit-visual-inner">
+            <div class="app-showcase">
+              <div class="showcase-header">✦ destination · AI Travel</div>
+              <div class="route-showcase">
+                <div class="route-item">London → New York</div>
+                <div class="route-info">Voice AI · Live Flights · Visa Check</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="exhibit-caption">AI travel intelligence, end to end</span>
+      </div>
+      <div class="exhibit-foot reveal">
+        <p class="exhibit-desc">AI-powered travel platform with voice AI (ARIA), live flight tracking, visa intelligence, and smart route optimization.</p>
+        <div class="exhibit-tags"><span>Next.js</span><span>AI/ML</span><span>Groq</span><span>Real-time</span><span>Vercel</span></div>
+        <a href="https://destination-com-dun.vercel.app" target="_blank" rel="noopener" class="exhibit-link">View Project <span class="exhibit-arrow">→</span></a>
       </div>
     </article>
 
-    <article class="exhibit exhibit--c reveal rv-mask">
-      <div class="exhibit-head"><span class="exhibit-num">03 / 05</span><span class="exhibit-meta">IoT · Edge · Privacy</span></div>
-      <h3 class="exhibit-title">Taxi Lost Item<br>Detection</h3>
-      <a class="exhibit-visual" href="https://mouryadusi.github.io/taxi-lost-item-detection.html" target="_blank" rel="noopener" aria-label="Visit Taxi Lost Item Detection">
-        <span class="exhibit-visual-mark">PRIVACY</span>
-        <span class="exhibit-visual-live"><span class="exhibit-live-dot"></span>Real-time · 100% Privacy Safe</span>
-        <span class="exhibit-visual-cta">Visit project ↗</span>
-      </a>
-      <div class="exhibit-foot">
-        <p class="exhibit-desc">Privacy-first IoT system using multi-sensor arrays — pressure, infrared, ultrasonic — to detect forgotten belongings in taxis. All data processed on-device, zero cameras.</p>
-        <div class="exhibit-tags"><span>IoT</span><span>Edge Computing</span><span>Privacy Tech</span></div>
+    <!-- 03 — Smart Exit -->
+    <article class="exhibit-project v-c">
+      <div class="exhibit-row-top reveal">
+        <span class="exhibit-num">03</span>
+        <span class="exhibit-meta-line">2024 · MOBILE · IOT</span>
+      </div>
+      <div class="exhibit-visual reveal rv-scale">
+        <div class="exhibit-red-field">
+          <div class="exhibit-visual-inner">
+            <div class="app-showcase">
+              <div class="showcase-header">Smart Exit · AI Reminders</div>
+              <div class="showcase-icon">📱</div>
+              <div class="showcase-message">Don't forget your keys</div>
+            </div>
+          </div>
+        </div>
+        <span class="exhibit-caption">Learns your routine, quietly</span>
+      </div>
+      <h3 class="exhibit-title exhibit-title-overlap reveal rv-mask">Smart Exit</h3>
+      <div class="exhibit-foot reveal">
+        <p class="exhibit-desc">Mobile-first IoT system using machine learning to learn user routines and intelligently remind about essential items.</p>
+        <div class="exhibit-tags"><span>Python</span><span>TensorFlow</span><span>Mobile</span><span>Edge AI</span></div>
+        <a href="https://mouryadusi.github.io/smart-exit-reminder.html" target="_blank" rel="noopener" class="exhibit-link">View Project <span class="exhibit-arrow">→</span></a>
       </div>
     </article>
 
-    <article class="exhibit exhibit--a reveal rv-mask">
-      <div class="exhibit-head"><span class="exhibit-num">04 / 05</span><span class="exhibit-meta">Python · ML · Scikit-learn</span></div>
-      <h3 class="exhibit-title">Student Performance<br>Prediction</h3>
-      <button type="button" class="exhibit-visual exhibit-visual--case" data-project="student-performance">
-        <span class="exhibit-visual-mark">92%</span>
-        <span class="exhibit-visual-live"><span class="exhibit-live-dot"></span>92% Accuracy · 5+ ML Models</span>
-        <span class="exhibit-visual-cta">Case study in portfolio ↗</span>
-      </button>
-      <div class="exhibit-foot">
-        <p class="exhibit-desc">End-to-end ML pipeline identifying at-risk students with 92% accuracy, enabling institutions to intervene early and improve academic outcomes.</p>
-        <div class="exhibit-tags"><span>Python</span><span>Scikit-learn</span><span>Pandas</span></div>
+    <!-- 04 — Privacy Sensors -->
+    <article class="exhibit-project v-a">
+      <div class="exhibit-row-top reveal">
+        <span class="exhibit-num">04</span>
+        <span class="exhibit-meta-line">2024 · IOT · EDGE</span>
+      </div>
+      <h3 class="exhibit-title reveal rv-mask">Privacy Sensors</h3>
+      <div class="exhibit-visual reveal rv-scale">
+        <div class="exhibit-red-field">
+          <div class="exhibit-visual-inner">
+            <div class="app-showcase">
+              <div class="showcase-header">Privacy Sensors · Real-time</div>
+              <div class="sensor-grid">
+                <div class="sensor-item">💨</div>
+                <div class="sensor-item">🌡️</div>
+                <div class="sensor-item">📡</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="exhibit-caption">Everything processed on-device</span>
+      </div>
+      <div class="exhibit-foot reveal">
+        <p class="exhibit-desc">Privacy-first sensor system detecting forgotten belongings using edge computing. All processing happens on-device.</p>
+        <div class="exhibit-tags"><span>IoT</span><span>Edge Computing</span><span>Privacy</span><span>Sensors</span></div>
+        <a href="https://mouryadusi.github.io/taxi-lost-item-detection.html" target="_blank" rel="noopener" class="exhibit-link">View Project <span class="exhibit-arrow">→</span></a>
       </div>
     </article>
 
-    <article class="exhibit exhibit--b reveal rv-mask">
-      <div class="exhibit-head"><span class="exhibit-num">05 / 05</span><span class="exhibit-meta">NLP · TensorFlow · Flask</span></div>
-      <h3 class="exhibit-title">Intelligent University<br>Chatbot</h3>
-      <button type="button" class="exhibit-visual exhibit-visual--case" data-project="university-chatbot">
-        <span class="exhibit-visual-mark">24/7</span>
-        <span class="exhibit-visual-live"><span class="exhibit-live-dot"></span>1000+ Queries/Day · 24/7</span>
-        <span class="exhibit-visual-cta">Case study in portfolio ↗</span>
-      </button>
-      <div class="exhibit-foot">
-        <p class="exhibit-desc">NLP-powered assistant handling 1000+ student queries per day, reducing administrative workload by 35% through intent recognition built on TensorFlow and Flask.</p>
-        <div class="exhibit-tags"><span>NLP</span><span>TensorFlow</span><span>Flask</span><span>MongoDB</span></div>
+    <!-- 05 — Performance ML -->
+    <article class="exhibit-project v-b">
+      <div class="exhibit-row-top reveal">
+        <span class="exhibit-num">05</span>
+        <span class="exhibit-meta-line">2023 · ML · DATA SCIENCE</span>
+      </div>
+      <h3 class="exhibit-title reveal rv-mask">Performance ML</h3>
+      <div class="exhibit-visual reveal rv-scale">
+        <div class="exhibit-red-field">
+          <div class="exhibit-visual-inner">
+            <div class="app-showcase">
+              <div class="showcase-header">Accuracy · 92%</div>
+              <div class="chart-showcase">
+                <div class="chart-bar" style="height:40%"></div>
+                <div class="chart-bar" style="height:60%"></div>
+                <div class="chart-bar" style="height:92%"></div>
+                <div class="chart-bar" style="height:50%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="exhibit-caption">1,000+ records, every week</span>
+      </div>
+      <div class="exhibit-foot reveal">
+        <p class="exhibit-desc">Production machine learning pipeline identifying at-risk students with 92% accuracy. Processes 1000+ records weekly.</p>
+        <div class="exhibit-tags"><span>Python</span><span>Scikit-learn</span><span>Pandas</span><span>ML Pipeline</span></div>
+        <a href="#" class="exhibit-link">View Project <span class="exhibit-arrow">→</span></a>
+      </div>
+    </article>
+
+    <!-- 06 — University Chatbot -->
+    <article class="exhibit-project v-c">
+      <div class="exhibit-row-top reveal">
+        <span class="exhibit-num">06</span>
+        <span class="exhibit-meta-line">2023 · NLP · PRODUCTION</span>
+      </div>
+      <div class="exhibit-visual reveal rv-scale">
+        <div class="exhibit-red-field">
+          <div class="exhibit-visual-inner">
+            <div class="app-showcase">
+              <div class="showcase-header">24/7 Chatbot · Live</div>
+              <div class="chat-showcase">
+                <div class="chat-message bot">How can I help today?</div>
+                <div class="chat-message user">Question about course</div>
+                <div class="chat-message bot">Here's the information...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="exhibit-caption">99.9% uptime, 1,000+ queries a day</span>
+      </div>
+      <h3 class="exhibit-title exhibit-title-overlap reveal rv-mask">University<br>Chatbot</h3>
+      <div class="exhibit-foot reveal">
+        <p class="exhibit-desc">Production NLP chatbot handling 1000+ queries daily, reducing support workload by 35%. 99.9% uptime.</p>
+        <div class="exhibit-tags"><span>TensorFlow</span><span>NLP</span><span>Flask</span><span>Production</span></div>
+        <a href="#" class="exhibit-link">View Project <span class="exhibit-arrow">→</span></a>
       </div>
     </article>
 
   </div>
 </section>
+
+<style>
+  :root { --exhibit-red: #E8412B; --exhibit-red-deep: #B82F1C; --exhibit-cream: #FFF6EC; }
+
+  .exhibit-intro {
+    font-size: 15px; color: var(--text-muted); font-weight: 300;
+    max-width: 480px; line-height: 1.7; margin-top: -6px;
+  }
+
+  .exhibit-projects { margin-top: 100px; }
+
+  .exhibit-project {
+    margin-bottom: clamp(120px, 16vw, 220px);
+    position: relative;
+  }
+  .exhibit-project:last-child { margin-bottom: 40px; }
+
+  /* ── tiny metadata row ─────────────────────────────────────────── */
+  .exhibit-row-top {
+    display: flex; align-items: baseline; gap: 18px;
+    margin-bottom: 18px;
+  }
+  .exhibit-num {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1em;
+    color: var(--exhibit-red); font-variant-numeric: tabular-nums;
+  }
+  .exhibit-meta-line {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--text-subtle); font-weight: 500;
+  }
+
+  /* ── huge title ─────────────────────────────────────────────────── */
+  .exhibit-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(56px, 10vw, 150px);
+    line-height: 0.88;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin: 0 0 40px 0;
+  }
+
+  /* ── the red field / visual ────────────────────────────────────── */
+  .exhibit-visual { position: relative; margin-bottom: 28px; }
+
+  .exhibit-red-field {
+    background: linear-gradient(155deg, var(--exhibit-red) 0%, var(--exhibit-red-deep) 100%);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    padding: clamp(28px, 5vw, 64px);
+    overflow: hidden;
+  }
+
+  .exhibit-visual-inner {
+    width: 100%; max-width: 560px;
+    transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
+  }
+  .exhibit-visual:hover .exhibit-visual-inner { transform: scale(1.025); }
+
+  .exhibit-visual-inner .app-showcase {
+    background: var(--exhibit-cream);
+    border-radius: 14px;
+    padding: 32px 28px;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.25);
+    color: #1a1a1a;
+  }
+  .exhibit-visual-inner .showcase-header { font-size: 17px; font-weight: 700; margin-bottom: 18px; color: #1a1a1a; }
+  .exhibit-visual-inner .task-item { font-size: 13px; color: #555; padding: 7px 0; border-bottom: 1px solid rgba(0,0,0,0.08); }
+  .exhibit-visual-inner .task-item:last-child { border-bottom: none; }
+  .exhibit-visual-inner .route-showcase { background: rgba(0,0,0,0.04); padding: 14px; border-radius: 10px; }
+  .exhibit-visual-inner .route-item { font-size: 15px; font-weight: 600; color: #1a1a1a; margin-bottom: 6px; }
+  .exhibit-visual-inner .route-info { font-size: 11px; color: #777; letter-spacing: 0.05em; }
+  .exhibit-visual-inner .showcase-icon { font-size: 44px; margin: 12px 0; text-align: center; }
+  .exhibit-visual-inner .showcase-message { text-align: center; font-size: 14px; color: #555; font-weight: 500; }
+  .exhibit-visual-inner .sensor-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 14px; font-size: 34px; text-align: center; }
+  .exhibit-visual-inner .chart-showcase { display: flex; gap: 8px; align-items: flex-end; height: 100px; margin-top: 14px; }
+  .exhibit-visual-inner .chart-bar { flex: 1; background: linear-gradient(180deg, var(--exhibit-red), rgba(232,65,43,0.35)); border-radius: 5px; }
+  .exhibit-visual-inner .chat-showcase { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+  .exhibit-visual-inner .chat-message { font-size: 12px; padding: 8px 12px; border-radius: 9px; max-width: 85%; line-height: 1.4; }
+  .exhibit-visual-inner .chat-message.bot { background: rgba(0,0,0,0.06); color: #1a1a1a; align-self: flex-start; }
+  .exhibit-visual-inner .chat-message.user { background: var(--exhibit-red); color: #fff; align-self: flex-end; }
+
+  .exhibit-caption {
+    display: block; margin-top: 16px;
+    font-size: 12px; letter-spacing: 0.05em; font-style: italic;
+    color: var(--text-subtle);
+  }
+
+  /* ── footer: description, tags, link ───────────────────────────── */
+  .exhibit-foot { max-width: 480px; }
+  .exhibit-desc { font-size: 15px; color: var(--text-muted); line-height: 1.75; margin-bottom: 18px; font-weight: 300; }
+  .exhibit-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+  .exhibit-tags span {
+    font-size: 11px; padding: 5px 12px; border: 1px solid var(--border);
+    border-radius: 20px; color: var(--text-muted);
+  }
+  .exhibit-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.04em;
+    color: var(--text); text-decoration: none;
+    padding-bottom: 4px; border-bottom: 1.5px solid var(--exhibit-red);
+  }
+  .exhibit-arrow { transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); color: var(--exhibit-red); }
+  .exhibit-link:hover .exhibit-arrow { transform: translateX(6px); }
+
+  /* ══════════════════════════════════════════════════════════════
+     VARIANT A — contained, image full width of column, left-aligned
+     ══════════════════════════════════════════════════════════════ */
+  .v-a .exhibit-title { text-align: left; }
+  .v-a .exhibit-red-field { min-height: 360px; }
+
+  /* ══════════════════════════════════════════════════════════════
+     VARIANT B — offset right: title + link right-aligned,
+     visual pushed right and wider than the text column
+     ══════════════════════════════════════════════════════════════ */
+  .v-b { display: flex; flex-direction: column; align-items: flex-end; }
+  .v-b .exhibit-row-top,
+  .v-b .exhibit-title,
+  .v-b .exhibit-foot { text-align: right; align-self: flex-end; }
+  .v-b .exhibit-row-top { flex-direction: row-reverse; }
+  .v-b .exhibit-visual { width: 92%; align-self: flex-end; }
+  .v-b .exhibit-red-field { min-height: 380px; justify-content: flex-end; }
+  .v-b .exhibit-caption { text-align: right; }
+  .v-b .exhibit-tags { justify-content: flex-end; }
+  .v-b .exhibit-link { flex-direction: row-reverse; }
+
+  /* ══════════════════════════════════════════════════════════════
+     VARIANT C — visual first, title overlaps its bottom edge
+     ══════════════════════════════════════════════════════════════ */
+  .v-c .exhibit-visual { margin-bottom: 0; }
+  .v-c .exhibit-title-overlap {
+    margin: -0.14em 0 40px clamp(16px, 4vw, 48px);
+    position: relative; z-index: 2;
+  }
+
+  @media (max-width: 900px) {
+    .exhibit-projects { margin-top: 70px; }
+    .exhibit-project { margin-bottom: 90px; }
+    .exhibit-title { font-size: clamp(44px, 13vw, 76px); margin-bottom: 28px; }
+    .v-b { align-items: flex-start; }
+    .v-b .exhibit-row-top,
+    .v-b .exhibit-title,
+    .v-b .exhibit-foot,
+    .v-b .exhibit-caption { text-align: left; align-self: flex-start; }
+    .v-b .exhibit-row-top { flex-direction: row; }
+    .v-b .exhibit-visual { width: 100%; }
+    .v-b .exhibit-red-field { justify-content: center; }
+    .v-b .exhibit-tags { justify-content: flex-start; }
+    .v-b .exhibit-link { flex-direction: row; }
+    .v-c .exhibit-title-overlap { margin-left: 0; margin-top: 24px; }
+    .exhibit-red-field { min-height: 260px !important; padding: 24px !important; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .exhibit-visual-inner { transition: none !important; }
+    .exhibit-arrow { transition: none !important; }
+  }
+</style>
+
 
 <!-- Experience -->
 <section id="experience" style="border-top:1px solid var(--border);position:relative;">
@@ -1634,31 +1921,19 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 
   <div class="section-label">05 — Personal</div>
   <h2 class="section-title reveal">Beyond<br><em>the code</em></h2>
-  <div class="scrap">
-    <div class="scrap-row scrap-row--a reveal rv-slide-l">
-      <span class="scrap-label">01 — Soundtrack</span>
-      <h3 class="scrap-fact">Music is<br><em>the constant.</em></h3>
-      <p class="scrap-note">Whether I'm commuting through Dubai, deep in a coding session, or just unwinding — from indie to classical, it shapes how I think and create.</p>
-    </div>
-    <div class="scrap-row scrap-row--b reveal rv-slide-r">
-      <span class="scrap-label">02 — Travel</span>
-      <h3 class="scrap-fact">Mostly,<br><em>solo.</em></h3>
-      <p class="scrap-note">There's something uniquely clarifying about navigating a new country on your own terms — every city teaches you something a group trip never could.</p>
-    </div>
-    <div class="scrap-row scrap-row--c reveal rv-slide-l">
-      <span class="scrap-label scrap-label--red">03 — What's next</span>
-      <h3 class="scrap-fact">AI, and the<br><em>human side.</em></h3>
-      <p class="scrap-note">I'm fascinated by how AI will reshape everyday life — not just the technical side, but the human side too. Building things that are simple and genuinely useful is what drives me.</p>
-    </div>
+  <div class="interests-grid reveal rv-mask" style="margin-top:48px;">
+    <div class="interest-card"><div class="interest-icon">🎵</div><h3>Music</h3><p>Music is my constant companion — whether I'm commuting through Dubai, deep in a coding session, or just unwinding. From indie to classical, it shapes how I think and create.</p></div>
+    <div class="interest-card"><div class="interest-icon">✈️</div><h3>Travel</h3><p>I travel most of the time solo — there's something uniquely clarifying about navigating a new country on your own terms. Every city teaches you something a group trip never could.</p></div>
+    <div class="interest-card"><div class="interest-icon">🤖</div><h3>AI & The Future</h3><p>I'm fascinated by how AI will reshape everyday life — not just the technical side, but the human side too. Building things that are simple and genuinely useful is what drives me.</p></div>
   </div>
 
   <!-- D3 Globe -->
   <div class="reveal" style="margin-top:80px;" id="globe-section">
-    <div style="text-align:left;margin-bottom:32px;max-width:520px;">
+    <div style="text-align:center;margin-bottom:32px;">
       <p style="font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:12px;">Places visited</p>
       <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,44px);font-weight:300;letter-spacing:.02em;">Places I've <em style="font-style:italic;color:var(--text-muted)">called home for a while</em></h3>
     </div>
-    <div style="display:flex;justify-content:flex-start;gap:56px;flex-wrap:wrap;margin-bottom:40px;">
+    <div style="display:flex;justify-content:center;gap:56px;flex-wrap:wrap;margin-bottom:40px;">
       <div style="text-align:center;"><div style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;line-height:1;color:var(--text);" id="g-cn">0</div><div style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);margin-top:6px;">Countries</div></div>
       <div style="text-align:center;"><div style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;line-height:1;color:var(--text);" id="g-mi">0<span style="font-size:22px;color:var(--text-subtle)">k</span></div><div style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);margin-top:6px;">Miles flown</div><div style="font-size:11px;color:var(--text-subtle);margin-top:2px;font-style:italic;">≈ 6× around Earth</div></div>
 
@@ -1739,12 +2014,47 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 <section id="fun" style="position:relative;border-top:1px solid var(--border);">
   <div class="chapter-curve" data-curve-idx="4" style="--curve-color:var(--ch-fun);"><svg viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path class="curve-path" d="M0,70 C300,70 300,70 600,70 C900,70 900,70 1200,70 L1200,140 L0,140 Z"></path></svg></div>
 
-  <div class="section-label">06 — For Fun</div>
-  <h2 class="section-title reveal" style="margin-bottom:28px;">Totally <em>necessary</em><br>side projects</h2>
-  <p style="font-size:15px;color:var(--text-muted);font-weight:300;margin-top:0;max-width:520px;line-height:1.7;">Nobody asked for these. I built them anyway, on my own time, and I'm choosing to call that "fun" instead of what it probably is.</p>
+  <div class="section-label">06 — Creative Playground</div>
+  <h2 class="section-title reveal">Digital Experiments</h2>
+  <p style="font-size:15px;color:var(--text-muted);font-weight:300;margin-top:16px;max-width:520px;line-height:1.7;">Outside of client and coursework, I build small experimental sites just to try things out — a different corner of the sandbox from the case-study projects above.</p>
+
+  <div class="fun-section-label reveal" style="margin-top:70px;">a few fragments</div>
+  <div class="scrapbook-grid reveal">
+    <div class="scrap-tile scrap-dark scrap-tall">
+      <span class="scrap-mark">🎵</span>
+      <span class="scrap-cap">runs on music —<br>indie to classical</span>
+    </div>
+    <div class="scrap-tile scrap-red">
+      <span class="scrap-mark">✈️</span>
+      <span class="scrap-cap">9 countries,<br>always solo</span>
+    </div>
+    <div class="scrap-tile scrap-cream scrap-wide">
+      <span class="scrap-mark">🤖</span>
+      <span class="scrap-cap">curious about how AI reshapes everyday life</span>
+    </div>
+    <div class="scrap-tile scrap-outline">
+      <span class="scrap-mark">📍</span>
+      <span class="scrap-cap">Dubai, UAE</span>
+    </div>
+    <div class="scrap-tile scrap-dark">
+      <span class="scrap-mark">🎓</span>
+      <span class="scrap-cap">MSc Data<br>Science &amp; AI</span>
+    </div>
+    <div class="scrap-tile scrap-cream">
+      <span class="scrap-mark">🏢</span>
+      <span class="scrap-cap">ML Engineering<br>@ Accenture</span>
+    </div>
+    <div class="scrap-tile scrap-red scrap-wide">
+      <span class="scrap-mark scrap-flags">🇮🇳 🇦🇪 🇲🇾 🇸🇬 🇹🇭 🇻🇳 🇺🇸 🇳🇵 🇱🇰</span>
+      <span class="scrap-cap">stamps collected so far</span>
+    </div>
+  </div>
+
+  <div class="fun-section-label reveal">✨ Websites</div>
+
   <div class="fun-grid reveal rv-mask">
     <a class="fun-card" href="https://telugucinema.vercel.app" target="_blank" rel="noopener">
-      <div class="fun-card-visual" style="background:linear-gradient(135deg,#1a0c0e,#2c1013 55%,#120709);">3D</div>
+      <div class="fun-card-visual" style="background:linear-gradient(135deg,#1a0c0e,#2c1013 55%,#120709);">🎬</div>
       <div class="fun-card-body">
         <h3>Telugu Cinema</h3>
         <p>An interactive 3D poster universe of Telugu cinema — drag, orbit and click through a spatial archive of posters rendered in real time, with Auto/Calm motion and cursor settings built in.</p>
@@ -1752,27 +2062,100 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
         <span class="fun-card-link">Visit site ↗</span>
       </div>
     </a>
-      <a class="fun-card" href="https://onthisday-iota.vercel.app" target="_blank" rel="noopener">
-    <div class="fun-card-visual" style="background:linear-gradient(135deg,#0b1220,#172554 55%,#0f172a);">DAY</div>
-    <div class="fun-card-body">
-      <h3>On This Day</h3>
-      <p>An interactive exploration of historical events that happened on this day — a small experiment in making history more engaging and discoverable.</p>
-      <div class="fun-card-tags"><span>JavaScript</span><span>API</span><span>Creative Dev</span></div>
-      <span class="fun-card-link">Visit site ↗</span>
-    </div>
-  </a>
-  <a class="fun-card" href="https://getagain.netlify.app" target="_blank" rel="noopener">
-    <div class="fun-card-visual" style="background:linear-gradient(135deg,#160f08,#2b1a0d 55%,#100a06);">?</div>
-    <div class="fun-card-body">
-      <h3>Again?</h3>
-      <p>A small nudge that makes you pause and check whether you've already done this before you go and do it all over again.</p>
-      <div class="fun-card-tags"><span>JavaScript</span><span>UX Experiment</span><span>Creative Dev</span></div>
-      <span class="fun-card-link">Visit site ↗</span>
-    </div>
-  </a>
-</div>
+    <a class="fun-card" href="https://onthisday-iota.vercel.app" target="_blank" rel="noopener">
+      <div class="fun-card-visual" style="background:linear-gradient(135deg,#0b1220,#172554 55%,#0f172a);">📅</div>
+      <div class="fun-card-body">
+        <h3>On This Day</h3>
+        <p>An interactive exploration of historical events that happened on this day — a small experiment in making history more engaging and discoverable.</p>
+        <div class="fun-card-tags"><span>JavaScript</span><span>API</span><span>Creative Dev</span></div>
+        <span class="fun-card-link">Visit site ↗</span>
+      </div>
+    </a>
+    <a class="fun-card" href="https://getagain.netlify.app" target="_blank" rel="noopener">
+      <div class="fun-card-visual" style="background:linear-gradient(135deg,#0f1a12,#132c1c 55%,#0a1510);">✓</div>
+      <div class="fun-card-body">
+        <h3>Again</h3>
+        <p>A clean, minimal task management app built to explore real-time sync and smart organization patterns beyond the usual to-do list.</p>
+        <div class="fun-card-tags"><span>React</span><span>Next.js</span><span>Tailwind</span></div>
+        <span class="fun-card-link">Visit site ↗</span>
+      </div>
+    </a>
   </div>
 </section>
+
+<style>
+  .fun-section-label {
+    margin-top: 44px;
+    margin-bottom: -8px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+  }
+
+  /* ── personality scrapbook mosaic ────────────────────────────────── */
+  .scrapbook-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 96px;
+    gap: 14px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+
+  .scrap-tile {
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
+    padding: 14px 10px;
+    transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease;
+    transform: rotate(var(--tilt, 0deg));
+  }
+  .scrap-tile:hover {
+    transform: rotate(0deg) scale(1.035);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+    z-index: 2;
+  }
+  .scrap-tile:nth-child(odd) { --tilt: -1.4deg; }
+  .scrap-tile:nth-child(even) { --tilt: 1.2deg; }
+
+  .scrap-mark { font-size: 30px; line-height: 1; }
+  .scrap-mark.scrap-flags { font-size: 15px; letter-spacing: 0.08em; }
+  .scrap-cap {
+    font-size: 11px; letter-spacing: 0.02em; line-height: 1.4;
+    font-weight: 500;
+  }
+
+  .scrap-dark { background: #17130f; color: #f1e9da; grid-column: span 2; }
+  .scrap-dark .scrap-cap { color: rgba(241,233,218,0.75); }
+
+  .scrap-red { background: linear-gradient(155deg, var(--exhibit-red, #E8412B), var(--exhibit-red-deep, #B82F1C)); color: #fff; grid-column: span 2; }
+  .scrap-red .scrap-cap { color: rgba(255,255,255,0.9); }
+
+  .scrap-cream { background: var(--exhibit-cream, #FFF6EC); color: #1a1a1a; grid-column: span 2; }
+  .scrap-cream .scrap-cap { color: #555; }
+
+  .scrap-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text); grid-column: span 2; }
+  .scrap-outline .scrap-cap { color: var(--text-muted); }
+
+  .scrap-tall { grid-row: span 2; }
+  .scrap-wide { grid-column: span 3; }
+
+  @media (max-width: 900px) {
+    .scrapbook-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 110px; }
+    .scrap-tile { grid-column: span 1 !important; }
+    .scrap-wide { grid-column: span 2 !important; }
+    .scrap-tall { grid-row: span 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scrap-tile { transition: none !important; transform: none !important; }
+  }
+</style>
 
 <!-- Contact -->
 <section id="contact" style="position:relative;">
@@ -2264,81 +2647,6 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
     else { window.scrollTo({top:target,behavior:reduced?'auto':'smooth'}); }
   }
   tabs.forEach((tab,i)=>tab.addEventListener('click',()=>goTo(i)));
-
-  // Auto-fit the oversized watermark word inside each project's colour
-  // field. Previously every word used the same viewport-based clamp, so
-  // a long word like "DESTINATION" ran off the edges of its box while a
-  // short one like "92%" sat tiny and lost — each project's placeholder
-  // looked randomly placed relative to the others. This measures each
-  // word against its own box and sizes it to consistently fill the same
-  // proportion of that box, so every project's field reads the same way.
-  (function fitWatermarks(){
-    const boxes=[...root.querySelectorAll('.pte-panel-bg')];
-    if(!boxes.length) return;
-    let canvas, ctx;
-    function measure(text, px){
-      if(!canvas){ canvas=document.createElement('canvas'); ctx=canvas.getContext('2d'); }
-      ctx.font=`300 ${px}px 'Cormorant Garamond', serif`;
-      return ctx.measureText(text).width;
-    }
-    function fit(){
-      boxes.forEach(box=>{
-        const span=box.querySelector('span');
-        if(!span) return;
-        const text=span.textContent.trim();
-        if(!text) return;
-        const w=box.clientWidth, h=box.clientHeight;
-        if(!w||!h) return;
-        const availW=w*0.8, availH=h*0.66, probe=200;
-        const rawW=measure(text, probe);
-        const ls=-0.07*probe*Math.max(text.length-1,0); // approximates the -.07em letter-spacing
-        const totalW=Math.max(rawW+ls, probe*0.3);
-        let size=probe*(availW/totalW);
-        size=Math.min(size, availH/0.82);
-        size=Math.max(44, Math.min(size, 230));
-        span.style.fontSize=size+'px';
-      });
-    }
-    let t=null;
-    function schedule(){ clearTimeout(t); t=setTimeout(fit,120); }
-    window.addEventListener('resize', schedule, {passive:true});
-    window.addEventListener('load', fit);
-    if(document.fonts && document.fonts.ready){ document.fonts.ready.then(fit); }
-    fit();
-  })();
-
-  // Pull a small favicon/logo for each site that actually links out, and
-  // set it beside that project or fun-card's title. Cards/panels with no
-  // live link (case-study-only entries) are left as-is.
-  (function addSiteFavicons(){
-    function domainOf(url){ try{ return new URL(url, location.href).hostname; }catch(e){ return null; } }
-    function makeFavicon(url){
-      const domain=domainOf(url);
-      if(!domain) return null;
-      const img=document.createElement('img');
-      img.className='site-favicon';
-      img.src='https://www.google.com/s2/favicons?sz=128&domain='+domain;
-      img.alt=''; img.loading='lazy'; img.width=32; img.height=32;
-      img.addEventListener('error', ()=>img.remove(), {once:true});
-      return img;
-    }
-    document.querySelectorAll('.fun-card[href]').forEach(card=>{
-      const h3=card.querySelector('.fun-card-body h3');
-      if(h3 && !h3.querySelector('.site-favicon')){
-        const icon=makeFavicon(card.getAttribute('href'));
-        if(icon) h3.prepend(icon);
-      }
-    });
-    root.querySelectorAll('.pte-panel-copy').forEach(copy=>{
-      const link=copy.querySelector('a[href^="http"]');
-      const h3=copy.querySelector('h3');
-      if(link && h3 && !h3.querySelector('.site-favicon')){
-        const icon=makeFavicon(link.getAttribute('href'));
-        if(icon) h3.prepend(icon);
-      }
-    });
-  })();
-
   // clicking a project card or its "open" link also scrolls the pinned
   // stage to that project, instead of a second independent controller
   // fighting this one over the same panels
@@ -2395,7 +2703,7 @@ function updateClocks(){ document.getElementById('clock-dubai').textContent=fmtT
 updateClocks();setInterval(updateClocks,1000);
 
 // Scroll reveal
-const revObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revObserver.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -60px 0px'});
+const revObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revObserver.unobserve(e.target);}});},{threshold:0,rootMargin:'0px 0px -60px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>revObserver.observe(el));
 </script>
 
@@ -2798,7 +3106,7 @@ document.addEventListener('DOMContentLoaded', function(){
   document.body.appendChild(overlay);
 
   // ── INJECT NEWSPAPER TOGGLE into projects section ──
-  const projectsList = document.querySelector('.exhibits');
+  const projectsList = document.querySelector('.projects-list');
   if(projectsList){
     const toggle = document.createElement('button');
     toggle.id='newspaper-toggle';
@@ -2947,7 +3255,7 @@ window.startPitch=startPitch;
 // ── NEWSPAPER TOGGLE ──
 function toggleNewspaper(){
   const nv=document.getElementById('newspaper-view');
-  const pl=document.querySelector('.exhibits');
+  const pl=document.querySelector('.projects-list');
   const btn=document.getElementById('newspaper-toggle');
   const show=!nv.classList.contains('visible');
   nv.classList.toggle('visible',show);
