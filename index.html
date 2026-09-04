@@ -664,6 +664,7 @@
 
   /* REVEAL */
   .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.reveal-fade { transform: none; transition: opacity 0.5s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
   /* motion variants — deliberately different per moment rather than one
      fade-up repeated everywhere */
@@ -1179,9 +1180,22 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
       <div class="sidebar-item"><span class="key">Education</span><span class="val">MSc AI · MDX Dubai</span></div>
       <div class="sidebar-item"><span class="key">Focus</span><span class="val">ML · Data Science</span></div>
       <div class="sidebar-item"><span class="key">Languages</span><span class="val">EN · HI · TE</span></div>
+      <div class="sidebar-item"><span class="key">Age</span><span class="val" id="qf-age">—</span></div>
       <div class="sidebar-item"><span class="key">Countries</span><span class="val">10 visited</span></div>
     </div>
   </div>
+  <script>
+    window.__MOURYA_DOB = new Date(2002, 7, 12); // 12 Aug 2002 — single source of truth for age, reused by the AI assistant
+    (function(){
+      const dob = window.__MOURYA_DOB, now = new Date();
+      let age = now.getFullYear() - dob.getFullYear();
+      const beforeBirthday = (now.getMonth() < dob.getMonth()) || (now.getMonth() === dob.getMonth() && now.getDate() < dob.getDate());
+      if(beforeBirthday) age--;
+      window.__MOURYA_AGE = age;
+      const el = document.getElementById('qf-age');
+      if(el) el.textContent = age;
+    })();
+  </script>
   <div style="margin-top:100px;" class="reveal rv-mask">
     <div class="section-label">Skills</div>
     <div class="skill-category">Programming & ML</div>
@@ -1208,8 +1222,8 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
   <div class="chapter-curve" data-curve-idx="1" style="--curve-color:var(--ch-work);"><svg viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path class="curve-path" d="M0,70 C300,70 300,70 600,70 C900,70 900,70 1200,70 L1200,140 L0,140 Z"></path></svg></div>
 
   <div class="section-label">02 — Work</div>
-  <h2 class="section-title reveal">Featured<br><em>projects</em></h2>
-  <p class="exhibit-intro reveal">Six things I've built, laid out like an exhibition rather than a grid. Scroll through — each one gets its own moment.</p>
+  <h2 class="section-title reveal reveal-fade">Featured<br><em>projects</em></h2>
+  <p class="exhibit-intro reveal reveal-fade">Six things I've built, laid out like an exhibition rather than a grid. Scroll through — each one gets its own moment.</p>
 
   <div class="exhibit-projects">
 
@@ -1392,7 +1406,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 
   .exhibit-intro {
     font-size: 15px; color: var(--text-muted); font-weight: 300;
-    max-width: 480px; line-height: 1.7; margin-top: -6px;
+    max-width: 480px; line-height: 1.7; margin-top: 10px;
   }
 
   .exhibit-projects { margin-top: 100px; }
@@ -2015,8 +2029,8 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
   <div class="chapter-curve" data-curve-idx="4" style="--curve-color:var(--ch-fun);"><svg viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path class="curve-path" d="M0,70 C300,70 300,70 600,70 C900,70 900,70 1200,70 L1200,140 L0,140 Z"></path></svg></div>
 
   <div class="section-label">06 — Creative Playground</div>
-  <h2 class="section-title reveal">Digital Experiments</h2>
-  <p style="font-size:15px;color:var(--text-muted);font-weight:300;margin-top:16px;max-width:520px;line-height:1.7;">Outside of client and coursework, I build small experimental sites just to try things out — a different corner of the sandbox from the case-study projects above.</p>
+  <h2 class="section-title reveal reveal-fade">Digital Experiments</h2>
+  <p class="reveal reveal-fade" style="font-size:15px;color:var(--text-muted);font-weight:300;margin-top:20px;max-width:520px;line-height:1.7;">Outside of client and coursework, I build small experimental sites just to try things out — a different corner of the sandbox from the case-study projects above.</p>
 
   <div class="fun-section-label reveal" style="margin-top:70px;">a few fragments</div>
   <div class="scrapbook-grid reveal">
@@ -2541,6 +2555,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
   'student-performance':{num:'03',title:'Student Performance Prediction',subtitle:'Machine Learning · Predictive analytics',kicker:'ML / ANALYTICS / EDUCATION',media:'Predict earlier. Intervene sooner.',copy:'An end-to-end machine-learning pipeline designed to identify students at risk and support earlier intervention.',lede:'Prediction becomes valuable when it changes what happens next.',meta:'The project uses Python, Scikit-learn and Pandas to model student outcomes and surface risk signals for earlier action.',facts:[['Result','92% accuracy'],['Models','5+'],['Tools','Python · Scikit-learn']],story:[['01','The signal','Academic outcomes leave patterns in data. The pipeline looks for those patterns before failure becomes visible.','PREDICTIVE SIGNAL'],['02','The model','Multiple approaches can be compared, evaluated and interpreted before selecting a useful predictive workflow.','MODEL COMPARISON'],['03','The outcome','The objective is not prediction for its own sake. It is earlier visibility for people who can actually intervene.','EARLY ACTION']]},
   'university-chatbot':{num:'04',title:'Intelligent University Chatbot',subtitle:'NLP · TensorFlow · Flask',kicker:'NLP / AUTOMATION / PRODUCT',media:'Answer the question before the queue forms.',copy:'An NLP-powered university assistant built to handle recurring student questions and reduce administrative workload.',lede:'Good automation removes friction without removing the human option.',meta:'The system combines intent recognition with a Flask application and MongoDB-backed workflows to provide always-on assistance.',facts:[['Volume','1,000+ queries/day'],['Availability','24/7'],['Impact','35% workload reduction']],story:[['01','The queue','Repeated questions create repeated work. A conversational interface can absorb the predictable layer of that demand.','INTENT RECOGNITION'],['02','The system','NLP maps natural-language questions to useful responses while keeping the application simple enough to maintain.','TENSORFLOW / FLASK'],['03','The experience','Students get an immediate answer; staff can spend more time on questions that actually require a person.','HUMAN + AUTOMATION']]}
  };
+ window.__PROJECT_DATA = DATA; // reused by the AI assistant so project copy has one source of truth
  let active=null,locked=false;
  function open(slug){const d=DATA[slug];if(!d)return;active=d;locked=true;document.body.dataset.projectOpen='true';document.body.style.overflow='hidden';detail.classList.add('open');detail.setAttribute('aria-hidden','false');detail.scrollTop=0;
   document.getElementById('pd-index').textContent=d.num;document.getElementById('pd-title').textContent=d.title;document.getElementById('pd-subtitle').textContent=d.subtitle;document.getElementById('pd-media-kicker').textContent=d.kicker;document.getElementById('pd-media-title').textContent=d.media;document.getElementById('pd-media-copy').textContent=d.copy;document.getElementById('pd-lede').textContent=d.lede;document.getElementById('pd-meta-copy').textContent=d.meta;document.getElementById('pd-end-copy').textContent='Explore the live build or return to the portfolio.';document.getElementById('pd-live').href=document.querySelector('[data-project="'+slug+'"]')?.href||'#';
@@ -3331,45 +3346,101 @@ function initFlightMap(){
 // ── AI CHAT ──
 // ── AI CHAT — smart rule-based engine (no API needed, works everywhere) ──
 const AI_KB = [
-  { k:['build','can he','what does','create','make','develop','ship'],
-    a:"Mourya builds production ML systems — pipelines that processed 50,000+ records a week at Accenture, models deployed on AWS SageMaker, and full-stack AI products. His live project destination.com has voice AI, real-time flights, and visa guidance, all built solo." },
-  { k:['available','hire','open','looking','job','role','work','opportunity','join','recruit'],
-    a:"Yes — Mourya is actively looking for ML Engineer, Data Scientist, or AI Engineer roles. He's completing his MSc in Dubai in September 2026 and is open to Dubai-based, remote, or relocation opportunities. Email him at itsmouryadusi@gmail.com." },
-  { k:['project','built','destination','travel','smart exit','taxi','chatbot','student','portfolio'],
-    a:"His standout project is destination.com — a full AI travel platform with voice AI (ARIA), live flight tracking, and visa guidance, deployed on Vercel. He's also built a taxi lost-item detector, a student performance predictor at 92% accuracy, and an NLP university chatbot." },
-  { k:['stack','skill','tech','language','tool','python','tensorflow','aws','cloud','framework'],
-    a:"Mourya's core stack is Python, TensorFlow, Scikit-learn, and AWS (SageMaker, EC2, S3). He also works with SQL, Power BI, Flask, NLP, and D3.js. He holds AWS AI Practitioner, Google Cloud Architect, and AWS Solutions Architect certifications." },
-  { k:['experience','accenture','work history','background','career','company'],
-    a:"He spent 9 months at Accenture in Hyderabad as an ML Engineer — building production pipelines processing 50,000+ records weekly, deploying models on AWS SageMaker, and creating Power BI dashboards for stakeholders." },
-  { k:['education','degree','msc','master','university','middlesex','mdx','study','thesis'],
-    a:"Mourya is completing his MSc in Data Science & AI at Middlesex University Dubai, graduating September 2026. He also holds a BSc in Computer Science from Krishna University, India." },
-  { k:['certif','aws','google cloud','badge','credential'],
-    a:"He's certified in AWS AI Practitioner (MLOps), Implementing AI with Amazon ML, Google Professional Cloud Architect, and AWS Solutions Architect Associate — all earned in 2024–2025." },
-  { k:['travel','country','visit','trip','malaysia','singapore','uae','dubai','thailand','usa','nepal','vietnam','sri lanka'],
-    a:"Mourya has visited 10 countries — India (home), UAE (based there now), Malaysia, Singapore, Thailand, Vietnam, USA, Nepal, Sri Lanka, and counting. He travels mostly solo and finds it sharpens his problem-solving instincts." },
-  { k:['contact','email','reach','linkedin','github','social','message','touch'],
-    a:"The portfolio lists itsmouryadusi@gmail.com as the contact email. You can also find him on LinkedIn at linkedin.com/in/mouryadusi-dxb or on GitHub at github.com/mouryadusi." },
-  { k:['who','mourya','about','introduce','tell me','yourself','person','he'],
-    a:"Mourya Dusi is an ML Engineer and Data Scientist based in Dubai, UAE, currently completing his MSc in AI at Middlesex University. He's worked at Accenture, built live AI products, holds multiple cloud certifications, and travels to 10+ countries in his spare time." },
-  { k:['salary','pay','rate','compensation','expect','cost'],
-    a:"Mourya is targeting ML Engineer or Data Scientist roles — for current market rates and his expectations, just reach out directly at itsmouryadusi@gmail.com. He's open to a conversation." },
-  { k:['location','based','where','dubai','india','remote','relocat'],
-    a:"He's currently based in Dubai, UAE (studying at MDX Dubai) and is also spending time in India while working remotely on his thesis. He's open to Dubai, remote, or relocation roles globally." },
-  { k:['music','hobby','interest','outside','personal','fun','free time'],
-    a:"Outside of work, Mourya is into music — it's always on whether he's coding or commuting. He travels solo most of the time and is genuinely fascinated by where AI is headed and what it means for people, not just systems." },
-  { k:['fit','good','suitable','match','right','perfect','team','culture'],
-    a:"His portfolio shows ML engineering, data science, cloud deployment, Agile collaboration, and AI project work. He is open to AI & Data Science roles, remote positions, and relocation opportunities." },
+  // ── Privacy boundaries — checked first ──
+  { k:['home address','street address','phone number','mobile number','passport number','national id','social security','ssn','bank account','bank details','credit card','payslip','pay slip','net worth','religion','political party','politics','relationship status','marital status','married','girlfriend','boyfriend','dating','partner','health condition','medical','diagnosis','family member','siblings','parents\' names'],
+    a:"That's outside what this assistant shares — it only covers Mourya's professional background. For anything else, email him directly at itsmouryadusi@gmail.com." },
+  { k:['date of birth','birthday','how old','born on','his age','birth date'],
+    a:()=>`Mourya was born on August 12, 2002, which makes him ${window.__MOURYA_AGE ?? '24'} right now.` },
+
+  // ── Education ──
+  { k:['education','degree','msc','master','university','middlesex','mdx','study','thesis','bsc','bachelor','krishna university','graduat','gpa','academic'],
+    a:"He holds two degrees: an MSc in Data Science & Artificial Intelligence from Middlesex University, Dubai (Sep 2025 – Sep 2026), and a BSc in Computer Science from Krishna University, India (Oct 2021 – May 2024)." },
+
+  // ── Certifications ──
+  { k:['certif','aws certif','google cloud certif','badge','credential','license'],
+    a:"He holds 20 credentials across 4 issuers (mainly AWS, Google Cloud and Skillsoft), spanning AI & ML, Cloud, DevOps, Agile, Python and Security. Highlights: AWS Certified AI Practitioner, AWS AI Practitioner — Machine Learning Operations (MLOps), AWS Certified Solutions Architect Associate, and Google Professional Cloud Architect. Full list with verification links is in the Certifications section." },
+
+  // ── Work experience ──
+  { k:['experience','accenture','work history','background of his career','career','company','job history','associate software engineer','responsibilit','duties'],
+    a:"He worked at Accenture in Hyderabad, India as an Associate Software Engineer on ML Engineering & Data Science, for about 9 months. Responsibilities: building Python ML models with Scikit-learn and TensorFlow for enterprise predictive analytics, maintaining data-preprocessing pipelines handling 50,000+ records weekly, deploying models on AWS SageMaker, building Power BI dashboards for stakeholders, and collaborating in Agile teams." },
+  { k:['internship','intern'],
+    a:"There's no separate internship listed — his professional experience is the Accenture role (Associate Software Engineer), alongside independent projects." },
+  { k:['freelance','freelancing','contract work','consulting work'],
+    a:"No freelance or consulting work is listed currently — his professional experience is the Accenture role, plus independent project work." },
+  { k:['research paper','publication','publications','published paper','journal article','conference paper','research'],
+    a:"He doesn't have any published research papers listed. His technical work is documented as applied ML/AI projects rather than academic publications." },
+  { k:['open source','open-source','oss contribut'],
+    a:"No specific open-source contributions are listed. His project code lives on GitHub at github.com/mouryadusi if you'd like to look directly." },
+
+  // ── Skills ──
+  { k:['stack','skill','tech','programming language','tool','python','tensorflow','cloud','framework','what does he know'],
+    a:"Programming & ML: Python, TensorFlow, Scikit-learn, Pandas/NumPy, NLP, Deep Learning, Predictive Modeling, Java, JavaScript, SQL. Cloud & DevOps: AWS SageMaker, AWS Solutions, Google Cloud, CI/CD, Git/GitHub. Analytics & Visualization: Power BI, Tableau, Matplotlib, Seaborn, MySQL, Flask/REST APIs." },
+
+  // ── Projects — pulled live from the same data the Projects section renders ──
+  { k:['destination','travel platform','voice ai','aria','flight tracking','visa guidance'], a:()=>projectSummary('destination') },
+  { k:['smart exit','exit reminder','sensor fusion'], a:()=>projectSummary('smart-exit') },
+  { k:['taxi','lost item'], a:()=>projectSummary('taxi-lost') },
+  { k:['student performance','92%','risk prediction'], a:()=>projectSummary('student-performance') },
+  { k:['chatbot','university chatbot','nlp bot'], a:()=>projectSummary('university-chatbot') },
+  { k:['built','portfolio project','which projects','list of projects','ship','his projects','projects has he'],
+    a:"Five main projects: destination.com (AI travel platform — his featured live product), Smart Exit Reminder (mobile sensor-fusion AI), Taxi Lost Item Detection (privacy-first edge AI), Student Performance Prediction (92% accuracy ML pipeline), and an Intelligent University Chatbot (NLP, 1,000+ queries/day). Ask about any one by name for details." },
+
+  // ── Availability / hiring ──
+  { k:['available','hire','open to work','looking for','job','role','opportunity','join','recruit'],
+    a:"Yes — he's actively looking for ML Engineer, Data Scientist, or AI Engineer roles. He's completing his MSc in Dubai in September 2026 and is open to Dubai-based, remote, or relocation opportunities. Email him at itsmouryadusi@gmail.com." },
+  { k:['salary','pay','rate','compensation','expect','cost to hire'],
+    a:"For current expectations, the best move is to reach out directly at itsmouryadusi@gmail.com — he's open to a conversation once he knows more about the role." },
+  { k:['location','based','where is he','remote','relocat'],
+    a:"He's currently based in Dubai, UAE (studying at Middlesex University Dubai), spending some time in India as well. He's open to Dubai-based, remote, or relocation roles globally." },
+  { k:['fit','good','suitable','match','right','team','culture'],
+    a:"His background covers ML engineering, data science, cloud deployment, Agile collaboration, and shipped AI products — he's open to ML Engineer, Data Scientist, and AI Engineer roles, remote or Dubai-based." },
+
+  // ── Contact ──
+  { k:['contact','email','reach him','linkedin','github','social','message','get in touch'],
+    a:"itsmouryadusi@gmail.com is the best way to reach him. He's also on LinkedIn at linkedin.com/in/mouryadusi-dxb and GitHub at github.com/mouryadusi." },
+
+  // ── Light personal context already public elsewhere on the site ──
+  { k:['travel','countries visited','countries','visited','trip','malaysia','singapore','uae','thailand','nepal','vietnam','sri lanka'],
+    a:"He's visited 10 countries — India (home), UAE (based there now), Malaysia, Singapore, Thailand, Vietnam, USA, Nepal, and Sri Lanka. Mostly solo travel." },
+  { k:['music','hobby','interest','outside of work','free time'],
+    a:"Outside of work he's into music, travels mostly solo, and follows where AI is heading — both the systems and what it means for people." },
 ];
+
+function projectSummary(slug){
+  const p = (window.__PROJECT_DATA || {})[slug];
+  if(!p) return "I don't have that project's details loaded right now — the Projects section on the page has the full write-up.";
+  const facts = (p.facts||[]).map(f=>`${f[0]}: ${f[1]}`).join(' · ');
+  return `${p.title} — ${p.copy}${facts ? ` (${facts})` : ''}`;
+}
+
+// Lowest-priority fallback: only answers if nothing more specific in AI_KB
+// matched, so generic "who/about/tell me" phrasing never shadows a
+// specific question about a certification, project, etc.
+const AI_IDENTITY = { k:['who is','full name','who','mourya','about','introduce','tell me','yourself','person','he'],
+  a:"Mourya Dusi is a Machine Learning Engineer and Data Science professional based in Dubai, UAE. He's currently completing an MSc in Data Science & Artificial Intelligence at Middlesex University Dubai (graduating September 2026), previously spent 9 months at Accenture in Hyderabad as an Associate Software Engineer on ML Engineering & Data Science work, holds 20 credentials across AWS, Google Cloud and more, and has shipped several live AI products including destination.com." };
 
 function getAIReply(q){
   const ql = q.toLowerCase();
+  const resolve = a => typeof a === 'function' ? a() : a;
+  let best = null, bestLen = 0;
   for(const entry of AI_KB){
-    if(entry.k.some(kw => ql.includes(kw))) return entry.a;
+    for(const kw of entry.k){
+      const isPhrase = kw.includes(' ');
+      // Leading word-boundary only (not trailing), so 'internship' still
+      // matches 'internships', 'certif' still matches 'certifications', etc.,
+      // while a short word like 'he' still can't match inside 'the'.
+      const hit = isPhrase
+        ? ql.includes(kw)
+        : new RegExp('\\b' + kw.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).test(ql);
+      if(hit && kw.length > bestLen){ best = entry; bestLen = kw.length; }
+    }
   }
+  if(best) return resolve(best.a);
+  if(AI_IDENTITY.k.some(kw => ql.includes(kw))) return resolve(AI_IDENTITY.a);
   // Fuzzy fallback — check any word overlap
   const words = ql.split(/\s+/).filter(w=>w.length>3);
   for(const entry of AI_KB){
-    if(words.some(w => entry.k.some(kw=>kw.includes(w)||w.includes(kw)))) return entry.a;
+    if(words.some(w => entry.k.some(kw=>kw.includes(w)||w.includes(kw)))) return resolve(entry.a);
   }
   return "Great question — I don't have a specific answer for that, but Mourya would love to chat. Drop him an email at itsmouryadusi@gmail.com and he'll respond quickly.";
 }
@@ -3699,7 +3770,11 @@ function addMsg(text,type){
       px = (e.clientX-rect.left)*devicePixelRatio; py=(e.clientY-rect.top)*devicePixelRatio;
     });
     canvas.addEventListener('mouseleave', ()=>{ px=-9999; py=-9999; });
+    let nodeGraphRunning = false;
+    const nodeGraphIO = new IntersectionObserver(es=>{ nodeGraphRunning = es[0].isIntersecting; if(nodeGraphRunning) tick(); }, {threshold:0});
+    nodeGraphIO.observe(canvas);
     function tick(){
+      if(!nodeGraphRunning) return;
       ctx.clearRect(0,0,w,h);
       nodes.forEach(n=>{
         n.x+=n.vx; n.y+=n.vy;
@@ -3725,7 +3800,7 @@ function addMsg(text,type){
       });
       requestAnimationFrame(tick);
     }
-    init(); tick();
+    init();
     let rt; addEventListener('resize', ()=>{ clearTimeout(rt); rt=setTimeout(init,200); });
   })();
 })();
