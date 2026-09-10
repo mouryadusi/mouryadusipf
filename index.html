@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mourya   Dusi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..500;1,6..96,400..500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..500;1,6..96,400..500&family=Anton&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
@@ -352,6 +352,10 @@
   }
   .hero-intro .heart { color: #e06060; }
   .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; opacity: 0; animation: slideUp 0.8s 3.1s ease forwards; }
+  .hero-proof-points { display: flex; gap: 10px; flex-wrap: wrap; margin: 22px 0 26px; opacity: 0; animation: slideUp 0.8s 2.9s ease forwards; }
+  .hero-proof-points span { font-size: 12px; letter-spacing: 0.03em; color: var(--text-muted); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; white-space: nowrap; }
+  .sw-card:hover { transform: translateY(-4px); border-color: var(--exhibit-red,#E8412B); }
+  @media(max-width:860px){ .selected-work-grid{ grid-template-columns:1fr !important; } }
   .btn {
     padding: 13px 28px; border-radius: 100px; font-family: 'Inter', sans-serif;
     font-size: 14px; font-weight: 400; text-decoration: none; cursor: none;
@@ -965,21 +969,17 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
   position:absolute;
   left:50%;
   bottom:34px;
-  transform:translateX(-50%) rotate(-4deg);
-  font-family:"Segoe Print","Bradley Hand","Comic Sans MS",cursive;
-  font-size:clamp(2.6rem,5vw,5rem);
-  font-weight:600;
-  font-style:italic;
-  letter-spacing:-.07em;
-  line-height:1;
-  white-space:nowrap;
-  color:var(--text);
-  opacity:.9;
+  width:clamp(220px,32vw,420px);
+  height:auto;
+  transform:translateX(-50%);
+  opacity:.96;
   pointer-events:none;
   user-select:none;
   z-index:2;
+  filter: url(#mourya-brush-edge);
 }
-@media(max-width:600px){.main-mourya-signature{font-size:clamp(2.4rem,13vw,3.6rem);bottom:28px}footer{padding-bottom:90px!important}}
+.main-mourya-signature path{ fill:var(--text); }
+@media(max-width:600px){.main-mourya-signature{width:clamp(180px,58vw,280px);bottom:28px}footer{padding-bottom:90px!important}}
 </style>
 
 
@@ -1077,8 +1077,9 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
   <a id="logo" href="#">Mourya</a>
   <nav>
     <a href="#about">About</a>
-    <a href="#projects">Work</a>
+    <a href="#selected-work">Work</a>
     <a href="#experience">Experience</a>
+    <a href="#skills-restructured">Skills</a>
     <a href="#personal">Personal</a>
     <a href="#fun">For Fun</a>
     <a href="#guestbook">Guestbook</a>
@@ -1092,8 +1093,10 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 <div id="mobile-nav">
   <button id="mobile-close">×</button>
   <a href="#about" class="mn-link">About</a>
-  <a href="#projects" class="mn-link">Work</a>
+  <a href="#selected-work" class="mn-link">Work</a>
   <a href="#experience" class="mn-link">Experience</a>
+  <a href="#what-i-do" class="mn-link">What I Do</a>
+  <a href="#skills-restructured" class="mn-link">Skills</a>
   <a href="#personal" class="mn-link">Personal</a>
   <a href="#fun" class="mn-link">For Fun</a>
   <a href="#guestbook" class="mn-link">Guestbook</a>
@@ -1131,7 +1134,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
     <span class="sr-dot" data-scene="contact"></span>
   </div>
   <div class="hero-left hero-parallax" id="hero-copy">
-    <div class="hero-identity">AI &amp; Data Science</div>
+    <div class="hero-identity">Machine Learning Engineer · Data Science · AI</div>
     <div class="hero-greet">Hey — I'm</div>
     <h1 class="hero-title">
       <span class="hero-name-wrap">
@@ -1139,11 +1142,17 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
       </span>
     </h1>
     <p class="hero-intro" id="hero-intro">
-      <span class="explode-text">Here, you can check out what I'm working on. I try my best to create things with <span class="heart">❤</span> — or maybe something very much better but very simple. AI & Data Science, built with intention.</span>
+      <span class="explode-text">I build machine learning systems and AI products end to end — from a 92%-accuracy prediction pipeline to a live NLP chatbot handling 1,000+ queries a day, backed by 9 months of production ML work at Accenture and an MSc in Data Science &amp; AI in progress.</span>
     </p>
+    <div class="hero-proof-points">
+      <span>Accenture · ML Engineering &amp; Data Science</span>
+      <span>MSc Data Science &amp; AI</span>
+      <span>5 curated credentials</span>
+      <span>Live AI products</span>
+    </div>
     <div class="hero-cta">
-      <a href="#projects" class="btn btn-primary">See my work</a>
-      <a href="#contact" class="btn btn-ghost">Reach Out</a>
+      <a href="#projects" class="btn btn-primary">Explore My Work</a>
+      <a href="#experience" class="btn btn-ghost">View Experience</a>
     </div>
   </div>
   <div class="hero-photo-wrap hero-parallax" id="hero-portrait-wrap">
@@ -1159,63 +1168,56 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 </section>
 
 
-<!-- About -->
-<section id="about" style="position:relative;">
-  <div class="chapter-curve" data-curve-idx="0" style="--curve-color:var(--ch-about);"><svg viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path class="curve-path" d="M0,70 C300,70 300,70 600,70 C900,70 900,70 1200,70 L1200,140 L0,140 Z"></path></svg></div>
+<!-- Selected Work -->
+<section id="selected-work" style="border-top:1px solid var(--border);position:relative;">
+  <div style="max-width:1200px;margin:0 auto;padding:100px clamp(24px,5vw,60px);">
+    <div class="section-label">01 — Selected Work</div>
+    <h2 class="section-title reveal reveal-fade">Three things worth<br><em>your two minutes</em></h2>
+    <p class="reveal reveal-fade" style="font-size:15px;color:var(--text-muted);font-weight:300;margin-top:14px;max-width:520px;line-height:1.7;">The strongest evidence of how he works — full case studies are below.</p>
 
-  <div class="node-graphic" id="node-graphic" aria-hidden="true"><canvas id="node-canvas"></canvas></div>
+    <div class="selected-work-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:56px;">
 
-  <div class="section-label">01 — About</div>
-  <div class="about-grid">
-    <div class="about-text reveal">
-      <h2 class="section-title">Building intelligent<br><em>systems that matter</em></h2>
-      <p style="margin-top:40px;">I'm a Machine Learning Engineer and Data Science professional currently pursuing my MSc in Data Science & AI at Middlesex University, Dubai. I bring together technical depth in ML, cloud, and analytics with a genuine curiosity for how technology shapes the world around us.</p>
-      <p>Previously at Accenture, I built production-grade ML pipelines, deployed models on AWS SageMaker, and turned messy data into clear decisions. I believe great AI isn't just smart — it's simple, explainable, and built with care.</p>
-      <p>When I'm not training models, I'm probably somewhere new on the planet, listening to music, or thinking about the next thing worth building.</p>
-    </div>
-    <div class="about-sidebar reveal">
-      <h3>Quick Facts</h3>
-      <div class="sidebar-item"><span class="key">Status</span><span class="val"><span class="status-dot"></span>Available</span></div>
-      <div class="sidebar-item"><span class="key">Location</span><span class="val">Dubai, UAE</span></div>
-      <div class="sidebar-item"><span class="key">Education</span><span class="val">MSc AI · MDX Dubai</span></div>
-      <div class="sidebar-item"><span class="key">Focus</span><span class="val">ML · Data Science</span></div>
-      <div class="sidebar-item"><span class="key">Languages</span><span class="val">EN · HI · TE</span></div>
-      <div class="sidebar-item"><span class="key">Age</span><span class="val" id="qf-age">—</span></div>
-      <div class="sidebar-item"><span class="key">Countries</span><span class="val">10 visited</span></div>
-    </div>
-  </div>
-  <script>
-    window.__MOURYA_DOB = new Date(2002, 7, 12); // 12 Aug 2002 — single source of truth for age, reused by the AI assistant
-    (function(){
-      const dob = window.__MOURYA_DOB, now = new Date();
-      let age = now.getFullYear() - dob.getFullYear();
-      const beforeBirthday = (now.getMonth() < dob.getMonth()) || (now.getMonth() === dob.getMonth() && now.getDate() < dob.getDate());
-      if(beforeBirthday) age--;
-      window.__MOURYA_AGE = age;
-      const el = document.getElementById('qf-age');
-      if(el) el.textContent = age;
-    })();
-  </script>
-  <div style="margin-top:100px;" class="reveal rv-mask">
-    <div class="section-label">Skills</div>
-    <div class="skill-category">Programming & ML</div>
-    <div class="skills-grid">
-      <div class="skill-tag">Python</div><div class="skill-tag">TensorFlow</div><div class="skill-tag">Scikit-learn</div>
-      <div class="skill-tag">Pandas · NumPy</div><div class="skill-tag">NLP</div><div class="skill-tag">Deep Learning</div>
-      <div class="skill-tag">Predictive Modeling</div><div class="skill-tag">Java</div><div class="skill-tag">JavaScript</div><div class="skill-tag">SQL</div>
-    </div>
-    <div class="skill-category">Cloud & DevOps</div>
-    <div class="skills-grid">
-      <div class="skill-tag">AWS SageMaker</div><div class="skill-tag">AWS Solutions</div>
-      <div class="skill-tag">Google Cloud</div><div class="skill-tag">CI/CD Pipelines</div><div class="skill-tag">Git · GitHub</div>
-    </div>
-    <div class="skill-category">Analytics & Visualization</div>
-    <div class="skills-grid">
-      <div class="skill-tag">Power BI</div><div class="skill-tag">Tableau</div><div class="skill-tag">Matplotlib</div>
-      <div class="skill-tag">Seaborn</div><div class="skill-tag">MySQL</div><div class="skill-tag">Flask · REST APIs</div>
+      <a href="#case-performance-ml" class="sw-card" style="display:block;border:1px solid var(--border);border-radius:16px;padding:28px;text-decoration:none;color:inherit;transition:transform .3s ease,border-color .3s ease;">
+        <div style="font-size:12px;letter-spacing:.08em;color:var(--text-subtle);margin-bottom:14px;">01 · MACHINE LEARNING</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:24px;font-weight:500;margin-bottom:16px;">Student Performance Prediction</h3>
+        <div style="font-size:13px;color:var(--text-muted);line-height:1.7;margin-bottom:14px;">
+          <strong style="color:var(--text);">Problem —</strong> Identify at-risk students early enough to act.<br>
+          <strong style="color:var(--text);">Solution —</strong> ML pipeline comparing 5+ models, selecting the strongest.
+        </div>
+        <div style="font-size:11px;letter-spacing:.05em;color:var(--text-subtle);margin-bottom:14px;">ML · Python · Scikit-learn · Pandas</div>
+        <div style="font-size:14px;font-weight:600;color:var(--exhibit-red,#E8412B);margin-bottom:14px;">92% accuracy</div>
+        <span style="font-size:13px;font-weight:500;">View Case Study →</span>
+      </a>
+
+      <a href="#case-university-chatbot" class="sw-card" style="display:block;border:1px solid var(--border);border-radius:16px;padding:28px;text-decoration:none;color:inherit;transition:transform .3s ease,border-color .3s ease;">
+        <div style="font-size:12px;letter-spacing:.08em;color:var(--text-subtle);margin-bottom:14px;">02 · NLP</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:24px;font-weight:500;margin-bottom:16px;">Intelligent University Chatbot</h3>
+        <div style="font-size:13px;color:var(--text-muted);line-height:1.7;margin-bottom:14px;">
+          <strong style="color:var(--text);">Problem —</strong> Admin staff overloaded with repetitive student queries.<br>
+          <strong style="color:var(--text);">Solution —</strong> Production NLP assistant handling queries 24/7.
+        </div>
+        <div style="font-size:11px;letter-spacing:.05em;color:var(--text-subtle);margin-bottom:14px;">NLP · TensorFlow · Flask · MongoDB</div>
+        <div style="font-size:14px;font-weight:600;color:var(--exhibit-red,#E8412B);margin-bottom:14px;">1,000+ queries/day · −35% workload</div>
+        <span style="font-size:13px;font-weight:500;">View Case Study →</span>
+      </a>
+
+      <a href="#case-destination" class="sw-card" style="display:block;border:1px solid var(--border);border-radius:16px;padding:28px;text-decoration:none;color:inherit;transition:transform .3s ease,border-color .3s ease;">
+        <div style="font-size:12px;letter-spacing:.08em;color:var(--text-subtle);margin-bottom:14px;">03 · APPLIED AI PRODUCT</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:24px;font-weight:500;margin-bottom:16px;">destination.com</h3>
+        <div style="font-size:13px;color:var(--text-muted);line-height:1.7;margin-bottom:14px;">
+          <strong style="color:var(--text);">Problem —</strong> Trip planning is fragmented across too many tools.<br>
+          <strong style="color:var(--text);">Solution —</strong> One AI travel platform: voice assistant, live flights, visa guidance.
+        </div>
+        <div style="font-size:11px;letter-spacing:.05em;color:var(--text-subtle);margin-bottom:14px;">Next.js · AI/ML · Real-time · Vercel</div>
+        <div style="font-size:14px;font-weight:600;color:var(--exhibit-red,#E8412B);margin-bottom:14px;">Live in production</div>
+        <span style="font-size:13px;font-weight:500;">View Case Study →</span>
+      </a>
+
     </div>
   </div>
 </section>
+
+
 
 <!-- Projects -->
 <section id="projects" style="border-top:1px solid var(--border);position:relative;background:var(--bg);">
@@ -1227,39 +1229,69 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 
   <div class="exhibit-projects">
 
-    <!-- 01 — Again -->
-    <article class="exhibit-project v-a">
+    <!-- 01 — Performance Prediction (strongest DS/ML depth: model comparison, quantified accuracy) -->
+    <article class="exhibit-project v-a" id="case-performance-ml">
       <div class="exhibit-row-top reveal">
         <span class="exhibit-num">01</span>
-        <span class="exhibit-meta-line">2025 · WEB · PRODUCTIVITY</span>
+        <span class="exhibit-meta-line">2023 · ML · DATA SCIENCE</span>
       </div>
-      <h3 class="exhibit-title reveal rv-mask">Again</h3>
+      <h3 class="exhibit-title reveal rv-mask">Performance ML</h3>
       <div class="exhibit-visual reveal rv-scale">
         <div class="exhibit-red-field">
           <div class="exhibit-visual-inner">
             <div class="app-showcase">
-              <div class="showcase-header">Again · Tasks</div>
-              <div class="showcase-content">
-                <div class="task-item">✓ Design immersive UI</div>
-                <div class="task-item">Build scroll animations</div>
-                <div class="task-item">Deploy to production</div>
+              <div class="showcase-header">Accuracy · 92%</div>
+              <div class="chart-showcase">
+                <div class="chart-bar" style="height:40%"></div>
+                <div class="chart-bar" style="height:60%"></div>
+                <div class="chart-bar" style="height:92%"></div>
+                <div class="chart-bar" style="height:50%"></div>
               </div>
             </div>
           </div>
         </div>
-        <span class="exhibit-caption">Task management, reimagined</span>
+        <span class="exhibit-caption">1,000+ records, every week</span>
       </div>
       <div class="exhibit-foot reveal">
-        <p class="exhibit-desc">Beautifully designed task management with real-time sync, smart organization, and seamless collaboration.</p>
-        <div class="exhibit-tags"><span>React</span><span>Next.js</span><span>Tailwind</span><span>Real-time</span></div>
-        <a href="https://getagain.netlify.app" target="_blank" rel="noopener" class="exhibit-link">View Project <span class="exhibit-arrow">→</span></a>
+        <p class="exhibit-desc">End-to-end ML pipeline identifying at-risk students with 92% accuracy, comparing 5+ models before selecting the final approach. Processes 1,000+ records weekly.</p>
+        <div class="exhibit-tags"><span>Python</span><span>Scikit-learn</span><span>Pandas</span><span>ML Pipeline</span></div>
+        <a href="#" class="exhibit-link">View Project <span class="exhibit-arrow">→</span></a>
       </div>
     </article>
 
-    <!-- 02 — destination -->
-    <article class="exhibit-project v-b">
+    <!-- 02 — University Chatbot (NLP, production, quantified impact) -->
+    <article class="exhibit-project v-c" id="case-university-chatbot">
       <div class="exhibit-row-top reveal">
         <span class="exhibit-num">02</span>
+        <span class="exhibit-meta-line">2023 · NLP · PRODUCTION</span>
+      </div>
+      <div class="exhibit-visual reveal rv-scale">
+        <div class="exhibit-red-field">
+          <div class="exhibit-visual-inner">
+            <div class="app-showcase">
+              <div class="showcase-header">24/7 Chatbot · Live</div>
+              <div class="chat-showcase">
+                <div class="chat-message bot">How can I help today?</div>
+                <div class="chat-message user">Question about course</div>
+                <div class="chat-message bot">Here's the information...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="exhibit-caption">99.9% uptime, 1,000+ queries a day</span>
+      </div>
+      <h3 class="exhibit-title exhibit-title-overlap reveal rv-mask">University<br>Chatbot</h3>
+      <div class="exhibit-foot reveal">
+        <p class="exhibit-desc">Intent-classification NLP chatbot handling 1,000+ queries daily, reducing support workload by 35%. 99.9% uptime.</p>
+        <div class="exhibit-tags"><span>TensorFlow</span><span>NLP</span><span>Flask</span><span>Production</span></div>
+        <a href="#" class="exhibit-link">View Project <span class="exhibit-arrow">→</span></a>
+      </div>
+    </article>
+
+    <!-- 03 — destination (flagship applied-AI product, full-stack breadth) -->
+    <article class="exhibit-project v-b" id="case-destination">
+      <div class="exhibit-row-top reveal">
+        <span class="exhibit-num">03</span>
         <span class="exhibit-meta-line">2025 · AI · TRAVEL</span>
       </div>
       <h3 class="exhibit-title reveal rv-mask">destination</h3>
@@ -1284,10 +1316,10 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
       </div>
     </article>
 
-    <!-- 03 — Smart Exit -->
+    <!-- 04 — Smart Exit (sensor-fusion IoT, meaningful engineering) -->
     <article class="exhibit-project v-c">
       <div class="exhibit-row-top reveal">
-        <span class="exhibit-num">03</span>
+        <span class="exhibit-num">04</span>
         <span class="exhibit-meta-line">2024 · MOBILE · IOT</span>
       </div>
       <div class="exhibit-visual reveal rv-scale">
@@ -1310,13 +1342,13 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
       </div>
     </article>
 
-    <!-- 04 — Privacy Sensors -->
+    <!-- 05 — Lost-Item Detection (edge AI, privacy-first — meaningful, narrower scope) -->
     <article class="exhibit-project v-a">
       <div class="exhibit-row-top reveal">
-        <span class="exhibit-num">04</span>
+        <span class="exhibit-num">05</span>
         <span class="exhibit-meta-line">2024 · IOT · EDGE</span>
       </div>
-      <h3 class="exhibit-title reveal rv-mask">Privacy Sensors</h3>
+      <h3 class="exhibit-title reveal rv-mask">Lost-Item<br>Detection</h3>
       <div class="exhibit-visual reveal rv-scale">
         <div class="exhibit-red-field">
           <div class="exhibit-visual-inner">
@@ -1333,68 +1365,37 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
         <span class="exhibit-caption">Everything processed on-device</span>
       </div>
       <div class="exhibit-foot reveal">
-        <p class="exhibit-desc">Privacy-first sensor system detecting forgotten belongings using edge computing. All processing happens on-device.</p>
+        <p class="exhibit-desc">Camera-free sensor system detecting forgotten belongings in taxis using pressure, infrared and ultrasonic sensing, kept entirely on-device.</p>
         <div class="exhibit-tags"><span>IoT</span><span>Edge Computing</span><span>Privacy</span><span>Sensors</span></div>
         <a href="https://mouryadusi.github.io/taxi-lost-item-detection.html" target="_blank" rel="noopener" class="exhibit-link">View Project <span class="exhibit-arrow">→</span></a>
       </div>
     </article>
 
-    <!-- 05 — Performance ML -->
+    <!-- 06 — Again (experimental / no AI or DS content — deprioritized to last) -->
     <article class="exhibit-project v-b">
       <div class="exhibit-row-top reveal">
-        <span class="exhibit-num">05</span>
-        <span class="exhibit-meta-line">2023 · ML · DATA SCIENCE</span>
-      </div>
-      <h3 class="exhibit-title reveal rv-mask">Performance ML</h3>
-      <div class="exhibit-visual reveal rv-scale">
-        <div class="exhibit-red-field">
-          <div class="exhibit-visual-inner">
-            <div class="app-showcase">
-              <div class="showcase-header">Accuracy · 92%</div>
-              <div class="chart-showcase">
-                <div class="chart-bar" style="height:40%"></div>
-                <div class="chart-bar" style="height:60%"></div>
-                <div class="chart-bar" style="height:92%"></div>
-                <div class="chart-bar" style="height:50%"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <span class="exhibit-caption">1,000+ records, every week</span>
-      </div>
-      <div class="exhibit-foot reveal">
-        <p class="exhibit-desc">Production machine learning pipeline identifying at-risk students with 92% accuracy. Processes 1000+ records weekly.</p>
-        <div class="exhibit-tags"><span>Python</span><span>Scikit-learn</span><span>Pandas</span><span>ML Pipeline</span></div>
-        <a href="#" class="exhibit-link">View Project <span class="exhibit-arrow">→</span></a>
-      </div>
-    </article>
-
-    <!-- 06 — University Chatbot -->
-    <article class="exhibit-project v-c">
-      <div class="exhibit-row-top reveal">
         <span class="exhibit-num">06</span>
-        <span class="exhibit-meta-line">2023 · NLP · PRODUCTION</span>
+        <span class="exhibit-meta-line">2025 · WEB · EXPERIMENT</span>
       </div>
+      <h3 class="exhibit-title reveal rv-mask">Again</h3>
       <div class="exhibit-visual reveal rv-scale">
         <div class="exhibit-red-field">
           <div class="exhibit-visual-inner">
             <div class="app-showcase">
-              <div class="showcase-header">24/7 Chatbot · Live</div>
-              <div class="chat-showcase">
-                <div class="chat-message bot">How can I help today?</div>
-                <div class="chat-message user">Question about course</div>
-                <div class="chat-message bot">Here's the information...</div>
+              <div class="showcase-header">Again?</div>
+              <div class="showcase-content">
+                <div class="task-item">Have I done this before?</div>
+                <div class="task-item">A pause before you repeat it</div>
               </div>
             </div>
           </div>
         </div>
-        <span class="exhibit-caption">99.9% uptime, 1,000+ queries a day</span>
+        <span class="exhibit-caption">A small nudge, not a notification</span>
       </div>
-      <h3 class="exhibit-title exhibit-title-overlap reveal rv-mask">University<br>Chatbot</h3>
       <div class="exhibit-foot reveal">
-        <p class="exhibit-desc">Production NLP chatbot handling 1000+ queries daily, reducing support workload by 35%. 99.9% uptime.</p>
-        <div class="exhibit-tags"><span>TensorFlow</span><span>NLP</span><span>Flask</span><span>Production</span></div>
-        <a href="#" class="exhibit-link">View Project <span class="exhibit-arrow">→</span></a>
+        <p class="exhibit-desc">A small web experiment — a nudge that makes you stop and check whether you've already done something before doing it all over again.</p>
+        <div class="exhibit-tags"><span>React</span><span>Next.js</span><span>Tailwind</span></div>
+        <a href="https://getagain.netlify.app" target="_blank" rel="noopener" class="exhibit-link">View Project <span class="exhibit-arrow">→</span></a>
       </div>
     </article>
 
@@ -1565,10 +1566,10 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
   <div class="chapter-curve" data-curve-idx="2" style="--curve-color:var(--ch-experience);"><svg viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path class="curve-path" d="M0,70 C300,70 300,70 600,70 C900,70 900,70 1200,70 L1200,140 L0,140 Z"></path></svg></div>
 
   <div class="section-label">03 — Experience</div>
-  <h2 class="section-title reveal">My <em>Work</em></h2>
+  <h2 class="section-title reveal">Industry <em>Experience</em></h2>
   <div class="exp-list reveal">
     <div class="exp-item">
-      <div class="exp-meta"><strong>Accenture</strong>Associate Software Engineer<br><br>Hyderabad, India</div>
+      <div class="exp-meta"><strong style="font-size:1.3em;">Accenture</strong>Associate Software Engineer<br><br>Hyderabad, India</div>
       <div class="exp-content">
         <h3>ML Engineering & Data Science</h3>
         <ul>
@@ -1583,9 +1584,57 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
   </div>
 </section>
 
+<!-- What I Do -->
+<section id="what-i-do" style="border-top:1px solid var(--border);position:relative;">
+  <div style="max-width:1100px;margin:0 auto;padding:100px clamp(24px,5vw,60px);">
+    <div class="section-label">04 — What I Do</div>
+    <h2 class="section-title reveal">Where I can <em>help</em></h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:56px;">
+      <div>
+        <div style="font-size:28px;margin-bottom:14px;">🤖</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:500;margin-bottom:10px;">Intelligent Applications</h3>
+        <p style="font-size:14px;color:var(--text-muted);line-height:1.7;">NLP systems and AI-assisted, user-facing products — like the chatbot and voice AI he's already shipped.</p>
+      </div>
+      <div>
+        <div style="font-size:28px;margin-bottom:14px;">📊</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:500;margin-bottom:10px;">Machine Learning Systems</h3>
+        <p style="font-size:14px;color:var(--text-muted);line-height:1.7;">Model comparison, evaluation, and production ML pipelines — from raw data to a deployed, measured result.</p>
+      </div>
+      <div>
+        <div style="font-size:28px;margin-bottom:14px;">☁️</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:500;margin-bottom:10px;">Data &amp; Cloud Solutions</h3>
+        <p style="font-size:14px;color:var(--text-muted);line-height:1.7;">Data pipelines, APIs, and cloud deployment (AWS SageMaker, Google Cloud) for AI systems that need to actually run in production.</p>
+      </div>
+    </div>
+  </div>
+</section>
+  <style>@media(max-width:760px){ #what-i-do > div > div[style*="grid-template-columns:repeat(3"], #skills-restructured .skills-cats { grid-template-columns:1fr !important; } }</style>
+
+<!-- Skills -->
+<section id="skills-restructured" style="border-top:1px solid var(--border);position:relative;">
+  <div style="max-width:1100px;margin:0 auto;padding:100px clamp(24px,5vw,60px);">
+    <div class="section-label">05 — Skills</div>
+    <h2 class="section-title reveal">Capability, <em>by category</em></h2>
+    <div class="skills-cats" style="display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:56px;">
+      <div>
+        <h3 style="font-size:13px;letter-spacing:.08em;color:var(--exhibit-red,#E8412B);margin-bottom:16px;">AI &amp; MACHINE LEARNING</h3>
+        <p style="font-size:15px;line-height:2;color:var(--text);">Python<br>TensorFlow<br>Scikit-learn<br>NLP<br>Deep Learning</p>
+      </div>
+      <div>
+        <h3 style="font-size:13px;letter-spacing:.08em;color:var(--exhibit-red,#E8412B);margin-bottom:16px;">DATA</h3>
+        <p style="font-size:15px;line-height:2;color:var(--text);">SQL<br>Pandas / NumPy<br>Power BI · Tableau<br>Matplotlib · Seaborn</p>
+      </div>
+      <div>
+        <h3 style="font-size:13px;letter-spacing:.08em;color:var(--exhibit-red,#E8412B);margin-bottom:16px;">CLOUD &amp; ENGINEERING</h3>
+        <p style="font-size:15px;line-height:2;color:var(--text);">AWS SageMaker<br>Google Cloud<br>Flask / REST APIs<br>Git · CI/CD</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Education -->
 <section id="education" style="border-top:1px solid var(--border);">
-  <div class="section-label">04 — Education</div>
+  <div class="section-label">06 — Education</div>
   <h2 class="section-title reveal">Academic<br><em>background</em></h2>
   <div class="edu-grid reveal">
     <div class="edu-card"><div class="degree">MSc Data Science & Artificial Intelligence</div><div class="school">Middlesex University, Dubai, UAE</div><div class="period">Sep 2025 — Sep 2026</div></div>
@@ -1597,22 +1646,16 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
     <!-- Stats row -->
     <div class="cert-vault-header">
       <div class="cert-stats">
-        <div class="cert-stat"><div class="cert-stat-n">20</div><div class="cert-stat-l">Credentials</div></div>
-        <div class="cert-stat"><div class="cert-stat-n">4</div><div class="cert-stat-l">Issuers</div></div>
-        <div class="cert-stat"><div class="cert-stat-n">6</div><div class="cert-stat-l">Domains</div></div>
+        <div class="cert-stat"><div class="cert-stat-n">5</div><div class="cert-stat-l">Credentials</div></div>
+        <div class="cert-stat"><div class="cert-stat-n">2</div><div class="cert-stat-l">Domains</div></div>
       </div>
     </div>
 
     <!-- Filter tabs -->
     <div class="cert-filters">
       <button class="cert-filter active" data-filter="all">All</button>
-      <button class="cert-filter" data-filter="ai">AI & ML</button>
+      <button class="cert-filter" data-filter="ai">AI &amp; ML</button>
       <button class="cert-filter" data-filter="cloud">Cloud</button>
-      <button class="cert-filter" data-filter="devops">DevOps</button>
-      <button class="cert-filter" data-filter="agile">Agile</button>
-      <button class="cert-filter" data-filter="python">Python</button>
-      <button class="cert-filter" data-filter="security">Security</button>
-      <button class="cert-filter" data-filter="other">Other</button>
     </div>
 
     <!-- Cards -->
@@ -1648,21 +1691,6 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
         <a href="https://skillsoft.digitalbadges.skillsoft.com/4e1556f7-43de-45c9-a9bf-a216adfb8e8c" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
       </div>
 
-      <div class="cert-card" data-cat="security">
-        <div class="cert-card-inner">
-          <div class="cert-issuer-bar">
-            <div class="cert-issuer-icon">S</div>
-            <div class="cert-issuer-name">Skillsoft</div>
-          </div>
-          <div class="cert-card-title">CBROPS: The CIA Triad & Security Approaches</div>
-          <div class="cert-card-footer">
-            <span class="cert-date">May 2025</span>
-            <span class="cert-badge">Security</span>
-          </div>
-        </div>
-        <a href="https://skillsoft.digitalbadges.skillsoft.com/73d48c78-ccca-4d1d-b5dd-d670850c73e5" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
-      </div>
-
       <div class="cert-card" data-cat="cloud">
         <div class="cert-card-inner">
           <div class="cert-issuer-bar">
@@ -1693,217 +1721,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
         <a href="https://skillsoft.digitalbadges.skillsoft.com/d0db326d-4914-463c-903e-622fe2a27bb7" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
       </div>
 
-      <div class="cert-card" data-cat="cloud">
-        <div class="cert-card-inner">
-          <div class="cert-issuer-bar">
-            <div class="cert-issuer-icon">S</div>
-            <div class="cert-issuer-name">Skillsoft</div>
-          </div>
-          <div class="cert-card-title">Google Professional Cloud Architect: Google Cloud Fundamentals</div>
-          <div class="cert-card-footer">
-            <span class="cert-date">Dec 2024</span>
-            <span class="cert-badge">Cloud</span>
-          </div>
-        </div>
-        <a href="https://skillsoft.digitalbadges.skillsoft.com/dfd0c5a0-8f5c-4a5d-9643-9ac556078f49" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
-      </div>
-
-      <div class="cert-card" data-cat="cloud">
-        <div class="cert-card-inner">
-          <div class="cert-issuer-bar">
-            <div class="cert-issuer-icon">S</div>
-            <div class="cert-issuer-name">Skillsoft</div>
-          </div>
-          <div class="cert-card-title">MS-102: Implementing a Microsoft 365 Tenant</div>
-          <div class="cert-card-footer">
-            <span class="cert-date">Dec 2024</span>
-            <span class="cert-badge">Cloud</span>
-          </div>
-        </div>
-        <a href="https://skillsoft.digitalbadges.skillsoft.com/82ea4d99-275c-41d2-b07f-134d5d6a11bb" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
-      </div>
-
-      <div class="cert-card" data-cat="devops">
-        <div class="cert-card-inner">
-          <div class="cert-issuer-bar">
-            <div class="cert-issuer-icon">S</div>
-            <div class="cert-issuer-name">Skillsoft</div>
-          </div>
-          <div class="cert-card-title">IT Infrastructure Automation: Getting Started</div>
-          <div class="cert-card-footer">
-            <span class="cert-date">Nov 2024</span>
-            <span class="cert-badge">DevOps</span>
-          </div>
-        </div>
-        <a href="https://skillsoft.digitalbadges.skillsoft.com/a4ca4636-247a-4d6f-9b7c-d618819b3779" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
-      </div>
-
-      <div class="cert-card" data-cat="devops">
-        <div class="cert-card-inner">
-          <div class="cert-issuer-bar">
-            <div class="cert-issuer-icon">S</div>
-            <div class="cert-issuer-name">Skillsoft</div>
-          </div>
-          <div class="cert-card-title">The Language of DevOps: DevOps Tools & Processes</div>
-          <div class="cert-card-footer">
-            <span class="cert-date">Nov 2024</span>
-            <span class="cert-badge">DevOps</span>
-          </div>
-        </div>
-        <a href="https://skillsoft.digitalbadges.skillsoft.com/09975ccb-a064-4cf7-aaaf-3e2963e9261c" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
-      </div>
-
-      <div class="cert-card" data-cat="devops">
-        <div class="cert-card-inner">
-          <div class="cert-issuer-bar">
-            <div class="cert-issuer-icon">S</div>
-            <div class="cert-issuer-name">Skillsoft</div>
-          </div>
-          <div class="cert-card-title">Exploring Business Process Automation</div>
-          <div class="cert-card-footer">
-            <span class="cert-date">Nov 2024</span>
-            <span class="cert-badge">DevOps</span>
-          </div>
-        </div>
-        <a href="https://skillsoft.digitalbadges.skillsoft.com/8e12f1ce-1b65-44bd-a2c2-4b20f94ad469" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
-      </div>
-
-      <div class="cert-card" data-cat="devops">
-        <div class="cert-card-inner">
-          <div class="cert-issuer-bar">
-            <div class="cert-issuer-icon">S</div>
-            <div class="cert-issuer-name">Skillsoft</div>
-          </div>
-          <div class="cert-card-title">Using Robots and RPA in the Workplace</div>
-          <div class="cert-card-footer">
-            <span class="cert-date">Nov 2024</span>
-            <span class="cert-badge">DevOps</span>
-          </div>
-        </div>
-        <a href="https://skillsoft.digitalbadges.skillsoft.com/98bb76ea-5486-4fba-a240-42a737e68aca" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
-      </div>
-
-      <div class="cert-card" data-cat="agile">
-        <div class="cert-card-inner">
-          <div class="cert-issuer-bar">
-            <div class="cert-issuer-icon">S</div>
-            <div class="cert-issuer-name">Skillsoft</div>
-          </div>
-          <div class="cert-card-title">Agile Best Practices for Tech Leaders: Core Concepts</div>
-          <div class="cert-card-footer">
-            <span class="cert-date">Nov 2024</span>
-            <span class="cert-badge">Agile</span>
-          </div>
-        </div>
-        <a href="https://skillsoft.digitalbadges.skillsoft.com/1a009b26-9bdf-4656-9f4f-95ae5a8360cb" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
-      </div>
-
-      <div class="cert-card" data-cat="agile">
-        <div class="cert-card-inner">
-          <div class="cert-issuer-bar">
-            <div class="cert-issuer-icon">S</div>
-            <div class="cert-issuer-name">Skillsoft</div>
-          </div>
-          <div class="cert-card-title">Agile Best Practices for Tech Leaders: The Scrum Framework</div>
-          <div class="cert-card-footer">
-            <span class="cert-date">Nov 2024</span>
-            <span class="cert-badge">Agile</span>
-          </div>
-        </div>
-        <a href="https://skillsoft.digitalbadges.skillsoft.com/126d98cb-64d3-40c7-9653-40430e832974" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
-      </div>
-
-      <div class="cert-card" data-cat="agile">
-        <div class="cert-card-inner">
-          <div class="cert-issuer-bar">
-            <div class="cert-issuer-icon">S</div>
-            <div class="cert-issuer-name">Skillsoft</div>
-          </div>
-          <div class="cert-card-title">Agile Best Practices for Tech Leaders: The Scrum Phases</div>
-          <div class="cert-card-footer">
-            <span class="cert-date">Nov 2024</span>
-            <span class="cert-badge">Agile</span>
-          </div>
-        </div>
-        <a href="https://skillsoft.digitalbadges.skillsoft.com/54ad40c8-bfd5-4897-bc1e-ca4c06802956" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
-      </div>
-
-      <div class="cert-card" data-cat="other">
-        <div class="cert-card-inner">
-          <div class="cert-issuer-bar">
-            <div class="cert-issuer-icon">S</div>
-            <div class="cert-issuer-name">Skillsoft</div>
-          </div>
-          <div class="cert-card-title">Software Design & Development: Methodologies</div>
-          <div class="cert-card-footer">
-            <span class="cert-date">Nov 2024</span>
-            <span class="cert-badge">Engineering</span>
-          </div>
-        </div>
-        <a href="https://skillsoft.digitalbadges.skillsoft.com/9d237755-1b3c-44a4-aed6-029d675467ab" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
-      </div>
-
-      <div class="cert-card" data-cat="other">
-        <div class="cert-card-inner">
-          <div class="cert-issuer-bar">
-            <div class="cert-issuer-icon">S</div>
-            <div class="cert-issuer-name">Skillsoft</div>
-          </div>
-          <div class="cert-card-title">Software Design & Development: Software Engineering & SDLC Phases</div>
-          <div class="cert-card-footer">
-            <span class="cert-date">Nov 2024</span>
-            <span class="cert-badge">Engineering</span>
-          </div>
-        </div>
-        <a href="https://skillsoft.digitalbadges.skillsoft.com/8679a933-dd38-4c18-ba44-100cbcfacce1" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
-      </div>
-
-      <div class="cert-card" data-cat="other">
-        <div class="cert-card-inner">
-          <div class="cert-issuer-bar">
-            <div class="cert-issuer-icon">S</div>
-            <div class="cert-issuer-name">Skillsoft</div>
-          </div>
-          <div class="cert-card-title">Being an Effective Team Member</div>
-          <div class="cert-card-footer">
-            <span class="cert-date">Feb 2025</span>
-            <span class="cert-badge">Leadership</span>
-          </div>
-        </div>
-        <a href="https://skillsoft.digitalbadges.skillsoft.com/4cb93caa-c828-4460-a981-2525aa59e349" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
-      </div>
-
-      <div class="cert-card" data-cat="cloud">
-        <div class="cert-card-inner">
-          <div class="cert-issuer-bar">
-            <div class="cert-issuer-icon">P</div>
-            <div class="cert-issuer-name">Pluralsight</div>
-          </div>
-          <div class="cert-card-title">5G & Edge Computing</div>
-          <div class="cert-card-footer">
-            <span class="cert-date">Nov 2024</span>
-            <span class="cert-badge">Cloud</span>
-          </div>
-        </div>
-        <a href="https://app.pluralsight.com/achievements/share/b5fd9399-a4d2-4f0b-92bb-807608597726" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
-      </div>
-
-      <div class="cert-card" data-cat="python">
-        <div class="cert-card-inner">
-          <div class="cert-issuer-bar">
-            <div class="cert-issuer-icon">U</div>
-            <div class="cert-issuer-name">Udemy</div>
-          </div>
-          <div class="cert-card-title">100 Days of Code: The Complete Python Pro Bootcamp</div>
-          <div class="cert-card-footer">
-            <span class="cert-date">May 2024</span>
-            <span class="cert-badge">Python</span>
-          </div>
-        </div>
-        <a href="https://ude.my/UC-5eee6069-97e5-455d-bf39-561f00a28b65" target="_blank" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--accent2);text-decoration:none;letter-spacing:.05em;">View credential ↗</a>
-      </div>
-
-      <div class="cert-card" data-cat="other">
+      <div class="cert-card" data-cat="ai">
         <div class="cert-card-inner">
           <div class="cert-issuer-bar">
             <div class="cert-issuer-icon">S</div>
@@ -1920,20 +1738,39 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 
     </div><!-- end cert-grid -->
 
-    <!-- Show more / less toggle (shows all 20 at once, collapses to 6) -->
-    <button class="cert-show-more" id="cert-toggle">
-      <span id="cert-toggle-text">Show all 20 credentials</span>
-      <span id="cert-toggle-icon">↓</span>
-    </button>
-
   </div><!-- end cert-vault-wrap -->
+</section>
+
+<section id="about" style="position:relative;">
+  <div class="chapter-curve" data-curve-idx="0" style="--curve-color:var(--ch-about);"><svg viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path class="curve-path" d="M0,70 C300,70 300,70 600,70 C900,70 900,70 1200,70 L1200,140 L0,140 Z"></path></svg></div>
+
+  <div class="node-graphic" id="node-graphic" aria-hidden="true"><canvas id="node-canvas"></canvas></div>
+
+  <div class="section-label">07 — About</div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <h2 class="section-title">Building intelligent<br><em>systems that matter</em></h2>
+      <p style="margin-top:40px;">I'm a Machine Learning Engineer and Data Science professional currently pursuing my MSc in Data Science & AI at Middlesex University, Dubai. I bring together technical depth in ML, cloud, and analytics with a genuine curiosity for how technology shapes the world around us.</p>
+      <p>Previously at Accenture, I built production-grade ML pipelines, deployed models on AWS SageMaker, and turned messy data into clear decisions. I believe great AI isn't just smart — it's simple, explainable, and built with care.</p>
+      <p>When I'm not training models, I'm probably somewhere new on the planet, listening to music, or thinking about the next thing worth building.</p>
+    </div>
+    <div class="about-sidebar reveal">
+      <h3>Quick Facts</h3>
+      <div class="sidebar-item"><span class="key">Status</span><span class="val"><span class="status-dot"></span>Available</span></div>
+      <div class="sidebar-item"><span class="key">Location</span><span class="val">Dubai, UAE</span></div>
+      <div class="sidebar-item"><span class="key">Education</span><span class="val">MSc AI · MDX Dubai</span></div>
+      <div class="sidebar-item"><span class="key">Focus</span><span class="val">ML · Data Science</span></div>
+      <div class="sidebar-item"><span class="key">Languages</span><span class="val">EN · HI · TE</span></div>
+      <div class="sidebar-item"><span class="key">Countries</span><span class="val">10 visited</span></div>
+    </div>
+  </div>
 </section>
 
 <!-- Personal -->
 <section id="personal" style="position:relative;">
   <div class="chapter-curve" data-curve-idx="3" style="--curve-color:var(--ch-personal);"><svg viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path class="curve-path" d="M0,70 C300,70 300,70 600,70 C900,70 900,70 1200,70 L1200,140 L0,140 Z"></path></svg></div>
 
-  <div class="section-label">05 — Personal</div>
+  <div class="section-label">08 — Personal</div>
   <h2 class="section-title reveal">Beyond<br><em>the code</em></h2>
   <div class="interests-grid reveal rv-mask" style="margin-top:48px;">
     <div class="interest-card"><div class="interest-icon">🎵</div><h3>Music</h3><p>Music is my constant companion — whether I'm commuting through Dubai, deep in a coding session, or just unwinding. From indie to classical, it shapes how I think and create.</p></div>
@@ -2028,7 +1865,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 <section id="fun" style="position:relative;border-top:1px solid var(--border);">
   <div class="chapter-curve" data-curve-idx="4" style="--curve-color:var(--ch-fun);"><svg viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path class="curve-path" d="M0,70 C300,70 300,70 600,70 C900,70 900,70 1200,70 L1200,140 L0,140 Z"></path></svg></div>
 
-  <div class="section-label">06 — Creative Playground</div>
+  <div class="section-label">09 — Creative Playground</div>
   <h2 class="section-title reveal reveal-fade">Digital Experiments</h2>
   <p class="reveal reveal-fade" style="font-size:15px;color:var(--text-muted);font-weight:300;margin-top:20px;max-width:520px;line-height:1.7;">Outside of client and coursework, I build small experimental sites just to try things out — a different corner of the sandbox from the case-study projects above.</p>
 
@@ -2064,14 +1901,14 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
     </div>
   </div>
 
-  <div class="fun-section-label reveal">✨ Websites</div>
+  <div class="fun-section-label reveal">Experiments</div>
 
   <div class="fun-grid reveal rv-mask">
     <a class="fun-card" href="https://telugucinema.vercel.app" target="_blank" rel="noopener">
       <div class="fun-card-visual" style="background:linear-gradient(135deg,#1a0c0e,#2c1013 55%,#120709);">🎬</div>
       <div class="fun-card-body">
         <h3>Telugu Cinema</h3>
-        <p>An interactive 3D poster universe of Telugu cinema — drag, orbit and click through a spatial archive of posters rendered in real time, with Auto/Calm motion and cursor settings built in.</p>
+        <p>A 3D poster archive built to explore real-time WebGL rendering and spatial interaction — drag, orbit and click through posters in a navigable 3D space, with Auto/Calm motion settings built in.</p>
         <div class="fun-card-tags"><span>Three.js</span><span>WebGL</span><span>Creative Dev</span></div>
         <span class="fun-card-link">Visit site ↗</span>
       </div>
@@ -2080,7 +1917,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
       <div class="fun-card-visual" style="background:linear-gradient(135deg,#0b1220,#172554 55%,#0f172a);">📅</div>
       <div class="fun-card-body">
         <h3>On This Day</h3>
-        <p>An interactive exploration of historical events that happened on this day — a small experiment in making history more engaging and discoverable.</p>
+        <p>A small experiment in API integration and data-driven storytelling — surfaces historical events that happened on today's date, built to make history more discoverable.</p>
         <div class="fun-card-tags"><span>JavaScript</span><span>API</span><span>Creative Dev</span></div>
         <span class="fun-card-link">Visit site ↗</span>
       </div>
@@ -2089,7 +1926,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
       <div class="fun-card-visual" style="background:linear-gradient(135deg,#0f1a12,#132c1c 55%,#0a1510);">✓</div>
       <div class="fun-card-body">
         <h3>Again</h3>
-        <p>A clean, minimal task management app built to explore real-time sync and smart organization patterns beyond the usual to-do list.</p>
+        <p>A small UX experiment in behavior-change design — a lightweight nudge that makes you pause and check whether you've already done something before doing it all over again.</p>
         <div class="fun-card-tags"><span>React</span><span>Next.js</span><span>Tailwind</span></div>
         <span class="fun-card-link">Visit site ↗</span>
       </div>
@@ -2175,7 +2012,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 <section id="contact" style="position:relative;">
   <div class="chapter-curve" data-curve-idx="5" style="--curve-color:var(--ch-contact);"><svg viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path class="curve-path" d="M0,70 C300,70 300,70 600,70 C900,70 900,70 1200,70 L1200,140 L0,140 Z"></path></svg></div>
 
-  <div class="section-label">07 — Reach Out</div>
+  <div class="section-label">10 — Reach Out</div>
   <div class="reachout-grid reveal">
     <div class="reachout-intro">
       <p class="reachout-kicker">Have something worth building? Let's talk.</p>
@@ -2194,8 +2031,8 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 <!-- Guestbook -->
 <section id="guestbook" style="border-top:1px solid var(--border);">
   <div style="max-width:1200px;margin:0 auto;padding:120px clamp(24px,5vw,60px);">
-    <div class="section-label">08 — Guestbook</div>
-    <div style="display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:start;">
+    <div class="section-label">11 — Guestbook</div>
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) 420px;gap:80px;align-items:start;">
       <div>
         <h2 class="section-title reveal gb-title">Leave a message</h2>
         <p style="font-size:15px;color:var(--text-muted);font-weight:300;margin-top:16px;line-height:1.7;max-width:480px;">Say hello, share a thought, or just let me know you were here. All messages appear live.</p>
@@ -2223,7 +2060,22 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 
 <!-- Footer -->
 <footer>
-  <div class="main-mourya-signature" aria-label="Mourya signature">Mourya</div>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="mourya-brush-edge" x="-20%" y="-30%" width="140%" height="160%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05 0.1" numOctaves="3" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+  <svg class="main-mourya-signature" viewBox="-10 -10 480 130" aria-label="Mourya signature" xmlns="http://www.w3.org/2000/svg">
+    <g fill="currentColor">
+<path transform="translate(4,0)" d="M 4.42,100.38 L 10.53,85.21 L 13.34,69.91 L 14.90,55.06 L 17.99,39.95 L 20.92,25.46 L 33.47,1.94 L 31.38,2.47 L 33.29,8.60 L 33.23,15.94 L 30.81,24.32 L 31.42,31.26 L 30.47,38.78 L 35.63,40.58 L 36.74,45.47 L 37.82,50.36 L 42.66,53.50 L 42.53,59.32 L 46.91,62.99 L 50.20,57.16 L 55.11,52.59 L 60.14,50.61 L 65.39,47.17 L 68.81,41.89 L 87.48,1.87 L 88.80,1.68 L 91.18,2.55 L 91.02,4.96 L 91.57,7.11 L 92.05,8.12 L 93.94,10.41 L 90.02,25.31 L 86.04,40.01 L 81.57,54.61 L 78.43,70.41 L 74.93,85.31 L 69.32,99.18 L 63.88,99.92 L 58.47,99.33 L 52.10,100.51 L 58.85,87.00 L 62.02,73.15 L 63.50,59.97 L 68.65,47.40 L 73.58,33.66 L 68.37,37.41 L 62.81,41.14 L 58.74,46.15 L 52.97,49.47 L 48.33,53.79 L 45.37,49.94 L 42.34,45.52 L 39.96,40.73 L 37.38,36.81 L 32.68,34.48 L 30.75,47.26 L 30.59,60.12 L 27.86,73.20 L 24.16,86.60 L 22.85,99.77 L 16.99,101.52 L 11.82,100.37 Z" fill-rule="nonzero"/>
+<path transform="translate(84,0)" d="M 72.94,51.66 L 70.41,62.41 L 67.72,72.24 L 61.93,80.60 L 54.41,87.51 L 47.94,93.57 L 41.10,96.54 L 34.35,99.73 L 28.50,98.08 L 22.90,95.58 L 18.34,90.44 L 13.88,84.56 L 12.15,76.66 L 12.07,67.25 L 14.05,56.92 L 16.52,46.93 L 20.04,37.43 L 23.46,27.77 L 29.63,19.43 L 35.28,12.92 L 42.04,7.38 L 49.44,3.92 L 56.13,4.50 L 62.39,6.48 L 68.15,10.08 L 70.92,16.76 L 74.39,24.00 L 75.44,32.72 L 76.58,42.00 Z M 60.14,51.49 L 58.14,58.83 L 57.09,66.27 L 53.37,71.47 L 49.50,77.20 L 46.28,81.67 L 41.44,83.33 L 38.92,82.77 L 35.82,82.34 L 33.97,79.36 L 34.80,75.98 L 33.18,70.99 L 35.02,66.84 L 35.48,61.15 L 37.42,57.11 L 38.03,52.38 L 40.81,47.27 L 42.60,44.06 L 44.10,39.44 L 44.83,36.40 L 46.72,32.60 L 46.65,30.55 L 49.03,28.89 L 50.89,27.19 L 52.49,26.96 L 55.50,27.48 L 56.03,31.55 L 58.54,34.47 L 60.01,39.32 L 59.28,45.15 Z" fill-rule="evenodd"/>
+<path transform="translate(154,0)" d="M 30.33,4.26 L 10.97,90.22 L 10.74,91.83 L 12.34,93.48 L 13.81,94.93 L 16.81,97.21 L 20.23,99.98 L 24.28,99.98 L 28.91,100.97 L 34.87,99.34 L 39.46,99.61 L 43.99,98.13 L 48.15,96.76 L 52.20,95.18 L 54.63,93.08 L 58.00,92.79 L 59.17,90.28 L 78.81,3.74 L 60.81,3.47 L 42.70,86.10 L 41.80,85.36 L 41.79,84.03 L 40.85,83.60 L 39.50,82.52 L 37.16,82.53 L 34.67,84.24 L 33.36,83.20 L 30.98,83.58 L 29.80,84.83 L 29.42,85.67 L 28.67,86.03 L 45.87,4.70 Z" fill-rule="nonzero"/>
+<path transform="translate(222,0)" d="M 31.65,4.14 L 48.20,4.11 L 25.77,99.74 L 9.34,99.37 Z M 47.92,4.43 L 47.34,4.02 L 51.93,4.95 L 57.39,6.88 L 61.89,8.66 L 63.93,13.73 L 64.92,18.47 L 65.80,23.72 L 64.98,28.94 L 63.41,34.46 L 58.76,38.49 L 53.70,42.04 L 49.04,46.31 L 42.58,47.54 L 36.78,47.47 L 37.27,48.43 Z M 40.01,38.03 L 40.98,31.10 L 42.95,30.87 L 45.36,29.35 L 47.61,27.70 L 49.59,27.23 L 49.29,24.96 L 49.23,24.02 L 47.47,22.46 L 45.47,21.58 L 42.21,21.43 L 44.87,14.55 Z M 25.64,49.61 L 55.76,105.64 L 61.40,102.78 L 44.69,39.66 Z" fill-rule="evenodd"/>
+<path transform="translate(286,0)" d="M 18.92,7.36 L 38.79,50.05 L 55.23,41.06 L 34.61,-2.71 Z M 80.19,-2.07 L 38.65,40.78 L 52.09,50.45 L 93.69,7.30 Z M 36.31,46.19 L 33.45,100.16 L 38.05,99.66 L 57.51,45.10 Z" fill-rule="nonzero"/>
+<path transform="translate(358,0)" d="M 56.18,0.75 L -7.04,96.94 L 11.54,104.01 L 60.14,2.44 Z M 55.46,3.23 L 58.21,103.87 L 82.37,95.78 L 61.42,0.94 Z M 24.75,67.86 L 62.72,67.58 L 66.44,52.22 L 28.87,53.71 Z" fill-rule="nonzero"/>
+    </g>
+  </svg>
   <span>© 2026 Mourya Dusi</span>
   <span>Dubai, UAE</span>
   <span>Built with ❤</span>
@@ -2700,7 +2552,7 @@ document.querySelectorAll('input,textarea,select').forEach(el=>el.style.cursor='
 
 // Theme
 const themeToggle=document.getElementById('theme-toggle'),html=document.documentElement;
-html.setAttribute('data-theme',localStorage.getItem('theme')||'light');
+html.setAttribute('data-theme',localStorage.getItem('theme')||'dark');
 themeToggle.addEventListener('click',()=>{ const n=html.getAttribute('data-theme')==='dark'?'light':'dark';html.setAttribute('data-theme',n);localStorage.setItem('theme',n); });
 
 // Header scroll
@@ -2802,7 +2654,7 @@ document.querySelectorAll('.reveal').forEach(el=>revObserver.observe(el));
   }
   function flash(msg){if(!statusEl)return;statusEl.textContent=msg;setTimeout(()=>statusEl.textContent='',3000);}
   const style=document.createElement('style');
-  style.textContent='@keyframes gbIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}#gb-feed>*{opacity:1!important}#guestbook input::placeholder,#guestbook textarea::placeholder{color:var(--text-subtle)}@media(max-width:760px){#guestbook [style*="grid-template-columns:1fr 420px"]{grid-template-columns:1fr!important;gap:40px!important}}';
+  style.textContent='@keyframes gbIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}#gb-feed>*{opacity:1!important}#guestbook input::placeholder,#guestbook textarea::placeholder{color:var(--text-subtle)}@media(max-width:900px){#guestbook [style*="grid-template-columns:minmax(0,1fr) 420px"]{grid-template-columns:1fr!important;gap:40px!important}}';
   document.head.appendChild(style);
   render();
   window.addEventListener('storage',e=>{if(e.key===KEY)render();});
@@ -3350,7 +3202,7 @@ const AI_KB = [
   { k:['home address','street address','phone number','mobile number','passport number','national id','social security','ssn','bank account','bank details','credit card','payslip','pay slip','net worth','religion','political party','politics','relationship status','marital status','married','girlfriend','boyfriend','dating','partner','health condition','medical','diagnosis','family member','siblings','parents\' names'],
     a:"That's outside what this assistant shares — it only covers Mourya's professional background. For anything else, email him directly at itsmouryadusi@gmail.com." },
   { k:['date of birth','birthday','how old','born on','his age','birth date'],
-    a:()=>`Mourya was born on August 12, 2002, which makes him ${window.__MOURYA_AGE ?? '24'} right now.` },
+    a:"That's not something shared here. I can tell you about his education timeline and career history if that's useful instead." },
 
   // ── Education ──
   { k:['education','degree','msc','master','university','middlesex','mdx','study','thesis','bsc','bachelor','krishna university','graduat','gpa','academic'],
@@ -3358,7 +3210,7 @@ const AI_KB = [
 
   // ── Certifications ──
   { k:['certif','aws certif','google cloud certif','badge','credential','license'],
-    a:"He holds 20 credentials across 4 issuers (mainly AWS, Google Cloud and Skillsoft), spanning AI & ML, Cloud, DevOps, Agile, Python and Security. Highlights: AWS Certified AI Practitioner, AWS AI Practitioner — Machine Learning Operations (MLOps), AWS Certified Solutions Architect Associate, and Google Professional Cloud Architect. Full list with verification links is in the Certifications section." },
+    a:"He holds 5 professional credentials via Skillsoft, curated down from a longer list to keep only what's genuinely AI/ML and cloud-relevant: AWS Certified AI Practitioner, AWS AI Practitioner — Machine Learning Operations (MLOps), Implementing AI with Amazon Machine Learning, AWS Certified Solutions Architect Associate, and Google Professional Cloud Architect (Cloud Architecture & System Design). Full list with verification links is in the Certifications section." },
 
   // ── Work experience ──
   { k:['experience','accenture','work history','background of his career','career','company','job history','associate software engineer','responsibilit','duties'],
@@ -3386,7 +3238,9 @@ const AI_KB = [
     a:"Five main projects: destination.com (AI travel platform — his featured live product), Smart Exit Reminder (mobile sensor-fusion AI), Taxi Lost Item Detection (privacy-first edge AI), Student Performance Prediction (92% accuracy ML pipeline), and an Intelligent University Chatbot (NLP, 1,000+ queries/day). Ask about any one by name for details." },
 
   // ── Availability / hiring ──
-  { k:['available','hire','open to work','looking for','job','role','opportunity','join','recruit'],
+  { k:['why should i hire','why hire him','worth hiring','why should you hire'],
+    a:"A few concrete reasons: real industry experience (9 months at Accenture doing ML Engineering & Data Science), shipped and live AI products (destination.com), a rigorous ML pipeline with a measured 92% accuracy, an NLP chatbot handling 1,000+ queries a day in production, 20 professional credentials across AWS and Google Cloud, and an MSc in Data Science & AI in progress. It's industry experience plus academic depth plus things that actually run in production." },
+  { k:['available','hire','open to work','looking for a role','looking for','job','role','opportunity','join','recruit'],
     a:"Yes — he's actively looking for ML Engineer, Data Scientist, or AI Engineer roles. He's completing his MSc in Dubai in September 2026 and is open to Dubai-based, remote, or relocation opportunities. Email him at itsmouryadusi@gmail.com." },
   { k:['salary','pay','rate','compensation','expect','cost to hire'],
     a:"For current expectations, the best move is to reach out directly at itsmouryadusi@gmail.com — he's open to a conversation once he knows more about the role." },
@@ -3416,12 +3270,64 @@ function projectSummary(slug){
 // Lowest-priority fallback: only answers if nothing more specific in AI_KB
 // matched, so generic "who/about/tell me" phrasing never shadows a
 // specific question about a certification, project, etc.
-const AI_IDENTITY = { k:['who is','full name','who','mourya','about','introduce','tell me','yourself','person','he'],
-  a:"Mourya Dusi is a Machine Learning Engineer and Data Science professional based in Dubai, UAE. He's currently completing an MSc in Data Science & Artificial Intelligence at Middlesex University Dubai (graduating September 2026), previously spent 9 months at Accenture in Hyderabad as an Associate Software Engineer on ML Engineering & Data Science work, holds 20 credentials across AWS, Google Cloud and more, and has shipped several live AI products including destination.com." };
+const AI_IDENTITY = { k:['who is mourya','full name','introduce mourya','tell me about mourya','tell me about him'],
+  a:"Mourya Dusi is a Machine Learning Engineer and Data Science professional based in Dubai, UAE. He's currently completing an MSc in Data Science & Artificial Intelligence at Middlesex University Dubai (graduating September 2026), previously spent 9 months at Accenture in Hyderabad as an Associate Software Engineer on ML Engineering & Data Science work, holds 5 curated AI/ML and cloud credentials, and has shipped several live AI products including destination.com." };
+
+// Conversational-intent layer — checked BEFORE any topic/biography matching.
+// Each test runs against the WHOLE trimmed message (word-boundary regex,
+// never a raw substring), so "heyy" can't be caught by a stray "he" inside
+// it, and a short greeting never falls through to the résumé dump.
+function stripPunct(s){ return s.replace(/[!?.,;:]+$/g, '').trim(); }
+
+const INTENT_TESTS = [
+  { test: s => /^(h+e+y+|h+i+|h+e+l+o+|yo+|sup|howdy|greetings)$/i.test(s),
+    a: "Hey! 👋 What can I help you with?" },
+  { test: s => /^(good\s?(morning|afternoon|evening))$/i.test(s),
+    a: "Hey! Good to see you. Ask me anything about Mourya's work, projects, experience, or background." },
+  { test: s => /^(bye|goodbye|good\s?bye|see\s?y(a|ou)|later|cya|take\s?care)$/i.test(s),
+    a: "Take care — feel free to come back anytime." },
+  { test: s => /^(thanks|thank\s?you|thx|ty|cheers|appreciate\s?it|much\s?appreciated)$/i.test(s),
+    a: "Anytime. Anything else you want to know?" },
+  { test: s => /^(how\s?are\s?you|how('s| is)\s?it\s?going|how\s?you\s?doin[g']?|what'?s\s?up|hows\s?life)$/i.test(s),
+    a: "Doing great! What would you like to know?" },
+  { test: s => /^(who\s?are\s?you|what\s?are\s?you)$/i.test(s),
+    a: "I'm the assistant built into Mourya's portfolio — ask me about his work, projects, experience, or background." },
+  { test: s => /\b(what'?s the weather|weather today|current weather|weather forecast)\b/i.test(s),
+    a: "I don't have access to live weather data from here — you'd need a weather app or search for that. Anything about Mourya's work I can help with instead?" },
+  { test: s => /\b(what time is it|current time|what'?s today'?s date|what day is it)\b/i.test(s),
+    a: "I don't have access to live date/time data from this chat. Happy to help with anything about Mourya's background though." },
+];
+
+// Tiny, safe arithmetic evaluator — only ever runs against input that's
+// already been regex-validated to contain nothing but digits/operators/
+// whitespace/parentheses, so there's no eval-injection surface.
+function tryArithmetic(raw){
+  const s = raw.trim().replace(/^what'?s\s+/i,'').replace(/\?+$/,'').replace(/x/gi,'*').trim();
+  if(!/^[0-9+\-*/().\s]+$/.test(s)) return null;
+  if(!/[0-9]/.test(s) || !/[+\-*/]/.test(s)) return null;
+  try{
+    const result = Function('"use strict"; return (' + s + ')')();
+    if(typeof result === 'number' && isFinite(result)) return String(Math.round(result*1e9)/1e9);
+  }catch(e){ /* not valid arithmetic, fall through */ }
+  return null;
+}
 
 function getAIReply(q){
-  const ql = q.toLowerCase();
+  const trimmed = stripPunct(q.trim());
+  const ql = trimmed.toLowerCase();
   const resolve = a => typeof a === 'function' ? a() : a;
+
+  // 1. Conversational intent (greeting/goodbye/thanks/small talk/self/live-info)
+  for(const it of INTENT_TESTS){
+    if(it.test(ql)) return it.a;
+  }
+
+  // 2. Simple arithmetic — genuine general-knowledge capability that
+  //    doesn't require guessing from portfolio content.
+  const mathResult = tryArithmetic(trimmed);
+  if(mathResult !== null) return mathResult;
+
+  // 3. Topic matching — longest/most specific keyword wins across the KB.
   let best = null, bestLen = 0;
   for(const entry of AI_KB){
     for(const kw of entry.k){
@@ -3436,13 +3342,19 @@ function getAIReply(q){
     }
   }
   if(best) return resolve(best.a);
+
+  // 4. Identity fallback — only for messages that are actually asking
+  //    about Mourya by name/phrase, never a bare pronoun or filler word.
   if(AI_IDENTITY.k.some(kw => ql.includes(kw))) return resolve(AI_IDENTITY.a);
-  // Fuzzy fallback — check any word overlap
-  const words = ql.split(/\s+/).filter(w=>w.length>3);
-  for(const entry of AI_KB){
-    if(words.some(w => entry.k.some(kw=>kw.includes(w)||w.includes(kw)))) return resolve(entry.a);
-  }
-  return "Great question — I don't have a specific answer for that, but Mourya would love to chat. Drop him an email at itsmouryadusi@gmail.com and he'll respond quickly.";
+
+  // 5. Honest unknown — this is a keyword-matched local assistant, not a
+  //    general-knowledge model, so anything unrecognized (not about
+  //    Mourya, not a greeting, not simple arithmetic) says so plainly
+  //    rather than guessing or defaulting to a biography. (A looser
+  //    word-overlap fallback used to sit here, but it matched filler
+  //    words like "what" against phrase keywords and produced confident
+  //    wrong answers to unrelated questions — removed rather than patched.)
+  return "I'm not able to answer that from here — I can help with questions about Mourya's background, projects, or experience. For anything else, email him at itsmouryadusi@gmail.com.";
 }
 
 function toggleAI(){
@@ -3456,19 +3368,42 @@ function aiAsk(q){
 }
 window.aiAsk=aiAsk;
 
-function sendAI(){
+let aiHistory = [];
+
+async function sendAI(){
   const input=document.getElementById('ai-input');
   const q=input.value.trim();
   if(!q)return;
   input.value='';
   addMsg(q,'user');
-  // Simulate brief typing delay for realism
   const typingEl=addMsg('typing…','bot typing');
-  setTimeout(()=>{
-    typingEl.textContent=getAIReply(q);
-    typingEl.classList.remove('typing');
-    document.getElementById('ai-messages').scrollTop=9999;
-  }, 600 + Math.random()*400);
+  const minDelay = new Promise(r=>setTimeout(r, 400 + Math.random()*300));
+
+  let reply;
+  try{
+    const res = await fetch('/api/chat', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ message:q, history: aiHistory })
+    });
+    if(!res.ok) throw new Error('backend unavailable');
+    const data = await res.json();
+    if(!data.reply) throw new Error('empty reply');
+    reply = data.reply;
+  }catch(e){
+    // /api/chat isn't deployed/configured yet (no ANTHROPIC_API_KEY set in
+    // Vercel) — fall back to the local rule-based assistant so the widget
+    // still works exactly as before.
+    reply = getAIReply(q);
+  }
+
+  aiHistory.push({role:'user', content:q}, {role:'assistant', content:reply});
+  if(aiHistory.length > 16) aiHistory = aiHistory.slice(-16);
+
+  await minDelay;
+  typingEl.textContent=reply;
+  typingEl.classList.remove('typing');
+  document.getElementById('ai-messages').scrollTop=9999;
 }
 window.sendAI=sendAI;
 
