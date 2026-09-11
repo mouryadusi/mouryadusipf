@@ -3,7 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mourya   Dusi</title>
+<title>Mourya Dusi — Machine Learning Engineer</title>
+<meta name="description" content="Mourya Dusi is a Machine Learning Engineer building and shipping ML systems — from a 92%-accuracy prediction pipeline to a production NLP chatbot handling 1,000+ queries a day. ML Engineering experience at Accenture, MSc Data Science & AI in progress.">
+<link rel="canonical" href="https://mouryadusi.vercel.app/">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mouryadusi.vercel.app/">
+<meta property="og:title" content="Mourya Dusi — Machine Learning Engineer">
+<meta property="og:description" content="Building and shipping ML systems — from a 92%-accuracy prediction pipeline to a production NLP chatbot handling 1,000+ queries a day.">
+<meta property="og:image" content="https://mouryadusi.vercel.app/assets/mourya.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mourya Dusi — Machine Learning Engineer">
+<meta name="twitter:description" content="Building and shipping ML systems — from a 92%-accuracy prediction pipeline to a production NLP chatbot handling 1,000+ queries a day.">
+<meta name="twitter:image" content="https://mouryadusi.vercel.app/assets/mourya.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..500;1,6..96,400..500&family=Anton&display=swap" rel="stylesheet">
@@ -60,6 +73,12 @@
     --red: #E8412B;
     --red-deep: #B82E1B;
     --on-red: #FFF6EE;
+  }
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible,
+  [tabindex]:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 3px;
+    border-radius: 2px;
   }
   [data-theme="light"] {
     --bg: #fafaf8;
@@ -169,7 +188,7 @@
     animation: progressBar 2.2s ease forwards;
   }
   @keyframes progressBar { to { width: 100%; } }
-  #loader.fade-out { animation: loaderFade 0.9s cubic-bezier(0.4,0,1,1) forwards; }
+  #loader.fade-out { animation: loaderFade 0.45s cubic-bezier(0.4,0,1,1) forwards; }
   @keyframes loaderFade { to { opacity: 0; pointer-events: none; } }
 
   /* HEADER */
@@ -304,7 +323,7 @@
   .hero-greet {
     font-family:'Inter',sans-serif; font-size:13px; font-weight:400; letter-spacing:.28em;
     text-transform:uppercase; color:var(--text-subtle); margin-bottom:18px;
-    opacity:0; animation: slideUp 0.7s 2.2s ease forwards;
+    opacity:0; animation: slideUp 0.7s 0.3s ease forwards;
   }
   /* the wordmark: oversized italic Didone first name (BEGG-style hero
      lettering — extreme stroke contrast, tall proportions, tight negative
@@ -317,13 +336,13 @@
     display:block; font-family:'Bodoni Moda',serif; font-style:italic; font-weight:500;
     font-optical-sizing:auto; font-size: clamp(72px, 13.5vw, 216px);
     letter-spacing:-0.03em; color:var(--text); white-space:nowrap;
-    opacity:0; transform:translateY(38px); animation: nameRise 1s 2.35s cubic-bezier(.16,1,.3,1) forwards;
+    opacity:0; transform:translateY(38px); animation: nameRise 1s 0.42s cubic-bezier(.16,1,.3,1) forwards;
   }
   .hero-name-last{
     display:block; font-family:'Bodoni Moda',serif; font-style:normal; font-weight:400;
     font-size: clamp(28px, 4.6vw, 60px); letter-spacing:.14em; text-transform:uppercase;
     color:var(--text-muted); margin-top:.14em; white-space:nowrap;
-    opacity:0; transform:translateY(24px); animation: nameRise 1s 2.65s cubic-bezier(.16,1,.3,1) forwards;
+    opacity:0; transform:translateY(24px); animation: nameRise 1s 0.58s cubic-bezier(.16,1,.3,1) forwards;
   }
   @keyframes nameRise{ to{ opacity:1; transform:translateY(0); } }
   .hero-title em { font-style: italic; color: var(--text-muted); }
@@ -348,11 +367,11 @@
   .hero-intro {
     font-size: clamp(16px,2vw,19px); color: var(--text-muted); line-height: 1.75;
     max-width: 520px; margin-bottom: 48px; font-weight: 300;
-    opacity: 0; animation: slideUp 0.8s 2.95s ease forwards;
+    opacity: 0; animation: slideUp 0.8s 0.72s ease forwards;
   }
   .hero-intro .heart { color: #e06060; }
-  .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; opacity: 0; animation: slideUp 0.8s 3.1s ease forwards; }
-  .hero-proof-points { display: flex; gap: 10px; flex-wrap: wrap; margin: 22px 0 26px; opacity: 0; animation: slideUp 0.8s 2.9s ease forwards; }
+  .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; opacity: 0; animation: slideUp 0.8s 0.95s ease forwards; }
+  .hero-proof-points { display: flex; gap: 10px; flex-wrap: wrap; margin: 22px 0 26px; opacity: 0; animation: slideUp 0.8s 0.85s ease forwards; }
   .hero-proof-points span { font-size: 12px; letter-spacing: 0.03em; color: var(--text-muted); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; white-space: nowrap; }
   .sw-card:hover { transform: translateY(-4px); border-color: var(--exhibit-red,#E8412B); }
   @media(max-width:860px){ .selected-work-grid{ grid-template-columns:1fr !important; } }
@@ -366,7 +385,7 @@
   .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border-hover); }
   .btn-ghost:hover { border-color: var(--text); transform: translateY(-2px); }
 
-  .hero-photo-wrap { position: relative; opacity: 0; animation: fadeSlideRight 1s 2.8s ease forwards; }
+  .hero-photo-wrap { position: relative; opacity: 0; animation: fadeSlideRight 1s 0.5s ease forwards; }
   .hero-photo-frame {
     width: 100%; height: auto;
     border-radius: 200px 200px 160px 160px; overflow: visible; background: var(--bg3);
@@ -1000,7 +1019,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
   <div class="pd-shell">
     <section class="pd-hero" id="pd-hero">
       <div class="pd-media" id="pd-media"><div class="pd-media-grid"></div><div class="pd-media-glow"></div><div class="pd-media-card"><div class="pd-media-kicker" id="pd-media-kicker"></div><div class="pd-media-title" id="pd-media-title"></div><div class="pd-media-copy" id="pd-media-copy"></div></div></div>
-      <div class="pd-hero-copy"><div class="pd-index" id="pd-index"></div><h1 class="pd-title" id="pd-title"></h1><p class="pd-subtitle" id="pd-subtitle"></p></div>
+      <div class="pd-hero-copy"><div class="pd-index" id="pd-index"></div><div class="pd-title" id="pd-title"></div><p class="pd-subtitle" id="pd-subtitle"></p></div>
       <div class="pd-scroll">Scroll to enter</div>
     </section>
     <section class="pd-meta"><div class="pd-lede" id="pd-lede"></div><div><p class="pd-meta-copy" id="pd-meta-copy"></p><div class="pd-facts" id="pd-facts"></div></div></section>
@@ -1076,14 +1095,12 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 <header id="site-header">
   <a id="logo" href="#">Mourya</a>
   <nav>
-    <a href="#about">About</a>
     <a href="#selected-work">Work</a>
     <a href="#experience">Experience</a>
     <a href="#skills-restructured">Skills</a>
-    <a href="#personal">Personal</a>
-    <a href="#fun">For Fun</a>
-    <a href="#guestbook">Guestbook</a>
-    <a href="#contact">Reach Out</a>
+    <a href="#about">About</a>
+    <a href="#fun">Experiments</a>
+    <a href="#contact">Contact</a>
     <button id="theme-toggle" aria-label="Toggle theme"></button>
   </nav>
   <button id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -1092,15 +1109,13 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 <!-- Mobile Nav -->
 <div id="mobile-nav">
   <button id="mobile-close">×</button>
-  <a href="#about" class="mn-link">About</a>
   <a href="#selected-work" class="mn-link">Work</a>
   <a href="#experience" class="mn-link">Experience</a>
   <a href="#what-i-do" class="mn-link">What I Do</a>
   <a href="#skills-restructured" class="mn-link">Skills</a>
-  <a href="#personal" class="mn-link">Personal</a>
-  <a href="#fun" class="mn-link">For Fun</a>
-  <a href="#guestbook" class="mn-link">Guestbook</a>
-  <a href="#contact" class="mn-link">Reach Out</a>
+  <a href="#about" class="mn-link">About</a>
+  <a href="#fun" class="mn-link">Experiments</a>
+  <a href="#contact" class="mn-link">Contact</a>
 </div>
 
 <!-- Clock Bar -->
@@ -1134,7 +1149,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
     <span class="sr-dot" data-scene="contact"></span>
   </div>
   <div class="hero-left hero-parallax" id="hero-copy">
-    <div class="hero-identity">Machine Learning Engineer · Data Science · AI</div>
+    <div class="hero-identity">Machine Learning Engineer — turning messy data into deployed systems</div>
     <div class="hero-greet">Hey — I'm</div>
     <h1 class="hero-title">
       <span class="hero-name-wrap">
@@ -1142,7 +1157,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
       </span>
     </h1>
     <p class="hero-intro" id="hero-intro">
-      <span class="explode-text">I build machine learning systems and AI products end to end — from a 92%-accuracy prediction pipeline to a live NLP chatbot handling 1,000+ queries a day, backed by 9 months of production ML work at Accenture and an MSc in Data Science &amp; AI in progress.</span>
+      <span class="explode-text">I build and ship machine learning systems — from a 92%-accuracy prediction pipeline to a production NLP chatbot handling 1,000+ queries a day — backed by hands-on ML engineering experience at Accenture and an MSc in Data Science &amp; AI in progress.</span>
     </p>
     <div class="hero-proof-points">
       <span>Accenture · ML Engineering &amp; Data Science</span>
@@ -1151,8 +1166,8 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
       <span>Live AI products</span>
     </div>
     <div class="hero-cta">
-      <a href="#projects" class="btn btn-primary">Explore My Work</a>
-      <a href="#experience" class="btn btn-ghost">View Experience</a>
+      <a href="#selected-work" class="btn btn-primary">View Case Studies</a>
+      <a href="/resume.pdf" class="btn btn-ghost" download>Download Résumé</a>
     </div>
   </div>
   <div class="hero-photo-wrap hero-parallax" id="hero-portrait-wrap">
@@ -1225,7 +1240,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 
   <div class="section-label">02 — Work</div>
   <h2 class="section-title reveal reveal-fade">Featured<br><em>projects</em></h2>
-  <p class="exhibit-intro reveal reveal-fade">Six things I've built, laid out like an exhibition rather than a grid. Scroll through — each one gets its own moment.</p>
+  <p class="exhibit-intro reveal reveal-fade">Five things I've built, laid out like an exhibition rather than a grid. Scroll through — each one gets its own moment.</p>
 
   <div class="exhibit-projects">
 
@@ -1255,7 +1270,29 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
       <div class="exhibit-foot reveal">
         <p class="exhibit-desc">End-to-end ML pipeline identifying at-risk students with 92% accuracy, comparing 5+ models before selecting the final approach. Processes 1,000+ records weekly.</p>
         <div class="exhibit-tags"><span>Python</span><span>Scikit-learn</span><span>Pandas</span><span>ML Pipeline</span></div>
-        <a href="#" class="exhibit-link">View Project <span class="exhibit-arrow">→</span></a>
+        <details class="case-study">
+          <summary>Read the Case Study <span class="exhibit-arrow">→</span></summary>
+          <div class="case-study-body">
+            <h4>Problem</h4>
+            <p>Instructors and academic advisors often identify struggling students only after performance has already dropped — by then, the window to intervene effectively has narrowed. The goal was to flag at-risk students earlier, from data that's already available.</p>
+            <h4>Data</h4>
+            <p class="cs-placeholder">[Dataset source, size, and feature set — add specifics from the original project]</p>
+            <h4>Approach</h4>
+            <p>Built a supervised learning pipeline in Python: Pandas for preprocessing and feature preparation, Scikit-learn for model training and evaluation. Compared 5+ model families rather than committing to one architecture upfront.</p>
+            <h4>Model Comparison</h4>
+            <p class="cs-placeholder">[Which specific models were compared, and how each performed — add from the original project's results]</p>
+            <h4>Result</h4>
+            <p>The selected model reached <strong>92% accuracy</strong> on the evaluation set. <span class="cs-placeholder">[Baseline or prior-approach comparison — add for context on what 92% represents]</span></p>
+            <h4>Architecture</h4>
+            <p>Data → Preprocessing (Pandas) → Model training &amp; comparison (Scikit-learn) → Evaluation → Selected model. Processes 1,000+ records weekly.</p>
+            <h4>Decisions</h4>
+            <p class="cs-placeholder">[Why the final model was chosen over the other candidates — add reasoning from the original project]</p>
+            <h4>What Didn't Work</h4>
+            <p class="cs-placeholder">[Approaches that underperformed and were ruled out — add if documented]</p>
+            <h4>Lessons</h4>
+            <p class="cs-placeholder">[What you'd do differently, or what this taught you about model selection/evaluation — add reflection]</p>
+          </div>
+        </details>
       </div>
     </article>
 
@@ -1284,7 +1321,25 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
       <div class="exhibit-foot reveal">
         <p class="exhibit-desc">Intent-classification NLP chatbot handling 1,000+ queries daily, reducing support workload by 35%. 99.9% uptime.</p>
         <div class="exhibit-tags"><span>TensorFlow</span><span>NLP</span><span>Flask</span><span>Production</span></div>
-        <a href="#" class="exhibit-link">View Project <span class="exhibit-arrow">→</span></a>
+        <details class="case-study">
+          <summary>Read the Case Study <span class="exhibit-arrow">→</span></summary>
+          <div class="case-study-body">
+            <h4>Problem</h4>
+            <p>University administrative staff were fielding a high volume of repetitive student questions — the kind that don't need human judgment, just fast, accurate retrieval of information that already exists somewhere in the system.</p>
+            <h4>Approach</h4>
+            <p>Built an NLP chatbot: TensorFlow for intent classification, Flask serving the backend API, MongoDB for storing conversation and query data.</p>
+            <h4>Architecture</h4>
+            <p>Student query → NLP intent classification (TensorFlow) → Flask API → MongoDB → response.</p>
+            <h4>Result</h4>
+            <p>Handles <strong>1,000+ queries a day</strong> with <strong>99.9% uptime</strong>, cutting administrative workload by roughly <strong>35%</strong>.</p>
+            <h4>Decisions</h4>
+            <p class="cs-placeholder">[Why this stack over alternatives (e.g. rule-based vs. ML intent classification) — add reasoning from the original project]</p>
+            <h4>What Didn't Work</h4>
+            <p class="cs-placeholder">[Approaches or intents that were harder to classify correctly, and how they were handled — add if documented]</p>
+            <h4>Lessons</h4>
+            <p class="cs-placeholder">[What you'd change about the NLP approach or deployment — add reflection]</p>
+          </div>
+        </details>
       </div>
     </article>
 
@@ -1310,7 +1365,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
         <span class="exhibit-caption">AI travel intelligence, end to end</span>
       </div>
       <div class="exhibit-foot reveal">
-        <p class="exhibit-desc">AI-powered travel platform with voice AI (ARIA), live flight tracking, visa intelligence, and smart route optimization.</p>
+        <p class="exhibit-desc">A full-stack travel platform, built solo. AI shows up in two places specifically: ARIA, a voice assistant for trip questions (built on Groq's LLM inference), and an AI itinerary planner. Everything else — live flight tracking, visa guidance, route optimization — is conventional full-stack engineering around that AI core, on Next.js and deployed on Vercel.</p>
         <div class="exhibit-tags"><span>Next.js</span><span>AI/ML</span><span>Groq</span><span>Real-time</span><span>Vercel</span></div>
         <a href="https://destination-com-dun.vercel.app" target="_blank" rel="noopener" class="exhibit-link">View Project <span class="exhibit-arrow">→</span></a>
       </div>
@@ -1368,34 +1423,6 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
         <p class="exhibit-desc">Camera-free sensor system detecting forgotten belongings in taxis using pressure, infrared and ultrasonic sensing, kept entirely on-device.</p>
         <div class="exhibit-tags"><span>IoT</span><span>Edge Computing</span><span>Privacy</span><span>Sensors</span></div>
         <a href="https://mouryadusi.github.io/taxi-lost-item-detection.html" target="_blank" rel="noopener" class="exhibit-link">View Project <span class="exhibit-arrow">→</span></a>
-      </div>
-    </article>
-
-    <!-- 06 — Again (experimental / no AI or DS content — deprioritized to last) -->
-    <article class="exhibit-project v-b">
-      <div class="exhibit-row-top reveal">
-        <span class="exhibit-num">06</span>
-        <span class="exhibit-meta-line">2025 · WEB · EXPERIMENT</span>
-      </div>
-      <h3 class="exhibit-title reveal rv-mask">Again</h3>
-      <div class="exhibit-visual reveal rv-scale">
-        <div class="exhibit-red-field">
-          <div class="exhibit-visual-inner">
-            <div class="app-showcase">
-              <div class="showcase-header">Again?</div>
-              <div class="showcase-content">
-                <div class="task-item">Have I done this before?</div>
-                <div class="task-item">A pause before you repeat it</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <span class="exhibit-caption">A small nudge, not a notification</span>
-      </div>
-      <div class="exhibit-foot reveal">
-        <p class="exhibit-desc">A small web experiment — a nudge that makes you stop and check whether you've already done something before doing it all over again.</p>
-        <div class="exhibit-tags"><span>React</span><span>Next.js</span><span>Tailwind</span></div>
-        <a href="https://getagain.netlify.app" target="_blank" rel="noopener" class="exhibit-link">View Project <span class="exhibit-arrow">→</span></a>
       </div>
     </article>
 
@@ -1506,6 +1533,31 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
   .exhibit-arrow { transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); color: var(--exhibit-red); }
   .exhibit-link:hover .exhibit-arrow { transform: translateX(6px); }
 
+  .case-study { margin-top: 4px; }
+  .case-study summary {
+    display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.04em;
+    color: var(--text); list-style: none; padding-bottom: 4px;
+    border-bottom: 1.5px solid var(--exhibit-red); width: fit-content;
+  }
+  .case-study summary::-webkit-details-marker { display: none; }
+  .case-study[open] summary .exhibit-arrow { transform: rotate(90deg); }
+  .case-study-body {
+    margin-top: 28px; max-width: 640px; padding: 28px 0 4px;
+    border-top: 1px solid var(--border);
+  }
+  .case-study-body h4 {
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--exhibit-red); margin: 20px 0 8px; font-weight: 600;
+  }
+  .case-study-body h4:first-child { margin-top: 0; }
+  .case-study-body p {
+    font-size: 14px; line-height: 1.7; color: var(--text-muted); font-weight: 300;
+  }
+  .case-study-body .cs-placeholder {
+    color: var(--text-subtle); font-style: italic; font-size: 13px;
+  }
+
   /* ══════════════════════════════════════════════════════════════
      VARIANT A — contained, image full width of column, left-aligned
      ══════════════════════════════════════════════════════════════ */
@@ -1615,9 +1667,9 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
   <div style="max-width:1100px;margin:0 auto;padding:100px clamp(24px,5vw,60px);">
     <div class="section-label">05 — Skills</div>
     <h2 class="section-title reveal">Capability, <em>by category</em></h2>
-    <div class="skills-cats" style="display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:56px;">
+    <div class="skills-cats" style="display:grid;grid-template-columns:repeat(3,1fr);gap:40px 32px;margin-top:56px;">
       <div>
-        <h3 style="font-size:13px;letter-spacing:.08em;color:var(--exhibit-red,#E8412B);margin-bottom:16px;">AI &amp; MACHINE LEARNING</h3>
+        <h3 style="font-size:13px;letter-spacing:.08em;color:var(--exhibit-red,#E8412B);margin-bottom:16px;">MACHINE LEARNING</h3>
         <p style="font-size:15px;line-height:2;color:var(--text);">Python<br>TensorFlow<br>Scikit-learn<br>NLP<br>Deep Learning</p>
       </div>
       <div>
@@ -1625,8 +1677,16 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
         <p style="font-size:15px;line-height:2;color:var(--text);">SQL<br>Pandas / NumPy<br>Power BI · Tableau<br>Matplotlib · Seaborn</p>
       </div>
       <div>
-        <h3 style="font-size:13px;letter-spacing:.08em;color:var(--exhibit-red,#E8412B);margin-bottom:16px;">CLOUD &amp; ENGINEERING</h3>
-        <p style="font-size:15px;line-height:2;color:var(--text);">AWS SageMaker<br>Google Cloud<br>Flask / REST APIs<br>Git · CI/CD</p>
+        <h3 style="font-size:13px;letter-spacing:.08em;color:var(--exhibit-red,#E8412B);margin-bottom:16px;">CLOUD / MLOPS</h3>
+        <p style="font-size:15px;line-height:2;color:var(--text);">AWS SageMaker<br>Google Cloud<br>CI/CD</p>
+      </div>
+      <div>
+        <h3 style="font-size:13px;letter-spacing:.08em;color:var(--exhibit-red,#E8412B);margin-bottom:16px;">ENGINEERING</h3>
+        <p style="font-size:15px;line-height:2;color:var(--text);">Flask / REST APIs<br>MongoDB · MySQL<br>Git</p>
+      </div>
+      <div>
+        <h3 style="font-size:13px;letter-spacing:.08em;color:var(--exhibit-red,#E8412B);margin-bottom:16px;">FRONTEND</h3>
+        <p style="font-size:15px;line-height:2;color:var(--text);">Next.js<br>React<br>Tailwind CSS</p>
       </div>
     </div>
   </div>
@@ -1733,7 +1793,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
             <span class="cert-badge">AI & ML</span>
           </div>
         </div>
-        <a href="#" style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--text-subtle);text-decoration:none;letter-spacing:.05em;">Credential pending</a>
+        <span style="display:block;padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--text-subtle);letter-spacing:.05em;">Credential pending</span>
       </div>
 
     </div><!-- end cert-grid -->
@@ -1778,21 +1838,20 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
     <div class="interest-card"><div class="interest-icon">🤖</div><h3>AI & The Future</h3><p>I'm fascinated by how AI will reshape everyday life — not just the technical side, but the human side too. Building things that are simple and genuinely useful is what drives me.</p></div>
   </div>
 
-  <!-- D3 Globe -->
-  <div class="reveal" style="margin-top:80px;" id="globe-section">
-    <div style="text-align:center;margin-bottom:32px;">
-      <p style="font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:12px;">Places visited</p>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,44px);font-weight:300;letter-spacing:.02em;">Places I've <em style="font-style:italic;color:var(--text-muted)">called home for a while</em></h3>
+  <!-- D3 Globe — collapsed by default: a small optional detour, not a competing showcase -->
+  <details class="case-study" style="margin-top:56px;max-width:520px;">
+    <summary>A map of where I've been <span class="exhibit-arrow">→</span></summary>
+    <div class="reveal" id="globe-section" style="margin-top:28px;">
+    <div style="text-align:center;margin-bottom:24px;">
+      <div style="display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-bottom:20px;">
+        <div style="text-align:center;"><div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;line-height:1;color:var(--text);" id="g-cn">0</div><div style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);margin-top:6px;">Countries</div></div>
+        <div style="text-align:center;"><div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;line-height:1;color:var(--text);" id="g-mi">0<span style="font-size:16px;color:var(--text-subtle)">k</span></div><div style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);margin-top:6px;">Miles flown</div></div>
+      </div>
+      <p style="text-align:center;font-size:11px;color:var(--text-subtle);margin-bottom:16px;letter-spacing:.08em;">Drag to rotate · Click a glowing country for the story</p>
     </div>
-    <div style="display:flex;justify-content:center;gap:56px;flex-wrap:wrap;margin-bottom:40px;">
-      <div style="text-align:center;"><div style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;line-height:1;color:var(--text);" id="g-cn">0</div><div style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);margin-top:6px;">Countries</div></div>
-      <div style="text-align:center;"><div style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;line-height:1;color:var(--text);" id="g-mi">0<span style="font-size:22px;color:var(--text-subtle)">k</span></div><div style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);margin-top:6px;">Miles flown</div><div style="font-size:11px;color:var(--text-subtle);margin-top:2px;font-style:italic;">≈ 6× around Earth</div></div>
-
-    </div>
-    <p style="text-align:center;font-size:12px;color:var(--text-subtle);margin-bottom:24px;letter-spacing:.1em;">Drag to rotate · Click a glowing country for the story</p>
-    <div style="display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap;">
-      <canvas id="globe-canvas" width="520" height="520" style="cursor:grab;border-radius:50%;flex-shrink:0;max-width:100%;touch-action:none;"></canvas>
-      <div id="globe-panel" style="width:280px;background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:24px 22px;opacity:0;transform:translateX(16px);transition:opacity .35s ease,transform .35s ease;pointer-events:none;max-height:460px;overflow-y:auto;scrollbar-width:thin;">
+    <div style="display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;">
+      <canvas id="globe-canvas" width="280" height="280" style="cursor:grab;border-radius:50%;flex-shrink:0;max-width:100%;touch-action:none;"></canvas>
+      <div id="globe-panel" style="width:240px;background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:20px 18px;opacity:0;transform:translateX(16px);transition:opacity .35s ease,transform .35s ease;pointer-events:none;max-height:380px;overflow-y:auto;scrollbar-width:thin;">
         <button id="globe-panel-close" style="float:right;background:none;border:none;color:var(--text-subtle);font-size:22px;cursor:pointer;line-height:1;margin:-4px -4px 0 0;">×</button>
         <div id="gp-flag" style="font-size:36px;display:block;margin-bottom:10px;clear:both;"></div>
         <div id="gp-name" style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;margin-bottom:4px;color:var(--text);"></div>
@@ -1802,6 +1861,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
       </div>
     </div>
   </div>
+  </details>
 
   <!-- Countries pill grid -->
   <div class="countries-section reveal">
@@ -2012,7 +2072,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 <section id="contact" style="position:relative;">
   <div class="chapter-curve" data-curve-idx="5" style="--curve-color:var(--ch-contact);"><svg viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path class="curve-path" d="M0,70 C300,70 300,70 600,70 C900,70 900,70 1200,70 L1200,140 L0,140 Z"></path></svg></div>
 
-  <div class="section-label">10 — Reach Out</div>
+  <div class="section-label">10 — Contact</div>
   <div class="reachout-grid reveal">
     <div class="reachout-intro">
       <p class="reachout-kicker">Have something worth building? Let's talk.</p>
@@ -2022,38 +2082,9 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
     <div class="reachout-links">
       <a href="https://linkedin.com/in/mouryadusi-dxb" target="_blank" rel="noopener" class="reachout-row cursor-reactive"><span><small>SOCIAL</small>LinkedIn</span><span>↗</span></a>
       <a href="mailto:itsmouryadusi@gmail.com" class="reachout-row cursor-reactive"><span><small>EMAIL</small>itsmouryadusi@gmail.com</span><span>↗</span></a>
-      <a href="tel:+971559315412" class="reachout-row cursor-reactive"><span><small>PHONE</small>Yes, I still answer calls.</span><span>↗</span></a>
+      <a href="tel:+971559315412" class="reachout-row cursor-reactive"><span><small>PHONE</small>+971 55 931 5412</span><span>↗</span></a>
       <a href="https://github.com/mouryadusi" target="_blank" rel="noopener" class="reachout-row cursor-reactive"><span><small>CODE</small>GitHub</span><span>↗</span></a>
-    </div>
-  </div>
-</section>
-
-<!-- Guestbook -->
-<section id="guestbook" style="border-top:1px solid var(--border);">
-  <div style="max-width:1200px;margin:0 auto;padding:120px clamp(24px,5vw,60px);">
-    <div class="section-label">11 — Guestbook</div>
-    <div style="display:grid;grid-template-columns:minmax(0,1fr) 420px;gap:80px;align-items:start;">
-      <div>
-        <h2 class="section-title reveal gb-title">Leave a message</h2>
-        <p style="font-size:15px;color:var(--text-muted);font-weight:300;margin-top:16px;line-height:1.7;max-width:480px;">Say hello, share a thought, or just let me know you were here. All messages appear live.</p>
-        <div id="gb-feed" style="margin-top:48px;display:flex;flex-direction:column;gap:12px;"></div>
-        <div id="gb-empty" style="display:none;"></div>
-      </div>
-      <div class="reveal">
-        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:32px;">
-          <div style="margin-bottom:20px;">
-            <label style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);display:block;margin-bottom:8px;">Your name</label>
-            <input id="gb-name" type="text" maxlength="40" placeholder="Satya" style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:14px;color:var(--text);font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;">
-          </div>
-          <div style="margin-bottom:20px;">
-            <label style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-subtle);display:block;margin-bottom:8px;">Message</label>
-            <textarea id="gb-msg" maxlength="280" placeholder="Say something nice..." rows="4" style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:14px;color:var(--text);font-family:'Inter',sans-serif;outline:none;resize:none;transition:border-color .2s;line-height:1.6;"></textarea>
-            <div style="text-align:right;font-size:11px;color:var(--text-subtle);margin-top:4px;"><span id="gb-count">0</span>/280</div>
-          </div>
-          <button id="gb-submit" style="width:100%;padding:14px;background:var(--text);color:var(--bg);border:none;border-radius:10px;font-size:14px;font-family:'Inter',sans-serif;cursor:pointer;transition:opacity .2s,transform .2s;font-weight:400;">Post message →</button>
-          <div id="gb-status" style="text-align:center;font-size:12px;color:var(--text-subtle);margin-top:12px;min-height:18px;"></div>
-        </div>
-      </div>
+      <a href="/resume.pdf" download class="reachout-row cursor-reactive"><span><small>RÉSUMÉ</small>Download PDF</span><span>↓</span></a>
     </div>
   </div>
 </section>
@@ -2309,23 +2340,14 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
   const greetings = [
     'Thanks for visiting',
     'ధన్యవాదాలు',
-    'Gracias por visitar',
-    'شكرًا لزيارتك',
-    'Français — Merci de votre visite',
-    'தமிழ் — வருகைக்கு நன்றி',
-    '中文 — 感谢您的访问',
-    '한국어 — 방문해 주셔서 감사합니다',
-    'Deutsch — Danke für Ihren Besuch',
-    'Italiano — Grazie per la visita',
-    'మీరు వచ్చినందుకు ధన్యవాదాలు',
-    '訪れてくれてありがとう'
+    'Gracias por visitar'
   ];
   const el=document.getElementById('loader-greeting');
   const loader=document.getElementById('loader');
   const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!el||!loader)return;
   let i=0;
-  const interval=reduced?350:320;
+  const interval=reduced?150:180;
   el.textContent=greetings[0];
   const timer=setInterval(()=>{
     i++;
@@ -2333,7 +2355,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
       clearInterval(timer);
       setTimeout(()=>{
         loader.classList.add('fade-out');
-        setTimeout(()=>{ loader.style.display='none'; document.body.style.overflow=''; },500);
+        setTimeout(()=>{ loader.style.display='none'; document.body.style.overflow=''; },280);
       },interval);
       return;
     }
@@ -3602,7 +3624,7 @@ function addMsg(text,type){
     const camera = new THREE.PerspectiveCamera(55, innerWidth/innerHeight, 0.1, 100);
     camera.position.z = 9;
 
-    const COUNT = innerWidth < 900 ? 60 : 130;
+    const COUNT = innerWidth < 900 ? 35 : 80;
     const positions = new Float32Array(COUNT*3);
     const speeds = [];
     for(let i=0;i<COUNT;i++){
