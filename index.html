@@ -12,11 +12,9 @@
 <meta property="og:url" content="https://mouryadusi.vercel.app/">
 <meta property="og:title" content="Mourya Dusi — Machine Learning Engineer">
 <meta property="og:description" content="Building and shipping ML systems — from a 92%-accuracy prediction pipeline to a production NLP chatbot handling 1,000+ queries a day.">
-<meta property="og:image" content="https://mouryadusi.vercel.app/assets/mourya.jpg">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mourya Dusi — Machine Learning Engineer">
 <meta name="twitter:description" content="Building and shipping ML systems — from a 92%-accuracy prediction pipeline to a production NLP chatbot handling 1,000+ queries a day.">
-<meta name="twitter:image" content="https://mouryadusi.vercel.app/assets/mourya.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..500;1,6..96,400..500&family=Anton&display=swap" rel="stylesheet">
@@ -1097,8 +1095,10 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
   <nav>
     <a href="#selected-work">Work</a>
     <a href="#experience">Experience</a>
+    <a href="#what-i-do">What I Do</a>
     <a href="#skills-restructured">Skills</a>
     <a href="#about">About</a>
+    <a href="#building">Building</a>
     <a href="#fun">Experiments</a>
     <a href="#contact">Contact</a>
     <button id="theme-toggle" aria-label="Toggle theme"></button>
@@ -1114,6 +1114,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
   <a href="#what-i-do" class="mn-link">What I Do</a>
   <a href="#skills-restructured" class="mn-link">Skills</a>
   <a href="#about" class="mn-link">About</a>
+  <a href="#building" class="mn-link">Building</a>
   <a href="#fun" class="mn-link">Experiments</a>
   <a href="#contact" class="mn-link">Contact</a>
 </div>
@@ -1167,13 +1168,16 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
     </div>
     <div class="hero-cta">
       <a href="#selected-work" class="btn btn-primary">View Case Studies</a>
-      <a href="/resume.pdf" class="btn btn-ghost" download>Download Résumé</a>
+      <a href="/resume.pdf" class="btn btn-ghost" download id="resume-cta-hero">Download Résumé</a>
     </div>
   </div>
   <div class="hero-photo-wrap hero-parallax" id="hero-portrait-wrap">
     <div class="hero-photo-frame">
       <img src="assets/mourya.jpg" alt="Mourya Dusi" id="hero-img"
-        onerror="this.onerror=null;this.src='photo.jpg';">
+        onerror="this.style.display='none';document.getElementById('hero-img-fallback').style.display='flex';">
+      <div id="hero-img-fallback" style="display:none;position:absolute;inset:0;width:100%;height:100%;align-items:center;justify-content:center;background:var(--bg3);z-index:2;">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:300;color:var(--text-subtle);">MD</span>
+      </div>
     </div>
     <div class="hero-photo-tag">
       <strong>Mourya Dusi</strong>
@@ -1922,10 +1926,58 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 </div>
 
 <!-- Fun projects -->
+<!-- Currently Building -->
+<section id="building" style="position:relative;border-top:1px solid var(--border);">
+  <div style="max-width:1200px;margin:0 auto;padding:100px clamp(24px,5vw,60px);">
+    <div class="section-label">09 — Currently Building</div>
+    <h2 class="section-title reveal reveal-fade">What I'm <em>building now</em></h2>
+    <p class="reveal reveal-fade" style="font-size:15px;color:var(--text-muted);font-weight:300;margin-top:14px;max-width:560px;line-height:1.7;">Three things in progress, at different stages — shown honestly rather than dressed up as finished work.</p>
+
+    <div class="building-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:56px;">
+
+      <a href="https://zhivatheapp.netlify.app" target="_blank" rel="noopener" class="sw-card" style="display:block;border:1px solid var(--border);border-radius:16px;padding:28px;text-decoration:none;color:inherit;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+          <span style="width:7px;height:7px;border-radius:50%;background:#3FC96C;display:inline-block;"></span>
+          <span style="font-size:11px;letter-spacing:.08em;color:var(--text-subtle);">LIVE · ACTIVE</span>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:24px;font-weight:500;margin-bottom:12px;">ZHIVA</h3>
+        <p style="font-size:13px;color:var(--text-muted);line-height:1.7;margin-bottom:18px;">A personal finance companion — expenses, transactions, budgets, reminders and insights in one place, with a built-in assistant, Shiva, for managing money through natural language.</p>
+        <div style="font-size:11px;letter-spacing:.05em;color:var(--text-subtle);margin-bottom:18px;">Personal Finance · AI Assistant</div>
+        <span style="font-size:13px;font-weight:500;">Try it live ↗</span>
+      </a>
+
+      <div class="sw-card" style="border:1px solid var(--border);border-radius:16px;padding:28px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+          <span style="width:7px;height:7px;border-radius:50%;background:var(--text-subtle);display:inline-block;"></span>
+          <span style="font-size:11px;letter-spacing:.08em;color:var(--text-subtle);">IN DEVELOPMENT</span>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:24px;font-weight:500;margin-bottom:12px;">Veya</h3>
+        <p style="font-size:13px;color:var(--text-muted);line-height:1.7;margin-bottom:18px;">An AI wardrobe assistant — upload clothes you already own, get outfit recommendations with styling explanations, and refine looks by chatting about weather, dress code and preference. Built to make getting dressed faster and more sustainable, not to sell more clothes.</p>
+        <div style="font-size:11px;letter-spacing:.05em;color:var(--text-subtle);margin-bottom:18px;">AI Styling</div>
+        <span style="font-size:13px;color:var(--text-subtle);font-style:italic;">Demo not yet available</span>
+      </div>
+
+      <div class="sw-card" style="border:1px solid var(--border);border-radius:16px;padding:28px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+          <span style="width:7px;height:7px;border-radius:50%;background:var(--text-subtle);display:inline-block;"></span>
+          <span style="font-size:11px;letter-spacing:.08em;color:var(--text-subtle);">IN DEVELOPMENT · MVP</span>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:24px;font-weight:500;margin-bottom:12px;">Dhva AI</h3>
+        <p style="font-size:13px;color:var(--text-muted);line-height:1.7;margin-bottom:18px;">A voice AI receptionist for businesses — answers calls 24/7, understands questions, takes orders and bookings, hands off to a human when needed, and logs every call with transcripts and summaries in a dashboard.</p>
+        <div style="font-size:11px;letter-spacing:.05em;color:var(--text-subtle);margin-bottom:18px;">Voice AI · Call Automation</div>
+        <span style="font-size:13px;color:var(--text-subtle);font-style:italic;">Demo not yet available</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>@media(max-width:860px){ .building-grid { grid-template-columns:1fr !important; } }</style>
+
 <section id="fun" style="position:relative;border-top:1px solid var(--border);">
   <div class="chapter-curve" data-curve-idx="4" style="--curve-color:var(--ch-fun);"><svg viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path class="curve-path" d="M0,70 C300,70 300,70 600,70 C900,70 900,70 1200,70 L1200,140 L0,140 Z"></path></svg></div>
 
-  <div class="section-label">09 — Creative Playground</div>
+  <div class="section-label">10 — Creative Playground</div>
   <h2 class="section-title reveal reveal-fade">Digital Experiments</h2>
   <p class="reveal reveal-fade" style="font-size:15px;color:var(--text-muted);font-weight:300;margin-top:20px;max-width:520px;line-height:1.7;">Outside of client and coursework, I build small experimental sites just to try things out — a different corner of the sandbox from the case-study projects above.</p>
 
@@ -2072,7 +2124,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 <section id="contact" style="position:relative;">
   <div class="chapter-curve" data-curve-idx="5" style="--curve-color:var(--ch-contact);"><svg viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path class="curve-path" d="M0,70 C300,70 300,70 600,70 C900,70 900,70 1200,70 L1200,140 L0,140 Z"></path></svg></div>
 
-  <div class="section-label">10 — Contact</div>
+  <div class="section-label">11 — Contact</div>
   <div class="reachout-grid reveal">
     <div class="reachout-intro">
       <p class="reachout-kicker">Have something worth building? Let's talk.</p>
@@ -2084,7 +2136,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
       <a href="mailto:itsmouryadusi@gmail.com" class="reachout-row cursor-reactive"><span><small>EMAIL</small>itsmouryadusi@gmail.com</span><span>↗</span></a>
       <a href="tel:+971559315412" class="reachout-row cursor-reactive"><span><small>PHONE</small>+971 55 931 5412</span><span>↗</span></a>
       <a href="https://github.com/mouryadusi" target="_blank" rel="noopener" class="reachout-row cursor-reactive"><span><small>CODE</small>GitHub</span><span>↗</span></a>
-      <a href="/resume.pdf" download class="reachout-row cursor-reactive"><span><small>RÉSUMÉ</small>Download PDF</span><span>↓</span></a>
+      <a href="/resume.pdf" download class="reachout-row cursor-reactive" id="resume-cta-contact"><span><small>RÉSUMÉ</small>Download PDF</span><span>↓</span></a>
     </div>
   </div>
 </section>
@@ -3256,6 +3308,11 @@ const AI_KB = [
   { k:['taxi','lost item'], a:()=>projectSummary('taxi-lost') },
   { k:['student performance','92%','risk prediction'], a:()=>projectSummary('student-performance') },
   { k:['chatbot','university chatbot','nlp bot'], a:()=>projectSummary('university-chatbot') },
+  { k:['zhiva'], a:"ZHIVA is a personal finance app he's actively building — tracks expenses, transactions, budgets and reminders in one place, with a built-in assistant (Shiva) for managing money through natural language. It's live at zhivatheapp.netlify.app." },
+  { k:['veya'], a:"Veya is an AI wardrobe assistant he's currently developing — upload clothes you own, get outfit recommendations with styling explanations, and refine looks by chatting about weather, dress code and preference. It's still in development, no public demo yet." },
+  { k:['dhva'], a:"Dhva AI is a voice AI receptionist for businesses he's currently developing — answers calls 24/7, understands questions, takes orders and bookings, and hands off to a human when needed, logging every call with transcripts. It's an MVP, still in development, no public demo yet." },
+  { k:['currently building','what is he building','building now'],
+    a:"Three things, at different stages: ZHIVA (a personal finance app, live now), Veya (an AI wardrobe assistant, in development), and Dhva AI (a voice AI receptionist for businesses, MVP stage). Ask about any one by name for details." },
   { k:['built','portfolio project','which projects','list of projects','ship','his projects','projects has he'],
     a:"Five main projects: destination.com (AI travel platform — his featured live product), Smart Exit Reminder (mobile sensor-fusion AI), Taxi Lost Item Detection (privacy-first edge AI), Student Performance Prediction (92% accuracy ML pipeline), and an Intelligent University Chatbot (NLP, 1,000+ queries/day). Ask about any one by name for details." },
 
@@ -3913,6 +3970,26 @@ function addMsg(text,type){
   // in the panel too, so the two systems agree rather than fight
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches && !active.has('reducemotion')){
     active.add('reducemotion'); applyClasses(); renderOptions('all');
+  }
+})();
+</script>
+<script>
+(function(){
+  // Graceful failure: don't leave a "Download Résumé" button pointing at a
+  // 404. Check once on load; if the file isn't there, convert both résumé
+  // CTAs into an honest, working alternative instead of a dead download.
+  fetch('/resume.pdf', {method:'HEAD'}).then(res=>{
+    if(res.ok) return;
+    degrade();
+  }).catch(degrade);
+  function degrade(){
+    document.querySelectorAll('#resume-cta-hero, #resume-cta-contact').forEach(el=>{
+      el.removeAttribute('download');
+      el.href = 'mailto:itsmouryadusi@gmail.com?subject=Resume%20request';
+      const label = el.querySelector('small');
+      if(label){ label.nextSibling && (label.nextSibling.textContent = 'Request by email'); }
+      else { el.textContent = 'Request Résumé by Email'; }
+    });
   }
 })();
 </script>
