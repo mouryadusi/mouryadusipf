@@ -1247,7 +1247,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 
   <div class="section-label">02 — Work</div>
   <h2 class="section-title reveal reveal-fade">Featured<br><em>projects</em></h2>
-  <p class="exhibit-intro reveal reveal-fade">Five things I've built, laid out like an exhibition rather than a grid. Scroll through — each one gets its own moment.</p>
+  <p class="exhibit-intro reveal reveal-fade">Six things I've built, laid out like an exhibition rather than a grid. Scroll through — each one gets its own moment.</p>
 
   <div class="exhibit-projects">
 
@@ -1415,6 +1415,49 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
         <p class="exhibit-desc">Camera-free sensor system detecting forgotten belongings in taxis using pressure, infrared and ultrasonic sensing, kept entirely on-device.</p>
         <div class="exhibit-tags"><span>IoT</span><span>Edge Computing</span><span>Privacy</span><span>Sensors</span></div>
         <a href="https://mouryadusi.github.io/taxi-lost-item-detection.html" target="_blank" rel="noopener" class="exhibit-link">View Project <span class="exhibit-arrow">→</span></a>
+      </div>
+    </article>
+        <!-- 06 — MSc Dissertation: GNN aircraft conflict detection -->
+    <article class="exhibit-project v-b" id="case-airspacegnn">
+      <div class="exhibit-row-top reveal">
+        <span class="exhibit-num">06</span>
+        <span class="exhibit-meta-line">2026 · MSC DISSERTATION · GRAPH ML</span>
+      </div>
+      <h3 class="exhibit-title reveal rv-mask">Can a Graph Neural Network Spot Mid-Air Conflicts?</h3>
+      <div class="exhibit-visual reveal rv-scale">
+        <div class="exhibit-red-field">
+          <div class="exhibit-visual-inner">
+            <div class="app-showcase">
+              <div class="showcase-header">XGBoost F1 0.9994 → leakage found</div>
+              <div class="route-showcase">
+                <div class="route-item">GCN test F1 = 0.6898</div>
+                <div class="route-info">81,270 aircraft pairs · 2.2% conflict rate</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="exhibit-caption">And can you trust a 99.9% score?</span>
+      </div>
+      <div class="exhibit-foot reveal">
+        <p class="exhibit-desc"><strong>MSc Dissertation · Data Science &amp; AI · Middlesex University Dubai · 2026.</strong> Investigates whether graph neural networks can predict aircraft conflicts using ADS-B traffic data, and why suspiciously high model scores require rigorous leakage audits.</p>
+        <div class="exhibit-tags"><span>Python</span><span>PyTorch Geometric</span><span>XGBoost</span><span>OpenSky ADS-B</span><span>Apple Silicon (MPS)</span></div>
+        <a href="https://airspacegnn.onrender.com" target="_blank" rel="noopener" class="exhibit-link">View Live Demo <span class="exhibit-arrow">→</span></a>
+        <details class="case-study">
+          <summary>Read the Case Study <span class="exhibit-arrow">→</span></summary>
+          <div class="case-study-body">
+            <h4>The approach</h4>
+            <p><strong>Dataset:</strong> 3.9M OpenSky Network ADS-B reports, cleaned to 1.7M observations from Central Europe (5 June 2017).</p>
+            <p><strong>Graphs:</strong> 72,841 snapshots and 674,186 aircraft-pair edges; approximately 2% were conflicts.</p>
+            <p><strong>Models:</strong> Rule-based ICAO separation baseline (5 NM horizontal, 1,000 ft vertical), XGBoost, GCN, and GAT.</p>
+            <p><strong>Validation:</strong> Chronological train/validation/test split and audits for feature leakage, temporal leakage, data quality, and traceability.</p>
+            <h4>Key finding</h4>
+            <p>XGBoost initially achieved <strong>F1 = 0.9994</strong> because DCPA (Distance at Closest Point of Approach) leaked future encounter information. Removing DCPA caused its performance to collapse to zero. After removing the leaking feature, GCN achieved <strong>test F1 = 0.6898</strong> on 81,270 aircraft pairs, with a 2.2% conflict rate.</p>
+            <h4>Limitations</h4>
+            <p>GCN and GAT could not be fairly compared because their dataset populations and target definitions differed, and GAT training was incomplete. The study covers one airspace, one day, and one random seed; it is not operationally validated or deployable.</p>
+            <h4>Lessons</h4>
+            <p>High scores require auditing; conclusions must match the evidence; rigorous methodology is itself a contribution.</p>
+          </div>
+        </details>
       </div>
     </article>
 
