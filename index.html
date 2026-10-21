@@ -824,7 +824,10 @@
 .hero-photo-frame img{width:100%!important;height:100%!important;max-height:none!important;object-fit:contain!important;object-position:center center!important;border-radius:inherit!important;}
 @media(max-width:900px){.hero-photo-frame{width:min(430px,62vw)!important;}}
 @media(max-width:700px){.hero-photo-frame{width:min(380px,82vw)!important;}}
-
+/* Hero tag sits below the photo, never over it */
+.hero-photo-wrap{width:fit-content;}
+.hero-photo-tag{position:static!important;margin-top:20px;width:fit-content;max-width:100%;white-space:normal!important;}
+@media(max-width:900px){.hero-photo-wrap{max-width:none!important;margin-inline:auto;}}
 /* Reach Out */
 .reachout-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:clamp(50px,9vw,130px);align-items:end;}
 .reachout-kicker{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:28px;}
@@ -2117,7 +2120,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
       <p class="reachout-note">AI, data, useful products, or a problem that has been sitting on your desk for too long.</p>
     </div>
     <div class="reachout-links">
-      <a href="https://linkedin.com/in/mouryadusi-dxb" target="_blank" rel="noopener" class="reachout-row cursor-reactive"><span><small>SOCIAL</small>LinkedIn</span><span>↗</span></a>
+      <a href="https://linkedin.com/in/mouryadusi" target="_blank" rel="noopener" class="reachout-row cursor-reactive"><span><small>SOCIAL</small>LinkedIn</span><span>↗</span></a>
       <a href="mailto:itsmouryadusi@gmail.com" class="reachout-row cursor-reactive"><span><small>EMAIL</small>itsmouryadusi@gmail.com</span><span>↗</span></a>
       <a href="tel:+971559315412" class="reachout-row cursor-reactive"><span><small>PHONE</small>+971 55 931 5412</span><span>↗</span></a>
       <a href="https://github.com/mouryadusi" target="_blank" rel="noopener" class="reachout-row cursor-reactive"><span><small>CODE</small>GitHub</span><span>↗</span></a>
