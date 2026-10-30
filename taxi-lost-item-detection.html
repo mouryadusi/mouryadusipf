@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taxi Lost Item Detection System | Mourya Dusi</title>
+<style>
+:root {
+    --color-bg: #ffffff;
+    --color-bg-secondary: #fafafa;
+    --color-surface: #f5f5f7;
+    --color-accent: #0071e3;
+    --color-accent-hover: #0077ed;
+    --color-text: #1d1d1f;
+    --color-text-secondary: #6e6e73;
+    --color-border: #d2d2d7;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.47059;
+    font-weight: 400;
+    letter-spacing: -0.022em;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Navigation */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.nav-content {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 44px;
+}
+
+.nav-brand {
+    font-size: 21px;
+    font-weight: 600;
+    color: var(--color-text);
+    text-decoration: none;
+    letter-spacing: -0.03em;
+}
+
+.nav-link {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #000000;
+}
+
+/* Hero */
+header {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 22px 80px;
+    background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+    text-align: center;
+}
+
+/* Logo Container */
+.logo-container {
+    margin: 0 auto 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.taxi-logo {
+    width: 120px;
+    height: 120px;
+}
+
+.hero-label {
+    font-size: 17px;
+    line-height: 1.23536;
+    font-weight: 600;
+    letter-spacing: 0.012em;
+    color: var(--color-accent);
+    margin-bottom: 8px;
+}
+
+h1 {
+    font-size: clamp(48px, 7vw, 80px);
+    line-height: 1.05;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--color-text);
+    margin-bottom: 16px;
+}
+
+.hero-subtitle {
+    font-size: clamp(21px, 3vw, 28px);
+    line-height: 1.14286;
+    font-weight: 400;
+    color: var(--color-text-secondary);
+    max-width: 700px;
+    margin: 0 auto 40px;
+}
+
+/* Sections */
+section {
+    padding: 100px 22px;
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-label {
+    font-size: 17px;
+    line-height: 1.23536;
+    font-weight: 600;
+    letter-spacing: 0.012em;
+    color: var(--color-accent);
+    margin-bottom: 8px;
+}
+
+.section-title {
+    font-size: clamp(40px, 5vw, 56px);
+    line-height: 1.07143;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    color: var(--color-text);
+}
+
+.section-description {
+    font-size: 21px;
+    line-height: 1.381;
+    font-weight: 400;
+    color: var(--color-text-secondary);
+    max-width: 700px;
+    margin: 16px auto 0;
+}
+
+/* Problem/Solution */
+.ps-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.ps-card {
+    background: var(--color-bg);
+    padding: 40px;
+    border-radius: 18px;
+    border: 1px solid var(--color-border);
+}
+
+.ps-icon {
+    font-size: 56px;
+    margin-bottom: 24px;
+    display: block;
+}
+
+.ps-card h3 {
+    font-size: 32px;
+    line-height: 1.125;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.ps-card p {
+    font-size: 17px;
+    line-height: 1.47059;
+    color: var(--color-text-secondary);
+    margin-bottom: 20px;
+}
+
+.ps-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.ps-card li {
+    font-size: 17px;
+    line-height: 1.47059;
+    color: var(--color-text-secondary);
+    padding: 8px 0;
+    padding-left: 28px;
+    position: relative;
+}
+
+.ps-card li:before {
+    content: "•";
+    position: absolute;
+    left: 8px;
+    color: var(--color-accent);
+    font-size: 20px;
+}
+
+/* Features Grid */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
+    margin-top: 60px;
+}
+
+.feature-card {
+    text-align: center;
+    padding: 40px 24px;
+}
+
+.feature-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.feature-card h3 {
+    font-size: 24px;
+    line-height: 1.16667;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    font-size: 17px;
+    line-height: 1.47059;
+    color: var(--color-text-secondary);
+}
+
+/* Technical Details */
+.tech-section {
+    background: var(--color-bg-secondary);
+    padding: 100px 22px;
+}
+
+.tech-card {
+    background: var(--color-bg);
+    border-radius: 18px;
+    border: 1px solid var(--color-border);
+    margin-bottom: 32px;
+    overflow: hidden;
+}
+
+.tech-header {
+    padding: 32px;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.tech-number {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--color-accent);
+    color: white;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+}
+
+.tech-header h3 {
+    font-size: 28px;
+    line-height: 1.14286;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.tech-body {
+    padding: 32px;
+}
+
+.tech-body p {
+    font-size: 17px;
+    line-height: 1.47059;
+    color: var(--color-text-secondary);
+    margin-bottom: 16px;
+}
+
+.tech-body ul {
+    list-style: none;
+    padding: 0;
+}
+
+.tech-body li {
+    padding: 8px 0;
+    padding-left: 24px;
+    position: relative;
+    font-size: 17px;
+    line-height: 1.47059;
+    color: var(--color-text-secondary);
+}
+
+.tech-body li:before {
+    content: "▹";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-size: 20px;
+}
+
+/* CTA */
+.cta-section {
+    background: var(--color-bg-secondary);
+    padding: 100px 22px;
+    text-align: center;
+}
+
+.cta-section h2 {
+    font-size: clamp(40px, 5vw, 56px);
+    line-height: 1.07143;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.cta-section p {
+    font-size: 21px;
+    line-height: 1.381;
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    margin: 0 auto 40px;
+}
+
+.btn-group {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    padding: 12px 24px;
+    font-size: 17px;
+    line-height: 1.17648;
+    font-weight: 400;
+    letter-spacing: -0.022em;
+    text-decoration: none;
+    border: none;
+    border-radius: 980px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
+    white-space: nowrap;
+}
+
+.btn-primary {
+    background: var(--color-accent);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background: var(--color-accent-hover);
+    transform: scale(1.02);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+}
+
+.btn-secondary:hover {
+    background: var(--color-accent);
+    color: #ffffff;
+}
+
+/* Footer */
+footer {
+    background: var(--color-surface);
+    padding: 60px 22px;
+    text-align: center;
+    border-top: 1px solid var(--color-border);
+}
+
+footer p {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    line-height: 1.33337;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .ps-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    
+    .taxi-logo {
+        width: 100px;
+        height: 100px;
+    }
+
+    section {
+        padding: 60px 16px;
+    }
+
+    .tech-section {
+        padding: 60px 16px;
+    }
+
+    .cta-section {
+        padding: 60px 16px;
+    }
+
+    .tech-header, .tech-body {
+        padding: 24px 20px;
+    }
+
+    .ps-card {
+        padding: 32px 24px;
+    }
+
+    .feature-card {
+        padding: 32px 20px;
+    }
+
+    h1 {
+        font-size: 48px;
+    }
+
+    .hero-subtitle {
+        font-size: 20px;
+    }
+
+    .section-title {
+        font-size: 40px;
+    }
+
+    .section-description {
+        font-size: 18px;
+    }
+
+    .tech-header h3 {
+        font-size: 24px;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .taxi-logo {
+        width: 80px;
+        height: 80px;
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+
+    .ps-card h3 {
+        font-size: 24px;
+    }
+
+    .tech-header h3 {
+        font-size: 20px;
+    }
+
+    .feature-card h3 {
+        font-size: 20px;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="nav-content">
+        <a href="profile.html" class="nav-brand">Mourya Dusi</a>
+        <a href="profile.html#projects" class="nav-link">Back to Portfolio</a>
+    </div>
+</nav>
+
+<!-- Hero -->
+<header>
+    <div style="max-width: 800px;">
+        <!-- Creative Logo -->
+        <div class="logo-container">
+            <svg class="taxi-logo" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                <!-- Outer circle -->
+                <circle cx="60" cy="60" r="55" fill="none" stroke="#0071e3" stroke-width="2"/>
+                
+                <!-- Taxi body -->
+                <rect x="30" y="50" width="60" height="30" rx="4" fill="#0071e3" opacity="0.9"/>
+                
+                <!-- Taxi windows -->
+                <rect x="35" y="54" width="22" height="12" rx="2" fill="#ffffff"/>
+                <rect x="63" y="54" width="22" height="12" rx="2" fill="#ffffff"/>
+                
+                <!-- Taxi wheels -->
+                <circle cx="40" cy="82" r="6" fill="#1d1d1f"/>
+                <circle cx="80" cy="82" r="6" fill="#1d1d1f"/>
+                
+                <!-- Lost item (bag) inside taxi -->
+                <g transform="translate(60, 60)">
+                    <path d="M -8 5 L -8 12 L 8 12 L 8 5 Z" fill="#ff3b30"/>
+                    <path d="M -6 5 Q 0 -2, 6 5" fill="none" stroke="#ff3b30" stroke-width="2"/>
+                    <circle cx="0" cy="9" r="1.5" fill="#ffffff"/>
+                </g>
+                
+                <!-- Alert/scan waves -->
+                <g opacity="0.6">
+                    <circle cx="60" cy="60" r="40" fill="none" stroke="#ff3b30" stroke-width="1.5" stroke-dasharray="5,5"/>
+                    <circle cx="60" cy="60" r="48" fill="none" stroke="#ff3b30" stroke-width="1" stroke-dasharray="5,5"/>
+                </g>
+                
+                <!-- Sensor beams -->
+                <line x1="25" y1="50" x2="35" y2="55" stroke="#0071e3" stroke-width="2" opacity="0.7"/>
+                <line x1="95" y1="50" x2="85" y2="55" stroke="#0071e3" stroke-width="2" opacity="0.7"/>
+                
+                <!-- Checkmark in corner (detection success) -->
+                <g transform="translate(90, 20)">
+                    <circle cx="0" cy="0" r="10" fill="#34c759"/>
+                    <path d="M -4 0 L -1 4 L 4 -4" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+                
+                <!-- Text "TLID" (Taxi Lost Item Detection) -->
+                <text x="60" y="100" font-family="-apple-system, sans-serif" font-size="10" font-weight="600" fill="#6e6e73" text-anchor="middle">TLID</text>
+            </svg>
+        </div>
+        
+        <div class="hero-label">IoT Solution for Urban Transportation</div>
+        <h1>Taxi Lost Item Detection</h1>
+        <p class="hero-subtitle">Smart sensor system preventing passenger belongings from being left behind in taxis — protecting tourists and travelers worldwide.</p>
+    </div>
+</header>
+
+<!-- Problem/Solution -->
+<section>
+    <div class="section-header">
+        <div class="section-label">Challenge</div>
+        <h2 class="section-title">The Problem</h2>
+    </div>
+    <div class="ps-grid">
+        <div class="ps-card">
+            <span class="ps-icon">🚕</span>
+            <h3>Current Reality</h3>
+            <p>Every day, thousands of passengers leave personal items in taxis worldwide. Tourists, business travelers, and locals lose phones, bags, wallets, and important documents.</p>
+            <ul>
+                <li>No automated detection system exists</li>
+                <li>Drivers discover items hours later</li>
+                <li>Passengers realize loss after departing</li>
+                <li>Recovery is time-consuming and difficult</li>
+                <li>Lost items cost travelers significant stress</li>
+            </ul>
+        </div>
+        <div class="ps-card">
+            <span class="ps-icon">✨</span>
+            <h3>Our Solution</h3>
+            <p>Real-time sensor system that tracks items entering and exiting taxis, alerting drivers immediately when passengers leave belongings behind.</p>
+            <ul>
+                <li>Automatic item detection on entry</li>
+                <li>Exit verification system</li>
+                <li>Instant driver alerts</li>
+                <li>Privacy-first design (no cameras)</li>
+                <li>Works seamlessly in background</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Core Features -->
+<section style="background: var(--color-bg-secondary); padding: 100px 22px;">
+    <div style="max-width: 980px; margin: 0 auto;">
+        <div class="section-header">
+            <div class="section-label">System Capabilities</div>
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-description">Intelligent sensor network that respects privacy while preventing lost belongings.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="feature-icon">📡</span>
+                <h3>Entry Detection</h3>
+                <p>Weight sensors and IR beams detect items passengers bring into the taxi upon boarding.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🔍</span>
+                <h3>Exit Monitoring</h3>
+                <p>System verifies all detected items leave with passenger when exiting the vehicle.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">⚡</span>
+                <h3>Instant Alerts</h3>
+                <p>Driver receives immediate visual and audio notification if item remains after passenger exits.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🔒</span>
+                <h3>Privacy First</h3>
+                <p>No cameras, no personal data recorded — only item presence detection.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">⚙️</span>
+                <h3>Easy Integration</h3>
+                <p>Retrofits to existing taxi infrastructure with minimal installation.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🌍</span>
+                <h3>24/7 Operation</h3>
+                <p>Works continuously in all lighting and weather conditions.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Technical Implementation -->
+<section class="tech-section">
+    <div style="max-width: 980px; margin: 0 auto;">
+        <div class="section-header">
+            <div class="section-label">Architecture</div>
+            <h2 class="section-title">Technical Implementation</h2>
+            <p class="section-description">Comprehensive sensor fusion system with intelligent detection algorithms.</p>
+        </div>
+        
+        <!-- Sensor Technology -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <span class="tech-number">01</span>
+                <h3>Sensor Technology</h3>
+            </div>
+            <div class="tech-body">
+                <p><strong>Multi-sensor array combining:</strong></p>
+                <ul>
+                    <li>Pressure/weight sensors on seats and floor</li>
+                    <li>Infrared beam sensors at door entry points</li>
+                    <li>Ultrasonic proximity sensors for 3D space mapping</li>
+                    <li>Time-of-flight (ToF) sensors for object detection</li>
+                    <li>Low-power microcontroller processing unit</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Detection Mechanism -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <span class="tech-number">02</span>
+                <h3>Detection Mechanism</h3>
+            </div>
+            <div class="tech-body">
+                <p><strong>Entry Detection Process:</strong></p>
+                <ul>
+                    <li>Door opening triggers sensor activation</li>
+                    <li>IR beams detect objects passing through doorway</li>
+                    <li>Weight sensors capture item mass (bags, phones, etc.)</li>
+                    <li>System creates "item signature" for each detected object</li>
+                    <li>Data stored temporarily during ride (deleted after successful exit)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Exit Verification -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <span class="tech-number">03</span>
+                <h3>Exit Verification</h3>
+            </div>
+            <div class="tech-body">
+                <p><strong>Smart Exit Monitoring:</strong></p>
+                <ul>
+                    <li>Door opens → system switches to exit verification mode</li>
+                    <li>Sensors detect items leaving through doorway</li>
+                    <li>Algorithm matches exit signatures with entry signatures</li>
+                    <li>Weight sensors verify item removal from seats</li>
+                    <li>30-second window after passenger exits for final verification</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Alert System -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <span class="tech-number">04</span>
+                <h3>Alert System</h3>
+            </div>
+            <div class="tech-body">
+                <p><strong>Multi-modal Driver Notification:</strong></p>
+                <ul>
+                    <li>Visual: Dashboard LED lights up red</li>
+                    <li>Audio: Gentle chime sound alert</li>
+                    <li>Display: "Item Detected in Backseat" message</li>
+                    <li>Optional: Mobile app notification for driver</li>
+                    <li>Alert persists until driver acknowledges or item removed</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Privacy & Security -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <span class="tech-number">05</span>
+                <h3>Privacy & Security</h3>
+            </div>
+            <div class="tech-body">
+                <p><strong>Privacy-First Architecture:</strong></p>
+                <ul>
+                    <li>No cameras — only presence/absence detection</li>
+                    <li>No recording of personal information or identifiable features</li>
+                    <li>Data exists only during active ride (30 seconds after exit)</li>
+                    <li>No cloud storage — all processing on-device</li>
+                    <li>Cannot identify what the item is, only that something exists</li>
+                    <li>GDPR and data protection compliant design</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Implementation Challenges -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <span class="tech-number">06</span>
+                <h3>Implementation Challenges</h3>
+            </div>
+            <div class="tech-body">
+                <p><strong>Technical Considerations:</strong></p>
+                <ul>
+                    <li>Distinguishing between items and passengers' clothing/body</li>
+                    <li>Handling multiple passengers with multiple items</li>
+                    <li>Calibration for different vehicle types and sizes</li>
+                    <li>False positive management (newspapers, trash)</li>
+                    <li>Power consumption optimization for taxi batteries</li>
+                    <li>Integration with existing taxi management systems</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Future Enhancements -->
+        <div class="tech-card">
+            <div class="tech-header">
+                <span class="tech-number">07</span>
+                <h3>Future Enhancements</h3>
+            </div>
+            <div class="tech-body">
+                <p><strong>Next-Generation Features:</strong></p>
+                <ul>
+                    <li>Machine learning for improved detection accuracy over time</li>
+                    <li>Passenger mobile app integration with receipt-based matching</li>
+                    <li>Item categorization (bag, phone, umbrella) without visual recording</li>
+                    <li>Pattern recognition for frequent passenger routes</li>
+                    <li>Integration with lost & found databases</li>
+                    <li>Blockchain-based item tracking for secure recovery</li>
+                    <li>Smart city integration for cross-taxi lost item network</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <h2>Preventing Lost Belongings</h2>
+        <p>This IoT solution demonstrates expertise in sensor systems, privacy-preserving technology, and real-world problem solving for urban transportation.</p>
+        <div class="btn-group">
+            <a href="profile.html#contact" class="btn btn-primary">Discuss This Project</a>
+            <a href="profile.html#projects" class="btn btn-secondary">View More Projects</a>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>© 2025 Mourya Dusi. All rights reserved.</p>
+    <p style="margin-top: 8px;">IoT Solution Concept by Mourya Dusi • Dubai, UAE</p>
+</footer>
+
+</body>
+</html>
