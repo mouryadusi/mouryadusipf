@@ -3286,26 +3286,6 @@ document.addEventListener('DOMContentLoaded', function(){
     projectsList.parentElement.insertBefore(npView, projectsList);
   }
 
-  // ── INJECT FLIGHT MAP into personal section ──
-  const countriesSection = document.querySelector('.countries-section');
-  if(countriesSection){
-    const flightSection = document.createElement('div');
-    flightSection.id='flight-map-section';
-    flightSection.className='reveal';
-    flightSection.innerHTML=`
-      <h3>Flight paths</h3>
-
-      <div id="flight-canvas-wrap">
-        <svg id="flight-svg" viewBox="0 0 860 420" xmlns="http://www.w3.org/2000/svg"></svg>
-        <div class="flight-tooltip" id="flight-tip"></div>
-      </div>
-    `;
-    countriesSection.parentElement.insertBefore(flightSection, countriesSection);
-    initFlightMap();
-  }
-
-
-
   // ── INJECT AI CHAT BUBBLE ──
   const bubble = document.createElement('button');
   bubble.id='ai-bubble';
@@ -3405,67 +3385,7 @@ function toggleNewspaper(){
 }
 window.toggleNewspaper=toggleNewspaper;
 
-// ── FLIGHT MAP ──
-function initFlightMap(){
-  const svg=document.getElementById('flight-svg');
-  if(!svg)return;
-  const W=860,H=420;
-  // Cities: [name, x, y, story]
-  const cities=[
-    {id:'VIZ',n:'Vijayawada',x:620,y:230,story:'Home base. Every journey starts and ends here.',home:true},
-    {id:'DXB',n:'Dubai, UAE',x:530,y:195,story:'5+ trips. Now a second home. Sharjah, Abu Dhabi, Ajman explored.'},
-    {id:'KUL',n:'Kuala Lumpur',x:690,y:260,story:'First international trip — with Dad. Petronas Towers at night.'},
-    {id:'SIN',n:'Singapore',x:700,y:278,story:'Twice — solo, then with buddies. Gardens by the Bay. Hawker food.'},
-    {id:'BKK',n:'Bangkok',x:672,y:242,story:'Thailand — twice. Beaches, temples, chaos. Zero regrets.'},
-    {id:'NYC',n:'USA',x:195,y:165,story:'Road trip: Texas→Colorado→New Mexico→Nevada→Utah→Arizona.'},
-    {id:'KTM',n:'Kathmandu',x:632,y:215,story:'With parents. The Himalayas make everything feel possible and tiny.'},
-    {id:'HCM',n:'Ho Chi Minh City',x:686,y:258,story:'Vietnam with the squad. The food is extraordinary.'},
-    {id:'CMB',n:'Colombo',x:607,y:258,story:'Sri Lanka — recent visit. Tea highlands, temples, golden beaches.'},
-  ];
-  // Draw paths first
-  const colors=['#4ade80','#60a5fa','#f472b6','#fb923c','#a78bfa','#34d399','#fbbf24','#f87171','#818cf8'];
-  const viz=cities[0];
-  cities.slice(1).forEach((city,i)=>{
-    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
-    const mx=(viz.x+city.x)/2;
-    const my=Math.min(viz.y,city.y)-60-Math.abs(viz.x-city.x)*0.08;
-    path.setAttribute('d',`M${viz.x},${viz.y} Q${mx},${my} ${city.x},${city.y}`);
-    path.setAttribute('class','flight-path animated');
-    path.setAttribute('stroke',colors[i%colors.length]);
-    path.setAttribute('stroke-width','1.5');
-    path.style.animationDelay=(i*0.2)+'s';
-    svg.appendChild(path);
-  });
-  // Draw dots + labels
-  const tip=document.getElementById('flight-tip');
-  cities.forEach((city,i)=>{
-    const g=document.createElementNS('http://www.w3.org/2000/svg','g');
-    const circle=document.createElementNS('http://www.w3.org/2000/svg','circle');
-    circle.setAttribute('cx',city.x);circle.setAttribute('cy',city.y);
-    circle.setAttribute('r',city.home?7:5);
-    circle.setAttribute('fill',city.home?'#f0f0f0':colors[(i-1+colors.length)%colors.length]);
-    circle.setAttribute('class','flight-dot');
-    circle.setAttribute('stroke','#0a0a0a');circle.setAttribute('stroke-width','1.5');
-    const label=document.createElementNS('http://www.w3.org/2000/svg','text');
-    label.setAttribute('x',city.x);label.setAttribute('y',city.y-12);
-    label.setAttribute('text-anchor','middle');
-    label.setAttribute('fill','#888');label.setAttribute('font-size','10');
-    label.setAttribute('font-family','Inter,sans-serif');
-    label.textContent=city.n;
-    g.appendChild(circle);g.appendChild(label);
-    g.style.cursor='pointer';
-    g.addEventListener('mouseenter',e=>{
-      const rect=svg.getBoundingClientRect();
-      const wrap=document.getElementById('flight-canvas-wrap').getBoundingClientRect();
-      tip.innerHTML=`<strong>${city.n}</strong><span>${city.story}</span>`;
-      tip.style.opacity='1';
-      tip.style.left=(e.clientX-wrap.left+12)+'px';
-      tip.style.top=(e.clientY-wrap.top-20)+'px';
-    });
-    g.addEventListener('mouseleave',()=>{tip.style.opacity='0';});
-    svg.appendChild(g);
-  });
-}
+
 
 // ── KNOWLEDGE GRAPH ──
 
@@ -3535,12 +3455,7 @@ const AI_KB = [
   { k:['contact','email','reach him','linkedin','github','social','message','get in touch'],
     a:"itsmouryadusi@gmail.com is the best way to reach him. He's also on LinkedIn at linkedin.com/in/mouryadusi-dxb and GitHub at github.com/mouryadusi." },
 
-  // ── Light personal context already public elsewhere on the site ──
-  { k:['travel','countries visited','countries','visited','trip','malaysia','singapore','uae','thailand','nepal','vietnam','sri lanka'],
-    a:"He's visited 10 countries — India (home), UAE (based there now), Malaysia, Singapore, Thailand, Vietnam, USA, Nepal, and Sri Lanka. Mostly solo travel." },
-  { k:['music','hobby','interest','outside of work','free time'],
-    a:"Outside of work he's into music, travels mostly solo, and follows where AI is heading — both the systems and what it means for people." },
-];
+
 
 function projectSummary(slug){
   const p = (window.__PROJECT_DATA || {})[slug];
