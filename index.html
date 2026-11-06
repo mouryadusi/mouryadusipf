@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mourya Dusi — Machine Learning Engineer</title>
-<meta name="description" content="Mourya Dusi is a Machine Learning Engineer building and shipping ML systems — from a 92%-accuracy prediction pipeline to a production NLP chatbot handling 1,000+ queries a day. ML Engineering experience at Accenture, MSc Data Science & AI in progress.">
+<meta name="description" content="Mourya Dusi is a Machine Learning Engineer building and shipping ML systems — from a 92%-accuracy prediction pipeline to a production NLP chatbot handling 1,000+ queries a day. ML Engineering experience at Accenture, MSc in Data Science & AI from Middlesex University Dubai.">
 <link rel="canonical" href="https://mouryadusi.vercel.app/">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -1028,6 +1028,149 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 #project-tab-experience .pte-panel.active{pointer-events:auto;}
 #project-tab-experience .pte-panel-bg{opacity:.98;}
 </style>
+
+<style id="md-monogram-theme-style">
+/* MD monogram: same box as before; draws once, then static. Colour follows --text so theme changes never replay the draw. */
+.main-mourya-signature{filter:none;pointer-events:auto;cursor:default}
+.main-mourya-signature .mk{fill:none;stroke:var(--text);stroke-width:7;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;opacity:0;transition:stroke .7s cubic-bezier(.65,0,.35,1),stroke-width .45s cubic-bezier(.2,.7,.2,1)}
+.main-mourya-signature.drawn .mk{animation:mk-draw 1.15s cubic-bezier(.65,0,.2,1) var(--d,0s) forwards}
+@keyframes mk-draw{0%{opacity:1}100%{opacity:1;stroke-dashoffset:0}}
+.main-mourya-signature.drawn:hover .mk{stroke-width:9}
+@media(prefers-reduced-motion:reduce){.main-mourya-signature .mk{opacity:1;stroke-dashoffset:0;animation:none!important}}
+/* Theme switch: circular reveal from the toggle (View Transitions), with a colour cross-fade fallback */
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+::view-transition-old(root){z-index:1}::view-transition-new(root){z-index:2}
+html.theme-fade,html.theme-fade *:not(canvas){transition:background-color .6s cubic-bezier(.65,0,.35,1),color .6s cubic-bezier(.65,0,.35,1),border-color .6s cubic-bezier(.65,0,.35,1),fill .6s cubic-bezier(.65,0,.35,1),stroke .6s cubic-bezier(.65,0,.35,1)!important}
+</style>
+
+<style id="redesign-final-css">
+/* ===== sub-navigation chips (merged sections) ===== */
+.rd-subnav{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 6px}
+.rd-subnav a{font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--text-muted);border:1px solid var(--border);border-radius:100px;padding:8px 14px;min-height:36px;display:inline-flex;align-items:center;transition:color .3s,border-color .3s,background .3s}
+.rd-subnav a:hover,.rd-subnav a:focus-visible{color:var(--text);border-color:var(--border-hover)}
+#what-i-do,#skills-restructured,#education,#personal,#fun{border-top:0!important}
+#what-i-do,#skills-restructured,#education{padding-top:clamp(40px,6vw,72px)!important}
+/* ===== gallery: individually art-directed compositions ===== */
+.xv{position:relative;width:100%;height:100%;min-height:clamp(230px,30vw,380px);display:block;color:#fff;font-family:'Inter',system-ui,sans-serif;perspective:900px;overflow:hidden}
+.xv .xl{position:absolute;display:block;translate:calc(var(--mx,0)*var(--z,1)*-14px) calc(var(--my,0)*var(--z,1)*-10px);transition:translate .6s cubic-bezier(.22,1,.36,1),clip-path .95s cubic-bezier(.77,0,.18,1) var(--dl,0s),opacity .6s ease var(--dl,0s),scale .6s cubic-bezier(.22,1,.36,1),rotate .6s cubic-bezier(.22,1,.36,1)}
+html.rd-js .xv .xl{clip-path:inset(0 0 100% 0);opacity:0}
+html.rd-js .xv.in .xl{clip-path:inset(-40px);opacity:1}
+.xv-1 .xl-num{left:6%;bottom:-6%;font-family:'Bodoni Moda','Playfair Display',serif;font-size:clamp(120px,19vw,250px);line-height:.9;letter-spacing:-.04em}
+.xv-1 .xl-chip,.xv-6 .xl-chip{padding:9px 14px;border:1px solid rgba(255,255,255,.55);border-radius:100px;font-size:12px;letter-spacing:.06em;background:rgba(0,0,0,.18);backdrop-filter:blur(6px)}
+.xv-1 .c1{right:7%;top:14%}.xv-1 .c2{right:12%;top:36%}
+.xv-1 .xl-rule{left:6%;right:6%;top:58%;height:1px;background:rgba(255,255,255,.45)}
+.xv-2 .xl-strip{left:6%;right:6%;display:flex;justify-content:space-between;align-items:baseline;padding:14px 20px;border:1px solid rgba(255,255,255,.5);background:rgba(0,0,0,.22);backdrop-filter:blur(6px);font-size:clamp(26px,4.6vw,52px);font-family:'Bodoni Moda','Playfair Display',serif}
+.xv-2 .xl-strip em{font:500 11px/1 'Inter',sans-serif;letter-spacing:.16em;text-transform:uppercase;font-style:normal;opacity:.85}
+.xv-2 .s1{top:8%}.xv-2 .s2{top:36%;left:14%;right:1%}.xv-2 .s3{top:64%;left:3%;right:12%}
+.exhibit-visual:hover .xv-2 .s1{scale:1 1;rotate:-1deg}.exhibit-visual:hover .xv-2 .s3{rotate:1deg}
+.xv-3 .xl-tile{padding:16px 20px;border-radius:14px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.4);backdrop-filter:blur(8px);font-size:clamp(14px,1.7vw,19px);font-weight:500;width:min(66%,300px)}
+.xv-3 .xl-tile i{font-style:normal;font-size:11px;letter-spacing:.16em;opacity:.7;margin-right:10px}.xv-3 .xl-tile small{display:block;margin-top:4px;font-size:11px;opacity:.75}
+.xv-3 .t1{left:6%;top:8%}.xv-3 .t2{left:22%;top:30%}.xv-3 .t3{left:10%;top:52%}.xv-3 .t4{left:30%;top:73%}
+.xv-3 .xl-tag{right:6%;top:8%;font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.85}
+.exhibit-visual:hover .xv-3 .t1{rotate:-2deg}.exhibit-visual:hover .xv-3 .t4{rotate:2deg}
+.xv-4 .xl-svg{left:50%;top:50%;translate:calc(-50% + var(--mx,0)*var(--z,1)*-14px) calc(-50% + var(--my,0)*var(--z,1)*-10px);width:min(86%,420px);height:auto;overflow:visible}
+.xv-4 .xl-line{fill:none;stroke:#fff;stroke-width:2;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.3s cubic-bezier(.65,0,.2,1) .25s}
+.xv-4.in .xl-line{stroke-dashoffset:0}.exhibit-visual:hover .xv-4 .xl-line{stroke-width:3.4}
+.xv-4 .x4n *{fill:rgba(0,0,0,.2);stroke:#fff;stroke-width:1.5}.xv-4 .x4t text{fill:#fff;font-size:11px;letter-spacing:.08em}
+.xv-5 .xl-ring{left:50%;top:50%;border:1px solid rgba(255,255,255,.55);border-radius:50%;translate:calc(-50% + var(--mx,0)*var(--z,1)*-14px) calc(-50% + var(--my,0)*var(--z,1)*-10px)}
+.xv-5 .r1{height:36%;aspect-ratio:1}.xv-5 .r2{height:62%;aspect-ratio:1}.xv-5 .r3{height:90%;aspect-ratio:1}
+.exhibit-visual:hover .xv-5 .r3{scale:1.06}.exhibit-visual:hover .xv-5 .r1{scale:.92}
+.xv-5 .xl-core{left:50%;top:50%;translate:calc(-50% + var(--mx,0)*var(--z,1)*-14px) calc(-50% + var(--my,0)*var(--z,1)*-10px);text-align:center;font:500 15px/1.2 'Inter',sans-serif}.xv-5 .xl-core small{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.75;margin-top:4px}
+.xv-5 .xl-sense{font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:6px 12px;border-radius:100px;background:rgba(0,0,0,.28)}
+.xv-5 .a{left:8%;top:18%}.xv-5 .b{right:8%;top:46%}.xv-5 .c{left:18%;bottom:12%}
+.xv-6 .xl-lead{left:6%;font-family:'Bodoni Moda','Playfair Display',serif;font-size:clamp(34px,6vw,72px);line-height:1}
+.xv-6 .xl-lead em{display:block;font:500 11px/1 'Inter',sans-serif;letter-spacing:.16em;text-transform:uppercase;font-style:normal;margin-bottom:8px;opacity:.8}
+.xv-6 .xl-lead:not(.big){top:8%}.xv-6 .xl-lead s{text-decoration-thickness:3px;opacity:.7}.xv-6 .xl-lead.big{top:34%;font-size:clamp(56px,10vw,128px)}
+.xv-6 .c1{left:6%;bottom:8%}.xv-6 .c2{right:6%;bottom:8%}
+.xv-6 .inl{font-size:inherit}
+/* ===== odometer digits ===== */
+.odo{display:inline-flex;align-items:flex-end;white-space:pre;line-height:1}
+.od-c{display:inline-block;height:1em;overflow:hidden;position:relative}
+.od-col{display:flex;flex-direction:column;transition:transform 1.5s cubic-bezier(.16,1,.3,1) var(--od,0s)}
+.od-col i{display:block;height:1em;line-height:1;font-style:normal}
+.exhibit-project:hover .od-c{translate:0 -2px;transition:translate .4s cubic-bezier(.22,1,.36,1) calc(var(--oi,0)*.03s)}
+.od-s{display:inline-block}
+/* ===== project cards: hover + reading time ===== */
+.exhibit-read{margin-left:14px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.7;white-space:nowrap}
+.exhibit-project .exhibit-title{translate:0 0;transition:translate .6s cubic-bezier(.22,1,.36,1)}
+.exhibit-project:hover .exhibit-title{translate:10px 0}
+.exhibit-project .exhibit-arrow{display:inline-block;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.exhibit-project:hover .exhibit-arrow,.exhibit-link:hover .exhibit-arrow{transform:translateX(8px)}
+.exhibit-visual{transition:transform .7s cubic-bezier(.22,1,.36,1)}
+.exhibit-visual:active{transform:scale(.985)}
+.sw-read{display:inline-block;margin-left:10px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+.exhibit-link,.case-study summary,.rd-cta,.rd-copy{will-change:translate}
+/* ===== case study as chapters ===== */
+.case-study-body{counter-reset:ch;position:relative;padding-left:clamp(0px,3vw,36px)}
+.case-study-body h4{counter-increment:ch;display:flex;align-items:baseline;gap:14px}
+.case-study-body h4::before{content:counter(ch,decimal-leading-zero);font-size:11px;letter-spacing:.16em;opacity:.55}
+.cs-meta{font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.65;margin-bottom:10px}
+details.case-study[open] .case-study-body>*{animation:csIn .8s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--k,0)*.05s)}
+@keyframes csIn{from{opacity:0;translate:0 14px}to{opacity:1;translate:0 0}}
+.cs-diagram{margin:22px 0;max-width:420px}
+.cs-diagram svg{width:100%;height:auto;display:block}.cs-diagram figcaption{font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.6;margin-top:8px}
+.dg-n rect{fill:none;stroke:var(--border-hover);stroke-width:1.2;transition:stroke .6s}
+.dg-t{fill:var(--text);font:500 13px 'Inter',sans-serif;transition:fill .6s}.dg-s{fill:var(--text-muted);font:400 11px 'Inter',sans-serif;transition:fill .6s}
+.dg-line{fill:none;stroke:var(--text-muted);stroke-width:1.4;stroke-dasharray:1;stroke-dashoffset:1}.dg-head{fill:none;stroke:var(--text-muted);stroke-width:1.4;opacity:0}
+details[open] .dg-line{stroke-dashoffset:0;transition:stroke-dashoffset .7s cubic-bezier(.65,0,.2,1) .35s}details[open] .dg-head{opacity:1;transition:opacity .4s ease .9s}
+.dg-n{opacity:0}details[open] .dg-n{opacity:1;transition:opacity .5s ease calc(var(--i)*.12s)}
+/* ===== contact ===== */
+.rd-contact-lead{margin:8px 0 28px;max-width:640px}.rd-contact-lead p{font-size:clamp(15px,1.6vw,18px);line-height:1.6;color:var(--text-muted);font-weight:300}
+.rd-contact-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:18px}
+.rd-cta,.rd-copy{min-height:48px;padding:0 26px;border-radius:100px;font:500 14px 'Inter',sans-serif;display:inline-flex;align-items:center;gap:8px;text-decoration:none;cursor:pointer;transition:background .3s,color .3s,border-color .3s}
+.rd-cta{background:var(--text);color:var(--bg);border:1px solid var(--text)}.rd-copy{background:none;color:var(--text);border:1px solid var(--border-hover)}
+.rd-copy:hover{border-color:var(--text)}.rd-copy-status{font-size:12px;color:var(--text-muted);min-width:80px}
+/* ===== footer: monogram keeps its box; text row no longer collides with it ===== */
+footer{padding-bottom:clamp(170px,19vw,230px)!important}
+@media(max-width:600px){footer{padding-bottom:140px!important}}
+/* ===== reduced motion + touch ===== */
+@media(prefers-reduced-motion:reduce){html.rd-js .xv .xl{clip-path:none!important;opacity:1!important}.xv .xl,.od-col,.exhibit-project .exhibit-title{transition:none!important}.xv-4 .xl-line,.dg-line{stroke-dashoffset:0!important;transition:none!important}.dg-n,.dg-head{opacity:1!important}details.case-study[open] .case-study-body>*{animation:none!important}}
+@media(hover:none){.xv .xl{translate:0 calc(var(--my,0)*var(--z,1)*-12px)}}
+</style>
+
+<style id="rd-shots-css">
+.has-shot .xl-shot{display:block;height:auto;border-radius:12px;border:1px solid rgba(255,255,255,.35);box-shadow:0 28px 56px rgba(0,0,0,.38);object-fit:cover}
+.xv-3.has-shot .xl-shot{left:5%;top:9%;width:74%}
+.xv-3.has-shot .t1{left:auto;right:4%;top:50%;width:min(46%,250px)}
+.xv-3.has-shot .t4{left:auto;right:12%;top:72%;width:min(44%,230px)}
+.xv-3.has-shot .xl-tag{right:6%;top:6%}
+.xv-6.has-shot .xl-shot{left:5%;top:8%;width:90%}
+.xv-6.has-shot .xl-lead:not(.big){left:6%;top:42%;font-size:clamp(26px,4vw,52px)}
+.xv-6.has-shot .xl-lead.big{left:auto;right:6%;top:38%;font-size:clamp(50px,8vw,100px)}
+.exhibit-visual:hover .xl-shot{scale:1.025}
+@media(max-width:600px){.xv-3.has-shot .xl-shot{width:86%}.xv-3.has-shot .t1{top:56%}.xv-3.has-shot .t4{top:78%}}
+</style>
+<style id="rd-fill-css">
+.exhibit-red-field{position:relative}
+.exhibit-red-field>.xv{position:absolute;inset:0;width:100%;height:100%;max-width:none;margin:0;min-height:0}
+.xv-6.has-shot .xl-lead.big{top:40%}
+@media(max-width:600px){
+ .xv-6.has-shot .xl-shot{width:92%;left:4%}
+ .xv-6.has-shot .xl-lead:not(.big){top:38%;font-size:24px}
+ .xv-6.has-shot .xl-lead.big{top:52%;right:auto;left:6%;font-size:56px}
+ .xv-6 .c1{bottom:6%}.xv-6 .c2{bottom:6%}
+ .xv-3.has-shot .xl-shot{left:4%;width:92%}
+ .xv-3.has-shot .t1{width:60%;right:4%;top:48%;padding:10px 14px;font-size:13px}
+ .xv-3.has-shot .t4{width:56%;right:8%;top:70%;padding:10px 14px;font-size:13px}
+}
+</style>
+<style id="rd-fill-css2">
+.exhibit-red-field{min-height:clamp(320px,30vw,420px)}
+.xv-6.has-shot .xl-lead:not(.big){top:56%}
+.xv-6.has-shot .xl-lead.big{top:50%}
+.xv-6.has-shot .c1,.xv-6.has-shot .c2{bottom:7%}
+@media(max-width:600px){
+ .exhibit-red-field{min-height:310px}
+ .xv-3.has-shot .xl-shot{top:5%}
+ .xv-3.has-shot .t1{top:57%}.xv-3.has-shot .t4{top:76%}
+ .xv-6.has-shot .xl-lead:not(.big){top:36%}
+ .xv-6.has-shot .xl-lead.big{top:50%}
+}
+</style>
+<style id="rd-fill-css3">
+@media(max-width:600px){.exhibit-visual .exhibit-red-field{height:320px!important;min-height:320px!important;aspect-ratio:auto!important}}
+</style>
+<style id="rd-fill-css4">@media(max-width:600px){.xv-3.has-shot .xl-tag{display:none}}</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -1114,12 +1257,9 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
   <a id="logo" href="#" aria-label="Mourya Dusi — back to top">Mourya</a>
   <nav aria-label="Primary">
     <a href="#selected-work">Work</a>
-    <a href="#experience">Experience</a>
-    <a href="#what-i-do">What I Do</a>
-    <a href="#skills-restructured">Skills</a>
+    <a href="#experience">Experience &amp; Skills</a>
     <a href="#about">About</a>
-    <a href="#building">Building</a>
-    <a href="#fun">Experiments</a>
+    <a href="#building">Building &amp; Experiments</a>
     <a href="#contact">Contact</a>
     <button id="theme-toggle" aria-label="Toggle theme"></button>
   </nav>
@@ -1130,12 +1270,9 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 <div id="mobile-nav">
   <button id="mobile-close">×</button>
   <a href="#selected-work" class="mn-link">Work</a>
-  <a href="#experience" class="mn-link">Experience</a>
-  <a href="#what-i-do" class="mn-link">What I Do</a>
-  <a href="#skills-restructured" class="mn-link">Skills</a>
+  <a href="#experience" class="mn-link">Experience &amp; Skills</a>
   <a href="#about" class="mn-link">About</a>
-  <a href="#building" class="mn-link">Building</a>
-  <a href="#fun" class="mn-link">Experiments</a>
+  <a href="#building" class="mn-link">Building &amp; Experiments</a>
   <a href="#contact" class="mn-link">Contact</a>
 </div>
 
@@ -1179,7 +1316,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
       </span>
     </h1>
     <p class="hero-intro" id="hero-intro">
-      <span class="explode-text">I build and ship machine learning systems — from a 92%-accuracy prediction pipeline to a production NLP chatbot handling 1,000+ queries a day — backed by hands-on ML engineering experience at Accenture and an MSc in Data Science &amp; AI in progress.</span>
+      <span class="explode-text">I build and ship machine learning systems — from a 92%-accuracy prediction pipeline to a production NLP chatbot handling 1,000+ queries a day — backed by hands-on ML engineering experience at Accenture and an MSc in Data Science &amp; AI.</span>
     </p>
     <div class="hero-proof-points">
       <span>Accenture · ML Engineering &amp; Data Science</span>
@@ -1207,7 +1344,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 <!-- Selected Work -->
 <section id="selected-work" style="border-top:1px solid var(--border);position:relative;">
   <div style="max-width:1200px;margin:0 auto;padding:100px clamp(24px,5vw,60px);">
-    <div class="section-label">01 — Selected Work</div>
+    <div class="section-label">01 — Work · Selected</div>
     <h2 class="section-title reveal reveal-fade">Three things worth<br><em>your two minutes</em></h2>
     <p class="reveal reveal-fade" style="font-size:15px;color:var(--text-muted);font-weight:300;margin-top:14px;max-width:520px;line-height:1.7;">The strongest evidence of how he works — full case studies are below.</p>
 
@@ -1259,7 +1396,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 <section id="projects" style="border-top:1px solid var(--border);position:relative;background:var(--bg);">
   <div class="chapter-curve" data-curve-idx="1" style="--curve-color:var(--ch-work);"><svg viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path class="curve-path" d="M0,70 C300,70 300,70 600,70 C900,70 900,70 1200,70 L1200,140 L0,140 Z"></path></svg></div>
 
-  <div class="section-label">02 — Work</div>
+  <div class="section-label">01 — Work · All projects</div>
   <h2 class="section-title reveal reveal-fade">Featured<br><em>projects</em></h2>
   <p class="exhibit-intro reveal reveal-fade">Six things I've built, laid out like an exhibition rather than a grid. Scroll through — each one gets its own moment.</p>
 
@@ -1267,24 +1404,18 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 
     <!-- 01 — Performance Prediction (strongest DS/ML depth: model comparison, quantified accuracy) -->
     <article class="exhibit-project v-a" id="case-performance-ml">
-      <div class="exhibit-row-top reveal">
+      <div class="exhibit-row-top reveal" data-read="1">
         <span class="exhibit-num">01</span>
-        <span class="exhibit-meta-line">2023 · ML · DATA SCIENCE</span>
+        <span class="exhibit-meta-line">2023 · ML · DATA SCIENCE</span><span class="exhibit-read">1 min read</span>
       </div>
       <h3 class="exhibit-title reveal rv-mask">Performance ML</h3>
       <div class="exhibit-visual reveal rv-scale">
         <div class="exhibit-red-field">
-          <div class="exhibit-visual-inner">
-            <div class="app-showcase">
-              <div class="showcase-header">Accuracy · 92%</div>
-              <div class="chart-showcase">
-                <div class="chart-bar" style="height:40%"></div>
-                <div class="chart-bar" style="height:60%"></div>
-                <div class="chart-bar" style="height:92%"></div>
-                <div class="chart-bar" style="height:50%"></div>
-              </div>
-            </div>
-          </div>
+          <div class="exhibit-visual-inner xv xv-1">
+<span class="xl xl-num" data-z="1.2"><b class="odo-t " data-odo>92%</b></span>
+<span class="xl xl-chip c1" data-z="2.4">5+ models compared</span>
+<span class="xl xl-chip c2" data-z="1.6">1,000+ records · every week</span>
+<span class="xl xl-rule" data-z=".5"></span></div>
         </div>
         <span class="exhibit-caption">1,000+ records, every week</span>
       </div>
@@ -1293,16 +1424,15 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
         <div class="exhibit-tags"><span>Python</span><span>Scikit-learn</span><span>Pandas</span><span>ML Pipeline</span></div>
         <details class="case-study">
           <summary>Read the Case Study <span class="exhibit-arrow">→</span></summary>
-          <div class="case-study-body">
+          <div class="case-study-body"><p class="cs-meta">1 min read · 121 words</p>
             <h4>Problem</h4>
             <p>Instructors and academic advisors often identify struggling students only after performance has already dropped — by then, the window to intervene effectively has narrowed. The goal was to flag at-risk students earlier, from data that's already available.</p>
             <h4>Approach</h4>
             <p>Built a supervised learning pipeline in Python: Pandas for preprocessing and feature preparation, Scikit-learn for model training and evaluation. Compared 5+ model families rather than committing to one architecture upfront.</p>
-            <h4>Model Comparison</h4>
             <h4>Result</h4>
             <p>The selected model reached <strong>92% accuracy</strong> on the evaluation set. </p>
             <h4>Architecture</h4>
-            <p>Data → Preprocessing (Pandas) → Model training &amp; comparison (Scikit-learn) → Evaluation → Selected model. Processes 1,000+ records weekly.</p>
+            <p>Data → Preprocessing (Pandas) → Model training &amp; comparison (Scikit-learn) → Evaluation → Selected model. Processes 1,000+ records weekly.</p><figure class="cs-diagram"><svg viewBox="0 0 360 340" role="img" aria-label="Pipeline: data to selected model"><g class="dg-n" style="--i:0"><rect x="20" y="8" width="320" height="46" rx="10"/><text class="dg-t" x="180" y="28" text-anchor="middle">Data</text><text class="dg-s" x="180" y="44" text-anchor="middle">1,000+ records weekly</text></g><path class="dg-line" pathLength="1" d="M180 54 V74"/><path class="dg-head" d="M174 68 L180 74 L186 68"/><g class="dg-n" style="--i:1"><rect x="20" y="74" width="320" height="46" rx="10"/><text class="dg-t" x="180" y="94" text-anchor="middle">Preprocessing</text><text class="dg-s" x="180" y="110" text-anchor="middle">Pandas</text></g><path class="dg-line" pathLength="1" d="M180 120 V140"/><path class="dg-head" d="M174 134 L180 140 L186 134"/><g class="dg-n" style="--i:2"><rect x="20" y="140" width="320" height="46" rx="10"/><text class="dg-t" x="180" y="160" text-anchor="middle">Model training &amp; comparison</text><text class="dg-s" x="180" y="176" text-anchor="middle">Scikit-learn · 5+ model families</text></g><path class="dg-line" pathLength="1" d="M180 186 V206"/><path class="dg-head" d="M174 200 L180 206 L186 200"/><g class="dg-n" style="--i:3"><rect x="20" y="206" width="320" height="46" rx="10"/><text class="dg-t" x="180" y="234" text-anchor="middle">Evaluation</text></g><path class="dg-line" pathLength="1" d="M180 252 V272"/><path class="dg-head" d="M174 266 L180 272 L186 266"/><g class="dg-n" style="--i:4"><rect x="20" y="272" width="320" height="46" rx="10"/><text class="dg-t" x="180" y="292" text-anchor="middle">Selected model</text><text class="dg-s" x="180" y="308" text-anchor="middle">92% accuracy</text></g></svg><figcaption>Pipeline: data to selected model</figcaption></figure>
           </div>
         </details>
       </div>
@@ -1310,22 +1440,16 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 
     <!-- 02 — University Chatbot (NLP, production, quantified impact) -->
     <article class="exhibit-project v-c" id="case-university-chatbot">
-      <div class="exhibit-row-top reveal">
+      <div class="exhibit-row-top reveal" data-read="1">
         <span class="exhibit-num">02</span>
-        <span class="exhibit-meta-line">2023 · NLP · PRODUCTION</span>
+        <span class="exhibit-meta-line">2023 · NLP · PRODUCTION</span><span class="exhibit-read">1 min read</span>
       </div>
       <div class="exhibit-visual reveal rv-scale">
         <div class="exhibit-red-field">
-          <div class="exhibit-visual-inner">
-            <div class="app-showcase">
-              <div class="showcase-header">24/7 Chatbot · Live</div>
-              <div class="chat-showcase">
-                <div class="chat-message bot">How can I help today?</div>
-                <div class="chat-message user">Question about course</div>
-                <div class="chat-message bot">Here's the information...</div>
-              </div>
-            </div>
-          </div>
+          <div class="exhibit-visual-inner xv xv-2">
+<span class="xl xl-strip s1" data-z="1"><em>queries / day</em><b class="odo-t " data-odo>1,000+</b></span>
+<span class="xl xl-strip s2" data-z="1.8"><em>uptime</em><b class="odo-t " data-odo>99.9%</b></span>
+<span class="xl xl-strip s3" data-z="2.6"><em>admin workload</em><b class="odo-t " data-odo>−35%</b></span></div>
         </div>
         <span class="exhibit-caption">99.9% uptime, 1,000+ queries a day</span>
       </div>
@@ -1335,13 +1459,13 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
         <div class="exhibit-tags"><span>TensorFlow</span><span>NLP</span><span>Flask</span><span>Production</span></div>
         <details class="case-study">
           <summary>Read the Case Study <span class="exhibit-arrow">→</span></summary>
-          <div class="case-study-body">
+          <div class="case-study-body"><p class="cs-meta">1 min read · 101 words</p>
             <h4>Problem</h4>
             <p>University administrative staff were fielding a high volume of repetitive student questions — the kind that don't need human judgment, just fast, accurate retrieval of information that already exists somewhere in the system.</p>
             <h4>Approach</h4>
             <p>Built an NLP chatbot: TensorFlow for intent classification, Flask serving the backend API, MongoDB for storing conversation and query data.</p>
             <h4>Architecture</h4>
-            <p>Student query → NLP intent classification (TensorFlow) → Flask API → MongoDB → response.</p>
+            <p>Student query → NLP intent classification (TensorFlow) → Flask API → MongoDB → response.</p><figure class="cs-diagram"><svg viewBox="0 0 360 340" role="img" aria-label="Chatbot request path"><g class="dg-n" style="--i:0"><rect x="20" y="8" width="320" height="46" rx="10"/><text class="dg-t" x="180" y="36" text-anchor="middle">Student query</text></g><path class="dg-line" pathLength="1" d="M180 54 V74"/><path class="dg-head" d="M174 68 L180 74 L186 68"/><g class="dg-n" style="--i:1"><rect x="20" y="74" width="320" height="46" rx="10"/><text class="dg-t" x="180" y="94" text-anchor="middle">Intent classification</text><text class="dg-s" x="180" y="110" text-anchor="middle">NLP · TensorFlow</text></g><path class="dg-line" pathLength="1" d="M180 120 V140"/><path class="dg-head" d="M174 134 L180 140 L186 134"/><g class="dg-n" style="--i:2"><rect x="20" y="140" width="320" height="46" rx="10"/><text class="dg-t" x="180" y="160" text-anchor="middle">Flask API</text><text class="dg-s" x="180" y="176" text-anchor="middle">backend</text></g><path class="dg-line" pathLength="1" d="M180 186 V206"/><path class="dg-head" d="M174 200 L180 206 L186 200"/><g class="dg-n" style="--i:3"><rect x="20" y="206" width="320" height="46" rx="10"/><text class="dg-t" x="180" y="226" text-anchor="middle">MongoDB</text><text class="dg-s" x="180" y="242" text-anchor="middle">conversation &amp; query data</text></g><path class="dg-line" pathLength="1" d="M180 252 V272"/><path class="dg-head" d="M174 266 L180 272 L186 266"/><g class="dg-n" style="--i:4"><rect x="20" y="272" width="320" height="46" rx="10"/><text class="dg-t" x="180" y="292" text-anchor="middle">Response</text><text class="dg-s" x="180" y="308" text-anchor="middle">1,000+ queries a day · 99.9% uptime</text></g></svg><figcaption>Chatbot request path</figcaption></figure>
             <h4>Result</h4>
             <p>Handles <strong>1,000+ queries a day</strong> with <strong>99.9% uptime</strong>, cutting administrative workload by roughly <strong>35%</strong>.</p>
           </div>
@@ -1351,22 +1475,18 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 
     <!-- 03 — destination (flagship applied-AI product, full-stack breadth) -->
     <article class="exhibit-project v-b" id="case-destination">
-      <div class="exhibit-row-top reveal">
+      <div class="exhibit-row-top reveal" data-read="1">
         <span class="exhibit-num">03</span>
-        <span class="exhibit-meta-line">2025 · AI · TRAVEL</span>
+        <span class="exhibit-meta-line">2025 · AI · TRAVEL</span><span class="exhibit-read">1 min read</span>
       </div>
       <h3 class="exhibit-title reveal rv-mask">destination</h3>
       <div class="exhibit-visual reveal rv-scale">
         <div class="exhibit-red-field">
-          <div class="exhibit-visual-inner">
-            <div class="app-showcase">
-              <div class="showcase-header">✦ destination · AI Travel</div>
-              <div class="route-showcase">
-                <div class="route-item">London → New York</div>
-                <div class="route-info">Voice AI · Live Flights · Visa Check</div>
-              </div>
-            </div>
-          </div>
+          <div class="exhibit-visual-inner xv xv-3 has-shot">
+<img class="xl xl-shot" data-z="1" src="assets/projects/destination.jpg" width="1600" height="795" loading="lazy" decoding="async" alt="destination.com home screen with the headline Your world moves. So should you., above the Route Intelligence panel">
+<span class="xl xl-tile t1" data-z="2.6"><i>01</i>ARIA voice assistant<small>built on Groq</small></span>
+<span class="xl xl-tile t4" data-z="1.8"><i>02</i>Live flight tracking</span>
+<span class="xl xl-tag" data-z="3">Next.js · Vercel</span></div>
         </div>
         <span class="exhibit-caption">AI travel intelligence, end to end</span>
       </div>
@@ -1379,19 +1499,17 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 
     <!-- 04 — Smart Exit (sensor-fusion IoT, meaningful engineering) -->
     <article class="exhibit-project v-c">
-      <div class="exhibit-row-top reveal">
+      <div class="exhibit-row-top reveal" data-read="1">
         <span class="exhibit-num">04</span>
-        <span class="exhibit-meta-line">2024 · MOBILE · IOT</span>
+        <span class="exhibit-meta-line">2024 · MOBILE · IOT</span><span class="exhibit-read">1 min read</span>
       </div>
       <div class="exhibit-visual reveal rv-scale">
         <div class="exhibit-red-field">
-          <div class="exhibit-visual-inner">
-            <div class="app-showcase">
-              <div class="showcase-header">Smart Exit · AI Reminders</div>
-              <div class="showcase-icon">📱</div>
-              <div class="showcase-message">Don't forget your keys</div>
-            </div>
-          </div>
+          <div class="exhibit-visual-inner xv xv-4">
+<svg class="xl xl-svg" data-z="1.2" viewBox="0 0 300 170" role="img" aria-label="Wi-Fi, GPS and Bluetooth signals combine into a reminder">
+<path class="xl-line" pathLength="1" d="M68 32 C140 32 150 85 204 85"/><path class="xl-line" pathLength="1" d="M68 85 H204"/><path class="xl-line" pathLength="1" d="M68 138 C140 138 150 85 204 85"/>
+<g class="x4n"><circle cx="46" cy="32" r="22"/><circle cx="46" cy="85" r="22"/><circle cx="46" cy="138" r="22"/><rect x="204" y="58" width="86" height="54" rx="27"/></g>
+<g class="x4t"><text x="46" y="36" text-anchor="middle">Wi-Fi</text><text x="46" y="89" text-anchor="middle">GPS</text><text x="46" y="142" text-anchor="middle">BLE</text><text x="247" y="89" text-anchor="middle">Reminder</text></g></svg></div>
         </div>
         <span class="exhibit-caption">Learns your routine, quietly</span>
       </div>
@@ -1405,23 +1523,17 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 
     <!-- 05 — Lost-Item Detection (edge AI, privacy-first — meaningful, narrower scope) -->
     <article class="exhibit-project v-a">
-      <div class="exhibit-row-top reveal">
+      <div class="exhibit-row-top reveal" data-read="1">
         <span class="exhibit-num">05</span>
-        <span class="exhibit-meta-line">2024 · IOT · EDGE</span>
+        <span class="exhibit-meta-line">2024 · IOT · EDGE</span><span class="exhibit-read">1 min read</span>
       </div>
       <h3 class="exhibit-title reveal rv-mask">Lost-Item<br>Detection</h3>
       <div class="exhibit-visual reveal rv-scale">
         <div class="exhibit-red-field">
-          <div class="exhibit-visual-inner">
-            <div class="app-showcase">
-              <div class="showcase-header">Privacy Sensors · Real-time</div>
-              <div class="sensor-grid">
-                <div class="sensor-item">💨</div>
-                <div class="sensor-item">🌡️</div>
-                <div class="sensor-item">📡</div>
-              </div>
-            </div>
-          </div>
+          <div class="exhibit-visual-inner xv xv-5">
+<span class="xl xl-ring r1" data-z=".6"></span><span class="xl xl-ring r2" data-z="1.2"></span><span class="xl xl-ring r3" data-z="1.9"></span>
+<span class="xl xl-core" data-z="2.4">On-device<small>camera-free</small></span>
+<span class="xl xl-sense a" data-z="2.8">Pressure</span><span class="xl xl-sense b" data-z="2.2">Infrared</span><span class="xl xl-sense c" data-z="3.2">Ultrasonic</span></div>
         </div>
         <span class="exhibit-caption">Everything processed on-device</span>
       </div>
@@ -1433,22 +1545,18 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
     </article>
         <!-- 06 — MSc Dissertation: GNN aircraft conflict detection -->
     <article class="exhibit-project v-b" id="case-airspacegnn">
-      <div class="exhibit-row-top reveal">
+      <div class="exhibit-row-top reveal" data-read="1">
         <span class="exhibit-num">06</span>
-        <span class="exhibit-meta-line">2026 · MSC DISSERTATION · GRAPH ML</span>
+        <span class="exhibit-meta-line">2026 · MSC DISSERTATION · GRAPH ML</span><span class="exhibit-read">1 min read</span>
       </div>
       <h3 class="exhibit-title reveal rv-mask">Can a Graph Neural Network Spot Mid-Air Conflicts?</h3>
       <div class="exhibit-visual reveal rv-scale">
         <div class="exhibit-red-field">
-          <div class="exhibit-visual-inner">
-            <div class="app-showcase">
-              <div class="showcase-header">XGBoost F1 0.9994 → leakage found</div>
-              <div class="route-showcase">
-                <div class="route-item">GCN test F1 = 0.6898</div>
-                <div class="route-info">81,270 aircraft pairs · 2.2% conflict rate</div>
-              </div>
-            </div>
-          </div>
+          <div class="exhibit-visual-inner xv xv-6 has-shot">
+<img class="xl xl-shot" data-z="1" src="assets/projects/airspacegnn.jpg" width="1600" height="279" loading="lazy" decoding="async" alt="AirSpaceGNN live demo header with the headline Select an aircraft. Analyze the interaction. See why.">
+<span class="xl xl-lead" data-z="1.4"><em>XGBoost F1 · leaked DCPA</em><s>0.9994</s></span>
+<span class="xl xl-lead big" data-z="2"><em>GCN test F1 · leakage removed</em><b class="odo-t " data-odo>0.6898</b></span>
+<span class="xl xl-chip c1" data-z="2.8"><b class="odo-t inl" data-odo>81,270</b> pairs</span><span class="xl xl-chip c2" data-z="1.6"><b class="odo-t inl" data-odo>2.2%</b> conflict rate</span></div>
         </div>
         <span class="exhibit-caption">And can you trust a 99.9% score?</span>
       </div>
@@ -1458,13 +1566,13 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
         <a href="https://airspacegnn.onrender.com" target="_blank" rel="noopener" class="exhibit-link">View Live Demo <span class="exhibit-arrow">→</span></a>
         <details class="case-study">
           <summary>Read the Case Study <span class="exhibit-arrow">→</span></summary>
-          <div class="case-study-body">
+          <div class="case-study-body"><p class="cs-meta">1 min read · 200 words</p>
             <h4>The approach</h4>
             <p><strong>Dataset:</strong> 3.9M OpenSky Network ADS-B reports, cleaned to 1.7M observations from Central Europe (5 June 2017).</p>
             <p><strong>Graphs:</strong> 72,841 snapshots and 674,186 aircraft-pair edges; approximately 2% were conflicts.</p>
             <p><strong>Models:</strong> Rule-based ICAO separation baseline (5 NM horizontal, 1,000 ft vertical), XGBoost, GCN, and GAT.</p>
             <p><strong>Validation:</strong> Chronological train/validation/test split and audits for feature leakage, temporal leakage, data quality, and traceability.</p>
-            <h4>Key finding</h4>
+            <figure class="cs-diagram"><svg viewBox="0 0 360 406" role="img" aria-label="Dissertation pipeline"><g class="dg-n" style="--i:0"><rect x="20" y="8" width="320" height="46" rx="10"/><text class="dg-t" x="180" y="28" text-anchor="middle">OpenSky ADS-B</text><text class="dg-s" x="180" y="44" text-anchor="middle">3.9M reports</text></g><path class="dg-line" pathLength="1" d="M180 54 V74"/><path class="dg-head" d="M174 68 L180 74 L186 68"/><g class="dg-n" style="--i:1"><rect x="20" y="74" width="320" height="46" rx="10"/><text class="dg-t" x="180" y="94" text-anchor="middle">Cleaned observations</text><text class="dg-s" x="180" y="110" text-anchor="middle">1.7M · Central Europe · 5 June 2017</text></g><path class="dg-line" pathLength="1" d="M180 120 V140"/><path class="dg-head" d="M174 134 L180 140 L186 134"/><g class="dg-n" style="--i:2"><rect x="20" y="140" width="320" height="46" rx="10"/><text class="dg-t" x="180" y="160" text-anchor="middle">Aircraft graphs</text><text class="dg-s" x="180" y="176" text-anchor="middle">72,841 snapshots · 674,186 pair edges</text></g><path class="dg-line" pathLength="1" d="M180 186 V206"/><path class="dg-head" d="M174 200 L180 206 L186 200"/><g class="dg-n" style="--i:3"><rect x="20" y="206" width="320" height="46" rx="10"/><text class="dg-t" x="180" y="226" text-anchor="middle">Models compared</text><text class="dg-s" x="180" y="242" text-anchor="middle">ICAO baseline · XGBoost · GCN · GAT</text></g><path class="dg-line" pathLength="1" d="M180 252 V272"/><path class="dg-head" d="M174 266 L180 272 L186 266"/><g class="dg-n" style="--i:4"><rect x="20" y="272" width="320" height="46" rx="10"/><text class="dg-t" x="180" y="292" text-anchor="middle">Validation</text><text class="dg-s" x="180" y="308" text-anchor="middle">Chronological split · leakage audits</text></g><path class="dg-line" pathLength="1" d="M180 318 V338"/><path class="dg-head" d="M174 332 L180 338 L186 332"/><g class="dg-n" style="--i:5"><rect x="20" y="338" width="320" height="46" rx="10"/><text class="dg-t" x="180" y="358" text-anchor="middle">Finding</text><text class="dg-s" x="180" y="374" text-anchor="middle">DCPA leak found · GCN test F1 0.6898</text></g></svg><figcaption>Dissertation pipeline</figcaption></figure><h4>Key finding</h4>
             <p>XGBoost initially achieved <strong>F1 = 0.9994</strong> because DCPA (Distance at Closest Point of Approach) leaked future encounter information. Removing DCPA caused its performance to collapse to zero. After removing the leaking feature, GCN achieved <strong>test F1 = 0.6898</strong> on 81,270 aircraft pairs, with a 2.2% conflict rate.</p>
             <h4>Limitations</h4>
             <p>GCN and GAT could not be fairly compared because their dataset populations and target definitions differed, and GAT training was incomplete. The study covers one airspace, one day, and one random seed; it is not operationally validated or deployable.</p>
@@ -1666,7 +1774,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 <section id="experience" style="border-top:1px solid var(--border);position:relative;">
   <div class="chapter-curve" data-curve-idx="2" style="--curve-color:var(--ch-experience);"><svg viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path class="curve-path" d="M0,70 C300,70 300,70 600,70 C900,70 900,70 1200,70 L1200,140 L0,140 Z"></path></svg></div>
 
-  <div class="section-label">03 — Experience</div>
+  <div class="section-label">02 — Experience</div><nav class="rd-subnav" aria-label="In this section"><a href="#experience">Experience</a><a href="#what-i-do">What I do</a><a href="#skills-restructured">Skills</a><a href="#education">Education</a></nav>
   <h2 class="section-title reveal">Industry <em>Experience</em></h2>
   <div class="exp-list reveal">
     <div class="exp-item">
@@ -1688,7 +1796,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 <!-- What I Do -->
 <section id="what-i-do" style="border-top:1px solid var(--border);position:relative;">
   <div style="max-width:1100px;margin:0 auto;padding:100px clamp(24px,5vw,60px);">
-    <div class="section-label">04 — What I Do</div>
+    <div class="section-label">02 — What I Do</div>
     <h2 class="section-title reveal">Where I can <em>help</em></h2>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:56px;">
       <div>
@@ -1714,7 +1822,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 <!-- Skills -->
 <section id="skills-restructured" style="border-top:1px solid var(--border);position:relative;">
   <div style="max-width:1100px;margin:0 auto;padding:100px clamp(24px,5vw,60px);">
-    <div class="section-label">05 — Skills</div>
+    <div class="section-label">02 — Skills</div>
     <h2 class="section-title reveal">Capability, <em>by category</em></h2>
     <div class="skills-cats" style="display:grid;grid-template-columns:repeat(3,1fr);gap:40px 32px;margin-top:56px;">
       <div>
@@ -1743,7 +1851,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 
 <!-- Education -->
 <section id="education" style="border-top:1px solid var(--border);">
-  <div class="section-label">06 — Education</div>
+  <div class="section-label">02 — Education &amp; credentials</div>
   <h2 class="section-title reveal">Academic<br><em>background</em></h2>
   <div class="edu-grid reveal">
     <div class="edu-card"><div class="degree">MSc Data Science & Artificial Intelligence</div><div class="school">Middlesex University, Dubai, UAE</div><div class="period">Sep 2025 — Sep 2026</div></div>
@@ -1855,11 +1963,11 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 
   <div class="node-graphic" id="node-graphic" aria-hidden="true"><canvas id="node-canvas"></canvas></div>
 
-  <div class="section-label">07 — About</div>
+  <div class="section-label">03 — About</div><nav class="rd-subnav" aria-label="In this section"><a href="#about">About</a><a href="#personal">Beyond the code</a></nav>
   <div class="about-grid">
     <div class="about-text reveal">
       <h2 class="section-title">Building intelligent<br><em>systems that matter</em></h2>
-      <p style="margin-top:40px;">I'm a Machine Learning Engineer and Data Science professional currently pursuing my MSc in Data Science & AI at Middlesex University, Dubai. I bring together technical depth in ML, cloud, and analytics with a genuine curiosity for how technology shapes the world around us.</p>
+      <p style="margin-top:40px;">I'm a Machine Learning Engineer and Data Science professional with an MSc in Data Science & AI from Middlesex University, Dubai. I bring together technical depth in ML, cloud, and analytics with a genuine curiosity for how technology shapes the world around us.</p>
       <p>Previously at Accenture, I built production-grade ML pipelines, deployed models on AWS SageMaker, and turned messy data into clear decisions. I believe great AI isn't just smart — it's simple, explainable, and built with care.</p>
       <p>When I'm not training models, I'm probably somewhere new on the planet, listening to music, or thinking about the next thing worth building.</p>
     </div>
@@ -1870,7 +1978,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
       <div class="sidebar-item"><span class="key">Education</span><span class="val">MSc AI · MDX Dubai</span></div>
       <div class="sidebar-item"><span class="key">Focus</span><span class="val">ML · Data Science</span></div>
       <div class="sidebar-item"><span class="key">Languages</span><span class="val">EN · HI · TE</span></div>
-      <div class="sidebar-item"><span class="key">Countries</span><span class="val">10 visited</span></div>
+      <div class="sidebar-item"><span class="key">Countries</span><span class="val">9 visited</span></div>
     </div>
   </div>
 </section>
@@ -1879,7 +1987,7 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 <section id="personal" style="position:relative;">
   <div class="chapter-curve" data-curve-idx="3" style="--curve-color:var(--ch-personal);"><svg viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path class="curve-path" d="M0,70 C300,70 300,70 600,70 C900,70 900,70 1200,70 L1200,140 L0,140 Z"></path></svg></div>
 
-  <div class="section-label">08 — Personal</div>
+  <div class="section-label">03 — Beyond the code</div>
   <h2 class="section-title reveal">Beyond<br><em>the code</em></h2>
   <div class="interests-grid reveal rv-mask" style="margin-top:48px;">
     <div class="interest-card"><div class="interest-icon">🎵</div><h3>Music</h3><p>Music is my constant companion — whether I'm commuting through Dubai, deep in a coding session, or just unwinding. From indie to classical, it shapes how I think and create.</p></div>
@@ -1947,34 +2055,13 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 
 
 <!-- Full-page About view -->
-<div id="about-fullpage" aria-hidden="true">
-  <div class="about-full-inner">
-    <div class="about-full-top"><span class="section-label">ABOUT — MOURYA DUSI</span><button class="about-full-close" id="about-full-close" type="button">Back to portfolio</button></div>
-    <div class="about-full-grid">
-      <div>
-        <h2 class="about-full-title">Built with<br><em>curiosity.</em></h2>
-        <div class="about-full-copy">
-          <p>I'm a Machine Learning Engineer and Data Science professional pursuing my MSc in Data Science &amp; AI in Dubai. I like working where data, software and useful products meet.</p>
-          <p>I've built production ML pipelines, deployed models on AWS SageMaker, and created AI products that are meant to be used rather than merely demonstrated. Outside the technical work, travel, music and curiosity keep me moving.</p>
-        </div>
-      </div>
-      <div class="about-full-facts">
-        <div class="about-full-fact"><b>Based</b><span>Dubai, UAE</span></div>
-        <div class="about-full-fact"><b>Focus</b><span>ML · AI · Data Science</span></div>
-        <div class="about-full-fact"><b>Education</b><span>MSc Data Science &amp; AI</span></div>
-        <div class="about-full-fact"><b>Work</b><span>Accenture · ML Engineering</span></div>
-        <div class="about-full-fact"><b>Interests</b><span>AI · Travel · Music</span></div>
-      </div>
-    </div>
-    <div class="about-full-foot">A little more of the person behind the systems.</div>
-  </div>
-</div>
+
 
 <!-- Fun projects -->
 <!-- Currently Building -->
 <section id="building" style="position:relative;border-top:1px solid var(--border);">
   <div style="max-width:1200px;margin:0 auto;padding:100px clamp(24px,5vw,60px);">
-    <div class="section-label">09 — Currently Building</div>
+    <div class="section-label">04 — Building</div><nav class="rd-subnav" aria-label="In this section"><a href="#building">Building now</a><a href="#fun">Experiments</a></nav>
     <h2 class="section-title reveal reveal-fade">What I'm <em>building now</em></h2>
     <p class="reveal reveal-fade" style="font-size:15px;color:var(--text-muted);font-weight:300;margin-top:14px;max-width:560px;line-height:1.7;">Three things in progress, at different stages — shown honestly rather than dressed up as finished work.</p>
 
@@ -2022,41 +2109,9 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 <section id="fun" style="position:relative;border-top:1px solid var(--border);">
   <div class="chapter-curve" data-curve-idx="4" style="--curve-color:var(--ch-fun);"><svg viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path class="curve-path" d="M0,70 C300,70 300,70 600,70 C900,70 900,70 1200,70 L1200,140 L0,140 Z"></path></svg></div>
 
-  <div class="section-label">10 — Creative Playground</div>
+  <div class="section-label">04 — Experiments</div>
   <h2 class="section-title reveal reveal-fade">Digital Experiments</h2>
   <p class="reveal reveal-fade" style="font-size:15px;color:var(--text-muted);font-weight:300;margin-top:20px;max-width:520px;line-height:1.7;">Outside of client and coursework, I build small experimental sites just to try things out — a different corner of the sandbox from the case-study projects above.</p>
-
-  <div class="fun-section-label reveal" style="margin-top:70px;">a few fragments</div>
-  <div class="scrapbook-grid reveal">
-    <div class="scrap-tile scrap-dark scrap-tall">
-      <span class="scrap-mark">🎵</span>
-      <span class="scrap-cap">runs on music —<br>indie to classical</span>
-    </div>
-    <div class="scrap-tile scrap-red">
-      <span class="scrap-mark">✈️</span>
-      <span class="scrap-cap">9 countries,<br>always solo</span>
-    </div>
-    <div class="scrap-tile scrap-cream scrap-wide">
-      <span class="scrap-mark">🤖</span>
-      <span class="scrap-cap">curious about how AI reshapes everyday life</span>
-    </div>
-    <div class="scrap-tile scrap-outline">
-      <span class="scrap-mark">📍</span>
-      <span class="scrap-cap">Dubai, UAE</span>
-    </div>
-    <div class="scrap-tile scrap-dark">
-      <span class="scrap-mark">🎓</span>
-      <span class="scrap-cap">MSc Data<br>Science &amp; AI</span>
-    </div>
-    <div class="scrap-tile scrap-cream">
-      <span class="scrap-mark">🏢</span>
-      <span class="scrap-cap">ML Engineering<br>@ Accenture</span>
-    </div>
-    <div class="scrap-tile scrap-red scrap-wide">
-      <span class="scrap-mark scrap-flags">🇮🇳 🇦🇪 🇲🇾 🇸🇬 🇹🇭 🇻🇳 🇺🇸 🇳🇵 🇱🇰</span>
-      <span class="scrap-cap">stamps collected so far</span>
-    </div>
-  </div>
 
   <div class="fun-section-label reveal">Experiments</div>
 
@@ -2196,13 +2251,14 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
 <section id="contact" style="position:relative;">
   <div class="chapter-curve" data-curve-idx="5" style="--curve-color:var(--ch-contact);"><svg viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path class="curve-path" d="M0,70 C300,70 300,70 600,70 C900,70 900,70 1200,70 L1200,140 L0,140 Z"></path></svg></div>
 
-  <div class="section-label">11 — Contact</div>
+  <div class="section-label">05 — Contact</div>
   <div class="reachout-grid reveal">
     <div class="reachout-intro">
       <p class="reachout-kicker">Have something worth building? Let's talk.</p>
       <h2 class="section-title">Let's build<br><em>something</em></h2>
       <p class="reachout-note">AI, data, useful products, or a problem that has been sitting on your desk for too long.</p>
     </div>
+    <div class="rd-contact-lead"><p>Open to ML Engineer, Data Scientist and AI Engineer roles, in Dubai, remote or relocating.</p><div class="rd-contact-actions"><a class="rd-cta" href="mailto:itsmouryadusi@gmail.com">Email me <span aria-hidden="true">↗</span></a><button class="rd-copy" type="button" data-copy="itsmouryadusi@gmail.com">Copy email</button><span class="rd-copy-status" role="status" aria-live="polite"></span></div></div>
     <div class="reachout-links">
       <a href="https://linkedin.com/in/mouryadusi" target="_blank" rel="noopener" class="reachout-row cursor-reactive"><span><small>SOCIAL</small>LinkedIn</span><span>↗</span></a>
       <a href="mailto:itsmouryadusi@gmail.com" class="reachout-row cursor-reactive"><span><small>EMAIL</small>itsmouryadusi@gmail.com</span><span>↗</span></a>
@@ -2223,14 +2279,11 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
       <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
   </svg>
-  <svg class="main-mourya-signature" viewBox="-10 -10 480 130" aria-label="Mourya signature" xmlns="http://www.w3.org/2000/svg">
-    <g fill="currentColor">
-<path transform="translate(4,0)" d="M 4.42,100.38 L 10.53,85.21 L 13.34,69.91 L 14.90,55.06 L 17.99,39.95 L 20.92,25.46 L 33.47,1.94 L 31.38,2.47 L 33.29,8.60 L 33.23,15.94 L 30.81,24.32 L 31.42,31.26 L 30.47,38.78 L 35.63,40.58 L 36.74,45.47 L 37.82,50.36 L 42.66,53.50 L 42.53,59.32 L 46.91,62.99 L 50.20,57.16 L 55.11,52.59 L 60.14,50.61 L 65.39,47.17 L 68.81,41.89 L 87.48,1.87 L 88.80,1.68 L 91.18,2.55 L 91.02,4.96 L 91.57,7.11 L 92.05,8.12 L 93.94,10.41 L 90.02,25.31 L 86.04,40.01 L 81.57,54.61 L 78.43,70.41 L 74.93,85.31 L 69.32,99.18 L 63.88,99.92 L 58.47,99.33 L 52.10,100.51 L 58.85,87.00 L 62.02,73.15 L 63.50,59.97 L 68.65,47.40 L 73.58,33.66 L 68.37,37.41 L 62.81,41.14 L 58.74,46.15 L 52.97,49.47 L 48.33,53.79 L 45.37,49.94 L 42.34,45.52 L 39.96,40.73 L 37.38,36.81 L 32.68,34.48 L 30.75,47.26 L 30.59,60.12 L 27.86,73.20 L 24.16,86.60 L 22.85,99.77 L 16.99,101.52 L 11.82,100.37 Z" fill-rule="nonzero"/>
-<path transform="translate(84,0)" d="M 72.94,51.66 L 70.41,62.41 L 67.72,72.24 L 61.93,80.60 L 54.41,87.51 L 47.94,93.57 L 41.10,96.54 L 34.35,99.73 L 28.50,98.08 L 22.90,95.58 L 18.34,90.44 L 13.88,84.56 L 12.15,76.66 L 12.07,67.25 L 14.05,56.92 L 16.52,46.93 L 20.04,37.43 L 23.46,27.77 L 29.63,19.43 L 35.28,12.92 L 42.04,7.38 L 49.44,3.92 L 56.13,4.50 L 62.39,6.48 L 68.15,10.08 L 70.92,16.76 L 74.39,24.00 L 75.44,32.72 L 76.58,42.00 Z M 60.14,51.49 L 58.14,58.83 L 57.09,66.27 L 53.37,71.47 L 49.50,77.20 L 46.28,81.67 L 41.44,83.33 L 38.92,82.77 L 35.82,82.34 L 33.97,79.36 L 34.80,75.98 L 33.18,70.99 L 35.02,66.84 L 35.48,61.15 L 37.42,57.11 L 38.03,52.38 L 40.81,47.27 L 42.60,44.06 L 44.10,39.44 L 44.83,36.40 L 46.72,32.60 L 46.65,30.55 L 49.03,28.89 L 50.89,27.19 L 52.49,26.96 L 55.50,27.48 L 56.03,31.55 L 58.54,34.47 L 60.01,39.32 L 59.28,45.15 Z" fill-rule="evenodd"/>
-<path transform="translate(154,0)" d="M 30.33,4.26 L 10.97,90.22 L 10.74,91.83 L 12.34,93.48 L 13.81,94.93 L 16.81,97.21 L 20.23,99.98 L 24.28,99.98 L 28.91,100.97 L 34.87,99.34 L 39.46,99.61 L 43.99,98.13 L 48.15,96.76 L 52.20,95.18 L 54.63,93.08 L 58.00,92.79 L 59.17,90.28 L 78.81,3.74 L 60.81,3.47 L 42.70,86.10 L 41.80,85.36 L 41.79,84.03 L 40.85,83.60 L 39.50,82.52 L 37.16,82.53 L 34.67,84.24 L 33.36,83.20 L 30.98,83.58 L 29.80,84.83 L 29.42,85.67 L 28.67,86.03 L 45.87,4.70 Z" fill-rule="nonzero"/>
-<path transform="translate(222,0)" d="M 31.65,4.14 L 48.20,4.11 L 25.77,99.74 L 9.34,99.37 Z M 47.92,4.43 L 47.34,4.02 L 51.93,4.95 L 57.39,6.88 L 61.89,8.66 L 63.93,13.73 L 64.92,18.47 L 65.80,23.72 L 64.98,28.94 L 63.41,34.46 L 58.76,38.49 L 53.70,42.04 L 49.04,46.31 L 42.58,47.54 L 36.78,47.47 L 37.27,48.43 Z M 40.01,38.03 L 40.98,31.10 L 42.95,30.87 L 45.36,29.35 L 47.61,27.70 L 49.59,27.23 L 49.29,24.96 L 49.23,24.02 L 47.47,22.46 L 45.47,21.58 L 42.21,21.43 L 44.87,14.55 Z M 25.64,49.61 L 55.76,105.64 L 61.40,102.78 L 44.69,39.66 Z" fill-rule="evenodd"/>
-<path transform="translate(286,0)" d="M 18.92,7.36 L 38.79,50.05 L 55.23,41.06 L 34.61,-2.71 Z M 80.19,-2.07 L 38.65,40.78 L 52.09,50.45 L 93.69,7.30 Z M 36.31,46.19 L 33.45,100.16 L 38.05,99.66 L 57.51,45.10 Z" fill-rule="nonzero"/>
-<path transform="translate(358,0)" d="M 56.18,0.75 L -7.04,96.94 L 11.54,104.01 L 60.14,2.44 Z M 55.46,3.23 L 58.21,103.87 L 82.37,95.78 L 61.42,0.94 Z M 24.75,67.86 L 62.72,67.58 L 66.44,52.22 L 28.87,53.71 Z" fill-rule="nonzero"/>
+  <svg class="main-mourya-signature" viewBox="-10 -10 480 130" role="img" aria-label="MD monogram" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(-5,0)">
+      <path class="mk" style="--d:.1s" pathLength="1" d="M120 100 V10 L175 72 L230 10 V100"/>
+      <path class="mk" style="--d:.9s" pathLength="1" d="M262 10 V100"/>
+      <path class="mk" style="--d:1.2s" pathLength="1" d="M262 10 H290 C336 10 352 34 352 55 C352 76 336 100 290 100 H262"/>
     </g>
   </svg>
   <nav class="footer-links" aria-label="Footer">
@@ -2244,6 +2297,16 @@ footer{position:relative;padding-bottom:clamp(100px,11vh,145px)!important;}
   <span>Built with ❤</span>
 </footer>
 
+
+<script>
+(function(){
+  var sig=document.querySelector('.main-mourya-signature'); if(!sig) return;
+  var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(rm||!('IntersectionObserver' in window)){ sig.classList.add('drawn'); return; }
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ sig.classList.add('drawn'); io.disconnect(); } }); },{threshold:.6});
+  io.observe(sig);
+})();
+</script>
 <!-- D3 Globe Script -->
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script>
@@ -2708,7 +2771,19 @@ document.querySelectorAll('input,textarea,select').forEach(el=>el.style.cursor='
 // Theme
 const themeToggle=document.getElementById('theme-toggle'),html=document.documentElement;
 html.setAttribute('data-theme',localStorage.getItem('theme')||'dark');
-themeToggle.addEventListener('click',()=>{ const n=html.getAttribute('data-theme')==='dark'?'light':'dark';html.setAttribute('data-theme',n);localStorage.setItem('theme',n); });
+themeToggle.addEventListener('click',()=>{
+  const n=html.getAttribute('data-theme')==='dark'?'light':'dark';
+  const apply=()=>{ html.setAttribute('data-theme',n); try{localStorage.setItem('theme',n);}catch(e){} };
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){ apply(); return; }
+  if(document.startViewTransition){
+    const r=themeToggle.getBoundingClientRect(), x=r.left+r.width/2, y=r.top+r.height/2;
+    const end=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
+    const vt=document.startViewTransition(apply);
+    vt.ready.then(()=>{ html.animate({clipPath:['circle(0px at '+x+'px '+y+'px)','circle('+end+'px at '+x+'px '+y+'px)']},{duration:800,easing:'cubic-bezier(.65,0,.35,1)',pseudoElement:'::view-transition-new(root)'}); }).catch(()=>{});
+  } else {
+    html.classList.add('theme-fade'); apply(); setTimeout(()=>html.classList.remove('theme-fade'),700);
+  }
+});
 
 // Header scroll
 const header=document.getElementById('site-header');
@@ -3083,7 +3158,7 @@ document.querySelectorAll('.reveal').forEach(el=>revObserver.observe(el));
   ║   atob('bW91cnlhZHVzaUBvdXRsb29rLmNvbQ==')                     ║
   ║                                                                  ║
   ║   Stack: Python · TensorFlow · AWS · D3 · Dubai ☀️              ║
-  ║   Currently: MSc AI @ Middlesex University Dubai                 ║
+  ║   Education: MSc AI @ Middlesex University Dubai                 ║
   ║   Open to: ML Engineer / Data Scientist roles                    ║
   ║                                                                  ║
   ║   You clearly look at source code. So do I. We'd get along.     ║
@@ -3398,7 +3473,9 @@ function initFlightMap(){
 // ── AI CHAT — smart rule-based engine (no API needed, works everywhere) ──
 const AI_KB = [
   // ── Privacy boundaries — checked first ──
-  { k:['home address','street address','phone number','mobile number','passport number','national id','social security','ssn','bank account','bank details','credit card','payslip','pay slip','net worth','religion','political party','politics','relationship status','marital status','married','girlfriend','boyfriend','dating','partner','health condition','medical','diagnosis','family member','siblings','parents\' names'],
+  { k:['phone','telephone','mobile number','call him','call mourya','contact number','whatsapp'],
+    a:"His number is listed in the Contact section: +971 55 931 5412. Email (itsmouryadusi@gmail.com) is usually the quickest way to reach him." },
+  { k:['home address','street address','passport number','national id','social security','ssn','bank account','bank details','credit card','payslip','pay slip','net worth','religion','political party','politics','relationship status','marital status','married','girlfriend','boyfriend','dating','partner','health condition','medical','diagnosis','family member','siblings','parents\' names'],
     a:"That's outside what this assistant shares — it only covers Mourya's professional background. For anything else, email him directly at itsmouryadusi@gmail.com." },
   { k:['date of birth','birthday','how old','born on','his age','birth date'],
     a:"That's not something shared here. I can tell you about his education timeline and career history if that's useful instead." },
@@ -3444,13 +3521,13 @@ const AI_KB = [
 
   // ── Availability / hiring ──
   { k:['why should i hire','why hire him','worth hiring','why should you hire'],
-    a:"A few concrete reasons: real industry experience (9 months at Accenture doing ML Engineering & Data Science), shipped and live AI products (destination.com), a rigorous ML pipeline with a measured 92% accuracy, an NLP chatbot handling 1,000+ queries a day in production, 20 professional credentials across AWS and Google Cloud, and an MSc in Data Science & AI in progress. It's industry experience plus academic depth plus things that actually run in production." },
+    a:"A few concrete reasons: real industry experience (9 months at Accenture doing ML Engineering & Data Science), shipped and live AI products (destination.com), a rigorous ML pipeline with a measured 92% accuracy, an NLP chatbot handling 1,000+ queries a day in production, 20 professional credentials across AWS and Google Cloud, and an MSc in Data Science & AI. It's industry experience plus academic depth plus things that actually run in production." },
   { k:['available','hire','open to work','looking for a role','looking for','job','role','opportunity','join','recruit'],
-    a:"Yes — he's actively looking for ML Engineer, Data Scientist, or AI Engineer roles. He's completing his MSc in Dubai in September 2026 and is open to Dubai-based, remote, or relocation opportunities. Email him at itsmouryadusi@gmail.com." },
+    a:"Yes — he's actively looking for ML Engineer, Data Scientist, or AI Engineer roles. He has completed his MSc in Dubai (2026) and is open to Dubai-based, remote, or relocation opportunities. Email him at itsmouryadusi@gmail.com." },
   { k:['salary','pay','rate','compensation','expect','cost to hire'],
     a:"For current expectations, the best move is to reach out directly at itsmouryadusi@gmail.com — he's open to a conversation once he knows more about the role." },
   { k:['location','based','where is he','remote','relocat'],
-    a:"He's currently based in Dubai, UAE (studying at Middlesex University Dubai), spending some time in India as well. He's open to Dubai-based, remote, or relocation roles globally." },
+    a:"He's currently based in Dubai, UAE (MSc completed at Middlesex University Dubai), spending some time in India as well. He's open to Dubai-based, remote, or relocation roles globally." },
   { k:['fit','good','suitable','match','right','team','culture'],
     a:"His background covers ML engineering, data science, cloud deployment, Agile collaboration, and shipped AI products — he's open to ML Engineer, Data Scientist, and AI Engineer roles, remote or Dubai-based." },
 
@@ -3476,7 +3553,7 @@ function projectSummary(slug){
 // matched, so generic "who/about/tell me" phrasing never shadows a
 // specific question about a certification, project, etc.
 const AI_IDENTITY = { k:['who is mourya','full name','introduce mourya','tell me about mourya','tell me about him'],
-  a:"Mourya Dusi is a Machine Learning Engineer and Data Science professional based in Dubai, UAE. He's currently completing an MSc in Data Science & Artificial Intelligence at Middlesex University Dubai (graduating September 2026), previously spent 9 months at Accenture in Hyderabad as an Associate Software Engineer on ML Engineering & Data Science work, holds 5 curated AI/ML and cloud credentials, and has shipped several live AI products including destination.com." };
+  a:"Mourya Dusi is a Machine Learning Engineer and Data Science professional based in Dubai, UAE. He holds an MSc in Data Science & Artificial Intelligence at Middlesex University Dubai (Sep 2025 – Sep 2026, completed), previously spent 9 months at Accenture in Hyderabad as an Associate Software Engineer on ML Engineering & Data Science work, holds 5 curated AI/ML and cloud credentials, and has shipped several live AI products including destination.com." };
 
 // Conversational-intent layer — checked BEFORE any topic/biography matching.
 // Each test runs against the WHOLE trimmed message (word-boundary regex,
@@ -3706,7 +3783,7 @@ function addMsg(text,type){
 (function(){
   // Full-page About view; the original #about section remains untouched.
   const about=document.getElementById('about-fullpage'), close=document.getElementById('about-full-close');
-  const aboutLinks=[...document.querySelectorAll('a[href="#about"]')];
+  const aboutLinks=[];
   function openAbout(e){e.preventDefault(); if(!about)return; about.classList.add('open');about.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';history.pushState({about:true},'', '#about');}
   function closeAbout(){if(!about)return;about.classList.remove('open');about.setAttribute('aria-hidden','true');document.body.style.overflow='';if(location.hash==='#about')history.replaceState(null,'',location.pathname+location.search);}
   aboutLinks.forEach(a=>a.addEventListener('click',openAbout));
@@ -4377,6 +4454,76 @@ html.menu-open #hamburger,html.menu-open #ai-bubble,html.menu-open #a11y-trigger
   }
   applyRows();
   if(mq.addEventListener) mq.addEventListener('change',applyRows); else if(mq.addListener) mq.addListener(applyRows);
+})();
+</script>
+
+<script id="redesign-final-js">
+(function(){
+'use strict';
+var D=document,H=D.documentElement,RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+var FINE=matchMedia('(hover:hover) and (pointer:fine)').matches;
+H.classList.add('rd-js');
+function $$(s,r){return Array.prototype.slice.call((r||D).querySelectorAll(s));}
+/* ---- odometer ---- */
+function build(el){
+  var txt=el.textContent.trim(); el.setAttribute('role','img'); el.setAttribute('aria-label',txt); el.classList.add('odo'); el.textContent='';
+  var di=0; txt.split('').forEach(function(ch){
+    var s=D.createElement('span');
+    if(/\d/.test(ch)){ s.className='od-c'; s.setAttribute('aria-hidden','true'); var c=D.createElement('span'); c.className='od-col'; c.dataset.d=ch;
+      c.style.setProperty('--od',(di*.09)+'s'); s.style.setProperty('--oi',di); c.innerHTML='0123456789'.split('').map(function(n){return '<i>'+n+'</i>';}).join(''); s.appendChild(c); di++; }
+    else { s.className='od-s'; s.setAttribute('aria-hidden','true'); s.textContent=ch; }
+    el.appendChild(s);
+  });
+}
+function run(el){ $$('.od-col',el).forEach(function(c){ c.style.transform='translateY(-'+c.dataset.d+'em)'; }); }
+$$('.odo-t[data-odo]').forEach(build);
+$$('.sw-metric').forEach(function(m){ if(m.children.length||!/\d/.test(m.textContent)) return; m.dataset.odo=''; build(m); });
+var oio=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ if(RM){ $$('.od-col',e.target).forEach(function(c){c.style.transition='none';}); } run(e.target); oio.unobserve(e.target);} });},{threshold:.4});
+$$('.odo').forEach(function(o){oio.observe(o);});
+/* ---- gallery reveal + parallax ---- */
+var vio=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); $$('.odo',e.target).forEach(function(o){ if(RM) $$('.od-col',o).forEach(function(c){c.style.transition='none';}); run(o); oio.unobserve(o); }); vio.unobserve(e.target);} });},{threshold:.25});
+$$('.xv').forEach(function(x){ $$('.xl',x).forEach(function(l,i){ l.style.setProperty('--z',l.dataset.z||1); l.style.setProperty('--dl',(i*.09)+'s'); }); vio.observe(x); });
+if(!RM){
+  if(FINE){
+    $$('.exhibit-visual').forEach(function(v){ var x=v.querySelector('.xv'); if(!x) return; var raf=0,px=0,py=0;
+      v.addEventListener('pointermove',function(e){ var r=v.getBoundingClientRect(); px=((e.clientX-r.left)/r.width-.5)*2; py=((e.clientY-r.top)/r.height-.5)*2; if(!raf) raf=requestAnimationFrame(function(){raf=0; x.style.setProperty('--mx',px.toFixed(3)); x.style.setProperty('--my',py.toFixed(3)); x.style.transform='rotateX('+(py*-3).toFixed(2)+'deg) rotateY('+(px*4).toFixed(2)+'deg)';});});
+      v.addEventListener('pointerleave',function(){ x.style.setProperty('--mx',0); x.style.setProperty('--my',0); x.style.transform=''; });
+      x.style.transition='transform .7s cubic-bezier(.22,1,.36,1)';
+    });
+  } else {
+    var vis=new Set(),tick=0; var sio=new IntersectionObserver(function(es){es.forEach(function(e){ e.isIntersecting?vis.add(e.target):vis.delete(e.target); });},{rootMargin:'20% 0px'});
+    $$('.xv').forEach(function(x){sio.observe(x);});
+    function upd(){ tick=0; vis.forEach(function(x){ var r=x.getBoundingClientRect(); var p=((r.top+r.height/2)/innerHeight-.5)*2; x.style.setProperty('--my',Math.max(-1,Math.min(1,p)).toFixed(3)); }); }
+    addEventListener('scroll',function(){ if(!tick) tick=requestAnimationFrame(upd); },{passive:true});
+  }
+}
+/* ---- reading time chips on Selected Work cards ---- */
+$$('#selected-work a[href^="#case-"]').forEach(function(a){ var art=D.getElementById(a.getAttribute('href').slice(1)); var r=art&&art.querySelector('[data-read]'); if(!r) return; var s=D.createElement('span'); s.className='sw-read'; s.textContent=r.dataset.read+' min read'; a.appendChild(s); });
+/* ---- contextual cursor (reuses existing ring + states) ---- */
+if(FINE){
+  var lab=D.getElementById('cursor-label'),B=D.body,cur=null;
+  function setC(el,text){ if(cur===el) return; cur=el; B.classList.remove('cursor-view','cursor-drag'); if(el){ B.classList.add('cursor-view'); } if(lab) lab.textContent=text||''; }
+  function ctx(t){
+    var v=t.closest&&t.closest('.exhibit-visual'); if(v){ var art=v.closest('.exhibit-project'); return [v, art&&art.querySelector('details.case-study')?'Read case':'Visit']; }
+    var sw=t.closest&&t.closest('#selected-work a[href^="#case-"]'); if(sw) return [sw,'Open'];
+    var f=t.closest&&t.closest('.fun-card'); if(f) return [f,'Visit'];
+    var m=t.closest&&t.closest('a[href^="mailto:"],.rd-copy'); if(m) return [m,m.matches('.rd-copy')?'Copy':'Email'];
+    return null;
+  }
+  D.addEventListener('pointerover',function(e){ var c=ctx(e.target); if(c) setC(c[0],c[1]); else if(cur) setC(null); });
+  D.addEventListener('pointerleave',function(){ setC(null); });
+  /* magnetic pull on primary actions */
+  $$('.exhibit-link,.case-study summary,.rd-cta,.rd-copy').forEach(function(b){
+    b.addEventListener('pointermove',function(e){ var r=b.getBoundingClientRect(); b.style.translate=((e.clientX-r.left-r.width/2)*.18).toFixed(1)+'px '+((e.clientY-r.top-r.height/2)*.25).toFixed(1)+'px'; });
+    b.addEventListener('pointerleave',function(){ b.style.translate=''; });
+  });
+}
+/* ---- case study stagger index ---- */
+$$('.case-study-body').forEach(function(b){ Array.prototype.forEach.call(b.children,function(c,i){ c.style.setProperty('--k',i); }); });
+/* ---- copy email ---- */
+$$('.rd-copy').forEach(function(b){ b.addEventListener('click',function(){ var st=b.parentNode.querySelector('.rd-copy-status'),v=b.dataset.copy;
+  function ok(){ if(st){ st.textContent='Copied'; setTimeout(function(){st.textContent='';},2200);} }
+  if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(v).then(ok,function(){ if(st) st.textContent=v; }); } else { if(st) st.textContent=v; } }); });
 })();
 </script>
 </body>
